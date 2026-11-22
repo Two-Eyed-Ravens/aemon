@@ -13,6 +13,18 @@ tags:
 - auditkit
 size_categories:
 - 1K<n<10K
+configs:
+- config_name: test3_key
+  data_files: test3/test3_key.jsonl
+  default: true
+- config_name: test3_packets
+  data_files: test3/packets.jsonl
+- config_name: test3_judgments_codex
+  data_files: test3/judging/codexsol170_predictions.jsonl
+- config_name: test3_judgments_claude
+  data_files: test3/judging/claudecode_predictions.jsonl
+- config_name: development_key
+  data_files: judging/keys/stage2ab_all_key.jsonl
 ---
 
 # aemon-8b: Stage 2 runs, judgments and data

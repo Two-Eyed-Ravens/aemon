@@ -225,6 +225,7 @@ Against the Stage~1 system the fine-tuned 8B is ahead by +0.13 [+0.03, +0.23], +
 39 runs against its 43; on test set 3 the gap is +0.12 [+0.05, +0.20].
 
 \subsection{Which parts of the agent earn their place?}
+\label{sec:parts}
 
 \paragraph{Recovery rows.} Adding 401 rule-built recovery rows (the student's two common mistakes, a repeated call
 and a simulated result cited in the recommendation, each followed by the teacher's own next call) removes the loops at
@@ -504,14 +505,14 @@ test set 3: \texttt{scripts/test3/analyze.py} on \texttt{experiments/test3/}.
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lcc}
 \toprule
-Seed & A $-$ prompted 8B & Recovery $-$ A \\
+Seed & A $-$ prompted 8B & Own-state corr.\ $-$ A \\
 \midrule
 7 & +0.72 [+0.59, +0.85] & +0.12 [+0.02, +0.21] \\
 11 & +0.88 [+0.75, +1.00] & $-$0.05 [$-$0.15, +0.05] \\
 13 & +0.77 [+0.69, +0.85] & $-$0.14 [$-$0.29, $-$0.01] \\
 \bottomrule
 \end{tabular}
-\caption{Development by training seed (15 cases $\times$ 3 attempts, one judge), case-bootstrap intervals.}
+\caption{Development by training seed (15 cases $\times$ 3 attempts, one judge), case-bootstrap intervals. Right: the teacher's corrections of the student's own failure states (Section~\ref{sec:parts}), not the rule-built recovery rows (B).}
 \end{table}
 
 \begin{table}[h]
@@ -537,5 +538,13 @@ Tomra & +0.44 & $-$0.00 \\
 \end{tabular}
 \caption{Test set 3 by company: mean paired difference, mean of the two judges, 8 runs per arm and company.}
 \end{table}
+
+\paragraph{Judge agreement on test set 3.} Over all 288 runs the two judges' scores have Spearman 0.78 (Stage~1's
+tests: 0.94 and 0.95) and differ by 0.45 per run on average. Most of that difference is a level offset: Claude Code
+scores every arm about 0.45 lower than Codex (A 1.43 against 1.98, Stage~1 system 1.37 against 1.79, prompted 8B 0.82
+against 1.19), so both judges give the same ordering of arms and the same sign for every comparison. Within an arm
+they agree only weakly on which run is better (Spearman 0.31, 0.47 and 0.38). Stage~1's tests compared arms much
+further apart, which raises agreement over all runs. We therefore report differences between arms, averaged over the
+judges, and do not read single-run scores.
 
 \end{document}
