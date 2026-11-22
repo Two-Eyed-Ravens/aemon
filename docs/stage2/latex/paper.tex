@@ -43,13 +43,12 @@ companies), at all twelve companies, and finishes 81 of 96 investigations agains
 
 \section{Introduction}
 
-Stage~1 showed that a small open model can learn the form of a scientific investigation of a strategy question
-\citep{camuffo2020scientific,camuffo2024theory} by copying a larger model's tool calls inside an environment that
-enforces that form. It also showed where the student stops: it learns the procedure more reliably than the
-judgement, with its weakest scores on the recommendation and on judging evidence, and it fails mechanically by
-looping and by citing simulated results it is not allowed to cite. Agent fine-tuning is therefore not only a
-question about the model. The agent is the model plus the steps around it: what it is trained on, what decoding
-constraints shape each call, and which choices it is asked to make itself.
+The Lexsi AI Hackathon ran in two stages. In Stage~1 we built aemon, an environment of guarded tools for a
+scientific investigation of a strategy question \citep{camuffo2020scientific,camuffo2024theory}, and showed that a
+small open model (Tiny Aya 3.35B) learns its form by copying a teacher's tool calls, beating its prompted base on two
+frozen tests. This paper is Stage~2. Stage~1 also showed where the student stops: it learns the procedure better than the
+judgement, and fails mechanically by looping and by citing simulated results. The agent is the model plus the steps
+around it: its training data, the decoding constraints on each call, and the choices it makes itself.
 
 \begin{figure}[t]
 \centering
@@ -252,8 +251,8 @@ to 909). Our reading, a hypothesis whose mechanism we have not tested: up-weight
 to repeat itself, so whether it does depends on the training run, and the teacher's natural mix is the safer default.
 
 \paragraph{Guards.} Removing all six decoding guards from A (seed 7) costs $-0.43$ [$-0.66$, $-0.23$] and 18 finished
-runs (21 of 45 against 39), lower at all six companies: the fine-tuned agent still needs the guards, so fine-tuning
-and guards are complements, not substitutes.
+runs (21 of 45 against 39), lower at all six companies. Guards alone do not help the base either: under its staged
+prompt the prompted 8B finishes 32 of 45 without them and 27 with them. Fine-tuning and guards are complements.
 
 \paragraph{Where the adapter acts.} Serving the base model without the adapter for the later stages (position,
 update, conclude) and the adapter for the rest costs $-0.19$ [$-0.29$, $-0.10$] and 21 finished runs (18 of 45): the

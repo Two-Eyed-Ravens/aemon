@@ -6,6 +6,8 @@
 
 Team Two-Eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning), Stage 2 · November 2026
 
+> **Two stages, one project.** The Lexsi hackathon ran in two rounds. In **Stage 1** (1–15 November) we built aemon: an agent that investigates a strategy question through twelve guarded tools over verified dossiers of real manufacturers, distilled from a teacher (Command A+) into a small open student, Tiny Aya 3.35B, with AgentTune. It beat its prompted base by +0.83 and +0.52 on two frozen tests, and we were shortlisted as one of 20 finalists ([Stage 1 article](https://huggingface.co/blog/HatemSaadallah/aemon)). **Stage 2** (19–24 November), this article, moves the student to Aya Expanse 8B, tests it on twelve companies it has never seen, and measures which parts of the agent earn their place.
+
 **One-line claim.** Distilling a teacher's investigations into Aya Expanse 8B with AgentTune makes it a far better strategy investigator on twelve companies it has never seen, **+0.70 [0.61, 0.79]** in blind quality over the same model prompted with the same tools, at all twelve, and the fine-tuned weights still need the harness around them: each part adds to the other.
 
 [![The Stage 2 slides: fine-tuning holds on new companies](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/stage2/figures/slides_preview.png)](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/SLIDES_STAGE2.pdf)
@@ -35,9 +37,9 @@ In Stage 1 we distilled that procedure into Tiny Aya Global (3.35B). In Stage 2 
 
 The answer to the first is yes, clearly. On development, fine-tuning lifts the 8B from finishing 9% of investigations to 87% and raises judged quality by +0.72, +0.88 and +0.77 at three training seeds, with general ability unchanged. On a fresh test set of twelve companies, run once, the fine-tuned 8B beats the same model prompted with an identical scaffold by +0.70 [0.61, 0.79] at every company.
 
-The answer to the second is more interesting. The trained weights do not replace the harness: removing the decoding guards costs 0.43 and half the finished runs, and serving the base weights for the late stages costs 0.19. And several ways of adding training data looked like gains at one training seed and vanished over three. Single-seed gains in agent fine-tuning should not be trusted.
+The answer to the second is that the trained weights and the guards need each other. Without guards, the fine-tuned model finishes fewer runs than the prompted one; with them it finishes 39 of 45 development runs and scores highest. Fine-tuning lifts the share of tool calls the environment accepts from 80% to 92%, and every remaining unfinished run fails at one precise check, which makes the next round of training a targeted one. Along the way, two data additions that looked like gains at one training seed vanished over three, so we replicate before we believe.
 
-A closed model, Claude Haiku 5.5, run through the same tools, is still ahead: by +0.20 [0.05, 0.35] as registered, and by +0.42 [0.32, 0.52] if the 11 of its runs that ended on API refusals are left out. What the fine-tuned 8B offers instead is an open model that runs where the case data cannot leave.
+aemon-8b is fully open: the weights, every run and judgment, and the code. Against a closed model, Claude Haiku 5.5, it trails on judged quality (by +0.20 [0.05, 0.35] as registered; +0.42 post hoc without 11 Haiku runs that ended on API refusals), and its case is control: it runs where the case data cannot leave, and every call is checked and replayable.
 
 ![Stages reached by every run: the prompted 8B against the fine-tuned 8B](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/stage2/figures/fig_stages.png)
 
@@ -105,6 +107,16 @@ Every rule (which configuration to test, how to read it, what counts as a gain) 
 - Seconds are model time on different hardware per arm (A100 slices for the local models, Anthropic's API for Haiku), so latency is rough.
 
 ### Why it works: weights and harness are complements (development, seed 7, one judge)
+
+Each model under its best prompt, with and without the six guards (finished of 45, judged score):
+
+| | No guards | Six guards |
+|---|---|---|
+| Prompted 8B | 32 (not judged) | 27 (1.41) |
+| **Fine-tuned 8B** | 21 (1.57) | **39 (2.01)** |
+
+Fine-tuning alone finishes fewer runs than prompting alone, and guards alone don't help the prompted model; together they finish the most and score highest. Removing one part at a time from the fine-tuned system:
+
 
 | Removed from the fine-tuned system | Change in quality | Finished (of 45; full system 39) |
 |---|---|---|

@@ -3497,3 +3497,18 @@ post hoc, with those 11 runs left out (77 pairs): Haiku minus A +0.42 [+0.32, +0
 Claude Code +0.49), higher at all twelve companies; Haiku minus the Stage 1 system +0.55 [+0.46, +0.63]; Haiku then
 finishes 70 of 80. Both readings are reported. Haiku ran with Stage 1's registered settings: the staged prompt, effort
 medium, none of the six decoding guards. `experiments/test3/haiku/report_without_refusals.json`.
+
+**Test set 3: the fine-tuned 8B without guards as a fifth arm (Hatem, 23 November; registered before the run; added
+after the main result, reported as such and leaving it unchanged).** An outside review noted that the paper's title
+claim, that the fine-tuned weights and the guards are complements, rests on development data (one seed, one judge).
+Rule:
+- A (adapter seed 7) with no decoding guards (`ARMS=none`), otherwise exactly as test set 3's A arm: code 49fe311,
+  `jobs/screen_bases.sbatch`, the same bf16 base and adapter, compact prompt, context 8192, `SPLIT=heldout3`, the same
+  48 cases x 2 attempts, the same account and environment.
+- Packets rebuilt from all arms' reports; judgments of packets already judged are reused by packet id; only the new
+  packets are judged, blind, by both judges (codexsol170 and claudecode); an answer that fails the instrument's check
+  is re-judged once.
+- Reading: `scripts/test3/analyze.py` unchanged, comparisons A minus A-without-guards (primary of this addition) and
+  A-without-guards minus the prompted 8B; mean of judges, company t-interval over 12 companies; finished runs
+  reported. The complements claim holds on held-out data if A minus A-without-guards has its interval above zero;
+  whatever it shows goes into the paper, README and slides.

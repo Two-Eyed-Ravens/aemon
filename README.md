@@ -7,19 +7,26 @@
 
 *weigh what is known. test what is not.*
 
-**Distilling a strategy investigator into Aya Expanse 8B, with AgentTune and AuditKIT: the fine-tuned weights and the
-harness's guards are complements, and each is needed.**
+**An open strategy investigator, distilled into Aya Expanse 8B with AgentTune and AuditKIT. On twelve companies it had
+never seen, it beats the same model prompted by +0.70 at every company, and the fine-tuned weights and the harness's
+guards turn out to need each other.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026 ·
-**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [12-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf)**
+**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [13-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf)**
 
-> **Stage 2, run once.** On twelve companies never used before, Aya Expanse 8B fine-tuned on a teacher's investigations
-> scores **1.71** against **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric,
-> mean of two LLM judges): **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It finishes
-> **81 of 96** investigations against **2**, and still leads by **+0.55** on the stages both reach. The weights and the
-> harness each add to the other: on development cases (one judge, training seed 7), removing the decoding guards from
-> the fine-tuned model costs 0.43, and serving the base weights for the late stages costs 0.19.
+> **Two stages, one project.** The Lexsi hackathon ran in two rounds.
+> **Stage 1** (1–15 November): we built aemon, an agent that investigates a strategy question the way a careful
+> analyst would, through twelve guarded tools over verified dossiers of real manufacturers. A teacher model (Command
+> A+) ran investigations; we distilled them into a small open student, Tiny Aya 3.35B, with AgentTune. On two frozen
+> tests it beat its prompted base by +0.83 and +0.52, and we were shortlisted as one of 20 finalists.
+> **Stage 2** (19–24 November, this page's headline): we moved the student to a stronger Cohere model, Aya Expanse
+> 8B, built a fresh test of twelve unseen companies, and measured which parts of the agent earn their place.
 
-<a href="docs/stage2/SLIDES_STAGE2.pdf"><img alt="Stage 2 slides: fine-tuning holds on new companies, +0.70 blind quality, 12 of 12 companies, 81 of 96 investigations finished" src="docs/stage2/figures/slides_preview.png" width="720"></a>
+> **Stage 2 result, run once.** Fine-tuned on a teacher's investigations, Aya Expanse 8B scores **1.71** against
+> **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric, mean of two LLM
+> judges): **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It finishes **81 of 96**
+> investigations against **2**, with **92%** of its tool calls accepted against 80%.
+
+<a href="docs/stage2/SLIDES_STAGE2.pdf"><img alt="Stage 2 slides: fine-tuning holds on unseen companies, +0.70 blind quality, 12 of 12 companies, 81 of 96 investigations finished" src="docs/stage2/figures/slides_preview.png" width="720"></a>
 
 *The Stage 2 slides: [open the full deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf).*
 
@@ -27,7 +34,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |---|---|
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
-| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (12 slides, dark theme, clickable links) |
+| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (13 slides, clickable links) |
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (rules registered before their results; deviations marked as such) |
@@ -39,26 +46,33 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |:---:|:---:|:---:|
 | blind quality over the same 8B prompted with an identical scaffold (0–3 scale, 95% interval 0.61 to 0.79 over companies; Codex +0.79, Claude Code +0.61) | companies where the fine-tuned model scores higher | investigations finished, against 2 of 96 for the prompted 8B |
 
-- **The baseline:** the headline compares with the 8B prompted with the fine-tuned agent's own compact prompt and
-  guards. Under its best prompt (Stage 1's staged one) the prompted 8B finishes 27 of 45 development runs, and the
-  fine-tuned agent still leads it by +0.60 [0.49, 0.70].
-- **Replicated:** on development the gain holds at three training seeds (+0.72, +0.88, +0.77); general ability is
-  unchanged (MMLU and ARC, +0.6 points).
-- **Negative results, reported:** two kinds of added data (rule-built recovery rows, teacher corrections of the
-  student's own failure states) each gained at training seed 7 and did not hold over three seeds; rebalancing the
-  teacher's rows toward rare skills made the agent loop at two of three seeds. Single-seed gains in agent fine-tuning
-  should not be trusted.
-- **Against the Stage 1 system (Tiny Aya 3.35B, two adapters):** the 8B is ahead by only +0.12 [0.05, 0.20], near
-  zero at four of twelve companies, and finishes as often (81 against 82). Against a fine-tuned 3.35B system with the
-  same guards, the larger model adds little; most of the gain comes from fine-tuning and the guards.
-- **Against a closed model:** Claude Haiku 5.5 through the same tools, with Stage 1's settings (its staged prompt,
-  none of the six decoding guards), scores 1.92 against the fine-tuned 8B's 1.71: **+0.20 [0.05, 0.35]** as
-  registered. 11 of its 91 runs ended on API refusals (empty responses with stop reason "refusal"), which the harness
-  stopped as repeated errors; read post hoc without them, Haiku leads by **+0.42 [0.32, 0.52]** at all twelve
-  companies and finishes 70 of 80. Claude Code, of Haiku's own model family, gives it +0.30 as registered; Codex
-  +0.12. Haiku costs $0.008 per investigation. What aemon offers instead is an open model (CC-BY-NC 4.0,
-  non-commercial) that runs offline, with the case data kept on the machine and weights that can be audited. This arm
-  was added after the three-arm result, under a rule registered before its run.
+- **It replicates.** On development the gain holds at all three training seeds (+0.72, +0.88, +0.77; **+0.79 [0.70,
+  0.88]** pooled), and general ability is unchanged (MMLU and ARC, +0.6 points).
+- **Weights and guards need each other.** On development (45 runs per cell, seed 7, one judge), each model under its
+  best prompt finishes:
+
+  | | No guards | Six guards |
+  |---|---|---|
+  | Prompted 8B | 32 of 45 (not judged) | 27 of 45 (score 1.41) |
+  | **Fine-tuned 8B** | 21 of 45 (1.57) | **39 of 45 (2.01)** |
+
+  Fine-tuning alone finishes fewer runs than prompting alone, and guards alone don't help; together they finish the
+  most and score highest. Within the guards, resampling a repeated call carries most of it (−0.49 without it), and
+  the fine-tuned weights matter in the late stages too (−0.19 with base weights there).
+- **A strong baseline.** Even against the 8B under its own best prompt, the fine-tuned agent leads by +0.60 [0.49,
+  0.70] on development, and still +0.55 on test set 3's stages both runs reach.
+- **Method over size.** Our Stage 1 system on a 3.35B model scores 1.58 on the same test (+0.12 [0.05, 0.20] to the
+  8B), so most of the gain comes from fine-tuning and guards, not from the larger model.
+- **One precise failure left.** All 15 of the fine-tuned 8B's unfinished runs stop at the same check (a simulated
+  result cited as evidence), which makes the next round of training a targeted one.
+- **What we learned about data.** Two data additions (rule-built recovery rows, teacher corrections of the student's
+  own failure states) gained at seed 7 and did not hold over three seeds, and rebalancing toward rare skills made the
+  agent loop: single-seed gains in agent fine-tuning should be replicated before they are believed.
+- **Against a closed model.** Claude Haiku 5.5 through the same tools (Stage 1's settings: its staged prompt, no
+  guards) scores higher: +0.20 [0.05, 0.35] as registered (Claude Code, of Haiku's family, +0.30; Codex +0.12), and
+  +0.42 [0.32, 0.52] post hoc without the 11 of its 91 runs that ended on API refusals; $0.008 per investigation.
+  aemon-8b's case is control: open weights (CC-BY-NC 4.0, non-commercial), every call checked and replayable, and the
+  case data never leaves the machine.
 
 **A judge's 60-second view (Stage 2)**
 1. Open the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b), pick a company and start an
