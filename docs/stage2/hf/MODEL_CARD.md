@@ -86,4 +86,4 @@ Held-out loss on six validation companies 0.565 to 0.387.
 
 CC-BY-NC-4.0, following Aya Expanse: research and non-commercial use. The dossiers support evaluating
 evidence-grounded reasoning and procedure, not commercial decisions about the named companies. Quality is judged by
-LLM judges on a fixed rubric; two blind hand checks agreed on direction and ordering.
+LLM judges on a fixed rubric; two blind hand checks agreed on the direction of differences, not on the ranking of runs.

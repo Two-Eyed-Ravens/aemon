@@ -27,7 +27,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |---|---|
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
-| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (12 slides) |
+| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (12 slides, dark theme, clickable links) |
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (rules registered before their results; deviations marked as such) |
@@ -142,8 +142,8 @@ one judgment; the intervals are over the twelve companies, so repeats do not shr
 the decision log (`f5e0b6b`, `49fe311`) are in our private development repository; the frozen files and their sha256
 digests are public, and we can give judges read access on request.
 
-**Limits.** The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on direction and
-ordering only. The test ran one trained adapter, so its interval covers companies and attempts; training-seed variation
+**Limits.** The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on the
+direction of differences, not on the ranking of runs (rank correlations 0.17 and −0.20). The test ran one trained adapter, so its interval covers companies and attempts; training-seed variation
 comes from development (three seeds). Every case is a strategy question about a business-to-business manufacturer.
 Aya Expanse is CC-BY-NC: research use, not a commercial product without Cohere's agreement.
 

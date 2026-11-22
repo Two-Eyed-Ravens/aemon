@@ -136,7 +136,7 @@ Seed 7, the reference seed of every design step, made two data additions look li
 
 ### Limits
 
-The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on direction and ordering only. The test ran one trained adapter, fixed in advance, so its interval covers companies and attempts; training-seed variation comes from development. Every case is a strategy question about a business-to-business manufacturer.
+The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on the direction of differences, not on the ranking of runs (rank correlations 0.17 and −0.20). The test ran one trained adapter, fixed in advance, so its interval covers companies and attempts; training-seed variation comes from development. Every case is a strategy question about a business-to-business manufacturer.
 
 ## 8. With more credits
 
