@@ -8,6 +8,10 @@ Team Two-Eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning), Stage
 
 **One-line claim.** Distilling a teacher's investigations into Aya Expanse 8B with AgentTune makes it a far better strategy investigator on twelve companies it has never seen, **+0.70 [0.61, 0.79]** in blind quality over the same model prompted with the same tools, at all twelve, and the fine-tuned weights still need the harness around them: each part adds to the other.
 
+[![The Stage 2 slides: fine-tuning holds on new companies](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/stage2/figures/slides_preview.png)](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/SLIDES_STAGE2.pdf)
+
+*The Stage 2 slides: [open the full deck (PDF)](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/SLIDES_STAGE2.pdf).*
+
 **Tracks and problem statements covered**
 
 - Track 3, Agentic Fine-Tuning, problem statement 3: **Agentic distillation**.
