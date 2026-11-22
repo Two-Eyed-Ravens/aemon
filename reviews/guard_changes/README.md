@@ -4,7 +4,7 @@ Why this exists: guards were changed after seeing Claude's control runs, which i
 
 The old code is in git at `5c41acf`. `compare.py` scores recorded runs under old and new guards, and `compare.json` lists every verdict that changed.
 
-**Status: reviewed by Codex on PR #17, with its changes applied below. Not frozen.**
+**Status: reviewed on PR #17, with its changes applied below. Not frozen.**
 
 **The result to check first.** Verdicts that changed between the old and current guards, on the recorded runs:
 
@@ -46,10 +46,10 @@ The loosening mostly helps runs that get far enough to be judged, and Claude mos
 
 ## Tightened
 
-- **`guards_cleared` (d467a4e).** A check that applies but was never evaluated no longer counts as a pass. Codex asked for this.
+- **`guards_cleared` (d467a4e).** A check that applies but was never evaluated no longer counts as a pass. Asked for in review.
 - **Affected theories (d467a4e).** Judged on a theory's first claim, so revising it cannot hide that it was affected.
 
-## Changed after Codex's review
+## Changed after review
 
 - **`revision`.** Two holes were found. Silence on favourable evidence passed, and a response about an unrelated theory passed. Every direction now needs a cited response, and supporting or undermining evidence needs a response to an affected theory. Must still fail: `test_silence_on_favourable_evidence_does_not_pass`, `test_the_wrong_theory_check_uses_what_was_addressed`.
 - **Diagnostics, reported but not gating:** `causal_form`, `testable_predictions`, `evidence_kinds` and `evidence_classes`. Each measures a real concern with a rule too blunt to gate on, and Claude cleared none of its 15 runs under them. Their counts stay in every report, and judges score these things. This is a further loosening, made on Codex's recommendation, so it needs the same scrutiny.

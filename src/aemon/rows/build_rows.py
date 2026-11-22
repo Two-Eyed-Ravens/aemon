@@ -19,10 +19,12 @@ from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
-from aemon.agent.state_view import guidance, next_step, state_of
-from aemon.common.constants.prompts import PROMPTS
-from aemon.common.constants.prompts import START  # noqa: F401
 from aemon.agent.backends.llama_client import parse_call
+from aemon.agent.state_view import guidance, next_step, state_of
+from aemon.common.constants.prompts import (
+    PROMPTS,
+    START,  # noqa: F401
+)
 from aemon.common.paths import REVIEW
 from aemon.common.types import Json, Message
 from aemon.environment.cases import load_cases
@@ -81,14 +83,19 @@ class Overlength(ValueError):
     pass
 
 
+# Extra chat-template variables for every rendering, such as {'enable_thinking': False} for a base whose template opens a
+# thinking block (set by the trainer's --chat-template-kwargs; empty, as every Tiny Aya run was built).
+CHAT_TEMPLATE_KWARGS: dict = {}
+
+
 def labels_for(tokenizer: PreTrainedTokenizerBase, row: Json, limit: int) -> Json:
     """Loss on the target reply only. The context is tokenized on its own and must be an exact prefix of
     the whole, or a mask would land on the wrong tokens. A row over the limit is refused, never cut."""
     messages, index = row['messages'], row['target_index']
-    before = tokenizer(cast(str, tokenizer.apply_chat_template(messages[:index], tokenize=False, add_generation_prompt=True)), add_special_tokens=False)[
+    before = tokenizer(cast(str, tokenizer.apply_chat_template(messages[:index], tokenize=False, add_generation_prompt=True, **CHAT_TEMPLATE_KWARGS)), add_special_tokens=False)[
         'input_ids'
     ]
-    ids = tokenizer(cast(str, tokenizer.apply_chat_template(messages[: index + 1], tokenize=False)), add_special_tokens=False)['input_ids']
+    ids = tokenizer(cast(str, tokenizer.apply_chat_template(messages[: index + 1], tokenize=False, **CHAT_TEMPLATE_KWARGS)), add_special_tokens=False)['input_ids']
     if list(ids[: len(before)]) != list(before):
         raise ValueError('the context tokens are not a prefix of the full row, so the loss mask would be wrong')
     if len(ids) > limit:

@@ -5,11 +5,11 @@
 Team Two-eyed Ravens: Hatem Saadallah and Nour Jennane | Lexsi AI Hackathon Track 3 (Agentic Fine-Tuning) | November 2026
 
 **[Live demo](https://huggingface.co/spaces/HatemSaadallah/aemon)** ·
-**[Full write-up and code](https://github.com/HatemSaadallah/aemon)** ·
+**[Full write-up and code](https://github.com/Two-Eyed-Ravens/aemon)** ·
 **[Article](https://huggingface.co/blog/HatemSaadallah/aemon)** ·
-[Dataset](https://huggingface.co/datasets/two-eyed-ravens/aemon) ·
-[Collection](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd) ·
-[Paper](https://github.com/HatemSaadallah/aemon/blob/main/docs/PAPER.pdf)
+[Dataset](https://huggingface.co/datasets/twoeyedravens/aemon) ·
+[Collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) ·
+[Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)
 
 > On four companies it never saw, this adapter scored **1.48** against the best-prompted base model's **0.65** on a
 > 0–3 blind rubric (mean of two judges; **+0.83, 95% interval 0.69 to 0.97**). A second frozen test on twelve more
@@ -22,7 +22,7 @@ Team Two-eyed Ravens: Hatem Saadallah and Nour Jennane | Lexsi AI Hackathon Trac
 | **Version 1, the evaluated adapter** | `adapter_model.safetensors` + `adapter_config.json` (PEFT); `tiny-aya-global-strategy-lora-bf16.gguf` (llama.cpp; the exact file evaluated) | the results in sections 5 and 6: one adapter on Tiny Aya Global, distilled from Command A+ | +0.83 and +0.52, frozen tests run once |
 | **Version 3, the final system's reasoner** | `v3_adapter.gguf` | the app and the [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon): version 1 gathers the evidence, version 3 reasons, with decoding-time guards the app sets (`app/server.py`) | +1.02 and +1.11 over the base model on the same cases, measured after the tests (the two sections at the end) |
 
-To run the final system, follow [Run it](https://github.com/HatemSaadallah/aemon#run-it) in the repository; with
+To run the final system, follow [Run it](https://github.com/Two-Eyed-Ravens/aemon#run-it) in the repository; with
 only version 1's file present the app runs version 1 alone. Both adapters derive from Tiny Aya Global, so both are
 CC-BY-NC 4.0 (non-commercial).
 

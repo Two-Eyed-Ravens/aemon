@@ -106,6 +106,9 @@ take() {  # QUEUE may list several files separated by colons: the first that has
     line=$(flock $q.lock bash -c "head -n1 $q; sed -i 1d $q")
     [ -n "$line" ] && { echo "$line"; return; }
   done
+  # an empty queue is the normal end, not an error: without this the last test above returns 1, and under set -e the
+  # caller's LINE=$(take) ended the job FAILED before it could print "queue empty" (job 781736, 21 November)
+  return 0
 }
 give_back() { local q=${QUEUE%%:*}; flock $q.lock bash -c "echo '$*' >> $q"; }
 remote_worker() {

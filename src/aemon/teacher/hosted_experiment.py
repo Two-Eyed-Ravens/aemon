@@ -24,12 +24,13 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from aemon.common.constants.pipeline import TEST_CASE_FILES
 from aemon.common.types import Json
+from aemon.data.splits import is_validation
 from aemon.environment.cases import load_cases
 from aemon.teacher import corrections as c
 from aemon.teacher import corrective, experiment_design
 from aemon.teacher import targeted as t
-from aemon.data.splits import is_validation
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -76,7 +77,7 @@ def _manifest(paths: list[str]) -> str:
 
 def candidates(asked: list[str], manifests: list[str]) -> tuple[list[Json], dict[str, int]]:
     cases = {x.id: x for x in load_cases()}
-    frozen = {x.id for x in load_cases(split='heldout')} | {x.id for x in load_cases(split='heldout2')}
+    frozen = {x.id for split in TEST_CASE_FILES for x in load_cases(split=split)}
     manifest = _manifest(manifests)
     out, counts = [], {}
     for item in _latest(asked):

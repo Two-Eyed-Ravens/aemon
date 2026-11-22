@@ -161,7 +161,7 @@ def run_packets(backend,packets_path,output,repo,run_cap=8,workers=1,adopt=None)
                 (dest/'events.jsonl').write_text(raw)
                 response={'text':text,'usage':usage,'requested_model':result['model'],'resolved_model':None,'cli_version':instrument['judges']['codex']['cli_version'],
                           'binary_sha256':instrument['judges']['codex']['binary_sha256'],'adopted_first_isolation_probe':True,'raw_events_sha256':digest(raw.encode())}
-            elif backend in ('codex','codexsol'):response=codex_call(packet,dest,backend)
+            elif backend in ('codex','codexsol','codexsol170'):response=codex_call(packet,dest,backend)
             elif backend=='claudecode':response=claudecode_call(packet,dest)
             else:response=claude_call(packet,dest,repo,run_id,run_cap)
             result['response']=response
@@ -176,7 +176,7 @@ def run_packets(backend,packets_path,output,repo,run_cap=8,workers=1,adopt=None)
         result_path.write_text(json.dumps(result,indent=2))
         print(json.dumps({'judge':backend,'packet':pid,'valid':'judgment' in result}),flush=True)
         return result
-    with concurrent.futures.ThreadPoolExecutor(max_workers=workers if backend in ('codex','codexsol','claudecode') else 1) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers if backend in ('codex','codexsol','codexsol170','claudecode') else 1) as pool:
         results=list(pool.map(one,packets))
     target=out/'predictions.jsonl'
     if target.exists():raise ValueError('aggregate already exists')

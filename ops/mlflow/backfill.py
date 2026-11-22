@@ -92,8 +92,17 @@ class Logger:
         runs = self.client.search_runs([self.experiment(experiment)], f"tags.source_sha256 = '{digest}'", max_results=1)
         return bool(runs)
 
-    def run(self, experiment: str, name: str, source: Path, params: dict, metrics: dict[str, float], tags: dict,
-            steps: dict[str, list[tuple[int, float]]] | None = None, artifacts: tuple[Path, ...] | list[Path] = ()) -> None:
+    def run(
+        self,
+        experiment: str,
+        name: str,
+        source: Path,
+        params: dict,
+        metrics: dict[str, float],
+        tags: dict,
+        steps: dict[str, list[tuple[int, float]]] | None = None,
+        artifacts: tuple[Path, ...] | list[Path] = (),
+    ) -> None:
         digest = sha(source)
         if not self.dry and self.done(experiment, digest):
             self.skipped += 1
@@ -108,10 +117,13 @@ class Logger:
         batch_metrics = [Metric(clean(k), v, now, 0) for k, v in metrics.items()]
         for key, series in (steps or {}).items():
             batch_metrics += [Metric(clean(key), v, now, int(s)) for s, v in series]
-        tag_list = [RunTag(k, str(v)[:5000]) for k, v in {**tags, 'source': str(source.relative_to(REPO) if source.is_relative_to(REPO) else source), 'source_sha256': digest}.items()]
+        tag_list = [
+            RunTag(k, str(v)[:5000])
+            for k, v in {**tags, 'source': str(source.relative_to(REPO) if source.is_relative_to(REPO) else source), 'source_sha256': digest}.items()
+        ]
         param_list = [Param(clean(k), str(v)[:6000]) for k, v in params.items() if v is not None]
         for i in range(0, max(len(batch_metrics), 1), 900):  # the store takes at most 1000 entities per batch
-            self.client.log_batch(rid, metrics=batch_metrics[i:i + 900], params=param_list if i == 0 else [], tags=tag_list if i == 0 else [])
+            self.client.log_batch(rid, metrics=batch_metrics[i : i + 900], params=param_list if i == 0 else [], tags=tag_list if i == 0 else [])
         for a in artifacts:
             self.client.log_artifact(rid, str(a))
         self.client.set_terminated(rid, 'FINISHED', end_time=now)
@@ -133,10 +145,18 @@ def training(log: Logger) -> None:
                 if k not in ('step', 'epoch') and isinstance(v, (int, float)):
                     steps.setdefault(k, []).append((entry['step'], v))
         params = {
-            'run_folder': folder, 'lora_r': config.get('r'), 'lora_alpha': config.get('lora_alpha'), 'lora_dropout': config.get('lora_dropout'),
-            'target_modules': config.get('target_modules'), 'base_model': config.get('base_model_name_or_path'),
-            'epochs': state.get('num_train_epochs'), 'max_steps': state.get('max_steps'), 'batch_size': state.get('train_batch_size'),
-            'code_revision': report.get('code_revision'), 'rows': report.get('rows'), 'held_out_rows': report.get('held_out_rows'),
+            'run_folder': folder,
+            'lora_r': config.get('r'),
+            'lora_alpha': config.get('lora_alpha'),
+            'lora_dropout': config.get('lora_dropout'),
+            'target_modules': config.get('target_modules'),
+            'base_model': config.get('base_model_name_or_path'),
+            'epochs': state.get('num_train_epochs'),
+            'max_steps': state.get('max_steps'),
+            'batch_size': state.get('train_batch_size'),
+            'code_revision': report.get('code_revision'),
+            'rows': report.get('rows'),
+            'held_out_rows': report.get('held_out_rows'),
             'supervised_by_source': json.dumps(report.get('supervised_by_source')) if report else None,
         }
         metrics = {'best_eval_loss': state['best_metric']} if state.get('best_metric') is not None else {}
@@ -144,8 +164,16 @@ def training(log: Logger) -> None:
             metrics['train_seconds'] = float(report['seconds'])
         if report.get('peak_gpu_gb'):
             metrics['peak_gpu_gb'] = float(report['peak_gpu_gb'])
-        log.run('aemon-training', label, state_path, params, metrics, {'adapter': label, 'kind': 'training'}, steps,
-                [p for p in (config_path, report_path) if p and p.exists()])
+        log.run(
+            'aemon-training',
+            label,
+            state_path,
+            params,
+            metrics,
+            {'adapter': label, 'kind': 'training'},
+            steps,
+            [p for p in (config_path, report_path) if p and p.exists()],
+        )
 
 
 def judge_means(folder: Path) -> dict[str, dict[str, tuple[float, int]]]:
@@ -195,16 +223,40 @@ def evaluation(log: Logger) -> None:
         for name, (mean, n) in judged.get(path.name, {}).items():
             metrics[f'judge.{name}.mean'] = mean
             metrics[f'judge.{name}.episodes'] = float(n)
-        params = {k: a.get(k) for k in ('prompt', 'split', 'attempts', 'max_turns', 'max_errors', 'max_tokens', 'context', 'temperature',
-                                        'lora_route', 'status_check', 'source_dates', 'recovery', 'backend', 'model_label', 'weights_sha256')}
+        params = {
+            k: a.get(k)
+            for k in (
+                'prompt',
+                'split',
+                'attempts',
+                'max_turns',
+                'max_errors',
+                'max_tokens',
+                'context',
+                'temperature',
+                'lora_route',
+                'status_check',
+                'source_dates',
+                'recovery',
+                'backend',
+                'model_label',
+                'weights_sha256',
+            )
+        }
         params['cases'] = len(str(a.get('cases', '')).split(','))
         params['code_revision'] = data.get('code_revision')
         params['uncommitted_changes'] = data.get('uncommitted_changes')
         rel = path.relative_to(REPO / 'reports')
         set_name = rel.parts[1] if rel.parts[0] == 'judge' and len(rel.parts) > 2 else rel.parts[0]
         name = str(rel.relative_to('judge') if rel.parts[0] == 'judge' else rel).removesuffix('.json')
-        log.run('aemon-evaluation', name, path, params, metrics,
-                {'set': set_name, 'split': a.get('split'), 'adapter_in_label': 'adapter' in str(a.get('model_label')), 'kind': 'evaluation'})
+        log.run(
+            'aemon-evaluation',
+            name,
+            path,
+            params,
+            metrics,
+            {'set': set_name, 'split': a.get('split'), 'adapter_in_label': 'adapter' in str(a.get('model_label')), 'kind': 'evaluation'},
+        )
 
 
 def comparisons(log: Logger) -> None:
@@ -223,8 +275,9 @@ def comparisons(log: Logger) -> None:
             diff = block.get('difference') or {}
             if diff.get('mean_and_95_interval'):
                 m, lo, hi = diff['mean_and_95_interval']
-                metrics.update({f'{judge}.difference': m, f'{judge}.difference_low': lo, f'{judge}.difference_high': hi,
-                                f'{judge}.pairs': float(diff.get('pairs', 0))})
+                metrics.update(
+                    {f'{judge}.difference': m, f'{judge}.difference_low': lo, f'{judge}.difference_high': hi, f'{judge}.pairs': float(diff.get('pairs', 0))}
+                )
                 compared = diff.get('arms')
                 for company, value in (diff.get('by_company') or {}).items():
                     metrics[f'{judge}.by_company.{company}'] = value
@@ -232,30 +285,66 @@ def comparisons(log: Logger) -> None:
         if agreement.get('spearman_episode_scores') is not None:
             metrics['agreement.spearman'] = agreement['spearman_episode_scores']
         set_name = path.parent.name
-        log.run('aemon-comparisons', f'{set_name}/{path.stem.removeprefix("report_")}', path,
-                {'set': set_name, 'judges': ','.join(data['judges']), 'compared': compared}, metrics, {'set': set_name, 'kind': 'comparison'})
+        log.run(
+            'aemon-comparisons',
+            f'{set_name}/{path.stem.removeprefix("report_")}',
+            path,
+            {'set': set_name, 'judges': ','.join(data['judges']), 'compared': compared},
+            metrics,
+            {'set': set_name, 'kind': 'comparison'},
+        )
 
 
 # name -> what it is, training folder (None for the base), weights, and the runner reports that evaluated it
 MODELS = {
-    'aemon-v1': ('v1, the submitted adapter: LoRA r16 on Tiny Aya Global, 2 epochs on 3,891 teacher rows plus 51 corrections', 'final_pilot',
-                 {'safetensors_sha256': '740c4a9b2f415c7b83162cb463d9eaec56a34feff090d9bf882680914eb3a112',
-                  'gguf_sha256': '41794b5756b9e0f87c58dd14e451756d15c897d595886dee9921181298fdb9d1',
-                  'location': 'cluster runs/final_pilot/adapter; https://huggingface.co/two-eyed-ravens/aemon', 'status': 'submitted'},
-                 ('dev_final_adapter', 'final_test_trained_adapter', 'test2_trained_adapter', 'screen3_v1_adapter', 'switch_v1', 'status_aqp_v1', 'status_dev_v1')),
-    'aemon-v2': ('v2, DeepSeek corrective rows; failed its development screen', 'v2_deepseek',
-                 {'safetensors_sha256': 'f4c419f7aefebbb128c4ecc2d92c1ade156e7dcd59e5d49b966c9068f063b57f', 'location': 'cluster runs/v2_deepseek/adapter',
-                  'status': 'failed development screen'}, ()),
-    'aemon-v3': ('v3, 7,502 rows (teacher plus extra), 1 epoch; failed its small screen, then better on test set 2 (exploratory)', 'v3',
-                 {'safetensors_sha256': '8de2730fefa518a0100cbfd268d9c940ab2cf412c1277597f83a1900fa90a5c4',
-                  'gguf_sha256': 'ea9193807fe9d5132878021bdf73de40ee84e2486f6688db9b3c3e29e04e1443', 'location': 'cluster runs/v3/adapter', 'status': 'exploratory'},
-                 ('final_test_v3_adapter', 'test2_v3_adapter', 'screen3_v3_adapter', 'switch_v3', 'status_aqp_v3', 'status_dev_v3')),
-    'aemon-third': ('the third development adapter', 'third_pilot',
-                    {'safetensors_sha256': 'da98c6f33e1ab12c3e041c889f6f718d8b2c6e845982cbbf75fb81e9dc697241', 'location': 'cluster runs/third_pilot/adapter',
-                     'status': 'development only'}, ()),
-    'tiny-aya-global-base': ('Tiny Aya Global without an adapter (CohereLabs, bf16 GGUF)', None,
-                             {'location': 'https://huggingface.co/CohereLabs/tiny-aya-global', 'status': 'baseline'},
-                             ('dev_final_base', 'final_test_base_base', 'test2_base_base')),
+    'aemon-v1': (
+        'v1, the submitted adapter: LoRA r16 on Tiny Aya Global, 2 epochs on 3,891 teacher rows plus 51 corrections',
+        'final_pilot',
+        {
+            'safetensors_sha256': '740c4a9b2f415c7b83162cb463d9eaec56a34feff090d9bf882680914eb3a112',
+            'gguf_sha256': '41794b5756b9e0f87c58dd14e451756d15c897d595886dee9921181298fdb9d1',
+            'location': 'cluster runs/final_pilot/adapter; https://huggingface.co/twoeyedravens/aemon',
+            'status': 'submitted',
+        },
+        ('dev_final_adapter', 'final_test_trained_adapter', 'test2_trained_adapter', 'screen3_v1_adapter', 'switch_v1', 'status_aqp_v1', 'status_dev_v1'),
+    ),
+    'aemon-v2': (
+        'v2, DeepSeek corrective rows; failed its development screen',
+        'v2_deepseek',
+        {
+            'safetensors_sha256': 'f4c419f7aefebbb128c4ecc2d92c1ade156e7dcd59e5d49b966c9068f063b57f',
+            'location': 'cluster runs/v2_deepseek/adapter',
+            'status': 'failed development screen',
+        },
+        (),
+    ),
+    'aemon-v3': (
+        'v3, 7,502 rows (teacher plus extra), 1 epoch; failed its small screen, then better on test set 2 (exploratory)',
+        'v3',
+        {
+            'safetensors_sha256': '8de2730fefa518a0100cbfd268d9c940ab2cf412c1277597f83a1900fa90a5c4',
+            'gguf_sha256': 'ea9193807fe9d5132878021bdf73de40ee84e2486f6688db9b3c3e29e04e1443',
+            'location': 'cluster runs/v3/adapter',
+            'status': 'exploratory',
+        },
+        ('final_test_v3_adapter', 'test2_v3_adapter', 'screen3_v3_adapter', 'switch_v3', 'status_aqp_v3', 'status_dev_v3'),
+    ),
+    'aemon-third': (
+        'the third development adapter',
+        'third_pilot',
+        {
+            'safetensors_sha256': 'da98c6f33e1ab12c3e041c889f6f718d8b2c6e845982cbbf75fb81e9dc697241',
+            'location': 'cluster runs/third_pilot/adapter',
+            'status': 'development only',
+        },
+        (),
+    ),
+    'tiny-aya-global-base': (
+        'Tiny Aya Global without an adapter (CohereLabs, bf16 GGUF)',
+        None,
+        {'location': 'https://huggingface.co/CohereLabs/tiny-aya-global', 'status': 'baseline'},
+        ('dev_final_base', 'final_test_base_base', 'test2_base_base'),
+    ),
 }
 REGISTERED = ('aemon-v1', 'aemon-v2', 'aemon-v3')  # versions 1, 2, 3 of aemon-adapter
 LINKED = ('finished', 'end_to_end_success', 'refused_calls', 'mean_calls', 'episodes')
@@ -279,9 +368,18 @@ def models(log: Logger) -> None:
             continue
         label = TRAINED[folder][0] if folder else None
         source = training_runs.get(label)
-        model = mlflow.create_external_model(name=name, source_run_id=source.info.run_id if source else None, experiment_id=experiment,
-                                             model_type='peft-lora' if folder else 'base', tags={**tags, 'description': description},
-                                             params={k: v for k, v in (source.data.params if source else {}).items() if k.startswith('lora') or k in ('rows', 'epochs', 'code_revision', 'base_model')})
+        model = mlflow.create_external_model(
+            name=name,
+            source_run_id=source.info.run_id if source else None,
+            experiment_id=experiment,
+            model_type='peft-lora' if folder else 'base',
+            tags={**tags, 'description': description},
+            params={
+                k: v
+                for k, v in (source.data.params if source else {}).items()
+                if k.startswith('lora') or k in ('rows', 'epochs', 'code_revision', 'base_model')
+            },
+        )
         ids[name] = model.model_id
         for run in eval_runs:
             report = Path(run.data.tags.get('source', '')).stem

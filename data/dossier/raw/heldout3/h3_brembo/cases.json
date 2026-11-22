@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "Brembo N.V.",
+   "question": "Should Brembo N.V. develop a differentiated consumer proposition for a specific use case, beyond its existing brake systems for vehicle manufacturers and replacement parts for the aftermarket? What evidence would justify that investment?",
+   "brief": "Brembo N.V. makes brake systems and components, including discs, calipers and complete braking systems, for car, motorcycle and commercial-vehicle manufacturers and for racing teams, and also sells replacement parts in the aftermarket. It is a listed group with its operational headquarters in Bergamo, Italy, and its legal seat in the Netherlands. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "brembo",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "brembo-base",
+   "premise_records": [
+    "brembo-gt-kit",
+    "brembo-gr-pro",
+    "brembo-lifestyle-collection"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

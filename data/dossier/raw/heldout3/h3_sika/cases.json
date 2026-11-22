@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "Sika AG",
+   "question": "Should Sika AG develop a differentiated consumer proposition for a specific use case, beyond its existing construction chemicals, sealants and adhesives for contractors, distributors and industrial manufacturers? What evidence would justify that investment?",
+   "brief": "Sika AG makes construction chemicals and industrial adhesives and sealants, including waterproofing, concrete admixtures, roofing, flooring and bonding systems, for contractors, distributors and manufacturers in the building and automotive industries. It is a listed group headquartered in Baar, Switzerland, with subsidiaries in 103 countries. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "sika",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "sika-base",
+   "premise_records": [
+    "sika-us-pro-select",
+    "sika-ireland-diy-sealants",
+    "sika-canada-sakrete-diy"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

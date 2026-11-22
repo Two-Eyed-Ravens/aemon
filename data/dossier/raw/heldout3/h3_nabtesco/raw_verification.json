@@ -1,0 +1,118 @@
+{
+ "summary": {
+  "verified": 20,
+  "not_found": 2
+ },
+ "results": [
+  {
+   "id": "nabtesco-size-9m-2026",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-reducer-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-door-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-door-sites",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-nabco-service-network",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-conpal-home",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-conpal-therapists",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-own-brand-exit",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-prosthetic-knee",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-allux-user-voice",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-monocrank-humanoid",
+   "status": "not_found",
+   "detail": "page has 77097 characters"
+  },
+  {
+   "id": "nabtesco-assist-unit-partners",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-prosthesis-public-funding",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-jis-installer-scope",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-door-accidents",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-ifr-consumer-robots",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-ifr-humanoids",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-lixil-doac-launch",
+   "status": "not_found",
+   "detail": "page has 5698 characters"
+  },
+  {
+   "id": "nabtesco-lixil-doac-ended",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-porteo-homes",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-ottobock-b2c",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "nabtesco-kowa-pallu",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

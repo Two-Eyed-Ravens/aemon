@@ -1,0 +1,94 @@
+{
+ "probes": {
+  "states": 171,
+  "probes": {
+   "unparseable": {
+    "n": 171,
+    "below_good_call": 171,
+    "tested": true
+   },
+   "repeat": {
+    "n": 171,
+    "below_good_call": 171,
+    "tested": true
+   },
+   "off_topic_search": {
+    "n": 171,
+    "below_good_call": 171,
+    "tested": true
+   },
+   "premature_finish": {
+    "n": 171,
+    "below_good_call": 171,
+    "tested": true
+   },
+   "misquote": {
+    "n": 21,
+    "below_good_call": 21,
+    "tested": true
+   },
+   "synthetic_as_support": {
+    "n": 0,
+    "below_good_call": 0,
+    "tested": false
+   }
+  },
+  "untested": [
+   "synthetic_as_support"
+  ],
+  "passed": false
+ },
+ "agreement": {
+  "runs": 855,
+  "arms": {
+   "final_system": 45,
+   "qwen9b": 45,
+   "qwen4b": 45,
+   "tinyaya": 45,
+   "gemma12b": 45,
+   "qwen4b_ft": 45,
+   "qwen9b_ft": 45,
+   "qwen9b_routed_staged": 45,
+   "qwen9b_routed_compact": 45,
+   "ayaexp8b": 45,
+   "ayaA7_guards": 45,
+   "ayaA7_decide": 45,
+   "ayaP_compact_guards": 45,
+   "ayaB7_guards": 45,
+   "ayaP_compact_decide": 45,
+   "ayaB7_decide": 45,
+   "ayaB11_guards": 45,
+   "ayaB11_decide": 45,
+   "ayaNC7_guards": 45
+  },
+  "spearman": 0.2598820194388609,
+  "threshold": 0.3,
+  "passed": false,
+  "diagnostics_only": {
+   "runs_whose_replay_diverges_from_the_recorded_calls": 424,
+   "spearman_on_faithful_replays": 0.16251318874065918,
+   "within_arm_spearman": {
+    "ayaA7_decide": -0.043,
+    "ayaA7_guards": -0.098,
+    "ayaB11_decide": 0.236,
+    "ayaB11_guards": 0.515,
+    "ayaB7_decide": -0.369,
+    "ayaB7_guards": -0.359,
+    "ayaNC7_guards": 0.21,
+    "ayaP_compact_decide": 0.056,
+    "ayaP_compact_guards": 0.138,
+    "ayaexp8b": 0.098,
+    "final_system": -0.117,
+    "gemma12b": 0.543,
+    "qwen4b": 0.445,
+    "qwen4b_ft": -0.078,
+    "qwen9b": 0.52,
+    "qwen9b_ft": 0.165,
+    "qwen9b_routed_compact": 0.332,
+    "qwen9b_routed_staged": 0.552,
+    "tinyaya": 0.217
+   }
+  }
+ },
+ "passed": false
+}

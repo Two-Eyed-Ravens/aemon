@@ -23,6 +23,7 @@ import random
 from pathlib import Path
 from typing import Any
 
+from aemon.common.constants.pipeline import SPLITS
 from aemon.common.types import Json
 from aemon.environment.cases import load_cases
 
@@ -178,7 +179,7 @@ def main() -> None:
     parser.add_argument('--packets', required=True)
     parser.add_argument('--key', required=True)
     parser.add_argument('--seed', type=int, default=20261106)
-    parser.add_argument('--split', choices=('development', 'heldout', 'heldout2'), default='development')
+    parser.add_argument('--split', choices=SPLITS, default='development')
     args = parser.parse_args()
     pairs = [tuple(x.split('=', 1)) for x in args.report]
     packets, key = build([(a, p) for a, p in pairs], args.seed, args.split)

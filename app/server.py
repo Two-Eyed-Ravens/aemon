@@ -78,7 +78,6 @@ OPEN = {'/login', '/api/login'}
 _new_accounts, _auth_lock = collections.deque(), threading.Lock()
 
 
-
 def _user_of(request: Request) -> str | None:
     return store.session_user(request.cookies.get(COOKIE))
 
@@ -195,14 +194,20 @@ def detail(record: Json, case: Case) -> dict[str, Any]:
     # A finished answer whose numbers or test fail the checks is flagged on its report (docs/RECOVERY_REPORT.md): the
     # finish-on-time guard made these failures more common, so a run with the guard on says so in the flag.
     checks = record.get('checks') or {}
-    out['answer_flags'] = [{'check': k, 'label': ANSWER_FLAGS[k], 'detail': checks[k].get('detail')} for k in ANSWER_FLAGS
-                           if record.get('final') and (checks.get(k) or {}).get('passed') is False]
+    out['answer_flags'] = [
+        {'check': k, 'label': ANSWER_FLAGS[k], 'detail': checks[k].get('detail')}
+        for k in ANSWER_FLAGS
+        if record.get('final') and (checks.get(k) or {}).get('passed') is False
+    ]
     out['finish_guard'] = 'budget' in ((record.get('settings') or {}).get('recovery') or [])
     if record.get('final'):  # the evidence checks of docs/VERIFY_EVAL_PLAN.md, shown to the reader; the run is not changed
         try:
-            run = rebuild({**record, 'settings': {k: v for k, v in (record.get('settings') or {}).items() if k not in ('recovery', 'stuck_help')}}, {case.id: case})
-            out['answer_flags'] += [{'check': f'evidence_{f["kind"]}', 'label': EVIDENCE_FLAGS[f['kind']], 'detail': f['text']}
-                                    for f in verify.findings(run, record['final'])]
+            run = rebuild(
+                {**record, 'settings': {k: v for k, v in (record.get('settings') or {}).items() if k not in ('recovery', 'stuck_help')}}, {case.id: case}
+            )
+            out['answer_flags'] += [
+                {'check': f'evidence_{f["kind"]}', 'label': EVIDENCE_FLAGS[f['kind']], 'detail': f['text']} for f in verify.findings(run, record['final'])
+            ]
         except Exception:  # noqa: BLE001  a record the tools cannot replay keeps its other flags
             pass
     return out
@@ -251,12 +256,35 @@ STATUS_CHECK = os.environ.get('STATUS_CHECK') == '1'
 # Then evidence first and grounded beliefs (DECISIONS 2026-11-13 00:10, rule met at 02:40): the quote and what it does not
 # show before the evidence kind; 'likely' only for a theory a real weighed source supports. Mean of judges over the
 # guards alone: development +0.07, test set 2 +0.03, final test +0.06.
-LOOP_GUARDS = () if os.environ.get('LOOP_GUARDS') == '0' else ('no_repeats', 'quote_menu', 'resample_repeats', 'budget',
-                                                                'grounded_beliefs', 'evidence_first')
+LOOP_GUARDS = () if os.environ.get('LOOP_GUARDS') == '0' else ('no_repeats', 'quote_menu', 'resample_repeats', 'budget', 'grounded_beliefs', 'evidence_first')
 MODELS = (
-    {'id': 'system', 'label': 'aemon: version 1 gathers the evidence, version 3 reasons' + (', with a company status check' if STATUS_CHECK else '') + (', loop and evidence guards on' if LOOP_GUARDS else '') + ' (4-bit base)',
-     'adapter': 'final_adapter.gguf', 'reasoner': 'v3_adapter.gguf', 'status_check': STATUS_CHECK, 'prompt': 'compact', 'loop_guards': bool(LOOP_GUARDS)},
-    {'id': 'final', 'label': 'Fine-tuned Tiny Aya (final adapter; 4-bit base, the reported results used full precision)', 'adapter': 'final_adapter.gguf', 'prompt': 'compact'},
+    {
+        'id': 'system',
+        'label': 'aemon: version 1 gathers the evidence, version 3 reasons'
+        + (', with a company status check' if STATUS_CHECK else '')
+        + (', loop and evidence guards on' if LOOP_GUARDS else '')
+        + ' (4-bit base)',
+        'adapter': 'final_adapter.gguf',
+        'reasoner': 'v3_adapter.gguf',
+        'status_check': STATUS_CHECK,
+        'prompt': 'compact',
+        'loop_guards': bool(LOOP_GUARDS),
+    },
+    # Stage 2 (DECISIONS 21-22 November): Aya Expanse 8B with adapter A (seed 7), the configuration sent to test set 3:
+    # compact prompt, the six guards, the adapter on every stage. Served by deploy/space8b.
+    {
+        'id': 'aemon8b',
+        'label': 'aemon-8b: Aya Expanse 8B fine-tuned (adapter A), loop and evidence guards on (8-bit base)',
+        'adapter': 'aemon-8b-adapter.gguf',
+        'prompt': 'compact',
+        'loop_guards': bool(LOOP_GUARDS),
+    },
+    {
+        'id': 'final',
+        'label': 'Fine-tuned Tiny Aya (final adapter; 4-bit base, the reported results used full precision)',
+        'adapter': 'final_adapter.gguf',
+        'prompt': 'compact',
+    },
     {'id': 'untrained', 'label': 'Untrained Tiny Aya', 'adapter': None, 'prompt': 'staged'},
     {'id': 'second', 'label': 'Trained Tiny Aya, second adapter', 'adapter': 'second_adapter.gguf', 'prompt': 'compact'},
     {'id': 'first', 'label': 'Trained Tiny Aya, first adapter (full history)', 'adapter': 'first_adapter.gguf', 'prompt': 'staged'},
@@ -341,7 +369,7 @@ EXAMPLES = {
     'jotun': [
         'It is mid-2024. Could our marine coatings become something homeowners buy?',
         'Who outside shipping has a problem our coatings could solve?',
-        "How would we test if people would pay for a Jotun product, without spending much?",
+        'How would we test if people would pay for a Jotun product, without spending much?',
     ],
     'tanita': [
         'It is 1993. Should we sell a body-fat scale people can use at home?',
@@ -501,7 +529,10 @@ def _summary(record: Json) -> Json:
     }
 
 
-ONLINE = re.compile(r"\b(search|look|check|find|browse|google)\w*\b[^.?!]{0,40}\b(online|on the web|on the internet|the internet|web)\b|\b(search|look)\w* (it )?up online\b|\bonline (search|sources|research)\b", re.I)
+ONLINE = re.compile(
+    r'\b(search|look|check|find|browse|google)\w*\b[^.?!]{0,40}\b(online|on the web|on the internet|the internet|web)\b|\b(search|look)\w* (it )?up online\b|\bonline (search|sources|research)\b',
+    re.I,
+)
 
 
 def asks_online(text: str) -> bool:
@@ -513,8 +544,7 @@ def _prepared(case: Case, items: list[Json], context: str | None) -> Case:
     """The case with the person's attached documents added to its sources and their new information in the brief."""
     brief = case.brief + attach.brief_note(items)
     if context and context.strip():
-        brief += ('\n\nNew information from the person for this run (their account, not evidence; weigh it against the sources): '
-                  + context.strip())
+        brief += '\n\nNew information from the person for this run (their account, not evidence; weigh it against the sources): ' + context.strip()
     return dataclasses.replace(case, dossier=attach.with_attachments(case.dossier, items), brief=brief)
 
 
@@ -565,7 +595,7 @@ def _run_attempt(identifier: str, case: Case, model: Json, loaded: list[str], pr
     def finished_record(run: Investigation, info: Json) -> Json:
         for call in run.calls:  # resumed turns are this model's own, replayed, not someone else's prefix
             call.pop('prefix', None)
-        extra = ({'continued_after_turn' if entry.get('continues') else 'resumed_after_turn': len(prefix)} if prefix else {})
+        extra = {'continued_after_turn' if entry.get('continues') else 'resumed_after_turn': len(prefix)} if prefix else {}
         more = {'continues': entry['continues']} if entry.get('continues') else {}
         return {**detail(record_of(run, info), case), 'memory_used': entry.get('memory_used') or [], 'depth': entry.get('depth', 'standard'), **extra, **more}
 
@@ -615,7 +645,9 @@ def _run_attempt(identifier: str, case: Case, model: Json, loaded: list[str], pr
             record = entry['record'] = {**record, 'final': final, 'stop_reason': stop or record.get('stop_reason')}
             entry['status'], entry['error'] = 'finished', None
         entry['wrapping'] = False
-    if entry['status'] == 'finished' and record and entry.get('cache_key') and not prefix and not (record.get('final') or {}).get('draft'):  # never a failed, stopped or resumed run
+    if (
+        entry['status'] == 'finished' and record and entry.get('cache_key') and not prefix and not (record.get('final') or {}).get('draft')
+    ):  # never a failed, stopped or resumed run
         store.save_run(entry['cache_key'], {**record, 'generated_by': entry.get('identity')})
     _record_history(
         entry['user'],
@@ -644,9 +676,17 @@ def _resume(wait: float = RESUME_WAIT) -> None:
             continue
         with _lock:
             _tries[e['id']] = {
-                'status': 'running', 'record': e.get('record'), 'error': None, 'model': settings.get('model'), 'model_label': '',
-                'user': e['user'], 'workspace': e['workspace'], 'cache_key': None, 'identity': None,
-                'memory_used': settings.get('memory_used') or [], 'resuming': True,
+                'status': 'running',
+                'record': e.get('record'),
+                'error': None,
+                'model': settings.get('model'),
+                'model_label': '',
+                'user': e['user'],
+                'workspace': e['workspace'],
+                'cache_key': None,
+                'identity': None,
+                'memory_used': settings.get('memory_used') or [],
+                'resuming': True,
             }
         pending.append((e, settings, turns))
     deadline = time.time() + wait
@@ -665,7 +705,9 @@ def _resume(wait: float = RESUME_WAIT) -> None:
         depth = DEPTHS.get(settings.get('depth') or 'standard', DEPTHS['standard'])
         base = cases()[e['case']]
         items = attach.load(store.folder(), e['user'], settings.get('attachments') or [])
-        case = dataclasses.replace(base, question=settings['question'], brief=settings['brief'], search_budget=depth['searches'], dossier=attach.with_attachments(base.dossier, items))
+        case = dataclasses.replace(
+            base, question=settings['question'], brief=settings['brief'], search_budget=depth['searches'], dossier=attach.with_attachments(base.dossier, items)
+        )
         entry['max_turns'], entry['depth'] = depth['turns'], settings.get('depth') or 'standard'
         entry['budget_guard'] = bool(settings.get('budget_guard'))
         entry['resuming'] = False
@@ -756,8 +798,9 @@ def company_profile(company: str, request: Request) -> Json:
     entries = workspace_history(company, request)['entries']
     own = store.companies_of(request.state.user)
     others = [companies.summary(x['id'], cases()[x['base_case']], order, 0) for x in workspaces() if x['id'] in own]
-    return companies.profile(company, cases()[w['base_case']], order, sorted(entries, key=lambda e: e.get('started') or 0, reverse=True),
-                             w['examples'], w['scenarios'], others)
+    return companies.profile(
+        company, cases()[w['base_case']], order, sorted(entries, key=lambda e: e.get('started') or 0, reverse=True), w['examples'], w['scenarios'], others
+    )
 
 
 def _workspace_or_404(workspace: str, user: str) -> None:
@@ -776,7 +819,9 @@ def workspace_history(workspace: str, request: Request) -> Json:
         status = e.get('status')
         if status == 'running' and e['id'] not in _tries:
             status = 'interrupted'
-        out.append({k: e.get(k) for k in ('id', 'question', 'case', 'started', 'ended', 'summary', 'error', 'cached_at', 'pinned', 'project')} | {'status': status})
+        out.append(
+            {k: e.get(k) for k in ('id', 'question', 'case', 'started', 'ended', 'summary', 'error', 'cached_at', 'pinned', 'project')} | {'status': status}
+        )
     return {'workspace': workspace, 'entries': out, 'projects': store.projects(request.state.user, workspace)}
 
 
@@ -794,7 +839,11 @@ def workspace_run(workspace: str, identifier: str, request: Request) -> dict[str
         'followups': store.followups(request.state.user, workspace, identifier),
         'memory_used': record.get('memory_used') or [],
         'settings': {k: v for k, v in (entry.get('run_settings') or {}).items() if k in ('depth', 'live', 'model', 'context', 'asked_online', 'budget_guard')}
-        | {'attachments': [attach.summary(i) for i in attach.load(store.folder(), request.state.user, (entry.get('run_settings') or {}).get('attachments') or [])]},
+        | {
+            'attachments': [
+                attach.summary(i) for i in attach.load(store.folder(), request.state.user, (entry.get('run_settings') or {}).get('attachments') or [])
+            ]
+        },
     }
 
 
@@ -841,7 +890,9 @@ def ask_followup(workspace: str, identifier: str, body: FollowUp, request: Reque
     if any(f['status'] == 'answering' for f in earlier):
         raise HTTPException(409, 'still answering the last question')
     item = store.add_followup(user, workspace, identifier, body.question.strip())
-    threading.Thread(target=_answer_followup, args=(item['id'], entry['record'], item['question'], _notes(user, entry.get('project'), workspace), earlier), daemon=True).start()
+    threading.Thread(
+        target=_answer_followup, args=(item['id'], entry['record'], item['question'], _notes(user, entry.get('project'), workspace), earlier), daemon=True
+    ).start()
     return item
 
 
@@ -906,8 +957,15 @@ def review_batches(request: Request) -> Json:
     for path in sorted(REVIEWS.glob('v2_round*/*_kept_for_review.json')):
         examples = json.loads(path.read_text()).get('examples', [])
         advisory = sorted(p.name for p in path.parent.glob('advisory_*.md'))
-        out.append({'batch': f'{path.parent.name}/{path.stem}', 'examples': len(examples), 'advisory': advisory,
-                    'kept': sum(e.get('keep') is True for e in examples), 'dropped': sum(e.get('keep') is False for e in examples)})
+        out.append(
+            {
+                'batch': f'{path.parent.name}/{path.stem}',
+                'examples': len(examples),
+                'advisory': advisory,
+                'kept': sum(e.get('keep') is True for e in examples),
+                'dropped': sum(e.get('keep') is False for e in examples),
+            }
+        )
     return {'batches': out}
 
 
@@ -963,15 +1021,27 @@ def continue_run(workspace: str, identifier: str, request: Request) -> Json:
     depth = DEPTHS.get(settings.get('depth') or 'standard', DEPTHS['standard'])
     base = cases()[entry['case']]
     items = attach.load(store.folder(), user, settings.get('attachments') or [])
-    case = dataclasses.replace(base, question=settings['question'], brief=settings['brief'], search_budget=depth['searches'], dossier=attach.with_attachments(base.dossier, items))
+    case = dataclasses.replace(
+        base, question=settings['question'], brief=settings['brief'], search_budget=depth['searches'], dossier=attach.with_attachments(base.dossier, items)
+    )
     with _lock:
         if any(t['status'] == 'running' for t in _tries.values()):
             raise HTTPException(409, 'an investigation is already running')
         continues = int(record.get('continues') or 0) + 1
         _tries[identifier] = {
-            'status': 'running', 'record': record, 'error': None, 'model': model['id'], 'model_label': model['label'], 'user': user,
-            'workspace': workspace, 'cache_key': None, 'identity': None, 'memory_used': settings.get('memory_used') or [],
-            'max_turns': len(turns) + 200, 'depth': settings.get('depth') or 'standard', 'continues': continues,
+            'status': 'running',
+            'record': record,
+            'error': None,
+            'model': model['id'],
+            'model_label': model['label'],
+            'user': user,
+            'workspace': workspace,
+            'cache_key': None,
+            'identity': None,
+            'memory_used': settings.get('memory_used') or [],
+            'max_turns': len(turns) + 200,
+            'depth': settings.get('depth') or 'standard',
+            'continues': continues,
             'budget_guard': bool(settings.get('budget_guard')),
         }
     _record_history(user, workspace, identifier, status='running', error=None)
@@ -991,8 +1061,14 @@ def investigation_report(workspace: str, identifier: str, request: Request) -> R
     user = request.state.user
     entry = _entry_or_404(workspace, identifier, user)
     company = next((w['company'] for w in workspaces() if w['id'] == workspace), workspace)
-    page = pdf_report.build(entry['record'], _metrics(entry['record']), company, entry.get('question') or entry['record'].get('question', ''),
-                        store.followups(user, workspace, identifier), entry.get('ended'))
+    page = pdf_report.build(
+        entry['record'],
+        _metrics(entry['record']),
+        company,
+        entry.get('question') or entry['record'].get('question', ''),
+        store.followups(user, workspace, identifier),
+        entry.get('ended'),
+    )
     try:
         data = pdf_report.pdf(page, company)
     except Exception as error:  # noqa: BLE001
@@ -1176,7 +1252,12 @@ def start_try(body: Attempt, request: Request) -> Json:
     if asked_online:  # "search online" in the question or the new information turns web search on, and the page says why
         body.live_research = True
     if notes:  # memory, as context in the brief; it changes the case, so a saved run without it is never reused
-        case = dataclasses.replace(case, brief=case.brief + '\n\nNotes from the person asking (their context, not evidence; never quote them): ' + ' '.join(f'({i + 1}) {n}' for i, n in enumerate(notes)))
+        case = dataclasses.replace(
+            case,
+            brief=case.brief
+            + '\n\nNotes from the person asking (their context, not evidence; never quote them): '
+            + ' '.join(f'({i + 1}) {n}' for i, n in enumerate(notes)),
+        )
     bound = _cache_key(case, model)
     key, identity = bound if bound else (None, None)
     saved = store.cached(key) if key and not body.fresh and not body.live_research and not items and not body.context and not body.budget_guard else None
@@ -1231,20 +1312,43 @@ def start_try(body: Attempt, request: Request) -> Json:
             'error': None,
             'live_research': body.live_research,
             'model': model['id'],
-            'model_label': model['label'] + (' · live web research (snapshotted; not part of the evaluated setup)' if body.live_research else '')
+            'model_label': model['label']
+            + (' · live web research (snapshotted; not part of the evaluated setup)' if body.live_research else '')
             + (' · experimental step-budget guard (not part of the evaluated setup)' if body.budget_guard else ''),
             'user': user,
             'workspace': body.workspace,
-            'cache_key': None if body.live_research or items or body.context or body.budget_guard else key,  # a run with the person's own material is never shared
+            'cache_key': None
+            if body.live_research or items or body.context or body.budget_guard
+            else key,  # a run with the person's own material is never shared
             'identity': identity,
             'memory_used': notes,
             'max_turns': depth['turns'],
             'depth': body.depth,
             'budget_guard': body.budget_guard,
         }
-    _record_history(user, body.workspace, identifier, question=shown + (' (live web)' if body.live_research else ''), case=body.case, model=model['id'], started=time.time(), status='running', project=body.project,
-                    run_settings={'question': case.question, 'brief': case.brief, 'model': model['id'], 'live': body.live_research, 'memory_used': notes, 'depth': body.depth,
-                                  'attachments': body.attachments, 'context': body.context, 'asked_online': asked_online, 'budget_guard': body.budget_guard})
+    _record_history(
+        user,
+        body.workspace,
+        identifier,
+        question=shown + (' (live web)' if body.live_research else ''),
+        case=body.case,
+        model=model['id'],
+        started=time.time(),
+        status='running',
+        project=body.project,
+        run_settings={
+            'question': case.question,
+            'brief': case.brief,
+            'model': model['id'],
+            'live': body.live_research,
+            'memory_used': notes,
+            'depth': body.depth,
+            'attachments': body.attachments,
+            'context': body.context,
+            'asked_online': asked_online,
+            'budget_guard': body.budget_guard,
+        },
+    )
     threading.Thread(target=_run_attempt, args=(identifier, case, model, loaded), daemon=True).start()
     return {'id': identifier}
 

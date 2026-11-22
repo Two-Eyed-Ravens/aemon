@@ -1,0 +1,12 @@
+{"precision": "bf16", "slots": 1, "wall_seconds": 1670, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/bf16_s1.json"}
+{"precision": "bf16", "slots": 4, "wall_seconds": 2915, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/bf16_s4.json"}
+{"precision": "bf16", "slots": 8, "wall_seconds": 2852, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/bf16_s8.json"}
+{"precision": "bf16", "slots": 16, "wall_seconds": 1916, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/bf16_s16.json"}
+{"precision": "q8_0", "slots": 1, "wall_seconds": 1059, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q8_0_s1.json"}
+{"precision": "q8_0", "slots": 4, "wall_seconds": 2195, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q8_0_s4.json"}
+{"precision": "q8_0", "slots": 8, "wall_seconds": 2312, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q8_0_s8.json"}
+{"precision": "q8_0", "slots": 16, "wall_seconds": 2230, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q8_0_s16.json"}
+{"precision": "q4_k_m", "slots": 1, "wall_seconds": 821, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q4_k_m_s1.json"}
+{"precision": "q4_k_m", "slots": 4, "wall_seconds": 1797, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q4_k_m_s4.json"}
+{"precision": "q4_k_m", "slots": 8, "wall_seconds": 1727, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q4_k_m_s8.json"}
+{"precision": "q4_k_m", "slots": 16, "wall_seconds": 1834, "report": "/home/CLUSTER_ACCOUNT/lexsi/runs/bench_aya-expanse-8b-s7/q4_k_m_s16.json"}

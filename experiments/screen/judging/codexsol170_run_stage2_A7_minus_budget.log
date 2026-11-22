@@ -1,0 +1,14 @@
+{"judge": "codexsol170", "packet": "56c6364fe1548f62", "valid": true}
+{"judge": "codexsol170", "packet": "bcbf9265092ffe68", "valid": true}
+{"judge": "codexsol170", "packet": "ed85d39d37d73240", "valid": true}
+{"judge": "codexsol170", "packet": "90a3d845b24b4dc2", "valid": true}
+Traceback (most recent call last):
+  File "/home/USER/Desktop/lexsi-ai-hackathon/src/aemon/evaluation/judging/judge_v1/run_campaign.py", line 50, in <module>
+    main()
+  File "/home/USER/Desktop/lexsi-ai-hackathon/src/aemon/evaluation/judging/judge_v1/run_campaign.py", line 45, in main
+    path = b.run_packets(a.backend, Path(a.packets), out, str(REPO), run_cap=a.run_cap, workers=a.workers)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/USER/Desktop/lexsi-ai-hackathon/src/aemon/evaluation/judging/judge_v1/judge_backends.py", line 182, in run_packets
+    if target.exists():raise ValueError('aggregate already exists')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: aggregate already exists

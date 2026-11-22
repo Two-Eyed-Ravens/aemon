@@ -1201,7 +1201,7 @@ def test_an_attempt_changes_the_seed_and_a_retry_still_uses_its_own_temperature(
     assert seen == [(start, .5), (start + 1, .4)]
 
 
-# Agreed with Codex's review of #17
+# Agreed in the review of #17
 
 def test_silence_on_favourable_evidence_does_not_pass():
     case = Case('fixture', 'Fixture Co', 'Q', 'Brief', 8, 20000, 12, Dossier(RECORDS), SHOCK, APPEARANCE, 'supports', True)

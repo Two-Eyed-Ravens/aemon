@@ -53,17 +53,23 @@ def play(
     recovery_features: Sequence[str] = (),
     errors_at_start: int = 0,
     status_check: bool = False,
+    decide: Callable[[Investigation, Json], tuple[Json, Json | None]] | None = None,
 ) -> tuple[Investigation, Json]:
     """respond(messages, seed, max_tokens, schema, temperature) returns a reply. Everything else is fixed by the arm.
     route, if given, maps the current stage to the adapters the server applies, and is passed to respond as lora.
     prefix replays recorded turns first, each of which must return its recorded result, and marks their calls, so the model
-    takes over mid-investigation from exactly the state a live run would show. stop_when(run) ends the run early."""
+    takes over mid-investigation from exactly the state a live run would show. stop_when(run) ends the run early.
+    decide(run, call), with the decide_kind feature, may change a typed argument before the tools see the call (a decision
+    model, src/aemon/agent/decision.py); the model's own text stays in its turn, and the decision with the executed
+    arguments is recorded on the turn and on the call entry, so replay reproduces the executed call."""
     run = Investigation(case, complete_workflow, staged, quote_marks, reread_limit, source_dates, min_assessed, status_check)
     run.stuck_help = stuck_help
     unknown = set(recovery_features) - set(recovery.FEATURES)
     if unknown:
         raise ValueError(f'unknown recovery features {sorted(unknown)}')
     run.recovery = frozenset(recovery_features)
+    if 'decide_kind' in run.recovery and decide is None:
+        raise ValueError('decide_kind needs a decision model')
     seed = sum(map(ord, case.id)) + 1000 * attempt
     messages = [{'role': 'system', 'content': system}, {'role': 'user', 'content': 'A new investigation is ready. Call read_brief.'}]
     turns, errors, stop = [], errors_at_start, 'turn limit'  # errors counts in a row, so one mistake does not end a run; a resumed checkpoint keeps its count
@@ -73,6 +79,20 @@ def play(
     def shown_to_model(result: Json) -> Json:
         return {**result, **guidance(run)} if staged else dict(result, next=next_step(run)) if guided else result
 
+    def decided(call: Json | None) -> tuple[Json | None, Json | None]:
+        if call is None or decide is None or 'decide_kind' not in run.recovery:
+            return call, None
+        return decide(run, call)
+
+    def execute(call: Json | None, problem: str | None, reply: Json, decision: Json | None) -> Json:
+        made = len(run.calls)
+        result = run.call(call['name'], call['arguments']) if call is not None else {'error': problem}
+        if decision is not None:
+            reply['decision'] = decision
+            if len(run.calls) > made:
+                run.calls[-1]['decision'] = decision
+        return result
+
     def advance(messages: list[Message], shown: Json) -> list[Message]:
         if compact:  # the model sees the state, not a transcript it could copy
             return [messages[0], {'role': 'user', 'content': state_of(run, shown)}]
@@ -80,6 +100,9 @@ def play(
 
     for index, turn in enumerate(prefix):
         call, problem = parse_call(turn['text'], schema is not None or staged)
+        recorded = turn.get('decision') or {}
+        if call is not None and recorded.get('applied'):
+            call = {**call, 'arguments': recorded['executed_arguments']}
         before = len(run.calls)
         result = run.call(call['name'], call['arguments']) if call is not None else {'error': problem}
         if json.dumps(result, sort_keys=True) != json.dumps(turn['tool_result'], sort_keys=True):
@@ -110,12 +133,19 @@ def play(
         call, problem = parse_call(reply['text'], schema is not None or staged)
         before_state = recovery.signature(run)
         calls_before = len(run.calls)
-        result = run.call(call['name'], call['arguments']) if call is not None else {'error': problem}
+        call, decision = decided(call)
+        result = execute(call, problem, reply, decision)
         redraws = 0
         # resample_repeats (experimental, development only): a call the environment refused as an exact repeat changed
         # nothing, so the same state is drawn again (temperature 0.8, new seed) up to 3 times before the refusal counts.
         # Every refused draw stays in run.calls, marked redrawn, so refusal counts are unchanged.
-        while 'resample_repeats' in run.recovery and 'error' in result and len(run.calls) > calls_before and run.calls[-1].get('category') == 'repeat' and redraws < 3:
+        while (
+            'resample_repeats' in run.recovery
+            and 'error' in result
+            and len(run.calls) > calls_before
+            and run.calls[-1].get('category') == 'repeat'
+            and redraws < 3
+        ):
             run.calls[-1]['redrawn'] = True
             redraws += 1
             try:
@@ -130,7 +160,8 @@ def play(
             turns[-1] = reply
             messages[-1] = {'role': 'assistant', 'content': reply['text']}
             call, problem = parse_call(reply['text'], schema is not None or staged)
-            result = run.call(call['name'], call['arguments']) if call is not None else {'error': problem}
+            call, decision = decided(call)
+            result = execute(call, problem, reply, decision)
         if redraws:
             reply['redraws'] = redraws
         errors = errors + 1 if 'error' in result else 0

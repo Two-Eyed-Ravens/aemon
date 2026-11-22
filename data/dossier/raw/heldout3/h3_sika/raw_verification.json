@@ -1,0 +1,118 @@
+{
+ "summary": {
+  "verified": 20,
+  "not_found": 2
+ },
+ "results": [
+  {
+   "id": "sika-group-profile",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-sales-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-target-markets",
+   "status": "not_found",
+   "detail": "page has 1738467 characters"
+  },
+  {
+   "id": "sika-channels",
+   "status": "not_found",
+   "detail": "page has 1738467 characters"
+  },
+  {
+   "id": "sika-not-for-diy",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-us-pro-select",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-ireland-diy-sealants",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-canada-sakrete-diy",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-everbuild-acquisition",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-uk-distribution-diyers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-diyweek-everbuild",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-toolstation-sanitary",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-cooltools-reader-channel",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-cooltools-reader-opened-tube",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-practical-sailor-test",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-bostik-diy-range",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-bostik-amazon",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-henkel-pattex",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-diy-market-2024",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-us-diy-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-diisocyanate-training",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "sika-carb-voc-consumer",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "Nabtesco Corporation",
+   "question": "Should Nabtesco Corporation develop a differentiated consumer proposition for a specific use case, beyond its existing precision reduction gears, automatic doors, transport equipment and welfare components sold to manufacturers, building owners and transport operators? What evidence would justify that investment?",
+   "brief": "Nabtesco Corporation makes precision reduction gears for industrial robots, NABCO and GILGEN automatic doors for buildings and platform screen doors, brake, door and control equipment for railway vehicles, aircraft, ships and commercial vehicles, packaging machines, and welfare equipment such as prosthetic knee joints. It is a listed group headquartered in Tokyo whose customers are mainly robot makers, building owners and contractors, transport operators and equipment manufacturers. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "nabtesco",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "nabtesco-base",
+   "premise_records": [
+    "nabtesco-prosthetic-knee",
+    "nabtesco-conpal-home",
+    "nabtesco-own-brand-exit"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

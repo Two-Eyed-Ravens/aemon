@@ -148,7 +148,7 @@ def _digest(data: object) -> str:
     return hashlib.sha256(data if type(data) is bytes else json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]
 
 
-AGENT_MODULES = ('loop', 'tool_schemas', 'state_view', 'adapter_routing', 'records', 'run_investigations')
+AGENT_MODULES = ('loop', 'tool_schemas', 'state_view', 'adapter_routing', 'records', 'run_investigations', 'decision')
 
 
 def protocol_of(system: str, generation: Json) -> Json:

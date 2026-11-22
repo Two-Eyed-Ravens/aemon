@@ -1,0 +1,2 @@
+Official *ACL style files, unmodified, from github.com/acl-org/acl-style-files at commit d5adc82 (29 June 2026).
+The ACL README says authors may not modify acl.sty or acl_natbib.bst. acl_latex.tex is the template to start from.

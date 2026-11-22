@@ -103,6 +103,34 @@
         "model_reasoning_effort": "medium"
       },
       "added": "2026-11-11 (Hatem: \"use sol\"): the same pinned CLI, sandbox and settings as codex, only the model differs; gpt-6-astra exhausts the ChatGPT Plus allowance after about 120 judgments. A different judge from codex: qualified separately, never mixed with codex scores. The claude, codex and claudecode entries are unchanged, so their receipts still bind"
+    },
+    "codexsol170": {
+      "model": "gpt-6-sol",
+      "cli_version": "codex-cli 0.170.0",
+      "binary": "/home/USER/.codex/packages/standalone/releases/0.170.0-x86_64-unknown-linux-musl/bin/codex",
+      "binary_sha256": "880819aab735adcf16f36cd628940b9f1e652a36c01d10a5d32f83cc84902971",
+      "temperature": null,
+      "temperature_reason": "not exposed by Codex CLI",
+      "max_output_tokens": null,
+      "output_limit_reason": "not exposed by CLI; timeout is not a token ceiling",
+      "timeout_seconds": 300,
+      "forbidden_repository": "/home/USER/Desktop/lexsi-ai-hackathon",
+      "settings": {
+        "features.shell_tool": false,
+        "features.unified_exec": false,
+        "features.shell_snapshot": false,
+        "features.apps": false,
+        "features.browser_use": false,
+        "features.multi_agent": false,
+        "features.memories": false,
+        "memories.use_memories": false,
+        "memories.generate_memories": false,
+        "web_search": "disabled",
+        "project_doc_max_bytes": 0,
+        "model_instructions_file": "/judge_prompt.txt",
+        "model_reasoning_effort": "medium"
+      },
+      "added": "2026-11-19: codexsol on the installed CLI 0.170.0, because 0.166.0 is no longer on this machine; same model (gpt-6-sol) and settings. A separate judge: qualified on its own, and every packet of a comparison is judged by it, never mixed with codexsol judgments. The other entries are unchanged, so their receipts still bind"
     }
   },
   "limitation": "Model IDs pinned; Codex JSONL does not return a resolved deployment model ID. Built-in CLI safety/environment scaffolding remains; no project/session/answer-key context is supplied."

@@ -5,15 +5,18 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from aemon.common.constants.pipeline import SPLITS, TEST_CASE_FILES
 from aemon.common.paths import DOSSIER
 from aemon.environment.dossier import Dossier, Record
 from aemon.environment.tools import Case
 
 
 def load_cases(selection: str = 'all', split: str = 'development') -> list[Any]:
-    """Development cases by default. Held-out cases load only when asked for by name: 'heldout' is the final test (frozen),
-    'heldout2' the second test set of new companies (2026-11-08); nothing trains on either."""
-    name = {'heldout': 'cases_heldout.json', 'heldout2': 'cases_heldout2.json'}.get(split, 'cases.json')
+    """Development cases by default. Held-out cases load only when asked for by name (TEST_CASE_FILES): 'heldout' is the
+    final test, 'heldout2' the second test set and 'heldout3' the third (Stage 2); nothing trains on any of them."""
+    if split not in SPLITS:
+        raise ValueError(f'unknown split {split!r}: one of {SPLITS}')
+    name = TEST_CASE_FILES.get(split, 'cases.json')
     data = json.loads((DOSSIER / name).read_text())
     records = Dossier.load(DOSSIER / 'evidence.json')
     cases = []

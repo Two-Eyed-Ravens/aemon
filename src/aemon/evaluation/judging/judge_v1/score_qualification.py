@@ -73,7 +73,7 @@ def read_results(folder, packets):
 
 def main():
     a = argparse.ArgumentParser()
-    a.add_argument('--backend', choices=('claude', 'codex', 'codexsol', 'claudecode'), required=True)
+    a.add_argument('--backend', choices=('claude', 'codex', 'codexsol', 'codexsol170', 'claudecode'), required=True)
     a.add_argument('--results', required=True)
     a.add_argument('--retry', action='store_true', help='retry invalid outputs once, into <results>_retry1')
     a.add_argument('--run-cap', type=float, default=8.0)

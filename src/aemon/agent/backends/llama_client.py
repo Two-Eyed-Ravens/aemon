@@ -25,8 +25,14 @@ def headers() -> dict[str, str]:
     return out
 
 
+CHANNEL_START, CHANNEL_END = '<|channel>', '<channel|>'
+
+
 def split_thinking(text: str) -> tuple[str, None] | tuple[str, str]:
     """Reasoning models write a thinking block before the call. It is kept on record, and only the call is parsed."""
+    if CHANNEL_END in text and text.lstrip().startswith(CHANNEL_START):  # Gemma 4's channel marker, empty when thinking is off
+        thinking, call = text.split(CHANNEL_END, 1)
+        return call.strip(), thinking.replace(CHANNEL_START, '').strip() or None
     if THINK_END not in text:
         return text, None
     thinking, call = text.rsplit(THINK_END, 1)
@@ -62,6 +68,8 @@ def chat(url: str, messages: list[Message], seed: int, max_tokens: int, schema: 
         'thinking': thinking,
         'prompt_tokens': data['usage']['prompt_tokens'],
         'completion_tokens': data['usage']['completion_tokens'],
+        # prompt tokens the server actually computed; the rest came from its cache of the slot's previous prompt
+        'prompt_processed': (data.get('timings') or {}).get('prompt_n'),
         'seconds': time.perf_counter() - started,
     }
 

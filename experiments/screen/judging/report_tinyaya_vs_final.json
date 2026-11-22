@@ -1,0 +1,131 @@
+{
+ "runs": 180,
+ "arms": [
+  "final_system",
+  "qwen4b",
+  "qwen9b",
+  "tinyaya"
+ ],
+ "judges": {
+  "codexsol170": {
+   "by_arm": {
+    "final_system": {
+     "mean": 1.879,
+     "n": 45
+    },
+    "qwen9b": {
+     "mean": 2.128,
+     "n": 45
+    },
+    "qwen4b": {
+     "mean": 2.013,
+     "n": 45
+    },
+    "tinyaya": {
+     "mean": 0.882,
+     "n": 45
+    }
+   },
+   "by_arm_company": {
+    "final_system": {
+     "acr": 1.995,
+     "deere": 1.725,
+     "hellberg": 1.927,
+     "jotun": 1.755,
+     "neumann": 2.035,
+     "tanita": 1.764
+    },
+    "qwen9b": {
+     "acr": 2.361,
+     "deere": 2.014,
+     "hellberg": 2.081,
+     "jotun": 2.049,
+     "neumann": 2.042,
+     "tanita": 2.292
+    },
+    "qwen4b": {
+     "acr": 1.882,
+     "deere": 2.403,
+     "hellberg": 1.806,
+     "jotun": 2.062,
+     "neumann": 2.118,
+     "tanita": 2.118
+    },
+    "tinyaya": {
+     "acr": 0.748,
+     "deere": 0.769,
+     "hellberg": 0.926,
+     "jotun": 1.141,
+     "neumann": 0.942,
+     "tanita": 0.704
+    }
+   },
+   "by_arm_dimension": {
+    "final_system": {
+     "assumptions_predictions": 2.644,
+     "causal_mechanism": 2.556,
+     "distinct_theories": 2.467,
+     "evidence_judgement": 1.222,
+     "experiment_design": 1.089,
+     "problem_framing": 2.178,
+     "recommendation": 1.067,
+     "revision": 2.0,
+     "seeking_challenge": 1.756
+    },
+    "qwen9b": {
+     "assumptions_predictions": 2.689,
+     "causal_mechanism": 2.733,
+     "distinct_theories": 2.867,
+     "evidence_judgement": 1.6,
+     "experiment_design": 1.267,
+     "problem_framing": 2.022,
+     "recommendation": 1.711,
+     "revision": 2.333,
+     "seeking_challenge": 2.044
+    },
+    "qwen4b": {
+     "assumptions_predictions": 2.467,
+     "causal_mechanism": 2.733,
+     "distinct_theories": 2.578,
+     "evidence_judgement": 1.333,
+     "experiment_design": 1.533,
+     "problem_framing": 1.8,
+     "recommendation": 1.733,
+     "revision": 2.333,
+     "seeking_challenge": 1.733
+    },
+    "tinyaya": {
+     "assumptions_predictions": 1.644,
+     "causal_mechanism": 1.267,
+     "distinct_theories": 1.222,
+     "evidence_judgement": 0.333,
+     "experiment_design": 0.644,
+     "problem_framing": 1.2,
+     "recommendation": 0.111,
+     "revision": 0.111,
+     "seeking_challenge": 1.089
+    }
+   },
+   "difference": {
+    "arms": "tinyaya minus final_system",
+    "pairs": 45,
+    "cases": 15,
+    "unpaired_runs": 0,
+    "mean_and_95_interval": [
+     -0.996,
+     -1.11,
+     -0.878
+    ],
+    "by_company": {
+     "acr": -1.248,
+     "deere": -0.956,
+     "hellberg": -1.001,
+     "jotun": -0.613,
+     "neumann": -1.093,
+     "tanita": -1.06
+    }
+   }
+  }
+ },
+ "missing": []
+}

@@ -1,0 +1,2373 @@
+{
+ "agent_baseline": {
+  "evidence_kind": {
+   "items": 121,
+   "majority_class": "company_assertion",
+   "majority_accuracy": 0.7603305785123967,
+   "agent": {
+    "version 1": {
+     "choices": 200,
+     "accuracy_over_choices": 0.72,
+     "accuracy_per_item": 0.8120915032679739,
+     "choices_by_value": {
+      "independent_study": 47,
+      "company_assertion": 151,
+      "market_fact": 2
+     }
+    },
+    "final system": {
+     "choices": 958,
+     "accuracy_over_choices": 0.8016701461377871,
+     "accuracy_per_item": 0.7905854599808405,
+     "choices_by_value": {
+      "company_assertion": 710,
+      "independent_study": 172,
+      "customer_observation": 4,
+      "market_fact": 63,
+      "regulation": 9
+     }
+    }
+   }
+  },
+  "test_choice": {
+   "items": 40,
+   "majority_class": "propose",
+   "majority_accuracy": 0.8,
+   "agent": {
+    "version 1": {
+     "choices": 120,
+     "accuracy_over_choices": 0.43333333333333335,
+     "accuracy_per_item": 0.4333333333333333,
+     "choices_by_value": {
+      "not reached": 50,
+      "propose": 70
+     }
+    },
+    "final system": {
+     "choices": 120,
+     "accuracy_over_choices": 0.7833333333333333,
+     "accuracy_per_item": 0.7833333333333333,
+     "choices_by_value": {
+      "propose": 118,
+      "not reached": 2
+     }
+    }
+   }
+  }
+ },
+ "arms": {
+  "base": {
+   "evidence_kind": {
+    "n": 121,
+    "accuracy": 0.8347107438016529,
+    "recall": {
+     "regulation": 1.0,
+     "independent_study": 0.375,
+     "customer_observation": 0.3333333333333333,
+     "company_assertion": 1.0,
+     "analogy": 0.0,
+     "market_fact": 0.3076923076923077
+    },
+    "ece": 0.11239754519166657,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.8347107438016529
+     },
+     "0.7": {
+      "coverage": 0.9338842975206612,
+      "accuracy": 0.8584070796460177
+     },
+     "0.9": {
+      "coverage": 0.8512396694214877,
+      "accuracy": 0.9029126213592233
+     }
+    }
+   },
+   "test_choice": {
+    "n": 40,
+    "accuracy": 0.2,
+    "recall": {
+     "propose": 0.125,
+     "decline": 0.5
+    },
+    "ece": 0.36184636293785777,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.2
+     },
+     "0.7": {
+      "coverage": 0.0,
+      "accuracy": null
+     },
+     "0.9": {
+      "coverage": 0.0,
+      "accuracy": null
+     }
+    }
+   }
+  }
+ },
+ "rows": {
+  "base": [
+   {
+    "id": 0,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9687915632605613,
+    "probs": {
+     "company_assertion": 0.9687915632605613,
+     "customer_observation": 0.02166428143967668,
+     "market_fact": 0.008454761323197389,
+     "regulation": 6.561490472085497e-05,
+     "analogy": 0.0002698353533245441,
+     "independent_study": 0.0002697761727546566
+    }
+   },
+   {
+    "id": 1,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9888623242219718,
+    "probs": {
+     "company_assertion": 0.9888623242219718,
+     "market_fact": 0.0074062153703288065,
+     "customer_observation": 0.0022124911720904344,
+     "regulation": 5.638215927012627e-05,
+     "analogy": 0.0005379235875115826,
+     "independent_study": 0.00020404818518993052
+    }
+   },
+   {
+    "id": 2,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9804842768634129,
+    "probs": {
+     "company_assertion": 0.9804842768634129,
+     "customer_observation": 0.012397661481164945,
+     "market_fact": 0.006213375684648841,
+     "regulation": 6.690230745229003e-05,
+     "analogy": 0.00024765438242776994,
+     "independent_study": 0.0001719635161893694
+    }
+   },
+   {
+    "id": 3,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9944274616825803,
+    "probs": {
+     "company_assertion": 0.9944274616825803,
+     "customer_observation": 0.0017852628311453864,
+     "market_fact": 0.0016506416369153694,
+     "analogy": 0.0010349705065511971,
+     "regulation": 5.8839696140037925e-05,
+     "independent_study": 0.0001738423394442328
+    }
+   },
+   {
+    "id": 4,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "customer_observation",
+    "conf": 0.9115489527740135,
+    "probs": {
+     "customer_observation": 0.9115489527740135,
+     "independent_study": 0.05304059775705259,
+     "market_fact": 0.022082499438402573,
+     "company_assertion": 0.010675693002299412,
+     "regulation": 5.6515706185718426e-05,
+     "analogy": 0.0003445307879184418
+    }
+   },
+   {
+    "id": 5,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9948076282264328,
+    "probs": {
+     "company_assertion": 0.9948076282264328,
+     "customer_observation": 0.0024268322267489203,
+     "market_fact": 0.00218194323209759,
+     "regulation": 4.5016487201989266e-05,
+     "analogy": 0.00013924666188738115,
+     "independent_study": 0.00011544548242011945
+    }
+   },
+   {
+    "id": 6,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "customer_observation",
+    "conf": 0.5598354886853704,
+    "probs": {
+     "customer_observation": 0.5598354886853704,
+     "independent_study": 0.4072978933965988,
+     "market_fact": 0.028204027215169673,
+     "company_assertion": 0.002876110316680506,
+     "regulation": 9.199598942734668e-05,
+     "analogy": 0.0002668097102518051
+    }
+   },
+   {
+    "id": 7,
+    "task": "evidence_kind",
+    "gold": "regulation",
+    "pred": "regulation",
+    "conf": 0.9546932898750761,
+    "probs": {
+     "regulation": 3.9924912125623654e-05,
+     "company_assertion": 0.0273672811799132,
+     "market_fact": 0.015703298747561746,
+     "analogy": 0.0011611900347723537,
+     "customer_observation": 0.0006374092949680615,
+     "independent_study": 0.00039760595558294414
+    }
+   },
+   {
+    "id": 8,
+    "task": "evidence_kind",
+    "gold": "customer_observation",
+    "pred": "customer_observation",
+    "conf": 0.7239416564345811,
+    "probs": {
+     "customer_observation": 0.7239416564345811,
+     "market_fact": 0.12975995779459634,
+     "company_assertion": 0.12431428090456582,
+     "analogy": 0.00892344787193914,
+     "regulation": 0.0001295893462222384,
+     "independent_study": 0.004068445694111727
+    }
+   },
+   {
+    "id": 9,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9942645531051156,
+    "probs": {
+     "company_assertion": 0.9942645531051156,
+     "market_fact": 0.003888271141635446,
+     "customer_observation": 0.0011614738754927474,
+     "analogy": 0.0003024631260420793,
+     "regulation": 3.3807924245102804e-05,
+     "independent_study": 8.529606985118348e-05
+    }
+   },
+   {
+    "id": 10,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.7606128964851979,
+    "probs": {
+     "company_assertion": 0.7606128964851979,
+     "market_fact": 0.22608123648659362,
+     "customer_observation": 0.004883625105159712,
+     "analogy": 0.0044408701331578775,
+     "regulation": 0.00010394179112162868,
+     "independent_study": 0.0015107858799660349
+    }
+   },
+   {
+    "id": 11,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9909513493600118,
+    "probs": {
+     "company_assertion": 0.9909513493600118,
+     "market_fact": 0.004982327221522137,
+     "customer_observation": 0.0031600751553297756,
+     "regulation": 4.819386797861909e-05,
+     "analogy": 0.0003478627901615817,
+     "independent_study": 0.0001366303758508895
+    }
+   },
+   {
+    "id": 12,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.9796320588201981,
+    "probs": {
+     "company_assertion": 0.9796320588201981,
+     "market_fact": 0.017629210863353676,
+     "customer_observation": 0.0016741169337081752,
+     "analogy": 0.0005961897293637783,
+     "regulation": 3.7454245413538596e-05,
+     "independent_study": 0.00012726071982022634
+    }
+   },
+   {
+    "id": 13,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "market_fact",
+    "conf": 0.6931224619584437,
+    "probs": {
+     "market_fact": 0.6931224619584437,
+     "customer_observation": 0.16731799313794213,
+     "company_assertion": 0.11111163158900385,
+     "analogy": 0.012293864254579363,
+     "independent_study": 0.010820468213857763,
+     "regulation": 9.936755930799274e-05
+    }
+   },
+   {
+    "id": 14,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9952135891324938,
+    "probs": {
+     "company_assertion": 0.9952135891324938,
+     "market_fact": 0.002815416162305705,
+     "customer_observation": 0.0013096048022157537,
+     "analogy": 0.0002923694050358308,
+     "regulation": 3.9583370568751625e-05,
+     "independent_study": 9.117464535828617e-05
+    }
+   },
+   {
+    "id": 15,
+    "task": "evidence_kind",
+    "gold": "customer_observation",
+    "pred": "company_assertion",
+    "conf": 0.6108073033290476,
+    "probs": {
+     "company_assertion": 0.6108073033290476,
+     "market_fact": 0.32461701738740006,
+     "customer_observation": 0.04794269586166028,
+     "analogy": 0.007449650861527085,
+     "independent_study": 0.005180873415588918,
+     "regulation": 7.685885784757974e-05
+    }
+   },
+   {
+    "id": 16,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.993681265897295,
+    "probs": {
+     "company_assertion": 0.993681265897295,
+     "market_fact": 0.0032200073529346095,
+     "customer_observation": 0.0022099003180403114,
+     "regulation": 4.803780561155535e-05,
+     "analogy": 0.00026751923172922644,
+     "independent_study": 0.00011102526923500945
+    }
+   },
+   {
+    "id": 17,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.9577406699808263,
+    "probs": {
+     "company_assertion": 0.9577406699808263,
+     "market_fact": 0.025151968854293594,
+     "customer_observation": 0.015806156421592735,
+     "regulation": 4.7412587190541774e-05,
+     "analogy": 0.0004308502948604722,
+     "independent_study": 0.0002448313037194477
+    }
+   },
+   {
+    "id": 18,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.7484447582381731,
+    "probs": {
+     "company_assertion": 0.7484447582381731,
+     "market_fact": 0.24519399272230188,
+     "analogy": 0.002736889045586839,
+     "customer_observation": 0.0017451993875205434,
+     "regulation": 6.272871892858111e-05,
+     "independent_study": 0.0003646294373071845
+    }
+   },
+   {
+    "id": 19,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.8857943887321548,
+    "probs": {
+     "company_assertion": 0.8857943887321548,
+     "customer_observation": 0.0635469081802828,
+     "market_fact": 0.044965946806107236,
+     "regulation": 0.0001369645138716946,
+     "independent_study": 0.0011389304781299254,
+     "analogy": 0.0009712627691567216
+    }
+   },
+   {
+    "id": 20,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "customer_observation",
+    "conf": 0.5845723715300856,
+    "probs": {
+     "customer_observation": 0.5845723715300856,
+     "independent_study": 0.3505131742257419,
+     "market_fact": 0.05684322041090845,
+     "company_assertion": 0.004924841500889787,
+     "regulation": 9.763850724128755e-05,
+     "analogy": 0.0003353091083615774
+    }
+   },
+   {
+    "id": 21,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9705419222401956,
+    "probs": {
+     "company_assertion": 0.9705419222401956,
+     "market_fact": 0.021685962556570675,
+     "customer_observation": 0.0056485604756026184,
+     "regulation": 5.8956451414350543e-05,
+     "analogy": 0.0005841271968245916,
+     "independent_study": 0.0002465902972147114
+    }
+   },
+   {
+    "id": 22,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.9801196350102632,
+    "probs": {
+     "company_assertion": 0.9801196350102632,
+     "market_fact": 0.017204242623877607,
+     "customer_observation": 0.0018348355816736038,
+     "analogy": 0.00040496169874411206,
+     "regulation": 3.9748272126391726e-05,
+     "independent_study": 0.00011678032935113887
+    }
+   },
+   {
+    "id": 23,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "independent_study",
+    "conf": 0.9908611593881282,
+    "probs": {
+     "independent_study": 0.9908611593881282,
+     "market_fact": 0.00626573513517154,
+     "company_assertion": 0.00147776261127389,
+     "customer_observation": 0.0007552612337381225,
+     "regulation": 9.299848287311701e-05,
+     "analogy": 0.00011391543897883242
+    }
+   },
+   {
+    "id": 24,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9941319688974294,
+    "probs": {
+     "company_assertion": 0.9941319688974294,
+     "market_fact": 0.004056750206650241,
+     "regulation": 4.688837658667704e-05,
+     "customer_observation": 0.0006401911434078617,
+     "analogy": 0.0002943969325764578,
+     "independent_study": 0.0001171613196503975
+    }
+   },
+   {
+    "id": 25,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9898080108913311,
+    "probs": {
+     "company_assertion": 0.9898080108913311,
+     "market_fact": 0.004467531560801359,
+     "customer_observation": 0.0032423379228736873,
+     "analogy": 0.0011807343657317185,
+     "regulation": 8.718261410765128e-05,
+     "independent_study": 0.00023218518535695674
+    }
+   },
+   {
+    "id": 26,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "customer_observation",
+    "conf": 0.8320787620831352,
+    "probs": {
+     "customer_observation": 0.8320787620831352,
+     "independent_study": 0.12067199263410515,
+     "market_fact": 0.04010137260224565,
+     "company_assertion": 0.003806058451351148,
+     "regulation": 7.674153291503312e-05,
+     "analogy": 0.0004157549315528589
+    }
+   },
+   {
+    "id": 27,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9955789924736786,
+    "probs": {
+     "company_assertion": 0.9955789924736786,
+     "market_fact": 0.0031730881350996993,
+     "customer_observation": 0.0005822045876686544,
+     "regulation": 3.467714188398697e-05,
+     "analogy": 0.00025892902409536186,
+     "independent_study": 6.734255012507542e-05
+    }
+   },
+   {
+    "id": 28,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "independent_study",
+    "conf": 0.7768774583684228,
+    "probs": {
+     "independent_study": 0.7768774583684228,
+     "market_fact": 0.18686891786907095,
+     "company_assertion": 0.022542789424558344,
+     "customer_observation": 0.008566547042654582,
+     "regulation": 0.00016638714002360162,
+     "analogy": 0.0016717797149936643
+    }
+   },
+   {
+    "id": 29,
+    "task": "evidence_kind",
+    "gold": "customer_observation",
+    "pred": "market_fact",
+    "conf": 0.9475675430931015,
+    "probs": {
+     "market_fact": 0.9475675430931015,
+     "customer_observation": 0.029654141885345098,
+     "company_assertion": 0.011112988219180976,
+     "analogy": 0.0054534484697871715,
+     "independent_study": 0.0031089530437693035,
+     "regulation": 3.7848980890877516e-05
+    }
+   },
+   {
+    "id": 30,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.996066394466271,
+    "probs": {
+     "company_assertion": 0.996066394466271,
+     "market_fact": 0.0025801876646640767,
+     "customer_observation": 0.0007091369430150549,
+     "regulation": 3.164548410535364e-05,
+     "analogy": 0.00019155272231286227,
+     "independent_study": 7.365546279741499e-05
+    }
+   },
+   {
+    "id": 31,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9973367697567962,
+    "probs": {
+     "company_assertion": 0.9973367697567962,
+     "market_fact": 0.0015703670262499029,
+     "customer_observation": 0.0005532235169773209,
+     "regulation": 6.870894853357277e-05,
+     "analogy": 0.00016892867998602614,
+     "independent_study": 6.678643597498579e-05
+    }
+   },
+   {
+    "id": 32,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "customer_observation",
+    "conf": 0.7132445858267575,
+    "probs": {
+     "customer_observation": 0.7132445858267575,
+     "market_fact": 0.25504188658079746,
+     "independent_study": 0.024225109392529205,
+     "company_assertion": 0.004785206450401844,
+     "regulation": 6.821276096132853e-05,
+     "analogy": 0.0011655352482327491
+    }
+   },
+   {
+    "id": 33,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9964609431525311,
+    "probs": {
+     "company_assertion": 0.9964609431525311,
+     "market_fact": 0.0018289940108714745,
+     "customer_observation": 0.0011979585422918818,
+     "regulation": 4.3809408928143524e-05,
+     "analogy": 0.00010946092566287648,
+     "independent_study": 8.68967197030545e-05
+    }
+   },
+   {
+    "id": 34,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9925524297307196,
+    "probs": {
+     "company_assertion": 0.9925524297307196,
+     "market_fact": 0.004260801305671865,
+     "customer_observation": 0.0022233585961917626,
+     "regulation": 3.926793281570433e-05,
+     "analogy": 0.00030101352752164744,
+     "independent_study": 0.000158606947941291
+    }
+   },
+   {
+    "id": 35,
+    "task": "evidence_kind",
+    "gold": "analogy",
+    "pred": "company_assertion",
+    "conf": 0.9887563895958997,
+    "probs": {
+     "company_assertion": 0.9887563895958997,
+     "market_fact": 0.008636935278251668,
+     "customer_observation": 0.0013602554136787047,
+     "analogy": 0.0005847005516385463,
+     "regulation": 5.516536634898069e-05,
+     "independent_study": 0.00014033829824997753
+    }
+   },
+   {
+    "id": 36,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9946399046605536,
+    "probs": {
+     "company_assertion": 0.9946399046605536,
+     "market_fact": 0.0038944902720432486,
+     "customer_observation": 0.0006649940574556552,
+     "analogy": 0.00034993966011764713,
+     "regulation": 5.2416088015976595e-05,
+     "independent_study": 9.223969148133177e-05
+    }
+   },
+   {
+    "id": 37,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9887366711836417,
+    "probs": {
+     "company_assertion": 0.9887366711836417,
+     "market_fact": 0.006469918170170818,
+     "customer_observation": 0.003976334464256901,
+     "regulation": 3.9298754633192146e-05,
+     "analogy": 0.0002878657904703179,
+     "independent_study": 0.00013764692068398847
+    }
+   },
+   {
+    "id": 38,
+    "task": "evidence_kind",
+    "gold": "independent_study",
+    "pred": "independent_study",
+    "conf": 0.5902037571813278,
+    "probs": {
+     "independent_study": 0.5902037571813278,
+     "customer_observation": 0.36668536941047647,
+     "market_fact": 0.037642622623864586,
+     "company_assertion": 0.0031785674199594025,
+     "regulation": 0.00012796653081238125,
+     "analogy": 0.000322264540704466
+    }
+   },
+   {
+    "id": 39,
+    "task": "evidence_kind",
+    "gold": "analogy",
+    "pred": "company_assertion",
+    "conf": 0.954017498822278,
+    "probs": {
+     "company_assertion": 0.954017498822278,
+     "market_fact": 0.04272262538037386,
+     "customer_observation": 0.001978654853532764,
+     "analogy": 0.0006312699836538195,
+     "regulation": 5.088205725507375e-05,
+     "independent_study": 0.00016561820661953322
+    }
+   },
+   {
+    "id": 40,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9970605186516338,
+    "probs": {
+     "company_assertion": 0.9970605186516338,
+     "market_fact": 0.001465228287891594,
+     "customer_observation": 0.0009491637266219755,
+     "regulation": 3.17882263439281e-05,
+     "analogy": 0.00019883640509482764,
+     "independent_study": 6.87186442346655e-05
+    }
+   },
+   {
+    "id": 41,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9955909575304802,
+    "probs": {
+     "company_assertion": 0.9955909575304802,
+     "market_fact": 0.001961038547541091,
+     "customer_observation": 0.0017780318605978582,
+     "regulation": 3.4959656442007226e-05,
+     "analogy": 0.00016503169541590444,
+     "independent_study": 0.0001255057981317008
+    }
+   },
+   {
+    "id": 42,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "market_fact",
+    "conf": 0.566004437000927,
+    "probs": {
+     "market_fact": 0.566004437000927,
+     "company_assertion": 0.4185739521794255,
+     "customer_observation": 0.0061227499368407155,
+     "analogy": 0.004896635189519311,
+     "independent_study": 0.002456272640106389,
+     "regulation": 8.092279512555787e-05
+    }
+   },
+   {
+    "id": 43,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "market_fact",
+    "conf": 0.6485992779002903,
+    "probs": {
+     "market_fact": 0.6485992779002903,
+     "company_assertion": 0.22928389944051822,
+     "customer_observation": 0.09131005363499368,
+     "independent_study": 0.013992167659229289,
+     "analogy": 0.012831519039145476,
+     "regulation": 7.01976554039338e-05
+    }
+   },
+   {
+    "id": 44,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9973715905115511,
+    "probs": {
+     "company_assertion": 0.9973715905115511,
+     "customer_observation": 0.0009670014866493369,
+     "market_fact": 0.0009281416932616049,
+     "regulation": 3.5678794342603135e-05,
+     "analogy": 7.878339453133388e-05,
+     "independent_study": 7.55920354919492e-05
+    }
+   },
+   {
+    "id": 45,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9958814029672052,
+    "probs": {
+     "company_assertion": 0.9958814029672052,
+     "market_fact": 0.002474709945630713,
+     "customer_observation": 0.0008816128388602077,
+     "regulation": 3.697957768644469e-05,
+     "analogy": 0.00019503052880863217,
+     "independent_study": 0.0001115242347981688
+    }
+   },
+   {
+    "id": 46,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.9554143456096885,
+    "probs": {
+     "company_assertion": 0.9554143456096885,
+     "market_fact": 0.029392451319961457,
+     "regulation": 4.4766646825861506e-05,
+     "customer_observation": 0.003029458819048457,
+     "analogy": 0.0004899896863279521,
+     "independent_study": 0.0003339988146177428
+    }
+   },
+   {
+    "id": 47,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.6872720780954622,
+    "probs": {
+     "company_assertion": 0.6872720780954622,
+     "market_fact": 0.2983789928880545,
+     "customer_observation": 0.007543722822167496,
+     "analogy": 0.004390682349806603,
+     "regulation": 6.39761705392657e-05,
+     "independent_study": 0.0010024368307739197
+    }
+   },
+   {
+    "id": 48,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.8711708935238236,
+    "probs": {
+     "company_assertion": 0.8711708935238236,
+     "market_fact": 0.11993948175875185,
+     "customer_observation": 0.006429526337754459,
+     "analogy": 0.0012630676289356404,
+     "regulation": 3.701999595292088e-05,
+     "independent_study": 0.00044064941398620723
+    }
+   },
+   {
+    "id": 49,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "market_fact",
+    "conf": 0.734763506297003,
+    "probs": {
+     "market_fact": 0.734763506297003,
+     "company_assertion": 0.23457235230981865,
+     "customer_observation": 0.013571806721640012,
+     "analogy": 0.009540165720846035,
+     "regulation": 9.589211834320432e-05,
+     "independent_study": 0.0029967747088991185
+    }
+   },
+   {
+    "id": 50,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9938248136296394,
+    "probs": {
+     "company_assertion": 0.9938248136296394,
+     "market_fact": 0.003564758026916477,
+     "customer_observation": 0.0015181389117346438,
+     "regulation": 5.424221896860522e-05,
+     "analogy": 0.0004144342959438271,
+     "independent_study": 0.0001332723622829976
+    }
+   },
+   {
+    "id": 51,
+    "task": "evidence_kind",
+    "gold": "analogy",
+    "pred": "market_fact",
+    "conf": 0.9838675375556699,
+    "probs": {
+     "market_fact": 0.9838675375556699,
+     "company_assertion": 0.011151390051211244,
+     "analogy": 0.0025535560922493646,
+     "customer_observation": 0.0011347233025571799,
+     "regulation": 5.142371403104094e-05,
+     "independent_study": 0.0004365795577113745
+    }
+   },
+   {
+    "id": 52,
+    "task": "evidence_kind",
+    "gold": "market_fact",
+    "pred": "company_assertion",
+    "conf": 0.9403141495055113,
+    "probs": {
+     "company_assertion": 0.9403141495055113,
+     "market_fact": 0.04385084257653332,
+     "customer_observation": 0.014158374028417107,
+     "regulation": 5.4692993939347227e-05,
+     "analogy": 0.0006544062534411314,
+     "independent_study": 0.0002638611909683983
+    }
+   },
+   {
+    "id": 53,
+    "task": "evidence_kind",
+    "gold": "analogy",
+    "pred": "company_assertion",
+    "conf": 0.8071935092733038,
+    "probs": {
+     "company_assertion": 0.8071935092733038,
+     "market_fact": 0.18786461766213702,
+     "customer_observation": 0.002866733022342423,
+     "analogy": 0.0009616392397599433,
+     "regulation": 4.102682604059113e-05,
+     "independent_study": 0.000325927471609587
+    }
+   },
+   {
+    "id": 54,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9986480722291813,
+    "probs": {
+     "company_assertion": 0.9986480722291813,
+     "customer_observation": 0.0006003589463034984,
+     "market_fact": 0.00032110528893452097,
+     "regulation": 3.517822257682844e-05,
+     "analogy": 9.996620689939108e-05,
+     "independent_study": 4.6426930205147e-05
+    }
+   },
+   {
+    "id": 55,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9896343539529865,
+    "probs": {
+     "company_assertion": 0.9896343539529865,
+     "customer_observation": 0.004205986076666735,
+     "market_fact": 0.003530195060237921,
+     "analogy": 0.0012756434946897123,
+     "regulation": 7.801191775816446e-05,
+     "independent_study": 0.00028704633981767856
+    }
+   },
+   {
+    "id": 56,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9974836810602177,
+    "probs": {
+     "company_assertion": 0.9974836810602177,
+     "market_fact": 0.0016976030658875415,
+     "customer_observation": 0.00037911748336638673,
+     "analogy": 0.0002252383187894485,
+     "regulation": 2.6018482167458318e-05,
+     "independent_study": 4.5790760288440535e-05
+    }
+   },
+   {
+    "id": 57,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9897554715906666,
+    "probs": {
+     "company_assertion": 0.9897554715906666,
+     "market_fact": 0.0045584205731053875,
+     "customer_observation": 0.0028109659238365055,
+     "regulation": 5.603242982003738e-05,
+     "independent_study": 0.0003993129169217806,
+     "analogy": 0.00039571680158250497
+    }
+   },
+   {
+    "id": 58,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9948104670114531,
+    "probs": {
+     "company_assertion": 0.9948104670114531,
+     "market_fact": 0.0022452647084060997,
+     "customer_observation": 0.0020885420664832448,
+     "regulation": 4.176404729028536e-05,
+     "analogy": 0.00017580302556529604,
+     "independent_study": 0.00011065774938103282
+    }
+   },
+   {
+    "id": 59,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9718524450920881,
+    "probs": {
+     "company_assertion": 0.9718524450920881,
+     "customer_observation": 0.014540325327972592,
+     "market_fact": 0.012170860433588632,
+     "regulation": 7.46607854721411e-05,
+     "analogy": 0.00043249927341268315,
+     "independent_study": 0.00024376425900168614
+    }
+   },
+   {
+    "id": 60,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9969581411377552,
+    "probs": {
+     "company_assertion": 0.9969581411377552,
+     "market_fact": 0.0020145834578165498,
+     "customer_observation": 0.00044170197223432405,
+     "regulation": 3.3919521873458136e-05,
+     "analogy": 0.00011985419323847861,
+     "independent_study": 5.999122556459518e-05
+    }
+   },
+   {
+    "id": 61,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9952726972254139,
+    "probs": {
+     "company_assertion": 0.9952726972254139,
+     "market_fact": 0.003387960120255196,
+     "customer_observation": 0.0007816266092092478,
+     "regulation": 3.9520706955197055e-05,
+     "analogy": 0.0001542173073742144,
+     "independent_study": 8.826511570291986e-05
+    }
+   },
+   {
+    "id": 62,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9883412608297308,
+    "probs": {
+     "company_assertion": 0.9883412608297308,
+     "market_fact": 0.00898822111345384,
+     "customer_observation": 0.0013063642362581014,
+     "analogy": 0.0007050341556983956,
+     "regulation": 3.8923431129282644e-05,
+     "independent_study": 9.541121999376303e-05
+    }
+   },
+   {
+    "id": 63,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9930869996014792,
+    "probs": {
+     "company_assertion": 0.9930869996014792,
+     "customer_observation": 0.003395679807782527,
+     "market_fact": 0.0025765652820787413,
+     "regulation": 3.984264009536905e-05,
+     "analogy": 0.00024121586671597191,
+     "independent_study": 0.0002121361954940306
+    }
+   },
+   {
+    "id": 64,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9944355619252758,
+    "probs": {
+     "company_assertion": 0.9944355619252758,
+     "customer_observation": 0.002725990111824301,
+     "market_fact": 0.0019457337796200862,
+     "regulation": 4.8181281115924225e-05,
+     "analogy": 0.0001976035326912044,
+     "independent_study": 0.00019614880778172022
+    }
+   },
+   {
+    "id": 65,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9937042886219334,
+    "probs": {
+     "company_assertion": 0.9937042886219334,
+     "market_fact": 0.004630996880282345,
+     "customer_observation": 0.0011181476640101356,
+     "regulation": 2.8074863080056445e-05,
+     "analogy": 0.00016165754966731603,
+     "independent_study": 0.00012977117638413184
+    }
+   },
+   {
+    "id": 66,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9963941834688163,
+    "probs": {
+     "company_assertion": 0.9963941834688163,
+     "market_fact": 0.002255243572671571,
+     "customer_observation": 0.0008131774760805884,
+     "regulation": 3.259488484639928e-05,
+     "analogy": 0.00017725512603212167,
+     "independent_study": 0.00011007364646569627
+    }
+   },
+   {
+    "id": 67,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9970260986978138,
+    "probs": {
+     "company_assertion": 0.9970260986978138,
+     "market_fact": 0.0015565203754442263,
+     "customer_observation": 0.0007364523864991137,
+     "regulation": 3.8256340781481085e-05,
+     "analogy": 0.00019844280361004058,
+     "independent_study": 8.390777611328481e-05
+    }
+   },
+   {
+    "id": 68,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.989422815445561,
+    "probs": {
+     "company_assertion": 0.989422815445561,
+     "market_fact": 0.007288027015086327,
+     "customer_observation": 0.0018318384608626919,
+     "regulation": 4.435937527924396e-05,
+     "analogy": 0.0006463462974515402,
+     "independent_study": 0.0001089547095440176
+    }
+   },
+   {
+    "id": 69,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9943267198057159,
+    "probs": {
+     "company_assertion": 0.9943267198057159,
+     "market_fact": 0.003163137198608093,
+     "customer_observation": 0.0015918515424380641,
+     "regulation": 6.038827082757141e-05,
+     "analogy": 0.00023189581815614475,
+     "independent_study": 0.00012970617118037033
+    }
+   },
+   {
+    "id": 70,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9907810663180805,
+    "probs": {
+     "company_assertion": 0.9907810663180805,
+     "customer_observation": 0.006482219852869658,
+     "market_fact": 0.0018785164027965563,
+     "regulation": 3.422309933952567e-05,
+     "analogy": 0.00019997570097592045,
+     "independent_study": 0.00014730637998695956
+    }
+   },
+   {
+    "id": 71,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9966034510365601,
+    "probs": {
+     "company_assertion": 0.9966034510365601,
+     "customer_observation": 0.001583813714426657,
+     "market_fact": 0.000877959394712029,
+     "regulation": 4.5392061720396096e-05,
+     "analogy": 0.0002264440299555037,
+     "independent_study": 0.00015256239229869767
+    }
+   },
+   {
+    "id": 72,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9927983856545383,
+    "probs": {
+     "company_assertion": 0.9927983856545383,
+     "market_fact": 0.003594576803489358,
+     "customer_observation": 0.0022532160419753895,
+     "regulation": 4.003996415720186e-05,
+     "analogy": 0.00022096537935319152,
+     "independent_study": 0.00015090590111469955
+    }
+   },
+   {
+    "id": 73,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9956885789040592,
+    "probs": {
+     "company_assertion": 0.9956885789040592,
+     "customer_observation": 0.002073283283341614,
+     "market_fact": 0.001678502868217901,
+     "regulation": 2.768699149934799e-05,
+     "analogy": 0.00016815485909010036,
+     "independent_study": 7.154013919647372e-05
+    }
+   },
+   {
+    "id": 74,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9963389642403847,
+    "probs": {
+     "company_assertion": 0.9963389642403847,
+     "market_fact": 0.001640053006458196,
+     "customer_observation": 0.0012486411863510242,
+     "regulation": 2.902724908447355e-05,
+     "analogy": 0.00013433204854804474,
+     "independent_study": 8.672789801386392e-05
+    }
+   },
+   {
+    "id": 75,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9963864057997751,
+    "probs": {
+     "company_assertion": 0.9963864057997751,
+     "customer_observation": 0.0017591674334388916,
+     "market_fact": 0.0013838183504024716,
+     "regulation": 2.4449790643472167e-05,
+     "analogy": 0.0001233264996028493,
+     "independent_study": 6.268195954058779e-05
+    }
+   },
+   {
+    "id": 76,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9968395462901996,
+    "probs": {
+     "company_assertion": 0.9968395462901996,
+     "market_fact": 0.0015097649271357278,
+     "customer_observation": 0.0007574045582633555,
+     "regulation": 4.699908404564761e-05,
+     "independent_study": 0.00018143978924665843,
+     "analogy": 0.00015240866385201793
+    }
+   },
+   {
+    "id": 77,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9977793400779862,
+    "probs": {
+     "company_assertion": 0.9977793400779862,
+     "customer_observation": 0.0009068976133066952,
+     "market_fact": 0.0008703535364379596,
+     "regulation": 3.569924574723002e-05,
+     "analogy": 8.865891363728845e-05,
+     "independent_study": 5.604984334235952e-05
+    }
+   },
+   {
+    "id": 78,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9933171250330571,
+    "probs": {
+     "company_assertion": 0.9933171250330571,
+     "market_fact": 0.005233150829747961,
+     "regulation": 2.621688234812691e-05,
+     "customer_observation": 0.0005008566490234316,
+     "analogy": 0.00031907678321579187,
+     "independent_study": 8.725669746770912e-05
+    }
+   },
+   {
+    "id": 79,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9709104333232988,
+    "probs": {
+     "company_assertion": 0.9709104333232988,
+     "market_fact": 0.026773842821556336,
+     "customer_observation": 0.0012436627410184436,
+     "regulation": 4.055391040378002e-05,
+     "analogy": 0.0003902669491993161,
+     "independent_study": 0.0001094603761724079
+    }
+   },
+   {
+    "id": 80,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9991660925251089,
+    "probs": {
+     "company_assertion": 0.9991660925251089,
+     "market_fact": 0.0002579828789374657,
+     "customer_observation": 0.00024052634616480393,
+     "regulation": 2.537988355084974e-05,
+     "analogy": 5.984342742706517e-05,
+     "independent_study": 4.0609690977178914e-05
+    }
+   },
+   {
+    "id": 81,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9927355223164255,
+    "probs": {
+     "company_assertion": 0.9927355223164255,
+     "market_fact": 0.005203588090920365,
+     "customer_observation": 0.0008999653776931559,
+     "regulation": 3.006064643921932e-05,
+     "analogy": 0.00039456230206188396,
+     "independent_study": 0.00010376527516751718
+    }
+   },
+   {
+    "id": 82,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9984340568277034,
+    "probs": {
+     "company_assertion": 0.9984340568277034,
+     "market_fact": 0.0009513527120022794,
+     "regulation": 3.191871319123319e-05,
+     "customer_observation": 0.00021290073213518584,
+     "analogy": 6.167949706842077e-05,
+     "independent_study": 3.700979787260863e-05
+    }
+   },
+   {
+    "id": 83,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9904683183753639,
+    "probs": {
+     "company_assertion": 0.9904683183753639,
+     "market_fact": 0.007537549777307476,
+     "customer_observation": 0.0009577400797729622,
+     "analogy": 0.0004622053635976113,
+     "regulation": 4.1309492248353516e-05,
+     "independent_study": 0.00010617662683787305
+    }
+   },
+   {
+    "id": 84,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9942699753429277,
+    "probs": {
+     "company_assertion": 0.9942699753429277,
+     "market_fact": 0.0028353914309683466,
+     "customer_observation": 0.0022914317486906234,
+     "regulation": 5.6996048604919034e-05,
+     "analogy": 0.00011684996973339579,
+     "independent_study": 9.638721047418173e-05
+    }
+   },
+   {
+    "id": 85,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9482771009109237,
+    "probs": {
+     "company_assertion": 0.9482771009109237,
+     "market_fact": 0.0468824272633349,
+     "regulation": 5.17325186216374e-05,
+     "customer_observation": 0.0017468695340752956,
+     "analogy": 0.0007909974216672976,
+     "independent_study": 0.00037966951536328375
+    }
+   },
+   {
+    "id": 86,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.994532808693535,
+    "probs": {
+     "company_assertion": 0.994532808693535,
+     "market_fact": 0.002476331478661658,
+     "customer_observation": 0.0021433029248757473,
+     "regulation": 4.495975714741384e-05,
+     "analogy": 0.00018131297242249156,
+     "independent_study": 0.00011392183148841172
+    }
+   },
+   {
+    "id": 87,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9917849325489063,
+    "probs": {
+     "company_assertion": 0.9917849325489063,
+     "market_fact": 0.007084743401961853,
+     "customer_observation": 0.0005210336736030843,
+     "regulation": 4.6818383069132395e-05,
+     "analogy": 0.00023457955551590116,
+     "independent_study": 6.212764393223484e-05
+    }
+   },
+   {
+    "id": 88,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9944889583573404,
+    "probs": {
+     "company_assertion": 0.9944889583573404,
+     "market_fact": 0.003351383320942731,
+     "customer_observation": 0.0013915036516540251,
+     "regulation": 5.898310556280563e-05,
+     "analogy": 0.00021818621509712727,
+     "independent_study": 0.00012453674284062526
+    }
+   },
+   {
+    "id": 89,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9838610128105318,
+    "probs": {
+     "company_assertion": 0.9838610128105318,
+     "customer_observation": 0.012204790715689171,
+     "market_fact": 0.002742857299624551,
+     "regulation": 7.043316253083728e-05,
+     "analogy": 0.00023255904580793117,
+     "independent_study": 0.0001594798088166338
+    }
+   },
+   {
+    "id": 90,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9951572677339444,
+    "probs": {
+     "company_assertion": 0.9951572677339444,
+     "market_fact": 0.0026973959017416245,
+     "customer_observation": 0.001420135119217894,
+     "regulation": 4.0646227834698234e-05,
+     "analogy": 0.0001991891405838914,
+     "independent_study": 9.629227585686161e-05
+    }
+   },
+   {
+    "id": 91,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9912361607151081,
+    "probs": {
+     "company_assertion": 0.9912361607151081,
+     "market_fact": 0.006543907204181011,
+     "customer_observation": 0.0011913482470259974,
+     "regulation": 4.526755745871716e-05,
+     "analogy": 0.000218944394927619,
+     "independent_study": 0.00013477585921279963
+    }
+   },
+   {
+    "id": 92,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9973463511040606,
+    "probs": {
+     "company_assertion": 0.9973463511040606,
+     "market_fact": 0.0015555215885520249,
+     "customer_observation": 0.0005754733235441441,
+     "regulation": 4.634795102835488e-05,
+     "analogy": 0.00013224763554311512,
+     "independent_study": 7.048587351164156e-05
+    }
+   },
+   {
+    "id": 93,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9966070144370432,
+    "probs": {
+     "company_assertion": 0.9966070144370432,
+     "market_fact": 0.0021769685870942175,
+     "customer_observation": 0.0007376116986874017,
+     "regulation": 2.7577403136630002e-05,
+     "analogy": 0.0001186958969105051,
+     "independent_study": 7.346852007955807e-05
+    }
+   },
+   {
+    "id": 94,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9960457643215794,
+    "probs": {
+     "company_assertion": 0.9960457643215794,
+     "market_fact": 0.0022852879660859695,
+     "customer_observation": 0.0008283381783915065,
+     "regulation": 4.9159714632776e-05,
+     "analogy": 0.00018031212664953785,
+     "independent_study": 0.00013409477257722325
+    }
+   },
+   {
+    "id": 95,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9853893155147638,
+    "probs": {
+     "company_assertion": 0.9853893155147638,
+     "customer_observation": 0.007257182111070356,
+     "market_fact": 0.005858388491680303,
+     "regulation": 6.982115877346571e-05,
+     "analogy": 0.0004567051378909266,
+     "independent_study": 0.0002629590579596055
+    }
+   },
+   {
+    "id": 96,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9947802025663774,
+    "probs": {
+     "company_assertion": 0.9947802025663774,
+     "market_fact": 0.0038350912636521193,
+     "customer_observation": 0.0009192832108903609,
+     "analogy": 0.00019125760867400607,
+     "regulation": 2.4042958064165736e-05,
+     "independent_study": 6.600747491997579e-05
+    }
+   },
+   {
+    "id": 97,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.99072112238407,
+    "probs": {
+     "company_assertion": 0.99072112238407,
+     "customer_observation": 0.005306140877684652,
+     "market_fact": 0.002884594758172359,
+     "regulation": 4.649265841816845e-05,
+     "analogy": 0.00026294808508425625,
+     "independent_study": 0.00018894194572346328
+    }
+   },
+   {
+    "id": 98,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9974676673446409,
+    "probs": {
+     "company_assertion": 0.9974676673446409,
+     "market_fact": 0.001688878420022607,
+     "regulation": 4.425933268071159e-05,
+     "customer_observation": 0.00028343279927423265,
+     "analogy": 0.00013487686036380182,
+     "independent_study": 6.774678029809755e-05
+    }
+   },
+   {
+    "id": 99,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9943749419247362,
+    "probs": {
+     "company_assertion": 0.9943749419247362,
+     "market_fact": 0.004050882404754368,
+     "customer_observation": 0.0008289922670733287,
+     "regulation": 3.6926129557377405e-05,
+     "analogy": 0.00021149847840447908,
+     "independent_study": 8.782338126552149e-05
+    }
+   },
+   {
+    "id": 100,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9955075633868009,
+    "probs": {
+     "company_assertion": 0.9955075633868009,
+     "market_fact": 0.0029525108960030133,
+     "customer_observation": 0.0006875403983725425,
+     "regulation": 3.291882681248727e-05,
+     "analogy": 0.0001868075851976765,
+     "independent_study": 7.467889855286252e-05
+    }
+   },
+   {
+    "id": 101,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9942544202502679,
+    "probs": {
+     "company_assertion": 0.9942544202502679,
+     "market_fact": 0.0036248722576376433,
+     "customer_observation": 0.0012277991076436023,
+     "regulation": 5.078109469313499e-05,
+     "analogy": 0.0002503681846997589,
+     "independent_study": 0.00019520388130150152
+    }
+   },
+   {
+    "id": 102,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9697915192097929,
+    "probs": {
+     "company_assertion": 0.9697915192097929,
+     "market_fact": 0.01979550028780195,
+     "customer_observation": 0.007754587664945247,
+     "analogy": 0.0012846747092435421,
+     "regulation": 8.000923498985571e-05,
+     "independent_study": 0.0005305422271364527
+    }
+   },
+   {
+    "id": 103,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.977093971880818,
+    "probs": {
+     "company_assertion": 0.977093971880818,
+     "market_fact": 0.016037918773130322,
+     "customer_observation": 0.003077752068480367,
+     "regulation": 8.525796716208784e-05,
+     "analogy": 0.0012802301764690892,
+     "independent_study": 0.0003332818630195783
+    }
+   },
+   {
+    "id": 104,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9960419887552132,
+    "probs": {
+     "company_assertion": 0.9960419887552132,
+     "market_fact": 0.002744611564442548,
+     "customer_observation": 0.0005428625329913557,
+     "regulation": 4.872949778069511e-05,
+     "analogy": 0.00016332996269766858,
+     "independent_study": 6.59972493563367e-05
+    }
+   },
+   {
+    "id": 105,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9963865471977965,
+    "probs": {
+     "company_assertion": 0.9963865471977965,
+     "market_fact": 0.001963403520192363,
+     "regulation": 3.521496264192528e-05,
+     "customer_observation": 0.000535124991700768,
+     "analogy": 0.00021398641236109603,
+     "independent_study": 7.092469611746731e-05
+    }
+   },
+   {
+    "id": 106,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9901116826907603,
+    "probs": {
+     "company_assertion": 0.9901116826907603,
+     "market_fact": 0.007354539805064674,
+     "customer_observation": 0.0013524379017952784,
+     "regulation": 3.861215276465142e-05,
+     "analogy": 0.00033506677899642365,
+     "independent_study": 0.00014489178966171104
+    }
+   },
+   {
+    "id": 107,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9843685003693836,
+    "probs": {
+     "company_assertion": 0.9843685003693836,
+     "market_fact": 0.010388174184372552,
+     "customer_observation": 0.0041851627600008965,
+     "regulation": 5.743129280509435e-05,
+     "analogy": 0.00035864671068784674,
+     "independent_study": 0.00015406509597949814
+    }
+   },
+   {
+    "id": 108,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9934298626668512,
+    "probs": {
+     "company_assertion": 0.9934298626668512,
+     "market_fact": 0.004872824926716877,
+     "customer_observation": 0.0010117127859545325,
+     "regulation": 2.660654610443802e-05,
+     "analogy": 0.00023311528197658376,
+     "independent_study": 0.00010434771189376413
+    }
+   },
+   {
+    "id": 109,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9977295808539721,
+    "probs": {
+     "company_assertion": 0.9977295808539721,
+     "market_fact": 0.001669172768379112,
+     "customer_observation": 0.00019754149528264562,
+     "regulation": 1.5122238487214676e-05,
+     "analogy": 0.0001694997602321089,
+     "independent_study": 3.187358462864372e-05
+    }
+   },
+   {
+    "id": 110,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9932067170726983,
+    "probs": {
+     "company_assertion": 0.9932067170726983,
+     "market_fact": 0.003117145586306852,
+     "customer_observation": 0.0028848410861356958,
+     "regulation": 3.142369535843275e-05,
+     "analogy": 0.00017405866137460465,
+     "independent_study": 0.0001350980904964539
+    }
+   },
+   {
+    "id": 111,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9902669015783983,
+    "probs": {
+     "company_assertion": 0.9902669015783983,
+     "market_fact": 0.005878961679067927,
+     "customer_observation": 0.002639791668513514,
+     "regulation": 3.432780086124983e-05,
+     "analogy": 0.00027221476779209835,
+     "independent_study": 0.00016812685497654924
+    }
+   },
+   {
+    "id": 112,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9972198073197948,
+    "probs": {
+     "company_assertion": 0.9972198073197948,
+     "market_fact": 0.0012906762440114768,
+     "customer_observation": 0.0008685675650586016,
+     "regulation": 5.200991049793386e-05,
+     "analogy": 0.00011703234735251466,
+     "independent_study": 9.4881764253858e-05
+    }
+   },
+   {
+    "id": 113,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.996582893846622,
+    "probs": {
+     "company_assertion": 0.996582893846622,
+     "customer_observation": 0.0015776516766286995,
+     "market_fact": 0.0009371233355152951,
+     "regulation": 5.596533991612947e-05,
+     "analogy": 0.0002116049406383373,
+     "independent_study": 0.00014797898816515097
+    }
+   },
+   {
+    "id": 114,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9955791447372238,
+    "probs": {
+     "company_assertion": 0.9955791447372238,
+     "market_fact": 0.001871356548147274,
+     "regulation": 2.3643069220923983e-05,
+     "customer_observation": 0.0007373498274010169,
+     "analogy": 0.0001877992903031427,
+     "independent_study": 0.00011637770703368689
+    }
+   },
+   {
+    "id": 115,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9985499775831197,
+    "probs": {
+     "company_assertion": 0.9985499775831197,
+     "market_fact": 0.0005316478033196305,
+     "customer_observation": 0.00047653419771438656,
+     "regulation": 3.039010786576751e-05,
+     "analogy": 7.656089406984791e-05,
+     "independent_study": 5.3404503621434146e-05
+    }
+   },
+   {
+    "id": 116,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9947392536879057,
+    "probs": {
+     "company_assertion": 0.9947392536879057,
+     "market_fact": 0.0028326307023478488,
+     "regulation": 4.1681767082844025e-05,
+     "customer_observation": 0.0010608495866775293,
+     "analogy": 0.0001369323973530664,
+     "independent_study": 0.00012744406792238112
+    }
+   },
+   {
+    "id": 117,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9985526673680599,
+    "probs": {
+     "company_assertion": 0.9985526673680599,
+     "regulation": 2.7767304360022367e-05,
+     "customer_observation": 0.0004417786125501379,
+     "market_fact": 0.00035510165838025177,
+     "analogy": 7.537282769955418e-05,
+     "independent_study": 5.775167511811539e-05
+    }
+   },
+   {
+    "id": 118,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9873531000027336,
+    "probs": {
+     "company_assertion": 0.9873531000027336,
+     "market_fact": 0.007713962591518987,
+     "regulation": 3.9079541362354836e-05,
+     "customer_observation": 0.0013364297735947368,
+     "analogy": 0.0003188820465792756,
+     "independent_study": 0.00020344827376585773
+    }
+   },
+   {
+    "id": 119,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.9839744822924648,
+    "probs": {
+     "company_assertion": 0.9839744822924648,
+     "market_fact": 0.010708777031165231,
+     "customer_observation": 0.004193097457589627,
+     "regulation": 4.281151937244834e-05,
+     "analogy": 0.0003116531250403105,
+     "independent_study": 0.00018025818427329048
+    }
+   },
+   {
+    "id": 120,
+    "task": "evidence_kind",
+    "gold": "company_assertion",
+    "pred": "company_assertion",
+    "conf": 0.997481120844169,
+    "probs": {
+     "company_assertion": 0.997481120844169,
+     "market_fact": 0.0013041584085146014,
+     "customer_observation": 0.0006206901364861397,
+     "regulation": 2.7328446567291622e-05,
+     "analogy": 0.00015666408457752016,
+     "independent_study": 7.483471945620254e-05
+    }
+   },
+   {
+    "id": 121,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.53166649780751,
+    "probs": {
+     "decline": 0.53166649780751,
+     "propose": 0.00013626430200357526
+    }
+   },
+   {
+    "id": 122,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.53166649780751,
+    "probs": {
+     "decline": 0.53166649780751,
+     "propose": 0.00013626430200357526
+    }
+   },
+   {
+    "id": 123,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "propose",
+    "conf": 0.578653016244123,
+    "probs": {
+     "propose": 0.00017319595530380252,
+     "decline": 0.4211737878005732
+    }
+   },
+   {
+    "id": 124,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "propose",
+    "conf": 0.578653016244123,
+    "probs": {
+     "propose": 0.00017319595530380252,
+     "decline": 0.4211737878005732
+    }
+   },
+   {
+    "id": 125,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5551034033543386,
+    "probs": {
+     "decline": 0.5551034033543386,
+     "propose": 0.00011578960318227962
+    }
+   },
+   {
+    "id": 126,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5551034033543386,
+    "probs": {
+     "decline": 0.5551034033543386,
+     "propose": 0.00011578960318227962
+    }
+   },
+   {
+    "id": 127,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "decline",
+    "conf": 0.5859127683510316,
+    "probs": {
+     "decline": 0.5859127683510316,
+     "propose": 0.00018451689712447206
+    }
+   },
+   {
+    "id": 128,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "decline",
+    "conf": 0.5859127683510316,
+    "probs": {
+     "decline": 0.5859127683510316,
+     "propose": 0.00018451689712447206
+    }
+   },
+   {
+    "id": 129,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.53166649780751,
+    "probs": {
+     "decline": 0.53166649780751,
+     "propose": 0.00013626430200357526
+    }
+   },
+   {
+    "id": 130,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.53166649780751,
+    "probs": {
+     "decline": 0.53166649780751,
+     "propose": 0.00013626430200357526
+    }
+   },
+   {
+    "id": 131,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "propose",
+    "conf": 0.578653016244123,
+    "probs": {
+     "propose": 0.00017319595530380252,
+     "decline": 0.4211737878005732
+    }
+   },
+   {
+    "id": 132,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "propose",
+    "conf": 0.578653016244123,
+    "probs": {
+     "propose": 0.00017319595530380252,
+     "decline": 0.4211737878005732
+    }
+   },
+   {
+    "id": 133,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5551034033543386,
+    "probs": {
+     "decline": 0.5551034033543386,
+     "propose": 0.00011578960318227962
+    }
+   },
+   {
+    "id": 134,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5551034033543386,
+    "probs": {
+     "decline": 0.5551034033543386,
+     "propose": 0.00011578960318227962
+    }
+   },
+   {
+    "id": 135,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "decline",
+    "conf": 0.5859127683510316,
+    "probs": {
+     "decline": 0.5859127683510316,
+     "propose": 0.00018451689712447206
+    }
+   },
+   {
+    "id": 136,
+    "task": "test_choice",
+    "gold": "decline",
+    "pred": "decline",
+    "conf": 0.5859127683510316,
+    "probs": {
+     "decline": 0.5859127683510316,
+     "propose": 0.00018451689712447206
+    }
+   },
+   {
+    "id": 137,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6037991444238638,
+    "probs": {
+     "decline": 0.6037991444238638,
+     "propose": 0.00012528855327606126
+    }
+   },
+   {
+    "id": 138,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6037991444238638,
+    "probs": {
+     "decline": 0.6037991444238638,
+     "propose": 0.00012528855327606126
+    }
+   },
+   {
+    "id": 139,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5972746775445615,
+    "probs": {
+     "decline": 0.5972746775445615,
+     "propose": 0.00010627932273500791
+    }
+   },
+   {
+    "id": 140,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5972746775445615,
+    "probs": {
+     "decline": 0.5972746775445615,
+     "propose": 0.00010627932273500791
+    }
+   },
+   {
+    "id": 141,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5016730107687404,
+    "probs": {
+     "decline": 0.5016730107687404,
+     "propose": 0.00012493513378364566
+    }
+   },
+   {
+    "id": 142,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5016730107687404,
+    "probs": {
+     "decline": 0.5016730107687404,
+     "propose": 0.00012493513378364566
+    }
+   },
+   {
+    "id": 143,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6558284194255867,
+    "probs": {
+     "decline": 0.6558284194255867,
+     "propose": 0.00016583630805817984
+    }
+   },
+   {
+    "id": 144,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6558284194255867,
+    "probs": {
+     "decline": 0.6558284194255867,
+     "propose": 0.00016583630805817984
+    }
+   },
+   {
+    "id": 145,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5423022757788375,
+    "probs": {
+     "decline": 0.5423022757788375,
+     "propose": 0.00017120041733273157
+    }
+   },
+   {
+    "id": 146,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5423022757788375,
+    "probs": {
+     "decline": 0.5423022757788375,
+     "propose": 0.00017120041733273157
+    }
+   },
+   {
+    "id": 147,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5300549966699236,
+    "probs": {
+     "decline": 0.5300549966699236,
+     "propose": 0.0001299471872915404
+    }
+   },
+   {
+    "id": 148,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5300549966699236,
+    "probs": {
+     "decline": 0.5300549966699236,
+     "propose": 0.0001299471872915404
+    }
+   },
+   {
+    "id": 149,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.524133192718475,
+    "probs": {
+     "decline": 0.524133192718475,
+     "propose": 0.00015939051177838264
+    }
+   },
+   {
+    "id": 150,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.524133192718475,
+    "probs": {
+     "decline": 0.524133192718475,
+     "propose": 0.00015939051177838264
+    }
+   },
+   {
+    "id": 151,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "propose",
+    "conf": 0.5123445768490518,
+    "probs": {
+     "propose": 0.00010724616663197244,
+     "decline": 0.4875481769843163
+    }
+   },
+   {
+    "id": 152,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "propose",
+    "conf": 0.5123445768490518,
+    "probs": {
+     "propose": 0.00010724616663197244,
+     "decline": 0.4875481769843163
+    }
+   },
+   {
+    "id": 153,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "propose",
+    "conf": 0.5006006844357526,
+    "probs": {
+     "propose": 0.00013838711281396644,
+     "decline": 0.4992609284514335
+    }
+   },
+   {
+    "id": 154,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "propose",
+    "conf": 0.5006006844357526,
+    "probs": {
+     "propose": 0.00013838711281396644,
+     "decline": 0.4992609284514335
+    }
+   },
+   {
+    "id": 155,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6077323532770449,
+    "probs": {
+     "decline": 0.6077323532770449,
+     "propose": 0.00014650804311768398
+    }
+   },
+   {
+    "id": 156,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.6077323532770449,
+    "probs": {
+     "decline": 0.6077323532770449,
+     "propose": 0.00014650804311768398
+    }
+   },
+   {
+    "id": 157,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5699133969320292,
+    "probs": {
+     "decline": 0.5699133969320292,
+     "propose": 0.0002321717782815048
+    }
+   },
+   {
+    "id": 158,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.5699133969320292,
+    "probs": {
+     "decline": 0.5699133969320292,
+     "propose": 0.0002321717782815048
+    }
+   },
+   {
+    "id": 159,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.588599158419282,
+    "probs": {
+     "decline": 0.588599158419282,
+     "propose": 0.0001403776644854275
+    }
+   },
+   {
+    "id": 160,
+    "task": "test_choice",
+    "gold": "propose",
+    "pred": "decline",
+    "conf": 0.588599158419282,
+    "probs": {
+     "decline": 0.588599158419282,
+     "propose": 0.0001403776644854275
+    }
+   }
+  ]
+ }
+}

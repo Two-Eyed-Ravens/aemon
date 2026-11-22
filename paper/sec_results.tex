@@ -182,7 +182,7 @@ GPUs for test set 2 and not rerun. The frozen tests keep the evaluated settings.
 We then tried to fix the data gaps directly with targeted examples: states harvested from the student's own runs at the
 test step, at rereading loops and at refused finishes, answered once by the teacher under instructions for the missing
 skill, filtered by code gates and reviewed by a human before any could train. Three advisory reviews (by separate
-language-model agents, each with a different lens, and by Gemini) found the first rounds' answers to be templates: test
+language-model reviewers, each with a different lens) found the first rounds' answers to be templates: test
 arms that differed only in a message, rival theories the answer itself called unsupported, decision rules that jumped to
 developing a product line, and facts attributed to a case's year from later sources. The gates were tightened (complete
 fields, no message-only arms without a control, a bounded next step, the currency and sources of the case's time) and,

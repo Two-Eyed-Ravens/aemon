@@ -1,4 +1,4 @@
-*Code, every run and every decision: [github.com/HatemSaadallah/aemon](https://github.com/HatemSaadallah/aemon) · Try it: [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (any username, no password) · Watch it: [demo video](https://youtu.be/Uow3miSSIIY) · Model and data: [the Two-Eyed Ravens collection](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd) · [Paper](https://github.com/HatemSaadallah/aemon/blob/main/docs/PAPER.pdf)*
+*Code, every run and every decision: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon) · Try it: [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (any username, no password) · Watch it: [demo video](https://youtu.be/Uow3miSSIIY) · Model and data: [the Two-Eyed Ravens collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) · [Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)*
 
 *weigh what is known. test what is not.*
 
@@ -36,8 +36,8 @@ Our goal is to help teams move from "we think this will work" to "here is the ev
 > - **What:** a 3B open model taught, by distillation from Command A+ with AgentTune, to run a strategy investigation through twelve guarded tools, with AuditKIT replaying every evaluated run.
 > - **Result:** blind quality 0.65 → 1.48 (+0.83 [0.69, 0.97]) on a frozen test run once; +0.52 [0.33, 0.70] on a second; the final system reaches 1.62 and finishes 46 of 48 investigations in 39 tool calls each (base model: 4 of 48, 242 calls).
 > - **The caveat we state ourselves:** Claude Haiku 5.5 scores 2.28 through the same tools for a quarter of the cost. The small model's case is offline, open-weights, auditable use.
-> - **See it in 60 seconds:** [one finished run as a page](https://github.com/HatemSaadallah/aemon/blob/main/docs/replays/system_rational-new-evidence-irrelevant_2.md), every tool call and refusal included; or [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon), any username, where finished investigations open at once.
-> - **Everything public:** [model](https://huggingface.co/two-eyed-ravens/aemon), [dataset with every judged run](https://huggingface.co/datasets/two-eyed-ravens/aemon), [code and dated decisions](https://github.com/HatemSaadallah/aemon), [paper](https://github.com/HatemSaadallah/aemon/blob/main/docs/PAPER.pdf), [demo video](https://youtu.be/Uow3miSSIIY).
+> - **See it in 60 seconds:** [one finished run as a page](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/replays/system_rational-new-evidence-irrelevant_2.md), every tool call and refusal included; or [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon), any username, where finished investigations open at once.
+> - **Everything public:** [model](https://huggingface.co/twoeyedravens/aemon), [dataset with every judged run](https://huggingface.co/datasets/twoeyedravens/aemon), [code and dated decisions](https://github.com/Two-Eyed-Ravens/aemon), [paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf), [demo video](https://youtu.be/Uow3miSSIIY).
 
 ## 1. Problem and approach
 
@@ -57,7 +57,7 @@ A stronger teacher, Command A+, ran investigations through those tools. Only the
 
 **Why this problem, and who would use it.** Adjacent-market decisions of this kind are made every year by mid-sized manufacturers that have no strategy department: whether a maker of professional kitchen equipment, water filters or hearing protection should sell to consumers. The people who make them are the owner, a product lead and a consultant's slide deck. An investigation that cites only checked quotes, shows what the evidence does not support, and can be replayed is useful to them exactly because the recommendation can be argued with. It also has to run on their own machine, since the dossier for a real decision is often confidential; that is why the student is a 3B model and not an API call.
 
-![The reasoning map of one investigation: question, rival hypotheses, the evidence weighed for each, the challenge, the proposed test and the recommendation](https://raw.githubusercontent.com/HatemSaadallah/aemon/main/docs/figures/ui/redesign/after/map.png)
+![The reasoning map of one investigation: question, rival hypotheses, the evidence weighed for each, the challenge, the proposed test and the recommendation](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/figures/ui/redesign/after/map.png)
 
 ## 2. Hackathon repositories used
 
@@ -99,7 +99,7 @@ No benchmark existed for this task, so the data is ours, and all of it is publis
 
 ## 5. Model artifacts
 
-Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd). Model: [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon) (derivatives of Tiny Aya, so CC-BY-NC-4.0), with a table at the top saying which file is which:
+Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf). Model: [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon) (derivatives of Tiny Aya, so CC-BY-NC-4.0), with a table at the top saying which file is which:
 
 - **Version 1, the evaluated adapter**: the LoRA (`adapter_model.safetensors`, `adapter_config.json`; sha256 740c4a9b…) and its GGUF conversion for llama.cpp (`tiny-aya-global-strategy-lora-bf16.gguf`, sha256 41794b57…), the exact file evaluated on the frozen tests.
 - **Version 3, the final system's reasoner** (`v3_adapter.gguf`, sha256 ea919380…): continued from version 1 on the second teacher's rows. The app loads both; `app/server.py` sets the decoding-time guards.
@@ -107,7 +107,7 @@ Collection: [aemon: a strategy-investigation agent](https://huggingface.co/colle
 
 ## 6. Data artifacts
 
-Dataset: [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon), in the same collection:
+Dataset: [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon), in the same collection:
 
 - the training rows, loadable as splits: version 1's 3,891 train and 411 validation rows, the 51 correction rows, and the second teacher's 3,611 train and 262 validation rows, each bound to its teacher episode;
 - the dossier in full (1,958 records, byte-identical to the one in the repository) and every case, with both freeze files;
@@ -115,7 +115,7 @@ Dataset: [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens
 - every evaluation campaign: runs, blinded judge packets, judge outputs and reports, for development, both frozen tests, version 3, adapter switching, the combined system, the loop guards, evidence first, and the Claude Haiku 5.5 baseline;
 - `MANIFEST.json`, with the sha256 of each private original and of its published copy.
 
-The repository adds every test run as a readable page ([first test](https://github.com/HatemSaadallah/aemon/blob/main/docs/replays/final/README.md), [second test](https://github.com/HatemSaadallah/aemon/blob/main/docs/replays/test2/README.md)): every tool call, what the environment refused and why, and the judges' scores, with no GPU needed.
+The repository adds every test run as a readable page ([first test](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/replays/final/README.md), [second test](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/replays/test2/README.md)): every tool call, what the environment refused and why, and the judges' scores, with no GPU needed.
 
 ## 7. Experiments and findings
 
@@ -123,7 +123,7 @@ The repository adds every test run as a readable page ([first test](https://gith
 
 The metrics, with their direction:
 
-- **Blind quality**, 0–3, mean of two judges over nine rubric dimensions ([the rubric](https://github.com/HatemSaadallah/aemon/blob/main/docs/RUBRIC.md)): higher is better. The primary result is the paired difference between arms with a 95% case-cluster bootstrap interval.
+- **Blind quality**, 0–3, mean of two judges over nine rubric dimensions ([the rubric](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/RUBRIC.md)): higher is better. The primary result is the paired difference between arms with a 95% case-cluster bootstrap interval.
 - **Finished investigations**, the task success rate (an accepted recommendation reached): higher is better.
 - **Tool calls per finished investigation**, refused calls included: lower is better. **Share of calls refused**, the tool-call accuracy inverted: lower is better.
 - **Replay mismatches** under AuditKIT, a run whose tool results do not reproduce: must be zero, and is, in all 22 run reports.
@@ -177,7 +177,7 @@ Four held-out companies, 16 cases, 3 attempts, 96 runs; the same environment, to
 | **Mean of judges** | **0.65** | **1.48** | **+0.83 [0.69, 0.97]** |
 | Finished investigations | 4 of 48 | 28 of 48 | |
 
-![Blind quality score on the final test, base model and fine-tuned, per judge](https://raw.githubusercontent.com/HatemSaadallah/aemon/main/docs/figures/quality-light.png)
+![Blind quality score on the final test, base model and fine-tuned, per judge](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/figures/quality-light.png)
 
 Every company is higher under both judges (Aquaporin +1.10, Simonelli +0.98, RATIONAL +0.66, Electrolux Professional +0.60), and every kind of new evidence. Case by case, the fine-tuned agent scored higher on all 16 of 16 cases and in 44 of 47 paired runs (exact sign test, p = 2.5e-10). The judges agree on the order of runs (Spearman 0.94). Two stricter checks, from the saved judgments, say the same thing: resampling whole companies instead of cases keeps the interval above zero (from +0.44), and comparing each pair only on the rubric dimensions both runs reached, which removes the base model's context-limit stops from the comparison, makes the difference larger, **+0.92 [0.83, 1.01]**.
 
@@ -222,7 +222,7 @@ Lexsi asks for an ROI comparison, so we ran the cheapest current closed model th
 
 Haiku is better on this task: higher at every company on both sets and on all nine rubric dimensions, most on the recommendation (1.95 against 1.06) and the causal mechanism (2.83 against 1.97). Both judges agree; Codex alone, scoring a model not of its own family, gives −0.43 on both sets. Haiku is also cheaper, about **$0.008 per investigation** through the API against $0.03 self-hosted, and quicker to a finish, 24 tool calls per finished investigation. We say this plainly because the earlier cost claim held only against Opus. The measured trade-off is this: fine-tuning takes a 3B model from 0.61 to 1.62, about 60% of the way to Haiku from the same start, and what the small open model offers is not quality or price but control. It runs offline on one GPU or a laptop, the case material never leaves the machine, the weights are open (CC-BY-NC 4.0, non-commercial) and can be inspected and trained further, and every investigation is a procedure you can audit step by step.
 
-![A finished report: the recommendation, the confidence the checks support, and what the evidence did and did not show](https://raw.githubusercontent.com/HatemSaadallah/aemon/main/docs/figures/ui/redesign/after/report.png)
+![A finished report: the recommendation, the confidence the checks support, and what the evidence did and did not show](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/figures/ui/redesign/after/report.png)
 
 ### Compute used, and cost per 1,000 investigations
 
@@ -239,7 +239,7 @@ Self-hosting is 8 times cheaper than the measured Opus run and 4 times dearer th
 
 ### What else we tested
 
-Everything is in [docs/FINAL_SYSTEM.md](https://github.com/HatemSaadallah/aemon/blob/main/docs/FINAL_SYSTEM.md) and the dataset's evaluation folders, with its registered rule and its judgments.
+Everything is in [docs/FINAL_SYSTEM.md](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/FINAL_SYSTEM.md) and the dataset's evaluation folders, with its registered rule and its judgments.
 
 - **Version 3 alone** (continued on both teachers' rows) failed its development adoption rule, +0.42 over version 1 on the second test but −0.13 on the first; it is used only as the reasoner above.
 - **Two adapter-switching rules** (hand a stuck turn to the other adapter) were beaten by dig then reason on development.
@@ -298,7 +298,7 @@ Built with AgentTune, AuditKIT and CuratorKIT (Lexsi Labs), Tiny Aya and Command
 
 ### Reproduction
 
-The repository's [README](https://github.com/HatemSaadallah/aemon#readme) has the layout and the commands; in short:
+The repository's [README](https://github.com/Two-Eyed-Ravens/aemon#readme) has the layout and the commands; in short:
 
 - **Requirements**: Python 3.12 with `requirements.lock.txt` (the exact set the frozen runs used), llama.cpp release b12032, Node once to build the interface, and one GPU with 40 GB for the evaluated speed. The app and the demo also run on CPU, slowly. Reading the results needs nothing: every frozen-test run is a page under `docs/replays/`.
 - **Layout**: `src/aemon/environment/` the tools, stage controller, cases and dossier search; `src/aemon/agent/` the runner and model clients; `src/aemon/teacher/` the teacher runs; `src/aemon/rows/` row building, provenance and CuratorKIT curation; `src/aemon/training/` AgentTune training and the masking gate; `src/aemon/evaluation/` AuditKIT replay, the conversion gate and blind judging; `app/` the interface; `jobs/` the Slurm scripts for every stage; `reports/` and `experiments/` every result, packet and judgment; `docs/` the decision log and the plans frozen before each test.
@@ -308,16 +308,12 @@ The repository's [README](https://github.com/HatemSaadallah/aemon#readme) has th
 
 None. The first commit is dated 1 November 2026, the day the hackathon opened, and everything here (the environment, the dossier and cases, the teacher runs, the training, the evaluations, the app, the paper and this write-up) was done between then and the deadline. What we brought in was public: the Lexsi kits, Cohere's models, PEFT, TRL and llama.cpp, and the strategy literature cited in section 1.
 
-### LLM usage statement
-
-Claude Code and Codex wrote most of the code and drafted most of the documents under our direction; we chose every design, registered every rule before a run, read every result and rewrote the text. Their role in the experiments was confined to blind judging, with a provenance check that keeps any Claude or Codex output out of the training data.
-
 ### References
 
 Camuffo, A., Cordova, A., Gambardella, A. and Spina, C. (2020). A scientific approach to entrepreneurial decision making. *Management Science* 66(2). · Camuffo, A., Gambardella, A. and Pignataro, A. (2024). Theory-driven strategic management decisions. *Strategy Science*. · Lexsi Labs: [AgentTune](https://agenttune.lexsi.ai/), [AuditKIT](https://auditkit.lexsi.ai/), CuratorKIT. · Cohere Labs: [Tiny Aya Global](https://huggingface.co/CohereLabs/tiny-aya-global), Command A+. · Hugging Face [PEFT](https://github.com/huggingface/peft) and [TRL](https://github.com/huggingface/trl). · [llama.cpp](https://github.com/ggml-org/llama.cpp).
 
 ### Appendix
 
-- The judge rubric: [docs/RUBRIC.md](https://github.com/HatemSaadallah/aemon/blob/main/docs/RUBRIC.md); the judge prompt: [judge_prompt_v1.txt](https://github.com/HatemSaadallah/aemon/blob/main/src/aemon/evaluation/judging/judge_v1/judge_prompt_v1.txt).
-- The agent prompts and the stage controller's guidance: [prompts.py](https://github.com/HatemSaadallah/aemon/blob/main/src/aemon/common/constants/prompts.py).
-- Every table behind the numbers above, with the registered rule for each change: [docs/FINAL_SYSTEM.md](https://github.com/HatemSaadallah/aemon/blob/main/docs/FINAL_SYSTEM.md) and [docs/DECISIONS.md](https://github.com/HatemSaadallah/aemon/blob/main/docs/DECISIONS.md).
+- The judge rubric: [docs/RUBRIC.md](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/RUBRIC.md); the judge prompt: [judge_prompt_v1.txt](https://github.com/Two-Eyed-Ravens/aemon/blob/main/src/aemon/evaluation/judging/judge_v1/judge_prompt_v1.txt).
+- The agent prompts and the stage controller's guidance: [prompts.py](https://github.com/Two-Eyed-Ravens/aemon/blob/main/src/aemon/common/constants/prompts.py).
+- Every table behind the numbers above, with the registered rule for each change: [docs/FINAL_SYSTEM.md](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/FINAL_SYSTEM.md) and [docs/DECISIONS.md](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/DECISIONS.md).

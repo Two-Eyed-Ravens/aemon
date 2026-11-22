@@ -1,0 +1,147 @@
+{
+ "arms": {
+  "base": {
+   "temperature": 8.5,
+   "calibration_uncalibrated": {
+    "n": 231,
+    "accuracy": 0.6103896103896104,
+    "ece": 0.3522896340590987,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.8787878787878788,
+    "accuracy_at_threshold": 0.6305418719211823,
+    "accuracy_by_gold": {
+     "regulation": 0.18518518518518517,
+     "independent_study": 0.5789473684210527,
+     "customer_observation": 0.625,
+     "company_assertion": 0.9148936170212766,
+     "market_fact": 0.38666666666666666
+    }
+   },
+   "frozen_uncalibrated": {
+    "n": 121,
+    "accuracy": 0.8099173553719008,
+    "ece": 0.16924710432527862,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.9256198347107438,
+    "accuracy_at_threshold": 0.8660714285714286,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.5,
+     "customer_observation": 0.0,
+     "company_assertion": 0.9891304347826086,
+     "analogy": 0.0,
+     "market_fact": 0.15384615384615385
+    }
+   },
+   "frozen": {
+    "n": 121,
+    "accuracy": 0.8099173553719008,
+    "ece": 0.17862075574019706,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.0,
+    "accuracy_at_threshold": null,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.5,
+     "customer_observation": 0.0,
+     "company_assertion": 0.9891304347826086,
+     "analogy": 0.0,
+     "market_fact": 0.15384615384615385
+    }
+   },
+   "frozen_third_party": {
+    "n": 48,
+    "accuracy": 0.5208333333333334,
+    "ece": 0.23833804075707593,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.0,
+    "accuracy_at_threshold": null,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.5,
+     "customer_observation": 0.0,
+     "company_assertion": 0.9473684210526315,
+     "analogy": 0.0,
+     "market_fact": 0.15384615384615385
+    }
+   }
+  },
+  "decider": {
+   "temperature": 1.35,
+   "calibration_uncalibrated": {
+    "n": 231,
+    "accuracy": 0.8268398268398268,
+    "ece": 0.09195958057669357,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.7012987012987013,
+    "accuracy_at_threshold": 0.9135802469135802,
+    "accuracy_by_gold": {
+     "regulation": 0.8888888888888888,
+     "independent_study": 0.7368421052631579,
+     "customer_observation": 0.6875,
+     "company_assertion": 0.851063829787234,
+     "market_fact": 0.8266666666666667
+    }
+   },
+   "frozen_uncalibrated": {
+    "n": 121,
+    "accuracy": 0.7933884297520661,
+    "ece": 0.11507015931234585,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.71900826446281,
+    "accuracy_at_threshold": 0.896551724137931,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.375,
+     "customer_observation": 0.6666666666666666,
+     "company_assertion": 0.8478260869565217,
+     "analogy": 0.0,
+     "market_fact": 0.9230769230769231
+    }
+   },
+   "frozen": {
+    "n": 121,
+    "accuracy": 0.7933884297520661,
+    "ece": 0.06962642109607341,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.5454545454545454,
+    "accuracy_at_threshold": 0.9696969696969697,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.375,
+     "customer_observation": 0.6666666666666666,
+     "company_assertion": 0.8478260869565217,
+     "analogy": 0.0,
+     "market_fact": 0.9230769230769231
+    }
+   },
+   "frozen_third_party": {
+    "n": 48,
+    "accuracy": 0.4791666666666667,
+    "ece": 0.2594876566151688,
+    "missing_letter_rate": 0.0,
+    "coverage_at_threshold": 0.1875,
+    "accuracy_at_threshold": 0.7777777777777778,
+    "accuracy_by_gold": {
+     "regulation": 1.0,
+     "independent_study": 0.375,
+     "customer_observation": 0.6666666666666666,
+     "company_assertion": 0.2631578947368421,
+     "analogy": 0.0,
+     "market_fact": 0.9230769230769231
+    }
+   }
+  }
+ },
+ "accuracy_difference": {
+  "mean_and_95_interval": [
+   -0.01652892561983471,
+   -0.109375,
+   0.08064516129032258
+  ],
+  "head_right_base_wrong": 12,
+  "base_right_head_wrong": 14,
+  "records": 95
+ },
+ "go": false
+}

@@ -1,0 +1,827 @@
+{
+ "runs": 1485,
+ "arms": [
+  "ayaA11_decide",
+  "ayaA11_guards",
+  "ayaA13_decide",
+  "ayaA13_guards",
+  "ayaA7_decide",
+  "ayaA7_guards",
+  "ayaA7_minus_quote",
+  "ayaA7_none",
+  "ayaA7_routed",
+  "ayaB11_decide",
+  "ayaB11_guards",
+  "ayaB13_decide",
+  "ayaB13_guards",
+  "ayaB7_decide",
+  "ayaB7_guards",
+  "ayaBS7_decide",
+  "ayaBS7_guards",
+  "ayaC7_decide",
+  "ayaC7_guards",
+  "ayaNC7_decide",
+  "ayaNC7_guards",
+  "ayaP_compact_decide",
+  "ayaP_compact_guards",
+  "ayaexp8b",
+  "final_system",
+  "gemma12b",
+  "qwen4b",
+  "qwen4b_ft",
+  "qwen9b",
+  "qwen9b_ft",
+  "qwen9b_routed_compact",
+  "qwen9b_routed_staged",
+  "tinyaya"
+ ],
+ "judges": {
+  "codexsol170": {
+   "by_arm": {
+    "final_system": {
+     "mean": 1.879,
+     "n": 45
+    },
+    "qwen9b": {
+     "mean": 2.128,
+     "n": 45
+    },
+    "qwen4b": {
+     "mean": 2.013,
+     "n": 45
+    },
+    "tinyaya": {
+     "mean": 0.882,
+     "n": 45
+    },
+    "gemma12b": {
+     "mean": 1.893,
+     "n": 45
+    },
+    "qwen4b_ft": {
+     "mean": 1.96,
+     "n": 45
+    },
+    "qwen9b_ft": {
+     "mean": 2.132,
+     "n": 45
+    },
+    "qwen9b_routed_staged": {
+     "mean": 1.998,
+     "n": 45
+    },
+    "qwen9b_routed_compact": {
+     "mean": 2.156,
+     "n": 45
+    },
+    "ayaexp8b": {
+     "mean": 1.407,
+     "n": 45
+    },
+    "ayaA7_guards": {
+     "mean": 2.015,
+     "n": 45
+    },
+    "ayaA7_decide": {
+     "mean": 2.043,
+     "n": 45
+    },
+    "ayaP_compact_guards": {
+     "mean": 1.291,
+     "n": 45
+    },
+    "ayaB7_guards": {
+     "mean": 2.191,
+     "n": 45
+    },
+    "ayaP_compact_decide": {
+     "mean": 1.323,
+     "n": 45
+    },
+    "ayaB7_decide": {
+     "mean": 2.196,
+     "n": 45
+    },
+    "ayaB11_guards": {
+     "mean": 1.967,
+     "n": 45
+    },
+    "ayaB11_decide": {
+     "mean": 2.025,
+     "n": 45
+    },
+    "ayaNC7_guards": {
+     "mean": 2.015,
+     "n": 45
+    },
+    "ayaNC7_decide": {
+     "mean": 2.051,
+     "n": 45
+    },
+    "ayaA11_guards": {
+     "mean": 2.165,
+     "n": 45
+    },
+    "ayaA11_decide": {
+     "mean": 2.144,
+     "n": 45
+    },
+    "ayaB13_guards": {
+     "mean": 2.141,
+     "n": 45
+    },
+    "ayaA13_guards": {
+     "mean": 2.06,
+     "n": 45
+    },
+    "ayaC7_guards": {
+     "mean": 1.036,
+     "n": 45
+    },
+    "ayaC7_decide": {
+     "mean": 1.067,
+     "n": 45
+    },
+    "ayaA13_decide": {
+     "mean": 2.097,
+     "n": 45
+    },
+    "ayaB13_decide": {
+     "mean": 2.082,
+     "n": 45
+    },
+    "ayaA7_none": {
+     "mean": 1.572,
+     "n": 45
+    },
+    "ayaBS7_guards": {
+     "mean": 0.652,
+     "n": 45
+    },
+    "ayaA7_minus_quote": {
+     "mean": 1.956,
+     "n": 45
+    },
+    "ayaA7_routed": {
+     "mean": 1.814,
+     "n": 45
+    },
+    "ayaBS7_decide": {
+     "mean": 0.673,
+     "n": 45
+    }
+   },
+   "by_arm_company": {
+    "final_system": {
+     "acr": 1.995,
+     "deere": 1.725,
+     "hellberg": 1.927,
+     "jotun": 1.755,
+     "neumann": 2.035,
+     "tanita": 1.764
+    },
+    "qwen9b": {
+     "acr": 2.361,
+     "deere": 2.014,
+     "hellberg": 2.081,
+     "jotun": 2.049,
+     "neumann": 2.042,
+     "tanita": 2.292
+    },
+    "qwen4b": {
+     "acr": 1.882,
+     "deere": 2.403,
+     "hellberg": 1.806,
+     "jotun": 2.062,
+     "neumann": 2.118,
+     "tanita": 2.118
+    },
+    "tinyaya": {
+     "acr": 0.748,
+     "deere": 0.769,
+     "hellberg": 0.926,
+     "jotun": 1.141,
+     "neumann": 0.942,
+     "tanita": 0.704
+    },
+    "gemma12b": {
+     "acr": 2.049,
+     "deere": 1.875,
+     "hellberg": 1.683,
+     "jotun": 2.0,
+     "neumann": 2.0,
+     "tanita": 2.062
+    },
+    "qwen4b_ft": {
+     "acr": 2.056,
+     "deere": 1.741,
+     "hellberg": 1.997,
+     "jotun": 1.963,
+     "neumann": 1.944,
+     "tanita": 2.007
+    },
+    "qwen9b_ft": {
+     "acr": 2.123,
+     "deere": 2.035,
+     "hellberg": 2.25,
+     "jotun": 2.188,
+     "neumann": 1.863,
+     "tanita": 2.16
+    },
+    "qwen9b_routed_staged": {
+     "acr": 1.875,
+     "deere": 2.062,
+     "hellberg": 2.025,
+     "jotun": 1.931,
+     "neumann": 2.111,
+     "tanita": 1.944
+    },
+    "qwen9b_routed_compact": {
+     "acr": 2.15,
+     "deere": 1.97,
+     "hellberg": 2.284,
+     "jotun": 2.15,
+     "neumann": 1.986,
+     "tanita": 2.206
+    },
+    "ayaexp8b": {
+     "acr": 1.674,
+     "deere": 1.368,
+     "hellberg": 1.451,
+     "jotun": 1.34,
+     "neumann": 1.28,
+     "tanita": 1.262
+    },
+    "ayaA7_guards": {
+     "acr": 2.06,
+     "deere": 1.822,
+     "hellberg": 2.138,
+     "jotun": 2.046,
+     "neumann": 1.868,
+     "tanita": 1.97
+    },
+    "ayaA7_decide": {
+     "acr": 2.155,
+     "deere": 1.903,
+     "hellberg": 2.161,
+     "jotun": 2.014,
+     "neumann": 1.806,
+     "tanita": 2.044
+    },
+    "ayaP_compact_guards": {
+     "acr": 1.535,
+     "deere": 1.08,
+     "hellberg": 1.166,
+     "jotun": 1.567,
+     "neumann": 1.387,
+     "tanita": 1.197
+    },
+    "ayaB7_guards": {
+     "acr": 2.104,
+     "deere": 1.889,
+     "hellberg": 2.353,
+     "jotun": 2.26,
+     "neumann": 2.111,
+     "tanita": 2.188
+    },
+    "ayaP_compact_decide": {
+     "acr": 1.597,
+     "deere": 1.08,
+     "hellberg": 1.151,
+     "jotun": 1.567,
+     "neumann": 1.387,
+     "tanita": 1.417
+    },
+    "ayaB7_decide": {
+     "acr": 2.292,
+     "deere": 2.056,
+     "hellberg": 2.353,
+     "jotun": 2.26,
+     "neumann": 1.938,
+     "tanita": 2.042
+    },
+    "ayaB11_guards": {
+     "acr": 2.125,
+     "deere": 1.847,
+     "hellberg": 1.84,
+     "jotun": 2.347,
+     "neumann": 2.042,
+     "tanita": 1.794
+    },
+    "ayaB11_decide": {
+     "acr": 2.465,
+     "deere": 2.062,
+     "hellberg": 1.869,
+     "jotun": 2.188,
+     "neumann": 1.819,
+     "tanita": 1.977
+    },
+    "ayaNC7_guards": {
+     "acr": 1.736,
+     "deere": 1.998,
+     "hellberg": 2.13,
+     "jotun": 2.236,
+     "neumann": 2.111,
+     "tanita": 1.708
+    },
+    "ayaNC7_decide": {
+     "acr": 1.928,
+     "deere": 2.076,
+     "hellberg": 2.13,
+     "jotun": 2.41,
+     "neumann": 1.944,
+     "tanita": 1.701
+    },
+    "ayaA11_guards": {
+     "acr": 2.181,
+     "deere": 2.176,
+     "hellberg": 2.146,
+     "jotun": 2.229,
+     "neumann": 1.988,
+     "tanita": 2.299
+    },
+    "ayaA11_decide": {
+     "acr": 2.088,
+     "deere": 2.403,
+     "hellberg": 2.161,
+     "jotun": 2.236,
+     "neumann": 1.894,
+     "tanita": 2.056
+    },
+    "ayaB13_guards": {
+     "acr": 2.25,
+     "deere": 2.139,
+     "hellberg": 2.372,
+     "jotun": 1.993,
+     "neumann": 1.745,
+     "tanita": 2.0
+    },
+    "ayaA13_guards": {
+     "acr": 2.41,
+     "deere": 1.875,
+     "hellberg": 1.986,
+     "jotun": 2.19,
+     "neumann": 2.132,
+     "tanita": 1.877
+    },
+    "ayaC7_guards": {
+     "acr": 0.236,
+     "deere": 1.229,
+     "hellberg": 0.458,
+     "jotun": 2.0,
+     "neumann": 2.076,
+     "tanita": 1.083
+    },
+    "ayaC7_decide": {
+     "acr": 0.347,
+     "deere": 1.486,
+     "hellberg": 0.458,
+     "jotun": 1.831,
+     "neumann": 1.998,
+     "tanita": 1.199
+    },
+    "ayaA13_decide": {
+     "acr": 2.354,
+     "deere": 2.111,
+     "hellberg": 2.015,
+     "jotun": 2.174,
+     "neumann": 2.132,
+     "tanita": 1.917
+    },
+    "ayaB13_decide": {
+     "acr": 2.169,
+     "deere": 1.931,
+     "hellberg": 2.357,
+     "jotun": 1.734,
+     "neumann": 1.812,
+     "tanita": 2.076
+    },
+    "ayaA7_none": {
+     "acr": 1.588,
+     "deere": 1.431,
+     "hellberg": 2.074,
+     "jotun": 1.005,
+     "neumann": 1.609,
+     "tanita": 0.972
+    },
+    "ayaBS7_guards": {
+     "acr": 0.508,
+     "deere": 1.919,
+     "hellberg": 0.41,
+     "jotun": 0.544,
+     "neumann": 0.579,
+     "tanita": 0.317
+    },
+    "ayaA7_minus_quote": {
+     "acr": 2.155,
+     "deere": 1.648,
+     "hellberg": 2.008,
+     "jotun": 2.067,
+     "neumann": 1.938,
+     "tanita": 1.845
+    },
+    "ayaA7_routed": {
+     "acr": 1.822,
+     "deere": 1.688,
+     "hellberg": 1.914,
+     "jotun": 1.933,
+     "neumann": 1.762,
+     "tanita": 1.613
+    },
+    "ayaBS7_decide": {
+     "acr": 0.591,
+     "deere": 1.993,
+     "hellberg": 0.41,
+     "jotun": 0.544,
+     "neumann": 0.579,
+     "tanita": 0.317
+    }
+   },
+   "by_arm_dimension": {
+    "final_system": {
+     "assumptions_predictions": 2.644,
+     "causal_mechanism": 2.556,
+     "distinct_theories": 2.467,
+     "evidence_judgement": 1.222,
+     "experiment_design": 1.089,
+     "problem_framing": 2.178,
+     "recommendation": 1.067,
+     "revision": 2.0,
+     "seeking_challenge": 1.756
+    },
+    "qwen9b": {
+     "assumptions_predictions": 2.689,
+     "causal_mechanism": 2.733,
+     "distinct_theories": 2.867,
+     "evidence_judgement": 1.6,
+     "experiment_design": 1.267,
+     "problem_framing": 2.022,
+     "recommendation": 1.711,
+     "revision": 2.333,
+     "seeking_challenge": 2.044
+    },
+    "qwen4b": {
+     "assumptions_predictions": 2.467,
+     "causal_mechanism": 2.733,
+     "distinct_theories": 2.578,
+     "evidence_judgement": 1.333,
+     "experiment_design": 1.533,
+     "problem_framing": 1.8,
+     "recommendation": 1.733,
+     "revision": 2.333,
+     "seeking_challenge": 1.733
+    },
+    "tinyaya": {
+     "assumptions_predictions": 1.644,
+     "causal_mechanism": 1.267,
+     "distinct_theories": 1.222,
+     "evidence_judgement": 0.333,
+     "experiment_design": 0.644,
+     "problem_framing": 1.2,
+     "recommendation": 0.111,
+     "revision": 0.111,
+     "seeking_challenge": 1.089
+    },
+    "gemma12b": {
+     "assumptions_predictions": 2.467,
+     "causal_mechanism": 2.689,
+     "distinct_theories": 2.867,
+     "evidence_judgement": 1.133,
+     "experiment_design": 1.4,
+     "problem_framing": 1.8,
+     "recommendation": 1.0,
+     "revision": 1.815,
+     "seeking_challenge": 1.822
+    },
+    "qwen4b_ft": {
+     "assumptions_predictions": 2.778,
+     "causal_mechanism": 2.356,
+     "distinct_theories": 2.644,
+     "evidence_judgement": 1.444,
+     "experiment_design": 1.422,
+     "problem_framing": 2.2,
+     "recommendation": 0.889,
+     "revision": 1.963,
+     "seeking_challenge": 1.933
+    },
+    "qwen9b_ft": {
+     "assumptions_predictions": 2.667,
+     "causal_mechanism": 2.756,
+     "distinct_theories": 2.911,
+     "evidence_judgement": 1.689,
+     "experiment_design": 1.6,
+     "problem_framing": 2.289,
+     "recommendation": 1.267,
+     "revision": 1.963,
+     "seeking_challenge": 2.0
+    },
+    "qwen9b_routed_staged": {
+     "assumptions_predictions": 2.578,
+     "causal_mechanism": 2.467,
+     "distinct_theories": 2.933,
+     "evidence_judgement": 1.333,
+     "experiment_design": 1.0,
+     "problem_framing": 2.133,
+     "recommendation": 1.511,
+     "revision": 2.222,
+     "seeking_challenge": 1.911
+    },
+    "qwen9b_routed_compact": {
+     "assumptions_predictions": 2.8,
+     "causal_mechanism": 2.778,
+     "distinct_theories": 2.889,
+     "evidence_judgement": 1.511,
+     "experiment_design": 1.711,
+     "problem_framing": 2.511,
+     "recommendation": 1.489,
+     "revision": 1.407,
+     "seeking_challenge": 1.978
+    },
+    "ayaexp8b": {
+     "assumptions_predictions": 1.978,
+     "causal_mechanism": 2.022,
+     "distinct_theories": 1.556,
+     "evidence_judgement": 1.067,
+     "experiment_design": 1.0,
+     "problem_framing": 1.644,
+     "recommendation": 0.622,
+     "revision": 0.704,
+     "seeking_challenge": 1.733
+    },
+    "ayaA7_guards": {
+     "assumptions_predictions": 2.656,
+     "causal_mechanism": 2.578,
+     "distinct_theories": 2.689,
+     "evidence_judgement": 1.422,
+     "experiment_design": 1.144,
+     "problem_framing": 2.367,
+     "recommendation": 1.178,
+     "revision": 2.315,
+     "seeking_challenge": 1.933
+    },
+    "ayaA7_decide": {
+     "assumptions_predictions": 2.667,
+     "causal_mechanism": 2.533,
+     "distinct_theories": 2.689,
+     "evidence_judgement": 1.6,
+     "experiment_design": 1.167,
+     "problem_framing": 2.522,
+     "recommendation": 1.2,
+     "revision": 2.278,
+     "seeking_challenge": 1.867
+    },
+    "ayaP_compact_guards": {
+     "assumptions_predictions": 2.078,
+     "causal_mechanism": 2.289,
+     "distinct_theories": 1.311,
+     "evidence_judgement": 0.867,
+     "experiment_design": 0.956,
+     "problem_framing": 1.467,
+     "recommendation": 0.089,
+     "revision": 0.315,
+     "seeking_challenge": 1.811
+    },
+    "ayaB7_guards": {
+     "assumptions_predictions": 2.8,
+     "causal_mechanism": 2.667,
+     "distinct_theories": 2.956,
+     "evidence_judgement": 1.511,
+     "experiment_design": 1.133,
+     "problem_framing": 2.689,
+     "recommendation": 1.811,
+     "revision": 2.704,
+     "seeking_challenge": 1.7
+    },
+    "ayaP_compact_decide": {
+     "assumptions_predictions": 2.011,
+     "causal_mechanism": 2.2,
+     "distinct_theories": 1.311,
+     "evidence_judgement": 1.0,
+     "experiment_design": 1.044,
+     "problem_framing": 1.578,
+     "recommendation": 0.156,
+     "revision": 0.389,
+     "seeking_challenge": 1.789
+    },
+    "ayaB7_decide": {
+     "assumptions_predictions": 2.778,
+     "causal_mechanism": 2.822,
+     "distinct_theories": 2.822,
+     "evidence_judgement": 1.578,
+     "experiment_design": 1.156,
+     "problem_framing": 2.667,
+     "recommendation": 1.811,
+     "revision": 2.556,
+     "seeking_challenge": 1.744
+    },
+    "ayaB11_guards": {
+     "assumptions_predictions": 2.422,
+     "causal_mechanism": 2.756,
+     "distinct_theories": 2.567,
+     "evidence_judgement": 1.344,
+     "experiment_design": 1.156,
+     "problem_framing": 2.089,
+     "recommendation": 1.456,
+     "revision": 1.981,
+     "seeking_challenge": 1.933
+    },
+    "ayaB11_decide": {
+     "assumptions_predictions": 2.533,
+     "causal_mechanism": 2.756,
+     "distinct_theories": 2.633,
+     "evidence_judgement": 1.544,
+     "experiment_design": 1.2,
+     "problem_framing": 2.2,
+     "recommendation": 1.456,
+     "revision": 2.093,
+     "seeking_challenge": 1.822
+    },
+    "ayaNC7_guards": {
+     "assumptions_predictions": 2.678,
+     "causal_mechanism": 2.656,
+     "distinct_theories": 2.589,
+     "evidence_judgement": 1.478,
+     "experiment_design": 1.078,
+     "problem_framing": 2.356,
+     "recommendation": 1.456,
+     "revision": 2.167,
+     "seeking_challenge": 1.756
+    },
+    "ayaNC7_decide": {
+     "assumptions_predictions": 2.633,
+     "causal_mechanism": 2.744,
+     "distinct_theories": 2.544,
+     "evidence_judgement": 1.656,
+     "experiment_design": 1.078,
+     "problem_framing": 2.556,
+     "recommendation": 1.433,
+     "revision": 2.167,
+     "seeking_challenge": 1.711
+    },
+    "ayaA11_guards": {
+     "assumptions_predictions": 2.967,
+     "causal_mechanism": 2.856,
+     "distinct_theories": 2.589,
+     "evidence_judgement": 1.567,
+     "experiment_design": 1.333,
+     "problem_framing": 2.611,
+     "recommendation": 1.489,
+     "revision": 2.185,
+     "seeking_challenge": 1.889
+    },
+    "ayaA11_decide": {
+     "assumptions_predictions": 2.811,
+     "causal_mechanism": 2.944,
+     "distinct_theories": 2.678,
+     "evidence_judgement": 1.722,
+     "experiment_design": 1.156,
+     "problem_framing": 2.456,
+     "recommendation": 1.511,
+     "revision": 2.185,
+     "seeking_challenge": 1.867
+    },
+    "ayaB13_guards": {
+     "assumptions_predictions": 2.622,
+     "causal_mechanism": 2.844,
+     "distinct_theories": 2.844,
+     "evidence_judgement": 1.444,
+     "experiment_design": 1.211,
+     "problem_framing": 2.733,
+     "recommendation": 1.311,
+     "revision": 2.389,
+     "seeking_challenge": 2.011
+    },
+    "ayaA13_guards": {
+     "assumptions_predictions": 2.811,
+     "causal_mechanism": 2.656,
+     "distinct_theories": 2.944,
+     "evidence_judgement": 1.333,
+     "experiment_design": 1.222,
+     "problem_framing": 2.333,
+     "recommendation": 1.444,
+     "revision": 2.222,
+     "seeking_challenge": 1.633
+    },
+    "ayaC7_guards": {
+     "assumptions_predictions": 0.978,
+     "causal_mechanism": 1.178,
+     "distinct_theories": 1.044,
+     "evidence_judgement": 0.456,
+     "experiment_design": 0.533,
+     "problem_framing": 2.367,
+     "recommendation": 0.444,
+     "revision": 0.963,
+     "seeking_challenge": 1.244
+    },
+    "ayaC7_decide": {
+     "assumptions_predictions": 1.244,
+     "causal_mechanism": 1.244,
+     "distinct_theories": 1.0,
+     "evidence_judgement": 0.544,
+     "experiment_design": 0.489,
+     "problem_framing": 2.478,
+     "recommendation": 0.422,
+     "revision": 0.815,
+     "seeking_challenge": 1.178
+    },
+    "ayaA13_decide": {
+     "assumptions_predictions": 2.944,
+     "causal_mechanism": 2.722,
+     "distinct_theories": 2.944,
+     "evidence_judgement": 1.289,
+     "experiment_design": 1.267,
+     "problem_framing": 2.356,
+     "recommendation": 1.511,
+     "revision": 2.037,
+     "seeking_challenge": 1.767
+    },
+    "ayaB13_decide": {
+     "assumptions_predictions": 2.667,
+     "causal_mechanism": 2.733,
+     "distinct_theories": 2.756,
+     "evidence_judgement": 1.689,
+     "experiment_design": 1.078,
+     "problem_framing": 2.578,
+     "recommendation": 1.178,
+     "revision": 2.389,
+     "seeking_challenge": 1.856
+    },
+    "ayaA7_none": {
+     "assumptions_predictions": 2.156,
+     "causal_mechanism": 2.133,
+     "distinct_theories": 2.2,
+     "evidence_judgement": 1.022,
+     "experiment_design": 0.756,
+     "problem_framing": 2.378,
+     "recommendation": 0.711,
+     "revision": 1.185,
+     "seeking_challenge": 1.533
+    },
+    "ayaBS7_guards": {
+     "assumptions_predictions": 0.489,
+     "causal_mechanism": 0.589,
+     "distinct_theories": 0.589,
+     "evidence_judgement": 0.222,
+     "experiment_design": 0.222,
+     "problem_framing": 2.022,
+     "recommendation": 0.267,
+     "revision": 0.259,
+     "seeking_challenge": 0.956
+    },
+    "ayaA7_minus_quote": {
+     "assumptions_predictions": 2.578,
+     "causal_mechanism": 2.6,
+     "distinct_theories": 2.733,
+     "evidence_judgement": 1.2,
+     "experiment_design": 1.089,
+     "problem_framing": 2.6,
+     "recommendation": 1.089,
+     "revision": 1.926,
+     "seeking_challenge": 1.778
+    },
+    "ayaA7_routed": {
+     "assumptions_predictions": 2.611,
+     "causal_mechanism": 2.533,
+     "distinct_theories": 2.667,
+     "evidence_judgement": 1.333,
+     "experiment_design": 1.2,
+     "problem_framing": 2.444,
+     "recommendation": 0.533,
+     "revision": 0.667,
+     "seeking_challenge": 1.844
+    },
+    "ayaBS7_decide": {
+     "assumptions_predictions": 0.489,
+     "causal_mechanism": 0.611,
+     "distinct_theories": 0.633,
+     "evidence_judgement": 0.267,
+     "experiment_design": 0.244,
+     "problem_framing": 2.0,
+     "recommendation": 0.267,
+     "revision": 0.259,
+     "seeking_challenge": 1.022
+    }
+   },
+   "difference": {
+    "arms": "ayaA7_routed minus ayaA7_guards",
+    "pairs": 45,
+    "cases": 15,
+    "unpaired_runs": 0,
+    "mean_and_95_interval": [
+     -0.201,
+     -0.302,
+     -0.11
+    ],
+    "by_company": {
+     "acr": -0.238,
+     "deere": -0.134,
+     "hellberg": -0.225,
+     "jotun": -0.113,
+     "neumann": -0.106,
+     "tanita": -0.356
+    }
+   }
+  }
+ },
+ "missing": []
+}

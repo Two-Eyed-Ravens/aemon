@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any
 
 from aemon.agent.backends import hosted_client
+from aemon.common.constants.pipeline import TEST_CASE_FILES
 from aemon.common.types import Json
 from aemon.data.verify_sources import page_text
 
@@ -59,7 +60,7 @@ RESEARCH = {'type': 'object', 'additionalProperties': False, 'required': ['descr
 
 def known() -> set[str]:
     names = set()
-    for f in ('cases.json', 'cases_heldout.json', 'cases_heldout2.json'):
+    for f in ('cases.json', *TEST_CASE_FILES.values()):
         names |= {c['company'] for c in json.loads((ROOT / 'data' / 'dossier' / f).read_text())['cases']}
     return names
 

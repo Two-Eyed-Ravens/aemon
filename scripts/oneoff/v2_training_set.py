@@ -24,8 +24,9 @@ import json
 import random
 from pathlib import Path
 
-from aemon.environment.cases import load_cases
+from aemon.common.constants.pipeline import TEST_CASE_FILES
 from aemon.data.splits import is_validation
+from aemon.environment.cases import load_cases
 
 DEVELOPMENT = ('hellberg', 'neumann', 'jotun', 'tanita', 'deere', 'acr')
 
@@ -48,7 +49,7 @@ def main() -> None:
     p.add_argument('--revise-cap', type=float, default=0.1)
     p.add_argument('--seed', type=int, default=7)
     a = p.parse_args()
-    frozen = {c.id for c in load_cases(split='heldout')} | {c.id for c in load_cases(split='heldout2')}
+    frozen = {c.id for split in TEST_CASE_FILES for c in load_cases(split=split)}
     corrective, seen, dropped = [], set(), collections.Counter()
     for row in map(json.loads, open(a.corrective)):
         case = row['case']

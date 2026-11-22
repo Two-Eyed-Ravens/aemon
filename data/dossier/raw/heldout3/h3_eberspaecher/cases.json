@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "Eberspächer Gruppe GmbH & Co. KG",
+   "question": "Should Eberspächer Gruppe GmbH & Co. KG develop a differentiated consumer proposition for a specific use case, beyond its existing exhaust technology, vehicle heaters and thermal management systems for vehicle manufacturers and specialist dealers? What evidence would justify that investment?",
+   "brief": "Eberspächer Gruppe GmbH & Co. KG is a family-owned automotive supplier based in Esslingen am Neckar that makes exhaust technology, automotive electronics and thermal management systems, including fuel-operated and electric vehicle heaters, for a broad range of vehicle types. In 2025 it had around 10,400 employees and consolidated revenue of about 5.0 billion euros. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "eberspaecher",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "eberspaecher-base",
+   "premise_records": [
+    "eberspaecher-car-consumer-site",
+    "eberspaecher-dealer-network",
+    "reimo-retrofit-listing"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

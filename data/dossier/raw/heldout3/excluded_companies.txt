@@ -1,0 +1,120 @@
+3M (Minnesota Mining and Manufacturing)
+A123 Systems
+ACR Electronics
+ARRI (Arnold & Richter Cine Technik)
+Alfa Laval
+Andis Company
+Ansell Limited
+Aquaporin A/S
+Aspen Aerogels
+Atlas Copco
+B. Braun
+Bausch & Lomb
+Belimo Holding AG
+Black & Decker
+Bosch Rexroth
+Calgon Carbon
+Carl Zeiss Jena
+Carrier Engineering Corporation
+Corning Glass Works
+Cotral Lab
+Cree, Inc.
+Danfoss A/S
+Deere & Company
+Diatek Corporation
+Drägerwerk AG & Co. KGaA
+ESAB
+Earl S. Tupper Company
+Electrolux Professional Group
+Elekta
+Embrace Innovations
+Eppendorf
+Ernst Leitz Optische Werke (Leitz, Wetzlar)
+FLIR Systems
+Festool
+Franke Coffee Systems
+G.D. Searle
+Getinge
+Grundéns
+HRA Pharma
+Hach Company
+Halton
+Hellberg Safety
+Helmer Scientific
+Hilti
+Hoshizaki Corporation
+Hubbell
+Illumina
+Intel Corporation
+Jotun A/S
+KES Science & Technology
+KONE
+Kemira
+Kingspan Group plc
+Koppert
+L.M. Ericsson
+Laerdal Medical
+Lenzing AG
+Lincoln Electric
+MSA (Mine Safety Appliances)
+Mag Instrument
+Martek Biosciences
+Masimo Corporation
+Metso
+Mettler-Toledo International Inc.
+Microban International
+Moldex-Metric
+Nalge Company (Nalgene)
+Netafim
+Neumann (Georg Neumann GmbH)
+Nilfisk
+Nordson
+OXO (Sam Farber)
+OraSure Technologies
+Osram Licht AG
+Ottobock
+Outotec
+Perrigo
+Phoenix Contact
+Portwest
+Probi
+Putzmeister
+Quantum Devices, Inc.
+RATIONAL AG
+Recaro Holding
+ResMed
+Reynolds Metals
+S.L. Allen & Co.
+SICK AG
+SIGVARIS GROUP
+SKF
+SMA Solar Technology AG
+STIHL
+Sartorius
+Sealed Air (Bubble Wrap)
+Sensirion
+Shimadzu
+Siemens & Halske
+Sievi
+Simonelli Group
+Statitrol Corporation
+Sulzer
+Superior Glove
+Tanita Corporation
+Technogym S.p.A.
+Tennant Company
+Terumo
+Testo SE & Co. KGaA
+Texas Instruments
+Triangle Research and Development Corporation
+Trojan Technologies
+Trumpf
+Vaisala
+Valmont
+Vermeer
+Victaulic
+W. L. Gore & Associates
+Winterhalter Gastronom GmbH
+Wärtsilä
+Yaskawa
+ZARGES

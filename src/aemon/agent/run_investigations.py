@@ -21,12 +21,14 @@ from typing import TYPE_CHECKING
 from aemon.agent.adapter_routing import loaded_adapters, lora_route
 from aemon.agent.backends.claude_control import MODEL as CLAUDE_MODEL
 from aemon.agent.backends.claude_control import Claude
-from aemon.common.constants.claude import PRICES
 from aemon.agent.backends.llama_client import chat
+from aemon.agent.decision import DEFAULT_THRESHOLD, KindDecider
 from aemon.agent.loop import play
 from aemon.agent.records import model_of, protocol_of, record_of, server_props, suite_of, summary
 from aemon.agent.state_view import with_status
 from aemon.agent.tool_schemas import TOOL_SCHEMA
+from aemon.common.constants.claude import PRICES
+from aemon.common.constants.pipeline import SPLITS, TEST_CASE_FILES
 from aemon.common.constants.prompts import COMPACT, PROMPTS, REASONED, STRUCTURED
 from aemon.environment.cases import load_cases
 from aemon.rows.provenance import PROVENANCE, record_provenance
@@ -40,15 +42,25 @@ def main() -> None:
     parser.add_argument('--url', default='http://127.0.0.1:8091')
     parser.add_argument('--prompt', choices=sorted(PROMPTS), default='strong')
     parser.add_argument('--cases', default='all')
-    parser.add_argument('--split', choices=('development', 'heldout', 'heldout2'), default='development', help='heldout and heldout2 only for the two test sets')
+    parser.add_argument('--split', choices=SPLITS, default='development', help='the test splits (heldout, heldout2, heldout3) only for the test sets')
     parser.add_argument('--max-turns', type=int, default=45)
     parser.add_argument('--max-errors', type=int, default=4, help='errors in a row before stopping')
     parser.add_argument('--reread-limit', type=int, help='refuse reading one source more than this many times (off by default, as evaluated)')
     parser.add_argument('--source-dates', action='store_true', help="list each source's date in the state (off by default, as evaluated)")
-    parser.add_argument('--status-check', action='store_true', help='company_status right after framing, and finish must cite a status source it read (off by default, as evaluated)')
+    parser.add_argument(
+        '--status-check',
+        action='store_true',
+        help='company_status right after framing, and finish must cite a status source it read (off by default, as evaluated)',
+    )
     parser.add_argument('--min-assessed', type=int, default=1, help='weighed sources each theory needs before moving on (1 as evaluated)')
-    parser.add_argument('--stuck-help', action='store_true', help='after two refusals in a row, say what the agent can do instead (off by default, as evaluated)')
-    parser.add_argument('--recovery', default='', help="experimental recovery features, comma-separated (docs/RECOVERY_EXPERIMENT.md); off as evaluated; development only, except the adopted guards, also allowed on the test sets (exploratory)")
+    parser.add_argument(
+        '--stuck-help', action='store_true', help='after two refusals in a row, say what the agent can do instead (off by default, as evaluated)'
+    )
+    parser.add_argument(
+        '--recovery',
+        default='',
+        help='experimental recovery features, comma-separated (docs/RECOVERY_EXPERIMENT.md); off as evaluated; development only, except the adopted guards, also allowed on the test sets (exploratory)',
+    )
     parser.add_argument('--max-tokens', type=int, default=520)
     parser.add_argument('--context', type=int, default=12288, help='the server context size, recorded with the run')
     parser.add_argument('--output', required=True)
@@ -61,18 +73,28 @@ def main() -> None:
     parser.add_argument('--workers', type=int, default=1, help='episodes run at once, which needs the same number of server slots')
     parser.add_argument('--first-attempt', type=int, default=0, help='so a later stage gets new seeds rather than repeating an earlier one')
     parser.add_argument('--server-settings', help='JSON of how the server was started, such as {"reasoning_budget": 512}; recorded in every manifest entry')
-    parser.add_argument('--lora-route', help="stage to adapter id, such as 'default=0,test=1', for adapters loaded on the server; 'stuck=ID' (with 'stuck_after=N', default 2) hands a turn to another adapter after N refusals in a row")
+    parser.add_argument(
+        '--lora-route',
+        help="stage to adapter id, such as 'default=0,test=1', for adapters loaded on the server; 'stuck=ID' (with 'stuck_after=N', default 2) hands a turn to another adapter after N refusals in a row",
+    )
+    parser.add_argument('--decision-threshold', type=float, default=DEFAULT_THRESHOLD, help='decide_kind: the decision model abstains below this confidence')
     parser.add_argument('--effort', default='medium', help='claude backend only')
-    parser.add_argument('--claude-model', default=CLAUDE_MODEL, choices=sorted(PRICES), help='claude backend only: the control model, or Haiku as a closed-model baseline')
+    parser.add_argument(
+        '--claude-model', default=CLAUDE_MODEL, choices=sorted(PRICES), help='claude backend only: the control model, or Haiku as a closed-model baseline'
+    )
     parser.add_argument('--run-cap-usd', type=float, default=5.0, help='claude backend only')
+    parser.add_argument('--require-auditkit', action='store_true', help='stop before any run if AuditKIT cannot run (evaluation jobs)')
     args = parser.parse_args()
+    if args.require_auditkit:
+        # fail before spending GPU hours, not after: the audit is part of every evaluation (DECISIONS 20 November)
+        import aemon.evaluation.diagnostics.audit  # noqa: F401
     recovery_features = tuple(f for f in args.recovery.split(',') if f)
     # Experimental features run on development only. On test set 2 and the final test only the loop guards adopted on
     # development and the budget guard with them (DECISIONS 2026-11-12 05:20, 06:40 and 16:30), and the two features taken
     # forward from the development screens of 18:15 and 19:55 (DECISIONS 21:55), may run, labelled exploratory (both sets
     # have been run before; the final test's frozen result stands).
     adopted = {'no_repeats', 'quote_menu', 'resample_repeats', 'budget', 'grounded_beliefs', 'evidence_first'}
-    if recovery_features and args.split != 'development' and not (args.split in ('heldout', 'heldout2') and set(recovery_features) <= adopted):
+    if recovery_features and args.split != 'development' and not (args.split in TEST_CASE_FILES and set(recovery_features) <= adopted):
         parser.error('recovery features are experimental: development only, except the adopted loop guards on test set 2 and the final test')
     if args.backend == 'claude':
         respond = Claude(f'control {args.prompt} {args.claude_model}', args.run_cap_usd, args.effort, model=args.claude_model)
@@ -124,6 +146,7 @@ def main() -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     records, errors, lock = [], [], threading.Lock()
     jobs = [(c, a) for c in cases for a in range(args.first_attempt, args.first_attempt + args.attempts)]
+    decider = KindDecider(args.url, loaded_adapters(args.url), args.decision_threshold) if 'decide_kind' in recovery_features else None
 
     def one(job: tuple[Case, int]) -> None:
         """One episode. Each has its own seed and investigation, so episodes never share state."""
@@ -152,6 +175,7 @@ def main() -> None:
                 stuck_help=args.stuck_help,
                 min_assessed=args.min_assessed,
                 recovery_features=recovery_features,
+                decide=decider,
             )
             record = dict(record_of(run, info), attempt=attempt)
             with lock:
@@ -198,6 +222,8 @@ def main() -> None:
 
         report['auditkit'] = audit(records, cases)
     except ImportError as error:
+        if args.require_auditkit:
+            raise
         report['auditkit'] = {'skipped': str(error)}
     output.write_text(json.dumps(report, indent=1))
     print(json.dumps({'summary': report['summary'], 'auditkit': report['auditkit']}, indent=1))

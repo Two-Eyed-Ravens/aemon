@@ -1,0 +1,82 @@
+[
+ {
+  "arm": "A",
+  "runs": 45,
+  "finished": 39,
+  "stop_reasons": {
+   "finished": 39,
+   "repeated errors": 5,
+   "context limit": 1
+  },
+  "refused_calls": 146,
+  "median_turns": 35,
+  "median_peak_prompt_tokens": 5415,
+  "redrawn_repeats": 110,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.8657718120805369,
+  "kind_accuracy_third_party": 0.05555555555555555,
+  "third_party_assessments": 180,
+  "test_choice": {
+   "propose, right": 39,
+   "propose, wrong": 6
+  },
+  "finished_minus_reference": null,
+  "finished_by_case": {
+   "hellberg-base": 3,
+   "hellberg-new-evidence-looks": 1,
+   "hellberg-new-evidence-comfort": 1,
+   "hellberg-new-evidence-favours-looks": 2,
+   "hellberg-new-evidence-irrelevant": 3,
+   "neumann-base": 3,
+   "neumann-new-evidence-irrelevant": 2,
+   "jotun-base": 3,
+   "jotun-new-evidence-irrelevant": 3,
+   "tanita-base": 3,
+   "tanita-new-evidence-irrelevant": 3,
+   "acr-base": 3,
+   "acr-new-evidence-irrelevant": 3,
+   "deere-base": 3,
+   "deere-new-evidence-irrelevant": 3
+  }
+ },
+ {
+  "arm": "recovery_round",
+  "runs": 45,
+  "finished": 36,
+  "stop_reasons": {
+   "finished": 36,
+   "repeated errors": 8,
+   "context limit": 1
+  },
+  "refused_calls": 72,
+  "median_turns": 28,
+  "median_peak_prompt_tokens": 5014,
+  "redrawn_repeats": 41,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.8809523809523809,
+  "kind_accuracy_third_party": 0.12396694214876033,
+  "third_party_assessments": 121,
+  "test_choice": {
+   "propose, right": 39,
+   "propose, wrong": 6
+  },
+  "finished_minus_reference": -3,
+  "finished_by_case": {
+   "hellberg-base": 3,
+   "hellberg-new-evidence-looks": 0,
+   "hellberg-new-evidence-comfort": 1,
+   "hellberg-new-evidence-favours-looks": 0,
+   "hellberg-new-evidence-irrelevant": 3,
+   "neumann-base": 3,
+   "neumann-new-evidence-irrelevant": 3,
+   "jotun-base": 3,
+   "jotun-new-evidence-irrelevant": 3,
+   "tanita-base": 3,
+   "tanita-new-evidence-irrelevant": 3,
+   "acr-base": 3,
+   "acr-new-evidence-irrelevant": 3,
+   "deere-base": 2,
+   "deere-new-evidence-irrelevant": 3
+  }
+ }
+]

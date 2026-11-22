@@ -8,7 +8,7 @@ pinned: false
 ---
 
 <p align="center">
-  <img alt="aemon: weigh what is known. test what is not." src="https://raw.githubusercontent.com/HatemSaadallah/aemon/main/docs/figures/aemon-wordmark.png" width="380">
+  <img alt="aemon: weigh what is known. test what is not." src="https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/figures/aemon-wordmark.png" width="380">
 </p>
 
 # Two-Eyed Ravens
@@ -20,6 +20,14 @@ to a quote the environment checked word for word against its source, and it runs
 case material never leaves the machine.
 
 Built for the Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning), with AgentTune, AuditKIT and CuratorKIT.
+
+**Stage 2: aemon-8b.** The same procedure distilled into Aya Expanse 8B: on an identical scaffold the fine-tuned model
+beats its prompted base by **+0.72, +0.88 and +0.77** at three training seeds and finishes 87% of investigations
+against 9%, with general ability unchanged; the paper measures what the weights, the guards and the data each
+contribute. Test set 3 (twelve new companies, two judges) is being run.
+[Model](https://huggingface.co/twoeyedravens/aemon-8b) · [every run and judgment](https://huggingface.co/datasets/twoeyedravens/aemon-8b)
+
+**Stage 1: aemon (Tiny Aya Global, 3.35B).**
 
 | **+0.83** | **+0.52** | **46 of 48** | **39 calls** |
 |:---:|:---:|:---:|:---:|
@@ -34,15 +42,15 @@ investigation you can audit step by step.
 - **[Live demo](https://huggingface.co/spaces/HatemSaadallah/aemon)**: pick any username, no password. Finished
   investigations open at once; a new one takes a while on CPU.
 - **[Article](https://huggingface.co/blog/HatemSaadallah/aemon)**: the write-up in Lexsi's nine sections.
-- **[Code and every run](https://github.com/HatemSaadallah/aemon)**: the repository, with every test run readable as
+- **[Code and every run](https://github.com/Two-Eyed-Ravens/aemon)**: the repository, with every test run readable as
   a page and every decision dated.
-- **[Model](https://huggingface.co/two-eyed-ravens/aemon)**: the two adapters for Tiny Aya Global (version 1, evaluated; version 3,
+- **[Model](https://huggingface.co/twoeyedravens/aemon)**: the two adapters for Tiny Aya Global (version 1, evaluated; version 3,
   the final system's reasoner), as PEFT and GGUF files.
-- **[Dataset](https://huggingface.co/datasets/two-eyed-ravens/aemon)**: the training rows (split as trained), the dossier, every
+- **[Dataset](https://huggingface.co/datasets/twoeyedravens/aemon)**: the training rows (split as trained), the dossier, every
   case, and every evaluation run with its blind judgments.
-- **[Collection](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd)** · **[Paper](https://github.com/HatemSaadallah/aemon/blob/main/docs/PAPER.pdf)**
+- **[Collection](COLLECTION_URL)** · **[Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)**
 
-![The reasoning map of one investigation](https://raw.githubusercontent.com/HatemSaadallah/aemon/main/docs/figures/ui/redesign/after/map.png)
+![The reasoning map of one investigation](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/figures/ui/redesign/after/map.png)
 
 ## Team
 

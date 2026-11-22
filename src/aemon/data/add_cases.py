@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from aemon.common.constants.pipeline import ANNOTATIONS, CASE_KEYS  # noqa: F401
+from aemon.common.constants.pipeline import ANNOTATIONS, CASE_KEYS, TEST_CASE_FILES  # noqa: F401
 from aemon.common.paths import DOSSIER as HERE
 from aemon.data.build_dossier import entry
 
@@ -53,11 +53,11 @@ def load_folder(folder: str | Path) -> tuple[list[Any], Any, list[Any]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--split', choices=('training', 'heldout', 'heldout2'), required=True)
+    parser.add_argument('--split', choices=('training', *TEST_CASE_FILES), required=True)
     parser.add_argument('folders', nargs='+')
     args = parser.parse_args()
     evidence = json.loads((HERE / 'evidence.json').read_text())
-    target = HERE / {'training': 'cases.json', 'heldout': 'cases_heldout.json', 'heldout2': 'cases_heldout2.json'}[args.split]
+    target = HERE / {'training': 'cases.json', **TEST_CASE_FILES}[args.split]
     existing = (
         json.loads(target.read_text()) if target.exists() else {'note': 'Held out for the final test. Development runs never load this file.', 'cases': []}
     )

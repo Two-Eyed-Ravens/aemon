@@ -1,0 +1,204 @@
+[
+ {
+  "arm": "guards",
+  "runs": 45,
+  "finished": 39,
+  "stop_reasons": {
+   "finished": 39,
+   "repeated errors": 5,
+   "context limit": 1
+  },
+  "refused_calls": 146,
+  "median_turns": 35,
+  "median_peak_prompt_tokens": 5415,
+  "redrawn_repeats": 110,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.8657718120805369,
+  "kind_accuracy_third_party": 0.05555555555555555,
+  "third_party_assessments": 180,
+  "test_choice": {
+   "propose, right": 39,
+   "propose, wrong": 6
+  },
+  "finished_minus_reference": null,
+  "finished_by_case": {
+   "hellberg-base": 3,
+   "hellberg-new-evidence-looks": 1,
+   "hellberg-new-evidence-comfort": 1,
+   "hellberg-new-evidence-favours-looks": 2,
+   "hellberg-new-evidence-irrelevant": 3,
+   "neumann-base": 3,
+   "neumann-new-evidence-irrelevant": 2,
+   "jotun-base": 3,
+   "jotun-new-evidence-irrelevant": 3,
+   "tanita-base": 3,
+   "tanita-new-evidence-irrelevant": 3,
+   "acr-base": 3,
+   "acr-new-evidence-irrelevant": 3,
+   "deere-base": 3,
+   "deere-new-evidence-irrelevant": 3
+  }
+ },
+ {
+  "arm": "none",
+  "runs": 45,
+  "finished": 21,
+  "stop_reasons": {
+   "repeated errors": 19,
+   "finished": 21,
+   "turn limit": 5
+  },
+  "refused_calls": 263,
+  "median_turns": 28,
+  "median_peak_prompt_tokens": 3949,
+  "redrawn_repeats": 0,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.7297297297297297,
+  "kind_accuracy_third_party": 0.07692307692307693,
+  "third_party_assessments": 52,
+  "test_choice": {
+   "not reached": 21,
+   "propose, right": 22,
+   "propose, wrong": 2
+  },
+  "finished_minus_reference": -18,
+  "finished_by_case": {
+   "hellberg-base": 1,
+   "hellberg-new-evidence-looks": 1,
+   "hellberg-new-evidence-comfort": 2,
+   "hellberg-new-evidence-favours-looks": 2,
+   "hellberg-new-evidence-irrelevant": 2,
+   "neumann-base": 2,
+   "neumann-new-evidence-irrelevant": 3,
+   "jotun-base": 1,
+   "jotun-new-evidence-irrelevant": 1,
+   "tanita-base": 0,
+   "tanita-new-evidence-irrelevant": 0,
+   "acr-base": 1,
+   "acr-new-evidence-irrelevant": 2,
+   "deere-base": 2,
+   "deere-new-evidence-irrelevant": 1
+  }
+ },
+ {
+  "arm": "routed",
+  "runs": 45,
+  "finished": 18,
+  "stop_reasons": {
+   "finished": 18,
+   "repeated errors": 19,
+   "turn limit": 8
+  },
+  "refused_calls": 197,
+  "median_turns": 42,
+  "median_peak_prompt_tokens": 5721,
+  "redrawn_repeats": 110,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.865814696485623,
+  "kind_accuracy_third_party": 0.11518324607329843,
+  "third_party_assessments": 191,
+  "test_choice": {
+   "propose, right": 39,
+   "propose, wrong": 6
+  },
+  "finished_minus_reference": -21,
+  "finished_by_case": {
+   "hellberg-base": 3,
+   "hellberg-new-evidence-looks": 0,
+   "hellberg-new-evidence-comfort": 0,
+   "hellberg-new-evidence-favours-looks": 0,
+   "hellberg-new-evidence-irrelevant": 0,
+   "neumann-base": 2,
+   "neumann-new-evidence-irrelevant": 0,
+   "jotun-base": 3,
+   "jotun-new-evidence-irrelevant": 1,
+   "tanita-base": 3,
+   "tanita-new-evidence-irrelevant": 0,
+   "acr-base": 3,
+   "acr-new-evidence-irrelevant": 1,
+   "deere-base": 2,
+   "deere-new-evidence-irrelevant": 0
+  }
+ },
+ {
+  "arm": "minus_quote",
+  "runs": 45,
+  "finished": 35,
+  "stop_reasons": {
+   "finished": 35,
+   "repeated errors": 9,
+   "context limit": 1
+  },
+  "refused_calls": 162,
+  "median_turns": 35,
+  "median_peak_prompt_tokens": 5496,
+  "redrawn_repeats": 112,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.7649402390438247,
+  "kind_accuracy_third_party": 0.06153846153846154,
+  "third_party_assessments": 195,
+  "test_choice": {
+   "propose, right": 39,
+   "propose, wrong": 6
+  },
+  "finished_minus_reference": -4,
+  "finished_by_case": {
+   "hellberg-base": 3,
+   "hellberg-new-evidence-looks": 0,
+   "hellberg-new-evidence-comfort": 1,
+   "hellberg-new-evidence-favours-looks": 1,
+   "hellberg-new-evidence-irrelevant": 2,
+   "neumann-base": 3,
+   "neumann-new-evidence-irrelevant": 3,
+   "jotun-base": 3,
+   "jotun-new-evidence-irrelevant": 3,
+   "tanita-base": 3,
+   "tanita-new-evidence-irrelevant": 2,
+   "acr-base": 3,
+   "acr-new-evidence-irrelevant": 3,
+   "deere-base": 3,
+   "deere-new-evidence-irrelevant": 2
+  }
+ },
+ {
+  "arm": "minus_repeats",
+  "runs": 45,
+  "finished": 13,
+  "stop_reasons": {
+   "repeated errors": 30,
+   "finished": 13,
+   "turn limit": 2
+  },
+  "refused_calls": 328,
+  "median_turns": 31,
+  "median_peak_prompt_tokens": 4547,
+  "redrawn_repeats": 0,
+  "decisions": {},
+  "kind_accuracy_company_claims": 0.6568627450980392,
+  "kind_accuracy_third_party": 0.13333333333333333,
+  "third_party_assessments": 60,
+  "test_choice": {
+   "not reached": 26,
+   "propose, right": 18,
+   "propose, wrong": 1
+  },
+  "finished_minus_reference": -26,
+  "finished_by_case": {
+   "hellberg-base": 0,
+   "hellberg-new-evidence-looks": 1,
+   "hellberg-new-evidence-comfort": 0,
+   "hellberg-new-evidence-favours-looks": 0,
+   "hellberg-new-evidence-irrelevant": 0,
+   "neumann-base": 2,
+   "neumann-new-evidence-irrelevant": 2,
+   "jotun-base": 0,
+   "jotun-new-evidence-irrelevant": 1,
+   "tanita-base": 2,
+   "tanita-new-evidence-irrelevant": 0,
+   "acr-base": 1,
+   "acr-new-evidence-irrelevant": 1,
+   "deere-base": 2,
+   "deere-new-evidence-irrelevant": 1
+  }
+ }
+]

@@ -1,0 +1,118 @@
+{
+ "summary": {
+  "verified": 16,
+  "not_found": 6
+ },
+ "results": [
+  {
+   "id": "tomra-size-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-customer-groups",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-collection-business-model",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-store-sizes",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-rvm-footfall",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-consumers-not-end-users",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-mytomra-app",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-mytomra-milestone",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-mytomra-nsw-origin",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-clynk-bag-drop",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-reuse-pilots",
+   "status": "not_found",
+   "detail": "page has 1248535 characters"
+  },
+  {
+   "id": "tomra-food-small-packhouses",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-app-review-breakdowns",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-ireland-rvm-complaints",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-nypirg-return-habits",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-analogy-return-it-express",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-analogy-lomi-composter",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-rvm-market-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-analogy-bower-app",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-analogy-farmsort",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-uk-drs-return-points",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "tomra-eu-ppwr-drs",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

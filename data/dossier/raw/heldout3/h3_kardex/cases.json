@@ -1,0 +1,19 @@
+{
+ "cases": [
+  {
+   "company": "Kardex Holding AG",
+   "question": "Should Kardex Holding AG develop a differentiated consumer proposition for a specific use case, beyond its existing automated storage and retrieval systems (vertical lift modules, carousels and AutoStore-based systems) for warehouses, factories and organisations? What evidence would justify that investment?",
+   "brief": "Kardex Holding AG makes automated storage and retrieval systems, including vertical lift modules, vertical and horizontal carousels, miniload and high-bay systems, and AutoStore cube storage as a partner, for warehouses, factories and other organisations. It is a listed group headquartered in Zurich, Switzerland, with around 2,900 employees in over 30 countries. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "kardex",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "kardex-base",
+   "premise_records": [
+    "kardex-pre-owned",
+    "kardex-dealership-parts"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

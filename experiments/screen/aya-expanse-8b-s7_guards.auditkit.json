@@ -1,0 +1,19 @@
+{
+ "performed": "retrospectively, on the saved trajectories (replay of the recorded tool calls; no model calls)",
+ "report": "aya-expanse-8b-s7_guards.json",
+ "report_sha256": "34177dda342b825876f713412a2778a863bf716868669fce33a0da48366c5550",
+ "run_skipped_because": "No module named 'agenttune'",
+ "agenttune_version": "1.1.3",
+ "auditkit_version": "1.1.3",
+ "code_revision": "0900338",
+ "auditkit": {
+  "cases": 45,
+  "replay_mismatches": 0,
+  "guards_cleared": 2,
+  "guards_not_cleared": 43,
+  "other": 0,
+  "known_tool_names": 1.0,
+  "redundant_tool_calls": 0.10289544845126725,
+  "no_looping": 0.08888888888888889
+ }
+}

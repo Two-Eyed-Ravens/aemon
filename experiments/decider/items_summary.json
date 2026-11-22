@@ -1,0 +1,46 @@
+{
+ "training_scopes": 93,
+ "calibration_scopes": [
+  "andis",
+  "aspen",
+  "atlascopco",
+  "bbraun",
+  "calgoncarbon",
+  "embrace",
+  "halton",
+  "lmericsson",
+  "microban",
+  "netafim",
+  "resmed",
+  "searle",
+  "sma",
+  "trojantech"
+ ],
+ "records": 1225,
+ "records_sha256": "d7e680a0c6a27443168b1b24790080baffb081483555e3ca0cfbce04fe468c56",
+ "records_left_out_for_overlap": [
+  "nilfisk-2025-split"
+ ],
+ "train_items": 1316,
+ "train_by_source": {
+  "excerpt": 1037,
+  "teacher": 279
+ },
+ "train_by_kind": {
+  "company_assertion": 466,
+  "market_fact": 504,
+  "independent_study": 102,
+  "customer_observation": 113,
+  "regulation": 107,
+  "analogy": 24
+ },
+ "train_third_party_by_kind": {
+  "market_fact": 486,
+  "company_assertion": 29,
+  "independent_study": 102,
+  "customer_observation": 99,
+  "regulation": 102,
+  "analogy": 24
+ },
+ "calibration_items": 231
+}

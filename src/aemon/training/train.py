@@ -46,9 +46,10 @@ from trl.trainer.sft_config import SFTConfig
 from trl.trainer.sft_trainer import SFTTrainer  # noqa: E402
 
 from aemon.common.constants.prompts import PROMPTS
-from aemon.common.constants.training import GATE_FAILED, TARGETS, UNSLOTH_TARGETS  # noqa: F401
+from aemon.common.constants.training import GATE_FAILED, TARGETS, UNSLOTH_TARGETS_BY_MODEL_TYPE  # noqa: F401
 from aemon.common.paths import ROOT  # noqa: E402
 from aemon.common.types import Json
+from aemon.rows import build_rows  # noqa: E402
 from aemon.rows.build_rows import Overlength, labels_for, transcript, turn_rows  # noqa: E402
 
 if TYPE_CHECKING:
@@ -202,9 +203,19 @@ class Factory:
         if self.unsloth_seed is not None:  # the same LoRA (rank 16, alpha 32, dropout 0.05, every linear layer), built by Unsloth
             from unsloth import FastLanguageModel  # pyright: ignore[reportMissingImports]
 
+            model_type = json.loads((Path(self.model_path) / 'config.json').read_text())['model_type']
+            targets = list(UNSLOTH_TARGETS_BY_MODEL_TYPE[model_type])
             base, _ = FastLanguageModel.from_pretrained(self.model_path, max_seq_length=self.limit, dtype=torch.bfloat16, load_in_4bit=False)
-            base = FastLanguageModel.get_peft_model(base, r=16, lora_alpha=32, lora_dropout=0.05, target_modules=list(UNSLOTH_TARGETS),
-                                                    bias='none', use_gradient_checkpointing=UNSLOTH_CHECKPOINTING, random_state=self.unsloth_seed)
+            base = FastLanguageModel.get_peft_model(
+                base,
+                r=16,
+                lora_alpha=32,
+                lora_dropout=0.05,
+                target_modules=targets,
+                bias='none',
+                use_gradient_checkpointing=UNSLOTH_CHECKPOINTING,
+                random_state=self.unsloth_seed,
+            )
             lora: LoraConfig | None = None
         else:
             base = AutoModelForCausalLM.from_pretrained(self.model_path, dtype=torch.bfloat16, device_map={'': 0})
@@ -256,7 +267,7 @@ def reproduces(factory: Factory, rows: list[Json], count: int) -> tuple[int, int
     hits = []
     for row in rows[:count]:
         context = row['messages'][: row['target_index']]
-        prompt = tokenizer.apply_chat_template(context, tokenize=False, add_generation_prompt=True)
+        prompt = tokenizer.apply_chat_template(context, tokenize=False, add_generation_prompt=True, **build_rows.CHAT_TEMPLATE_KWARGS)
         ids = tokenizer(prompt, return_tensors='pt', add_special_tokens=False).to(model.device)
         with torch.no_grad():
             out = model.generate(**ids, max_new_tokens=400, do_sample=False)
@@ -281,17 +292,30 @@ def main() -> None:
     parser.add_argument('--max-length', type=int, default=8192)
     parser.add_argument('--minutes', type=float, default=1380, help='stop and save before this, to stay inside the one-day limit')
     parser.add_argument('--seed', type=int, default=7)
+    parser.add_argument(
+        '--gradient-checkpointing', action='store_true', help='recompute activations to fit a larger base on one GPU (off as the Tiny Aya runs were trained)'
+    )
+    parser.add_argument('--chat-template-kwargs', default='{}', help='JSON of chat-template variables for every row, such as {"enable_thinking": false}')
+    parser.add_argument('--eval-batch', type=int, help='validation batch size (the trainer default when unset, as the Tiny Aya runs used)')
     parser.add_argument('--check', type=int, default=0, help='after training, test whether it reproduces this many training targets')
     parser.add_argument('--require', type=int, default=0, help='fail the job unless at least this many are reproduced, so a dependent run never starts')
     parser.add_argument('--validation-cases', nargs='*', default=[], help='companies held out of training, by case id prefix such as hellberg')
     parser.add_argument('--validation-rows-per-company', type=int, default=40, help='evenly spaced, 0 for all')
-    parser.add_argument('--validation-rows', help="extra held-out rows, such as a hosted teacher's investigations of a few training companies; validated as their own teacher group, never trained")
+    parser.add_argument(
+        '--validation-rows',
+        help="extra held-out rows, such as a hosted teacher's investigations of a few training companies; validated as their own teacher group, never trained",
+    )
     parser.add_argument('--extra-rows', help='rows of another source, such as recovery corrections from strategy.correct')
     parser.add_argument('--extra-token-share', type=float, default=0.2, help='at most this share of supervised target tokens comes from the extra rows')
     parser.add_argument('--init-adapter', help='continue training this LoRA adapter instead of starting a fresh one')
-    parser.add_argument('--unsloth', action='store_true', help='build the model and LoRA with Unsloth; needs AEMON_UNSLOTH=1 and its own environment (jobs/unsloth_smoke.sbatch)')
+    parser.add_argument(
+        '--unsloth',
+        action='store_true',
+        help='build the model and LoRA with Unsloth; needs AEMON_UNSLOTH=1 and its own environment (jobs/unsloth_smoke.sbatch)',
+    )
     parser.add_argument('--stages', nargs='*', default=[], help='a specialist: train and validate only on rows from these stages, such as test')
     args = parser.parse_args()
+    build_rows.CHAT_TEMPLATE_KWARGS.update(json.loads(args.chat_template_kwargs))  # every rendering, rows and checks alike
     signal.signal(signal.SIGUSR1, lambda *_: STOP.update(requested=True))
     every = fixture_rows(args.fixture_rows) if args.fixture_rows else [json.loads(line) for line in open(args.rows)]
     if args.stages:  # the same split by company, applied after choosing the stages, so validation measures the same skill
@@ -319,7 +343,7 @@ def main() -> None:
             extra = keep
         rows += [dict(r, source=r.get('source', 'extra')) for r in extra]
     if held and {(r['case'], r.get('teacher_weights')) for r in held} & {(r['case'], r.get('teacher_weights')) for r in rows}:
-        raise SystemExit("a case is on both sides of the split for the same teacher")
+        raise SystemExit('a case is on both sides of the split for the same teacher')
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     resume = latest_checkpoint(out / 'checkpoints')
@@ -342,6 +366,13 @@ def main() -> None:
         if held
         else {}
     )
+    # A larger base fits one GPU only if activations are recomputed and validation runs one row at a time.
+    memory_options: dict[str, Any] = {}
+    if args.gradient_checkpointing:
+        memory_options['gradient_checkpointing'] = True
+        memory_options['gradient_checkpointing_kwargs'] = {'use_reentrant': False}
+    if args.eval_batch:
+        memory_options['per_device_eval_batch_size'] = args.eval_batch
     trainer = create_distill_trainer(
         args.model,
         demonstrations=demos,
@@ -362,6 +393,7 @@ def main() -> None:
         seed=args.seed,
         data_seed=args.seed,
         **evaluation,
+        **memory_options,
     )
     started = time.time()
     trainer.train()
@@ -405,15 +437,19 @@ def main() -> None:
             k: round(factory.supervised.get('correction', {}).get(k, 0) / max(sum(v[k] for v in factory.supervised.values()), 1), 3) for k in ('rows', 'tokens')
         },
         'held_out_by_company': {
-            c: [[h['step'], round(h[f'eval_{c}_loss'], 4)] for h in state.log_history if f'eval_{c}_loss' in h]
-            for c in sorted({group_of(r) for r in held})
+            c: [[h['step'], round(h[f'eval_{c}_loss'], 4)] for h in state.log_history if f'eval_{c}_loss' in h] for c in sorted({group_of(r) for r in held})
         },
         'held_out_by_teacher': {
-            t: [[h['step'], round(h[f'eval_teacher_{t}_loss'], 4)] for h in state.log_history if f'eval_teacher_{t}_loss' in h] for t in ('commanda', 'deepseek')
+            t: [[h['step'], round(h[f'eval_teacher_{t}_loss'], 4)] for h in state.log_history if f'eval_teacher_{t}_loss' in h]
+            for t in ('commanda', 'deepseek')
         },
-        'held_out_metric': ('universal: the mean of the two teachers, each the unweighted mean over its validation companies'
-                            if any(group_of(r).startswith('ds_') for r in held) and any(not group_of(r).startswith('ds_') for r in held)
-                            else 'unweighted mean over validation companies' if len({group_of(r) for r in held}) > 1 else 'mean over validation rows'),
+        'held_out_metric': (
+            'universal: the mean of the two teachers, each the unweighted mean over its validation companies'
+            if any(group_of(r).startswith('ds_') for r in held) and any(not group_of(r).startswith('ds_') for r in held)
+            else 'unweighted mean over validation companies'
+            if len({group_of(r) for r in held}) > 1
+            else 'mean over validation rows'
+        ),
         'rows_by_stage': {k: sum(r.get('stage') == k for r in rows) for k in sorted({str(r.get('stage')) for r in rows})},
         'held_out_losses': [[h['step'], round(h['eval_loss'], 4)] for h in state.log_history if 'eval_loss' in h],
         'best_checkpoint': state.best_model_checkpoint,

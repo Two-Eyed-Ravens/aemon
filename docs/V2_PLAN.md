@@ -70,7 +70,7 @@ shown to Hatem.
   fresh held-out companies, frozen before it is run, evaluated once; without them version 2 is reported as a
   development result only.
 
-## Revision, 2026-11-08, after an independent critique (stand-in reviewer; Codex unavailable). Hatem chose this reduced scope.
+## Revision, 2026-11-08, after an independent critique (stand-in reviewer). Hatem chose this reduced scope.
 
 - **Scope:** two skills only, experiment design and recovery from refused finishes, timeboxed to three days so the
   write-up is protected; reported as a development result.
@@ -124,8 +124,8 @@ quota. The dry-run rate on development outputs is not a yield forecast; the teac
 
 ## Fourth revision, 2026-11-08: one documented fix-and-regenerate round (Hatem)
 
-The 17 examples accepted in the first round were reviewed by Hatem's criteria with three advisory reviews (two Claude
-agents and Gemini; `reviews/v2_examples/`): none rated sound. They tested messages rather than purchase mechanisms,
+The 17 examples accepted in the first round were reviewed by Hatem's criteria with three advisory reviews (language-model
+reviewers; `reviews/v2_examples/`): none rated sound. They tested messages rather than purchase mechanisms,
 measured only stated preference, jumped from a survey gap to building, used online methods in pre-internet cases, used
 facts from after the decision date, and had decision rules cut off by the 240-character schema limit. Hatem chose one
 documented round of correction and regeneration, recorded here before it runs:

@@ -1,0 +1,231 @@
+4d8845665456cb90 /home/CLUSTER_ACCOUNT/lexsi/models/tiny-aya-global-bf16.gguf
+41794b5756b9e0f8 /home/CLUSTER_ACCOUNT/lexsi/runs/eval/final_test_trained_adapter.gguf
+ea9193807fe9d513 /home/CLUSTER_ACCOUNT/lexsi/runs/eval/final_test_v3_adapter.gguf
+server ready 23:23:48
+[{"id":0,"path":"/home/CLUSTER_ACCOUNT/lexsi/runs/eval/final_test_trained_adapter.gguf","scale":1.0,"task_name":"","prompt_prefix":""},{"id":1,"path":"/home/CLUSTER_ACCOUNT/lexsi/runs/eval/final_test_v3_adapter.gguf","scale":1.0,"task_name":"","prompt_prefix":""}]
+base {"evidence_kind": {"accuracy": 0.81, "ece": 0.059}, "test_choice": {"accuracy": 0.8, "ece": 0.147}}
+v1 {"evidence_kind": {"accuracy": 0.736, "ece": 0.133}, "test_choice": {"accuracy": 0.8, "ece": 0.176}}
+v3 {"evidence_kind": {"accuracy": 0.777, "ece": 0.091}, "test_choice": {"accuracy": 0.8, "ece": 0.152}}
+{
+ "agent_baseline": {
+  "evidence_kind": {
+   "items": 121,
+   "majority_class": "company_assertion",
+   "majority_accuracy": 0.7603305785123967,
+   "agent": {
+    "version 1": {
+     "choices": 200,
+     "accuracy_over_choices": 0.72,
+     "accuracy_per_item": 0.8120915032679739,
+     "choices_by_value": {
+      "independent_study": 47,
+      "company_assertion": 151,
+      "market_fact": 2
+     }
+    },
+    "final system": {
+     "choices": 958,
+     "accuracy_over_choices": 0.8016701461377871,
+     "accuracy_per_item": 0.7905854599808405,
+     "choices_by_value": {
+      "company_assertion": 710,
+      "independent_study": 172,
+      "customer_observation": 4,
+      "market_fact": 63,
+      "regulation": 9
+     }
+    }
+   }
+  },
+  "test_choice": {
+   "items": 40,
+   "majority_class": "propose",
+   "majority_accuracy": 0.8,
+   "agent": {
+    "version 1": {
+     "choices": 120,
+     "accuracy_over_choices": 0.43333333333333335,
+     "accuracy_per_item": 0.4333333333333333,
+     "choices_by_value": {
+      "not reached": 50,
+      "propose": 70
+     }
+    },
+    "final system": {
+     "choices": 120,
+     "accuracy_over_choices": 0.7833333333333333,
+     "accuracy_per_item": 0.7833333333333333,
+     "choices_by_value": {
+      "propose": 118,
+      "not reached": 2
+     }
+    }
+   }
+  }
+ },
+ "arms": {
+  "base": {
+   "evidence_kind": {
+    "n": 121,
+    "accuracy": 0.8099173553719008,
+    "recall": {
+     "regulation": 0.0,
+     "independent_study": 0.375,
+     "customer_observation": 0.3333333333333333,
+     "company_assertion": 0.9565217391304348,
+     "analogy": 0.0,
+     "market_fact": 0.46153846153846156
+    },
+    "ece": 0.059200566474187206,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 0.9669421487603306,
+      "accuracy": 0.8205128205128205
+     },
+     "0.7": {
+      "coverage": 0.8099173553719008,
+      "accuracy": 0.8979591836734694
+     },
+     "0.9": {
+      "coverage": 0.5950413223140496,
+      "accuracy": 0.9722222222222222
+     }
+    }
+   },
+   "test_choice": {
+    "n": 40,
+    "accuracy": 0.8,
+    "recall": {
+     "propose": 1.0,
+     "decline": 0.0
+    },
+    "ece": 0.1470100155744336,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.7": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.9": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     }
+    }
+   }
+  },
+  "v1": {
+   "evidence_kind": {
+    "n": 121,
+    "accuracy": 0.7355371900826446,
+    "recall": {
+     "regulation": 0.0,
+     "independent_study": 0.125,
+     "customer_observation": 0.3333333333333333,
+     "company_assertion": 0.8804347826086957,
+     "analogy": 0.0,
+     "market_fact": 0.46153846153846156
+    },
+    "ece": 0.13298838961166323,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.7355371900826446
+     },
+     "0.7": {
+      "coverage": 0.8016528925619835,
+      "accuracy": 0.8762886597938144
+     },
+     "0.9": {
+      "coverage": 0.6198347107438017,
+      "accuracy": 0.9333333333333333
+     }
+    }
+   },
+   "test_choice": {
+    "n": 40,
+    "accuracy": 0.8,
+    "recall": {
+     "propose": 1.0,
+     "decline": 0.0
+    },
+    "ece": 0.17610336155417045,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.7": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.9": {
+      "coverage": 0.5,
+      "accuracy": 1.0
+     }
+    }
+   }
+  },
+  "v3": {
+   "evidence_kind": {
+    "n": 121,
+    "accuracy": 0.7768595041322314,
+    "recall": {
+     "regulation": 0.0,
+     "independent_study": 0.125,
+     "customer_observation": 0.3333333333333333,
+     "company_assertion": 0.9347826086956522,
+     "analogy": 0.0,
+     "market_fact": 0.46153846153846156
+    },
+    "ece": 0.09126591570908366,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 0.9834710743801653,
+      "accuracy": 0.7899159663865546
+     },
+     "0.7": {
+      "coverage": 0.8099173553719008,
+      "accuracy": 0.8877551020408163
+     },
+     "0.9": {
+      "coverage": 0.6115702479338843,
+      "accuracy": 0.9459459459459459
+     }
+    }
+   },
+   "test_choice": {
+    "n": 40,
+    "accuracy": 0.8,
+    "recall": {
+     "propose": 1.0,
+     "decline": 0.0
+    },
+    "ece": 0.15190897871504502,
+    "no_letter": 0,
+    "abstain": {
+     "0.5": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.7": {
+      "coverage": 1.0,
+      "accuracy": 0.8
+     },
+     "0.9": {
+      "coverage": 0.95,
+      "accuracy": 0.7894736842105263
+     }
+    }
+   }
+  }
+ }
+}
+done 23:24:46

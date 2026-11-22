@@ -1,0 +1,119 @@
+{
+ "summary": {
+  "not_found": 5,
+  "verified": 16,
+  "fetch_failed": 1
+ },
+ "results": [
+  {
+   "id": "brembo-revenue-2025",
+   "status": "not_found",
+   "detail": "page has 2404539 characters"
+  },
+  {
+   "id": "brembo-application-split",
+   "status": "not_found",
+   "detail": "page has 2404539 characters"
+  },
+  {
+   "id": "brembo-product-scope",
+   "status": "not_found",
+   "detail": "page has 2404539 characters"
+  },
+  {
+   "id": "brembo-channels",
+   "status": "not_found",
+   "detail": "page has 2404539 characters"
+  },
+  {
+   "id": "brembo-counterfeit-risk",
+   "status": "not_found",
+   "detail": "page has 2404539 characters"
+  },
+  {
+   "id": "brembo-gt-kit",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-moto-upgrade-calipers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-gr-pro",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-expert-workshops",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-lifestyle-collection",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-eicma-aftermarket",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-upgrade-wholesale",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-ece-r90",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-ziv-ebike-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-ziv-bike-decline",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-acem-registrations",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-shimano-inventory",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-ebc-analogy",
+   "status": "fetch_failed",
+   "detail": "HTTP Error 403: Forbidden"
+  },
+  {
+   "id": "brembo-bikeradar-review",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-forum-counterfeit",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-fake-covers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "brembo-sema-aftermarket",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

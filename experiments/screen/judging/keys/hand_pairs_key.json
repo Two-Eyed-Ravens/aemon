@@ -1,0 +1,122 @@
+{
+ "P01": {
+  "packet_id": "c4005289b044fbb5",
+  "arm": "ayaA7_guards",
+  "case": "hellberg-new-evidence-favours-looks",
+  "attempt": 2
+ },
+ "P02": {
+  "packet_id": "64a64160e5ff2ae8",
+  "arm": "ayaA7_guards",
+  "case": "neumann-new-evidence-irrelevant",
+  "attempt": 2
+ },
+ "P03": {
+  "packet_id": "3c0bff8cd603aa33",
+  "arm": "ayaA7_guards",
+  "case": "acr-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P04": {
+  "packet_id": "86af15a89008c65e",
+  "arm": "ayaP_compact_guards",
+  "case": "neumann-new-evidence-irrelevant",
+  "attempt": 2
+ },
+ "P05": {
+  "packet_id": "83f4041bd8d494dd",
+  "arm": "ayaA7_guards",
+  "case": "hellberg-new-evidence-looks",
+  "attempt": 2
+ },
+ "P06": {
+  "packet_id": "cc0927cab4249cda",
+  "arm": "ayaA7_guards",
+  "case": "jotun-new-evidence-irrelevant",
+  "attempt": 1
+ },
+ "P07": {
+  "packet_id": "c9c1ea803a06a376",
+  "arm": "ayaP_compact_guards",
+  "case": "tanita-base",
+  "attempt": 0
+ },
+ "P08": {
+  "packet_id": "e395374e36ff773d",
+  "arm": "ayaP_compact_guards",
+  "case": "hellberg-new-evidence-looks",
+  "attempt": 2
+ },
+ "P09": {
+  "packet_id": "052e0bc3cb179874",
+  "arm": "ayaP_compact_guards",
+  "case": "jotun-new-evidence-irrelevant",
+  "attempt": 1
+ },
+ "P10": {
+  "packet_id": "57a6f454f883fc12",
+  "arm": "ayaP_compact_guards",
+  "case": "acr-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P11": {
+  "packet_id": "e9630cc0c522ae0c",
+  "arm": "ayaP_compact_guards",
+  "case": "jotun-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P12": {
+  "packet_id": "80d45f6162923f9f",
+  "arm": "ayaA7_guards",
+  "case": "deere-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P13": {
+  "packet_id": "56c6364fe1548f62",
+  "arm": "ayaA7_guards",
+  "case": "tanita-base",
+  "attempt": 0
+ },
+ "P14": {
+  "packet_id": "12c991a6927a214b",
+  "arm": "ayaP_compact_guards",
+  "case": "acr-base",
+  "attempt": 1
+ },
+ "P15": {
+  "packet_id": "299d95c3ecf0b933",
+  "arm": "ayaP_compact_guards",
+  "case": "deere-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P16": {
+  "packet_id": "73227a06192db900",
+  "arm": "ayaP_compact_guards",
+  "case": "tanita-new-evidence-irrelevant",
+  "attempt": 2
+ },
+ "P17": {
+  "packet_id": "ba8c78bd1f7dd6c1",
+  "arm": "ayaA7_guards",
+  "case": "jotun-new-evidence-irrelevant",
+  "attempt": 0
+ },
+ "P18": {
+  "packet_id": "a23e85dc9f9918f6",
+  "arm": "ayaA7_guards",
+  "case": "acr-base",
+  "attempt": 1
+ },
+ "P19": {
+  "packet_id": "e15673a3b30618db",
+  "arm": "ayaP_compact_guards",
+  "case": "hellberg-new-evidence-favours-looks",
+  "attempt": 2
+ },
+ "P20": {
+  "packet_id": "8c0a77e158c1f2b3",
+  "arm": "ayaA7_guards",
+  "case": "tanita-new-evidence-irrelevant",
+  "attempt": 2
+ }
+}

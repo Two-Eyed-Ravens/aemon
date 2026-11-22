@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "MULTIVAC Sepp Haggenmüller SE & Co. KG",
+   "question": "Should MULTIVAC Sepp Haggenmüller SE & Co. KG develop a differentiated consumer proposition for a specific use case, beyond its existing packaging machines and processing equipment for food, medical and industrial producers? What evidence would justify that investment?",
+   "brief": "MULTIVAC Sepp Haggenmüller SE & Co. KG makes packaging machines, including thermoforming packaging machines, traysealers and vacuum chamber machines, as well as labelling, inspection and food-processing equipment, for food, medical, pharmaceutical and industrial producers ranging from craft businesses to large companies. It is a privately owned group headquartered in Wolfertschwenden, Germany, with around 85 sales and service subsidiaries worldwide. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "multivac",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "multivac-base",
+   "premise_records": [
+    "multivac-home-made-in-germany",
+    "multivac-home-testberichte",
+    "multivac-tabletop-target-users"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

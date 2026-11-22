@@ -1,0 +1,19 @@
+{
+ "cases": [
+  {
+   "company": "Biesse S.p.A.",
+   "question": "Should Biesse S.p.A. develop a differentiated consumer proposition for a specific use case, beyond its existing CNC machining centres, edgebanders and other machines and lines for processing wood, glass, stone and advanced materials, sold to furniture, window and door, construction and other industrial manufacturers? What evidence would justify that investment?",
+   "brief": "Biesse S.p.A. makes CNC machining centres, edgebanders, saws and complete production lines for processing wood, glass, stone and advanced materials, sold mainly to furniture, window and door, construction, automotive and aerospace manufacturers. It is listed in Milan, headquartered in Pesaro, Italy, and earns most of its revenue abroad. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "biesse",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "biesse-base",
+   "premise_records": [
+    "biesse-rover-a-edge-2012",
+    "biesse-doig-craftsman"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

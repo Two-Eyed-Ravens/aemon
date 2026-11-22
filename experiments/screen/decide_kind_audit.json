@@ -1,0 +1,56 @@
+{
+ "A seed 7": {
+  "decisions": 190,
+  "replaced": 50,
+  "no_annotation": 3,
+  "abstained": 11,
+  "scored": 187,
+  "agent_right": 76,
+  "final_right": 101,
+  "scored_replaced": 48,
+  "replaced_fixed": 27,
+  "replaced_broke": 2,
+  "replaced_wrong_to_wrong": 19,
+  "agreed": 129
+ },
+ "B seed 7": {
+  "decisions": 202,
+  "replaced": 61,
+  "scored": 202,
+  "agent_right": 69,
+  "final_right": 92,
+  "scored_replaced": 61,
+  "replaced_fixed": 24,
+  "replaced_broke": 1,
+  "replaced_wrong_to_wrong": 36,
+  "abstained": 14,
+  "agreed": 127
+ },
+ "B seed 11": {
+  "decisions": 267,
+  "agreed": 153,
+  "scored": 267,
+  "agent_right": 95,
+  "final_right": 132,
+  "replaced": 68,
+  "scored_replaced": 68,
+  "replaced_fixed": 37,
+  "replaced_broke": 0,
+  "replaced_wrong_to_wrong": 31,
+  "abstained": 46
+ },
+ "Prompted 8B": {
+  "decisions": 78,
+  "agreed": 58,
+  "scored": 77,
+  "agent_right": 34,
+  "final_right": 41,
+  "replaced": 14,
+  "no_annotation": 1,
+  "scored_replaced": 13,
+  "replaced_fixed": 7,
+  "replaced_broke": 0,
+  "replaced_wrong_to_wrong": 6,
+  "abstained": 6
+ }
+}

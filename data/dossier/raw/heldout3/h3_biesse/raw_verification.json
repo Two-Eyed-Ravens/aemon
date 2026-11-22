@@ -1,0 +1,119 @@
+{
+ "summary": {
+  "verified": 20,
+  "not_found": 1,
+  "fetch_failed": 1
+ },
+ "results": [
+  {
+   "id": "biesse-size-employees",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-customer-sectors",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-wood-industries",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-fy2025-revenue",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-q3-2026-wood-resilient",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-china-pressure",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-showroom-network",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-equipment-finance",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-rover-k-smart",
+   "status": "not_found",
+   "detail": "page has 20702 characters"
+  },
+  {
+   "id": "biesse-doig-craftsman",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-houtshop-b2c",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-rover-a-edge-2012",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-acimall-high-end",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-italy-artisan-firms",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-us-hobby-households",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-makerspace-desktop-cnc",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-scm-minimax",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-felder-hammer-cnc",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-shaper-origin",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-shapeoko-users",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-hsd-spindles-small-cnc",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "biesse-eu-machinery-regulation",
+   "status": "fetch_failed",
+   "detail": "Remote end closed connection without response"
+  }
+ ]
+}

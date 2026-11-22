@@ -32,7 +32,7 @@ from aemon.common.constants.env import MIN_QUOTE
 from aemon.environment.dossier import normalise
 from aemon.environment.stages import current_stage
 
-FEATURES = ('mask_rereads', 'progress', 'budget', 'citations', 'no_repeats', 'quote_menu', 'resample_repeats', 'grounded_beliefs', 'evidence_first')
+FEATURES = ('mask_rereads', 'progress', 'budget', 'citations', 'no_repeats', 'quote_menu', 'resample_repeats', 'grounded_beliefs', 'evidence_first', 'decide_kind')
 NO_PROGRESS_LIMIT = 3  # calls in a row without progress before the recovery note
 BUDGET_MARGIN = 3  # spare turns kept above the minimum before exploration is withdrawn
 EXPLORATORY = ('search_evidence', 'challenge_theory', 'add_theory', 'read_source', 'assess_evidence')

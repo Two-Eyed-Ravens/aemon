@@ -1,0 +1,117 @@
+{
+ "summary": {
+  "verified": 22
+ },
+ "results": [
+  {
+   "id": "lapp-core-markets",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-size-fy25",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-fy25-sales",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-harnessing-focus",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-applications-channels",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-sales-network",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-mobility-end-consumer",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-mobility-private-checkout",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-mobility-retail-partners",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-wallbox-light-home",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-fy26-record",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-fy26-profitability",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-mobility-private-drivers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-ev-accessory-competition",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-oeamtc-test",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-eon-home-charging",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-kba-ev-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-adac-mode2",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-plugin-pv-rules",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-plugin-pv-registrations",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-wago-smart-home",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "lapp-mennekes-home",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

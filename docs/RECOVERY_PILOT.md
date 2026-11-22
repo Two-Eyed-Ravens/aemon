@@ -1,6 +1,6 @@
 # Proposal: a recovery-data pilot
 
-Status: **proposed 2026-11-03, not approved.** Needs Hatem's go-ahead and Codex's review before any row is trained on.
+Status: **proposed 2026-11-03, not approved.** Needs Hatem's go-ahead and an independent review before any row is trained on.
 
 ## Why
 
@@ -42,4 +42,4 @@ its own states, because the teacher rarely enters them: about 7 rows recover fro
   and the recorded refusals screen mechanical errors, not judgement.
 - Corrections that only teach "stop repeating" could cut repeats without better investigations. The prefix probe and
   the stage measures, and later the blind judges, check that.
-- A new protocol id means the provenance and row code change. Codex should review it like the existing manifest.
+- A new protocol id means the provenance and row code change. It is reviewed like the existing manifest.

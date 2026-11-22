@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Judge Hand Check</title>
+<style>
+:root { --bg: #f7f7f4; --card: #ffffff; --ink: #1c2626; --muted: #5d6b6b; --line: #dcdcd6; --accent: #1f5f5b; --done: #2f7d4f; }
+@media (prefers-color-scheme: dark) { :root { --bg: #151a1a; --card: #1e2525; --ink: #e6ecea; --muted: #9fb0ad; --line: #34403f; --accent: #6fc2ba; --done: #6fcf97; } }
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+header { position: sticky; top: 0; background: var(--card); border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; z-index: 2; }
+header h1 { font-size: 17px; margin: 0 8px 0 0; }
+button, select { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); cursor: pointer; }
+button.primary { background: var(--accent); color: var(--card); border-color: var(--accent); }
+main { max-width: 980px; margin: 0 auto; padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.muted { color: var(--muted); }
+.event { border-left: 3px solid var(--line); padding: 4px 10px; margin: 8px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.event b { color: var(--accent); }
+details { margin: 6px 0; }
+.rubric { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rubric td, .rubric th { border: 1px solid var(--line); padding: 6px; vertical-align: top; text-align: left; }
+.score { display: flex; gap: 14px; flex-wrap: wrap; margin: 8px 0 14px; }
+.score label { display: flex; gap: 4px; align-items: center; }
+textarea { width: 100%; min-height: 50px; font: inherit; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--line); margin-left: 6px; }
+.dot.on { background: var(--done); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Judge hand check</h1>
+  <select id="pick" aria-label="Packet"></select>
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+  <span id="progress" class="muted"></span>
+  <button id="export" class="primary">Export scores</button>
+</header>
+<main>
+  <div class="card muted">Score each investigation blind, on the judge's rubric, for the two dimensions below only. Labels hide the arm. Scores save in this browser as you go; export them when done and send the file back.</div>
+  <div id="view"></div>
+</main>
+<script>
+const PACKETS = __PACKETS__;
+const DIMENSIONS = __DIMENSIONS__;
+const RUBRIC = {
+  problem_framing: ['Restates the question', 'Lists obvious options', 'Separates the objective from the suggested solution', 'Also finds an option or constraint a good analyst would not want missed, or corrects a false premise'],
+  evidence_judgement: ['Ignores or misreads it', 'Cites what agrees', 'Separates company assertions, observations, studies and analogies', 'States what each key source cannot establish, including date, place and whether it fits the customer group'],
+  recommendation: ['Confident prose', 'A position, unsupported', 'Follows from the evidence, with stated uncertainty', 'Commits to a next action and says what would reverse it'],
+};
+const STORE = __STORE__;
+let scores = {};
+try { scores = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) { scores = {}; }
+function save() { try { localStorage.setItem(STORE, JSON.stringify(scores)); } catch (e) { /* storage unavailable: export before closing */ } }
+let index = 0;
+function el(tag, attrs, text) { const n = document.createElement(tag); Object.assign(n, attrs || {}); if (text !== undefined) n.textContent = text; return n; }
+function complete(id) { return DIMENSIONS.every(d => scores[id] && scores[id][d] !== undefined); }
+function refreshHeader() {
+  const pick = document.getElementById('pick');
+  pick.innerHTML = '';
+  PACKETS.forEach((p, i) => { const o = el('option', { value: i }, p.packet_id + (complete(p.packet_id) ? ' ✓' : '')); if (i === index) o.selected = true; pick.append(o); });
+  const done = PACKETS.filter(p => complete(p.packet_id)).length;
+  document.getElementById('progress').textContent = done + ' of ' + PACKETS.length + ' scored';
+}
+function render() {
+  const p = PACKETS[index];
+  const view = document.getElementById('view');
+  view.innerHTML = '';
+  const head = el('div', { className: 'card' });
+  head.append(el('h2', {}, p.packet_id + ' — ' + (p.case.company || '')));
+  head.append(el('p', {}, p.case.question || ''));
+  if (p.case.source_limits) head.append(el('p', { className: 'muted' }, 'Source limits: ' + p.case.source_limits));
+  view.append(head);
+  const src = el('div', { className: 'card' });
+  const det = el('details'); det.append(el('summary', {}, 'Sources (' + p.sources.length + ')'));
+  p.sources.forEach(s => det.append(el('div', { className: 'event' }, s.id + ' [' + s.class + '] ' + s.excerpt)));
+  src.append(det); view.append(src);
+  const evs = el('div', { className: 'card' });
+  evs.append(el('h3', {}, 'Investigation'));
+  p.events.forEach(e => {
+    const box = el('div', { className: 'event' });
+    box.append(el('b', {}, e.id + ' · ' + e.action + '  '));
+    const rest = Object.entries(e).filter(([k]) => !['id', 'action'].includes(k)).map(([k, v]) => (k === 'text' ? '' : k + ': ') + (typeof v === 'string' ? v : JSON.stringify(v))).join('\n');
+    box.append(document.createTextNode(rest));
+    evs.append(box);
+  });
+  view.append(evs);
+  const form = el('div', { className: 'card' });
+  DIMENSIONS.forEach(d => {
+    form.append(el('h3', {}, d.replace('_', ' ')));
+    const table = el('table', { className: 'rubric' });
+    const tr = el('tr'); RUBRIC[d].forEach((t, s) => tr.append(el('td', {}, s + ': ' + t))); table.append(tr); form.append(table);
+    const row = el('div', { className: 'score' });
+    [0, 1, 2, 3, 'not applicable'].forEach(v => {
+      const lab = el('label');
+      const r = el('input', { type: 'radio', name: d, value: v });
+      if (scores[p.packet_id] && String(scores[p.packet_id][d]) === String(v)) r.checked = true;
+      r.addEventListener('change', () => { scores[p.packet_id] = scores[p.packet_id] || {}; scores[p.packet_id][d] = v === 'not applicable' ? null : v; save(); refreshHeader(); });
+      lab.append(r, document.createTextNode(String(v))); row.append(lab);
+    });
+    form.append(row);
+  });
+  const note = el('textarea', { placeholder: 'Optional note' });
+  note.value = (scores[p.packet_id] && scores[p.packet_id].note) || '';
+  note.addEventListener('input', () => { scores[p.packet_id] = scores[p.packet_id] || {}; scores[p.packet_id].note = note.value; save(); });
+  form.append(note);
+  view.append(form);
+  refreshHeader();
+  window.scrollTo(0, 0);
+}
+document.getElementById('pick').addEventListener('change', e => { index = Number(e.target.value); render(); });
+document.getElementById('prev').addEventListener('click', () => { index = Math.max(0, index - 1); render(); });
+document.getElementById('next').addEventListener('click', () => { index = Math.min(PACKETS.length - 1, index + 1); render(); });
+document.getElementById('export').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify({ scorer: 'hand', dimensions: DIMENSIONS, scores }, null, 1)], { type: 'application/json' });
+  const a = el('a', { href: URL.createObjectURL(blob), download: 'hand_check_scores.json' }); document.body.append(a); a.click(); a.remove();
+});
+render();
+</script>
+</body>
+</html>

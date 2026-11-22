@@ -41,7 +41,7 @@ def prompt_for(it: dict) -> str:
     topic = it['subject'].replace('_', ' ')
     lines = [f'The following is a multiple choice question about {topic}. Answer with the letter only.', '',
              it['question'].strip()]
-    lines += [f'{letter}. {text}' for letter, text in zip('ABCD', it['choices'])]
+    lines += [f'{letter}. {text}' for letter, text in zip('ABCD', it['choices'], strict=True)]
     lines += ['', 'Answer:']
     return '\n'.join(lines)
 
@@ -115,7 +115,7 @@ def main() -> None:
         key = f'{name}_minus_{base_name}'
         summary['differences'][key] = {}
         for b in benches + ['all']:
-            pairs = [(x, y) for x, y in zip(replies[base_name], replies[name]) if b == 'all' or x['bench'] == b]
+            pairs = [(x, y) for x, y in zip(replies[base_name], replies[name], strict=True) if b == 'all' or x['bench'] == b]
             summary['differences'][key][b] = bootstrap([int(y['correct']) - int(x['correct']) for x, y in pairs])
     json.dump({'summary': summary, 'prompt': 'zero-shot, letter only; most probable letter among the first token\'s top-20 log-probabilities, else a 32-token greedy reply parsed',
                'replies': replies}, open(a.out, 'w'), indent=1)

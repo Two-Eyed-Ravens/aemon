@@ -1,0 +1,118 @@
+{
+ "summary": {
+  "verified": 18,
+  "not_found": 4
+ },
+ "results": [
+  {
+   "id": "multivac-turnover-2023",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-group-scope",
+   "status": "not_found",
+   "detail": "page has 0 characters"
+  },
+  {
+   "id": "multivac-sales-service-subsidiaries",
+   "status": "not_found",
+   "detail": "page has 85458 characters"
+  },
+  {
+   "id": "multivac-customers-craft-to-industrial",
+   "status": "not_found",
+   "detail": "page has 0 characters"
+  },
+  {
+   "id": "multivac-sueffa-2024-craft",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-c200-smaller-firms",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-tabletop-target-users",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-service-network-2019",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-home-made-in-germany",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-home-ifdesign",
+   "status": "not_found",
+   "detail": "page has 5160 characters"
+  },
+  {
+   "id": "multivac-turnover-2025-automation",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-wikipedia-footprint",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-home-testberichte",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-dealer-baseline-smallbiz",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-warentest-home-sealers-2018",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-analogy-foodsaver",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-analogy-anova-chamber",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-anova-review-hunters",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-analogy-lava",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-household-chamber-segment",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-fsa-botulinum",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "multivac-eu-food-contact",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

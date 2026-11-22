@@ -1,0 +1,64 @@
+{
+ "settings": {
+  "epochs": 2,
+  "learning_rate": 0.0001,
+  "batch": 8,
+  "micro_batch": 2,
+  "warmup_share": 0.05,
+  "seed": 7,
+  "rank": 16,
+  "alpha": 32,
+  "dropout": 0.05
+ },
+ "letter_ids": [
+  [
+   40,
+   1736
+  ],
+  [
+   41,
+   1761
+  ],
+  [
+   42,
+   1733
+  ],
+  [
+   43,
+   1772
+  ],
+  [
+   44,
+   1803
+  ],
+  [
+   45,
+   1795
+  ]
+ ],
+ "train_items": 1316,
+ "calibration_items": 231,
+ "history": [
+  {
+   "epoch": 0,
+   "calibration": {
+    "loss": 4.9098932704426925,
+    "accuracy": 0.6666666666666666
+   }
+  },
+  {
+   "epoch": 1,
+   "calibration": {
+    "loss": 0.5633271233343975,
+    "accuracy": 0.8225108225108225
+   }
+  },
+  {
+   "epoch": 2,
+   "calibration": {
+    "loss": 0.5544706461185114,
+    "accuracy": 0.8268398268398268
+   }
+  }
+ ]
+}

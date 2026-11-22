@@ -43,7 +43,7 @@ const STAGES: Stage[] = [
 ];
 
 const LINKS: [string, string, string][] = [
-  ['Public code', 'github.com/HatemSaadallah/aemon', 'https://github.com/HatemSaadallah/aemon'],
+  ['Public code', 'github.com/Two-Eyed-Ravens/aemon', 'https://github.com/Two-Eyed-Ravens/aemon'],
   ['Model card', 'aemon on Hugging Face', 'https://huggingface.co/two-eyed-ravens/aemon'],
   ['Dataset card', 'Teacher investigations on Hugging Face', 'https://huggingface.co/datasets/two-eyed-ravens/aemon'],
   ['Collection', 'Model, data and results together', 'https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd'],
@@ -156,7 +156,7 @@ export function HowPage({ workspace: w }: { workspace?: Workspace | null }) {
             <li key={k}><a className="panel pad hover link-card" href={href} target="_blank" rel="noreferrer noopener"><span className="kicker">{k}</span><b>{label}</b><Icon name="arrow" size={15} /></a></li>
           ))}
         </ul>
-        <p className="muted small">The research paper is published with the code: <a href="https://github.com/HatemSaadallah/aemon/blob/main/docs/PAPER.pdf" target="_blank" rel="noreferrer noopener">docs/PAPER.pdf</a>.</p>
+        <p className="muted small">The research paper is published with the code: <a href="https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf" target="_blank" rel="noreferrer noopener">docs/PAPER.pdf</a>.</p>
       </section>
     </div>
   );

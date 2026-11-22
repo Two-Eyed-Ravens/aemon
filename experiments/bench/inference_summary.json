@@ -1,0 +1,221 @@
+{
+ "haiku_measured_usd_per_investigation": 0.0084,
+ "settings": [
+  {
+   "precision": "bf16",
+   "slots": 1,
+   "runs": 15,
+   "finished": 12,
+   "refused_calls": 42,
+   "wall_seconds": 1670,
+   "investigations_per_gpu_hour": 32.3,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.05443,
+    "low $0.89/h": 0.02752,
+    "hyperscaler $3.67/h": 0.1135
+   },
+   "usd_per_finished_investigation": 0.06804,
+   "prompt_tokens_per_investigation": 119781,
+   "prompt_share_from_cache": 0.706,
+   "completion_tokens_per_investigation": 3967
+  },
+  {
+   "precision": "bf16",
+   "slots": 4,
+   "runs": 45,
+   "finished": 36,
+   "refused_calls": 134,
+   "wall_seconds": 2915,
+   "investigations_per_gpu_hour": 55.6,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.03167,
+    "low $0.89/h": 0.01601,
+    "hyperscaler $3.67/h": 0.06604
+   },
+   "usd_per_finished_investigation": 0.03959,
+   "prompt_tokens_per_investigation": 111459,
+   "prompt_share_from_cache": 0.709,
+   "completion_tokens_per_investigation": 3801
+  },
+  {
+   "precision": "bf16",
+   "slots": 8,
+   "runs": 45,
+   "finished": 37,
+   "refused_calls": 132,
+   "wall_seconds": 2852,
+   "investigations_per_gpu_hour": 56.8,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.03098,
+    "low $0.89/h": 0.01567,
+    "hyperscaler $3.67/h": 0.06461
+   },
+   "usd_per_finished_investigation": 0.03768,
+   "prompt_tokens_per_investigation": 114607,
+   "prompt_share_from_cache": 0.702,
+   "completion_tokens_per_investigation": 3907
+  },
+  {
+   "precision": "bf16",
+   "slots": 16,
+   "runs": 45,
+   "finished": 38,
+   "refused_calls": 121,
+   "wall_seconds": 1916,
+   "investigations_per_gpu_hour": 84.6,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.02082,
+    "low $0.89/h": 0.01053,
+    "hyperscaler $3.67/h": 0.04341
+   },
+   "usd_per_finished_investigation": 0.02465,
+   "prompt_tokens_per_investigation": 112709,
+   "prompt_share_from_cache": 0.688,
+   "completion_tokens_per_investigation": 3831
+  },
+  {
+   "precision": "q8_0",
+   "slots": 1,
+   "runs": 15,
+   "finished": 15,
+   "refused_calls": 11,
+   "wall_seconds": 1059,
+   "investigations_per_gpu_hour": 51.0,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.03452,
+    "low $0.89/h": 0.01745,
+    "hyperscaler $3.67/h": 0.07197
+   },
+   "usd_per_finished_investigation": 0.03452,
+   "prompt_tokens_per_investigation": 94505,
+   "prompt_share_from_cache": 0.68,
+   "completion_tokens_per_investigation": 3204
+  },
+  {
+   "precision": "q8_0",
+   "slots": 4,
+   "runs": 45,
+   "finished": 41,
+   "refused_calls": 96,
+   "wall_seconds": 2195,
+   "investigations_per_gpu_hour": 73.8,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.02385,
+    "low $0.89/h": 0.01206,
+    "hyperscaler $3.67/h": 0.04973
+   },
+   "usd_per_finished_investigation": 0.02617,
+   "prompt_tokens_per_investigation": 112012,
+   "prompt_share_from_cache": 0.687,
+   "completion_tokens_per_investigation": 3727
+  },
+  {
+   "precision": "q8_0",
+   "slots": 8,
+   "runs": 45,
+   "finished": 40,
+   "refused_calls": 105,
+   "wall_seconds": 2312,
+   "investigations_per_gpu_hour": 70.1,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.02512,
+    "low $0.89/h": 0.0127,
+    "hyperscaler $3.67/h": 0.05238
+   },
+   "usd_per_finished_investigation": 0.02826,
+   "prompt_tokens_per_investigation": 120970,
+   "prompt_share_from_cache": 0.693,
+   "completion_tokens_per_investigation": 4047
+  },
+  {
+   "precision": "q8_0",
+   "slots": 16,
+   "runs": 45,
+   "finished": 40,
+   "refused_calls": 120,
+   "wall_seconds": 2230,
+   "investigations_per_gpu_hour": 72.6,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.02423,
+    "low $0.89/h": 0.01225,
+    "hyperscaler $3.67/h": 0.05052
+   },
+   "usd_per_finished_investigation": 0.02726,
+   "prompt_tokens_per_investigation": 110193,
+   "prompt_share_from_cache": 0.691,
+   "completion_tokens_per_investigation": 3764
+  },
+  {
+   "precision": "q4_k_m",
+   "slots": 1,
+   "runs": 15,
+   "finished": 11,
+   "refused_calls": 35,
+   "wall_seconds": 821,
+   "investigations_per_gpu_hour": 65.8,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.02676,
+    "low $0.89/h": 0.01353,
+    "hyperscaler $3.67/h": 0.0558
+   },
+   "usd_per_finished_investigation": 0.03649,
+   "prompt_tokens_per_investigation": 76045,
+   "prompt_share_from_cache": 0.694,
+   "completion_tokens_per_investigation": 2707
+  },
+  {
+   "precision": "q4_k_m",
+   "slots": 4,
+   "runs": 45,
+   "finished": 35,
+   "refused_calls": 114,
+   "wall_seconds": 1797,
+   "investigations_per_gpu_hour": 90.2,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.01952,
+    "low $0.89/h": 0.00987,
+    "hyperscaler $3.67/h": 0.04071
+   },
+   "usd_per_finished_investigation": 0.0251,
+   "prompt_tokens_per_investigation": 87689,
+   "prompt_share_from_cache": 0.685,
+   "completion_tokens_per_investigation": 2949
+  },
+  {
+   "precision": "q4_k_m",
+   "slots": 8,
+   "runs": 45,
+   "finished": 39,
+   "refused_calls": 98,
+   "wall_seconds": 1727,
+   "investigations_per_gpu_hour": 93.8,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.01876,
+    "low $0.89/h": 0.00949,
+    "hyperscaler $3.67/h": 0.03912
+   },
+   "usd_per_finished_investigation": 0.02165,
+   "prompt_tokens_per_investigation": 87100,
+   "prompt_share_from_cache": 0.66,
+   "completion_tokens_per_investigation": 2961
+  },
+  {
+   "precision": "q4_k_m",
+   "slots": 16,
+   "runs": 45,
+   "finished": 39,
+   "refused_calls": 89,
+   "wall_seconds": 1834,
+   "investigations_per_gpu_hour": 88.3,
+   "usd_per_investigation": {
+    "A100 40GB median $1.76/h": 0.01992,
+    "low $0.89/h": 0.01008,
+    "hyperscaler $3.67/h": 0.04155
+   },
+   "usd_per_finished_investigation": 0.02299,
+   "prompt_tokens_per_investigation": 92715,
+   "prompt_share_from_cache": 0.654,
+   "completion_tokens_per_investigation": 3162
+  }
+ ]
+}

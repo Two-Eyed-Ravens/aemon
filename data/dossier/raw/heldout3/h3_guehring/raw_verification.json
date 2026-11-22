@@ -1,0 +1,119 @@
+{
+ "summary": {
+  "verified": 17,
+  "not_found": 4,
+  "fetch_failed": 1
+ },
+ "results": [
+  {
+   "id": "guehring-size-footprint",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-customer-industries",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-hardware-store-origin",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-csr-portrait",
+   "status": "not_found",
+   "detail": "page has 224723 characters"
+  },
+  {
+   "id": "guehring-own-salesforce",
+   "status": "not_found",
+   "detail": "page has 224723 characters"
+  },
+  {
+   "id": "guehring-asian-competition",
+   "status": "not_found",
+   "detail": "page has 224723 characters"
+  },
+  {
+   "id": "guehring-hss-to-carbide",
+   "status": "not_found",
+   "detail": "page has 224723 characters"
+  },
+  {
+   "id": "guehring-b2b-shop",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-dianoz-maker-offer",
+   "status": "fetch_failed",
+   "detail": "HTTP Error 403: Forbidden"
+  },
+  {
+   "id": "guehring-dianoz-development",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-eurofound-jobcuts",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-forum-direct-to-industry",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-forum-price",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-baumarkt-decline",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-heimwerker-brands",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-bosch-diy-drillset",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-alpen-maykestag-brands",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-heller-pro-focus",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-tormach-hobbyists",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-entry-level-3d-printing",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-vdma-precision-tools",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "guehring-dianoz-reseller",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

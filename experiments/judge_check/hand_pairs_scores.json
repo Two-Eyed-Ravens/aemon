@@ -1,0 +1,109 @@
+{
+ "scorer": "hand",
+ "dimensions": [
+  "problem_framing",
+  "evidence_judgement"
+ ],
+ "scores": {
+  "P01": {
+   "problem_framing": 1,
+   "evidence_judgement": 1,
+   "note": "Says SYN-C is “not directly related”, but it tests exactly whether styling increases wear. Ignores the Sonova finding that 57% never wear protection. Treats competitors (ISOtunes, UVX) as if they were about Hellberg. Misses that Hellberg has about 20 staff."
+  },
+  "P02": {
+   "problem_framing": 1,
+   "evidence_judgement": 2,
+   "note": "Separates company claims from independent sources, but calls reviews and a news item “independent studies”. Marks Futuresource as neutral, though it shows the home-studio market shrinking. Misses that Neumann already sells to home studios (TLM102, Home Studio Academy). Borderline 1/2."
+  },
+  "P03": {
+   "problem_framing": 2,
+   "evidence_judgement": 2,
+   "note": "Licensing and co-branding go beyond the standard options. Separates regulatory records from the company story. Misses that acr-gcn-three shows two approved competitors, and that registration adds hassle for buyers. Doesn’t check whether the 2002–03 sources come after the decision date."
+  },
+  "P04": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Says Futuresource supports a growing-market theory when it shows the market shrinking. In A11 it treats SYN-D as insight into market reach, then reverses that in A12."
+  },
+  "P05": {
+   "problem_framing": 1,
+   "evidence_judgement": 1,
+   "note": "Reads SYN-A correctly as contradicting T1, and fairly notes that wear isn’t purchase. But it labels the simulated result a company assertion and ignores the Sonova 57% figure."
+  },
+  "P06": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "The frame assumes Jotun is B2B-focused, though decorative paint is 37% of sales. Concludes DIY consumers are “not currently served”, which contradicts pci-diy, pci-share and byggern-optimal. Ignores the yacht range Jotun already sells direct to individuals."
+  },
+  "P07": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Labels Lukaski 1985 (peer-reviewed) as a company assertion. Uses one source to support T1 and T3 and contradict T2, with no reason given. Marks the key accuracy limit as neutral. Doesn’t flag sources that may come after 1993."
+  },
+  "P08": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Counts everything as support, including Apple’s EN 352 feature (a competing substitute) and the PIP acquisition (irrelevant). Misses that RNID frames the barrier as how people see earplugs, not the product itself."
+  },
+  "P09": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Uses one source to support all three theories. Never assesses q1-2024-soft or wiki-overview. Concludes from SYN-D that custom colours won’t cause logistics problems."
+  },
+  "P10": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Assesses only one source and mislabels the regulatory text as a company assertion. Finds acr-nbc-false (false alerts) but never assesses it."
+  },
+  "P11": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Same frame as P09. Uses pci-yachts to support all three theories. Never assesses q1-2024-soft or wiki-overview. Backs a new claim with SYN-D. Says T1 is “most supported” with nothing behind it."
+  },
+  "P12": {
+   "problem_framing": 2,
+   "evidence_judgement": 1,
+   "note": "Licensing and wider dealer reach are real alternatives. Marks deere-ctf-dealers as neutral to T1, though Deere dealers already selling rival lawn tractors is direct support. Doesn’t flag that green-venture and gbn-1000 describe the 1963 launch, after the decision date. Calls a competitor’s (Wheel Horse) account an “independent study”."
+  },
+  "P13": {
+   "problem_framing": 2,
+   "evidence_judgement": 1,
+   "note": "Corporate wellness is a good extra option. Misses that tanita-en-share shows Tanita already has about 50% of Japan’s scale market. Inverts cfr-exempt by relying on “regulatory clearance for medical use”. Doesn’t flag that Jebb (2000) and the household source come after 1993, or Jebb’s ±7.9 kg spread for single readings."
+  },
+  "P14": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Same as P10: assesses one source, mislabels regulatory text, and ignores the false-alert, registration and competitor evidence."
+  },
+  "P15": {
+   "problem_framing": 1,
+   "evidence_judgement": 1,
+   "note": "“Different customer group” points to agriculture or industry, not consumers. Marks everything as support. The “urbanisation and sustainability” trends are 1960s anachronisms with no source behind them. Treats Deere’s actual decision as support without flagging hindsight. Correctly notes the feasibility study shows intent, not demand."
+  },
+  "P16": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Same as P07: mislabels the studies, uses one source both ways, T2 and T3 are duplicates, and the accuracy limit is marked neutral."
+  },
+  "P17": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Same false B2B premise as P06. Pivots to automotive DIY with no source supporting it. Ignores byggern-optimal and pci-share. Recommends “maintain B2B focus” right after reading pci-diy."
+  },
+  "P18": {
+   "problem_framing": 2,
+   "evidence_judgement": 1,
+   "note": "Same frame as P03. Says acr-fr-purpose supports SAR teams as buyers, though it says PLBs are for the general public. Misses the competitors in acr-gcn-three and doesn’t check source dates. The decision rule picks a responder product from a survey that never samples responders."
+  },
+  "P19": {
+   "problem_framing": 1,
+   "evidence_judgement": 0,
+   "note": "Counts Apple’s EN 352 feature, the Radians about page and a retailer slogan as support. Finds rnid-2026-embarrassed but never assesses it, even though the test is built around it. Doesn’t note that the data is UK, 2026 and Gen Z only."
+  },
+  "P20": {
+   "problem_framing": 2,
+   "evidence_judgement": 1,
+   "note": "Same frame as P13. Marks pat-variation (readings vary by time and condition) as neutral, though it undercuts T1’s premise that buyers pay for accuracy. Same for Jebb’s spread. Doesn’t flag the household source as coming after 1993. Handles SYN-D correctly. Borderline 1/2."
+  }
+ }
+}

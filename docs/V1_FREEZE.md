@@ -5,7 +5,7 @@
 | Evaluated code | `d3aa608` (final test), `2e9cbbd` (test set 2); git tags `v1-final-test`, `v1-test2` |
 | Base model | CohereLabs/tiny-aya-global, commit `af89d21`; bf16 GGUF sha256 `4d8845665456cb90…` |
 | Adapter | LoRA `adapter_model.safetensors` sha256 `740c4a9b2f415c7b…`; converted GGUF (bf16) sha256 `41794b5756b9e0f8…` |
-| Published | huggingface.co/HatemSaadallah/tiny-aya-global-strategy-agent (both files; hashes checked 2026-11-10) |
+| Published | huggingface.co/twoeyedravens/aemon (both files; hashes checked 2026-11-10) |
 | Runtime | llama.cpp `b12032` (`dde879b`), `llama-server --parallel 1 -c 12288 -ngl 99 --jinja --reasoning-format none` |
 | Agent settings | `python -m aemon.agent.run_investigations --prompt compact --context 12288 --max-tokens 520 --max-turns 45` (4 refusals in a row stop a run; temperature 0, 0.4 on a retry after a refusal) |
 | Off by default | the recovery features (`--recovery`), verification (`agent.verify`), V1.1 (`agent.grounded`), V1-r (`agent.novelty`) and every Aemon extra |

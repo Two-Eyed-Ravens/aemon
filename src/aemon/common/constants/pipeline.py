@@ -26,6 +26,11 @@ TEACHER_WEIGHTS = {
 # Six industries and eras, including one case where no test is warranted (Jotun). Hellberg chose earlier checkpoints.
 VALIDATION_COMPANIES = ('hellberg', 'neumann', 'jotun', 'tanita', 'deere', 'acr')
 
+# The test sets by split name: the final test (frozen 2026-11-03), test set 2 (2026-11-08), test set 3 (Stage 2, 2026-11-21).
+# Nothing trains on any of them.
+TEST_CASE_FILES = {'heldout': 'cases_heldout.json', 'heldout2': 'cases_heldout2.json', 'heldout3': 'cases_heldout3.json'}
+SPLITS = ('development', *TEST_CASE_FILES)
+
 LATE = ('test', 'position', 'new_evidence', 'update', 'conclude')
 
 ANNOTATIONS = ('kind', 'geography', 'population', 'does_not_establish')

@@ -1,4 +1,4 @@
-# Strategy Lab: the redesigned interface (branch `claude/strategy-lab-ui`, 2026-11-10)
+# Strategy Lab: the redesigned interface (branch `strategy-lab-ui`, 2026-11-10)
 
 The agent is V1 as frozen (`docs/V1_FREEZE.md`). The redesign changes only the interface: no agent, prompt, tool,
 setting or evaluation code was touched.

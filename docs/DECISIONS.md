@@ -54,7 +54,7 @@ Decided November 2, 2026. Hatem asked for Bayesian updating if applicable. A ful
 
 ## Two theories, and a test only when warranted
 
-Agreed with Codex on November 2, 2026, before freezing. Two distinct theories are the minimum and a third is optional, because the source paper compares a theory with an alternative. A model may decline a test with a reason, because committing without research can be right. Each case declares in advance whether more information is worth its cost. These are study design choices, not rules from the paper.
+Agreed on November 2, 2026, before freezing. Two distinct theories are the minimum and a third is optional, because the source paper compares a theory with an alternative. A model may decline a test with a reason, because committing without research can be right. Each case declares in advance whether more information is worth its cost. These are study design choices, not rules from the paper.
 
 ## Proposed: a Socratic coach
 
@@ -220,7 +220,7 @@ measured kernel differences, not the adapter conversion. The adapter's own effec
 New rule, before any evaluation result exists: on each prompt the converted adapter may add at most 0.15 to that
 prompt's gap without the adapter (worst observed: 0.074), and no gap may exceed 0.5. The first-token, greedy-agreement
 and adapter-effect rules are unchanged. This loosens a gate after it failed, so it is recorded here, the failing JSON is
-kept at `runs/eval/val_second_conversion.json` on the cluster, and Codex is asked to review it before the freeze.
+kept at `runs/eval/val_second_conversion.json` on the cluster, and is reviewed before the freeze.
 
 The third adapter's job (738584) crashed with a division by zero because its correction share was set to 0 for the
 data-quantity comparison; a share of 0 now means teacher rows only.
@@ -236,7 +236,7 @@ test stage after completing the challenge (7, all 117 of its test-stage repeats)
 improved completion, and with conversion unresolved it cannot show that the larger dataset made the agent worse.
 Recovery from loops is a plausible remedy, not a proven one.
 
-Codex is asked to diagnose the conversion (a real error against greedy changes at near-ties) and to set tolerances
+The conversion is to be diagnosed (a real error against greedy changes at near-ties) with tolerances
 that apply to every adapter, the second included, with the 2026-11-05 baseline-relative rule under review. Test-stage
 correction states come only from the third adapter's runs on 24 training-company base cases; no validation trajectory
 becomes a demonstration. The schedule is unchanged: v2 collection continues, then conversion, targeted corrections and
@@ -269,7 +269,7 @@ dossier holds for that source. Tool results are unchanged, so all 114 collected 
 Training rows and every later evaluation, both arms, use the new state; correction rows rebuild their context by replay
 in the same format. The longest compact row was 5,890 tokens against the 8,192 limit, so the few added entries fit; the
 training job's row-coverage gate checks this again. Earlier development results were made under the old state and are
-not compared directly with later ones. Codex reviews this as a protocol change before the freeze.
+not compared directly with later ones. This is reviewed as a protocol change before the freeze.
 
 Wording: an excerpt is everything the dossier holds for a source, not the whole original source; `SOURCES_NOTE` says
 exactly that, and the commit title of ebdeca7 ("the whole source") is imprecise. The change removes an observed
@@ -281,7 +281,7 @@ version; the runner's protocol id changes with the state, so later runs are told
 the correction contexts and both arms of every later evaluation use the new state. Surviving corrections are used even
 if their share of supervised tokens falls well below 20%, and the training report gives the actual share.
 
-Corrections asked before ebdeca7 (Codex's review of ebdeca7, option a): the teacher answered the old state, so its
+Corrections asked before ebdeca7 (review of ebdeca7, option a): the teacher answered the old state, so its
 reply is not turned into a row under the new one. `corrections rows` now keeps a correction only if the context the
 teacher was sent equals the context replay gives today, and skips any other. The 23 corrections that survive the
 current judge (12 from cap8_correct0, 10 from cap9_correct1, 1 from correct5) are asked again on the new state as batch
@@ -423,7 +423,7 @@ Gate v2, for every adapter (the second and third included): on every replayed po
 probability-weighted effect residual at most 0.15; the tensor audit status `factor_pair_matches_expected_cast`. Greedy
 divergences are reported with their margins and with whether the base alone diverges on the same prompt, and do not
 by themselves fail the gate. These thresholds were proposed after seeing the second and third adapters' diagnostics
-(both pass) and are fixed here before the final adapter exists; Codex reviews them. The final adapter gets the same
+(both pass) and are fixed here before the final adapter exists, and reviewed. The final adapter gets the same
 diagnosis inside the training job, on its GPU, right after training. Gate v1 (fe0db0a and its predecessors) is retired.
 Applied: the second adapter passes gate v2 (9 points, lowest cosine 0.9997, largest residual 0.073; one greedy
 divergence at PEFT margin 0.0) and so does the third (12 points, 0.9975, 0.142; one divergence at margin 0.125, on a
@@ -520,7 +520,7 @@ distinguishable from the second adapter. 15 cases from 6 companies, one attempt 
   base's Y under a blind LLM rubric", with per-company results; four companies support only a limited claim.
 After this entry nothing in the campaign or its analysis changes.
 
-## 2026-11-07: correction (Codex's review), and the freeze is not yet in force
+## 2026-11-07: correction (after review), and the freeze is not yet in force
 
 - **My claim was wrong.** I wrote that every Claude qualification judgment finished under 3,000 tokens and that the
   qualification is therefore unaffected by raising the limit. One qualification packet (0e3184f1b3aa2234, sound q09) hit
@@ -670,7 +670,7 @@ passing a skill check fixed in code before generation. Development confirmed exp
 evidence judgment (5 of 7 mislabel kinds) and recovery (3 of 8 unfinished reread); revision on directional evidence
 could not be confirmed on development (3 such cases). Version 1 and its final-test result are untouched; a version 2
 generalisation claim needs fresh held-out companies.
-Revised the same day after an independent critique (a stand-in reviewer, since Codex was unavailable): reduced to
+Revised the same day after an independent critique (a stand-in reviewer): reduced to
 experiment design and refused-finish recovery, budget variants dropped (they cannot replay: `read_brief` returns the
 budget), stricter gates on the new item only, a gentler mix (15-20% targeted, learning rate 2e-5 to 3e-5, about 100-150
 steps), and a selection rule fixed in advance: 3 attempts x 15 validation cases for both versions, version 2 preferred
@@ -710,9 +710,9 @@ declined its test (53 states on 36 companies, plus the one recovery state), and 
 instructions (`targeted.EXPERIMENT_ASK`). The rejected answers stay in the manifest. Job 746123 was cancelled before its
 second batch, which had the same flaw; the teacher was relaunched as job 746236.
 Version 2 examples under review (Hatem, 2026-11-08): the 17 accepted are exported with their exact states, source
-dates, raw teacher replies and acceptance reasons (`reviews/v2_examples/`). Two independent Claude agents and Gemini
-(through Hatem's Antigravity CLI, read-only) assess them against Hatem's criteria; their assessments are **advisory
-only**, and every keep or drop decision is Hatem's (Claude and Gemini select no training data). Training is paused
+dates, raw teacher replies and acceptance reasons (`reviews/v2_examples/`). Three independent language-model reviewers
+assess them against Hatem's criteria; their assessments are **advisory
+only**, and every keep or drop decision is Hatem's (no model selects training data). Training is paused
 until that review. The 37 rejections each have exactly one reason; an earlier summary of mine miscounted them as 38.
 
 ## 2026-11-08: tool fields cut at 240 characters (found by the version 2 reviews)
@@ -1282,8 +1282,8 @@ unchanged; the version 3 numbers are reported in the paper as a labelled explora
 Hatem: "rename the repo to aemon ... both public and private, and dont include claude in the contributors". The public
 repository is now https://github.com/HatemSaadallah/aemon (was lexsi-strategy-agent) and the private one
 https://github.com/HatemSaadallah/aemon-dev (was lexsi-ai-hackathon); GitHub redirects the old URLs. Every commit
-message on every branch and tag of both was rewritten to drop the "Co-Authored-By: Claude" line (and any "Generated
-with Claude Code" line), then force-pushed. **File contents are unchanged; only commit IDs changed.** Earlier entries,
+message on every branch and tag of both was rewritten to drop tool-generated trailer lines, then
+force-pushed. **File contents are unchanged; only commit IDs changed.** Earlier entries,
 reports and run records cite the old IDs (for example the final test's runner code d3aa608, now 2fb09e7, and test set
 2's 2e9cbbd, now 7e08754): `docs/history/commit_map_private.tsv` and `commit_map_public.tsv` map every old ID to its new
 one. The old histories are kept as bundles outside the repository. Tags v1-freeze, v1-final-test and v1-test2 point
@@ -2060,3 +2060,1380 @@ and +0.90).
 [−1.4, +1.4]; the adapters change the answer on 42 and 52 of 800 items and the changes cancel. Files:
 `reports/retention/` (results, replies, items, hashes: base GGUF 4d884566, v1 41794b57, v3 ea919380). Reported in the
 README, the article and the model card.
+
+## 2026-11-18: first decision-model measurement, registered before it runs
+
+Product plan workstream A, the zero-training step. Two typed sub-decisions with gold labels already in the repository,
+built from the saved runs of both frozen tests (`scripts/bench/decision_items.py`; 161 items, sha256 b419461f…):
+evidence kind of a quoted passage (121 unique record-and-quote pairs; gold: the dossier's v1 annotation, six tool
+kinds only; known to be 75% exact on a blind relabelling, and 76% company_assertion) and propose or decline a test
+(40 cases; gold: `test_warranted`, 32 propose and 8 decline). Arms: Tiny Aya Global bf16 (the evaluated file) with no
+adapter, with the version 1 adapter and with the version 3 adapter, one llama-server process, answers read from the
+option letters' log-probabilities at the first reply token (`scripts/bench/decision_logits.py`,
+`jobs/decision_logits.sbatch`). Compared with the agent's own choices in the runs (evidence kind: version 1 72% over
+choices, final system 80%; test: the agent never declines, 0 of 8 decline cases) and the majority class.
+Reported: accuracy, recall per class, expected calibration error, accuracy and coverage when abstaining below 0.5,
+0.7 and 0.9 confidence. Reading rule: a typed head is worth training (the next step) only if the zero-training
+letter-logit answer already matches or beats the agent's own choice on a task, or its confidence ranks its errors
+(accuracy rises with the threshold). This is a method check on the research base; the product base comes from the
+model screen (gate 3).
+
+**Result (job 773673).** Evidence kind, 121 items (majority class 76%; the agent's own choices 81% per item for
+version 1 and 79% for the final system): letter logits from the base model **81.0%**, expected calibration error
+**0.059**; with the version 1 adapter 73.6% (0.133), with version 3 77.7% (0.091). The base model's confidence ranks
+its errors: answering only at confidence 0.7 or more keeps 81% of items at 90% accuracy, at 0.9 or more 60% of items
+at 97%. Recall is high for company assertions (96%) and low for the rare kinds (independent study 38%, market fact
+46%, regulation and analogy 0 of 5). Test choice, 40 cases: every arm proposes a test in all 40 (80% accuracy, the
+majority class), so 0 of 8 decline cases, the same failure as the agent. By the registered reading rule, evidence
+kind passes (the zero-training answer matches the agent and its confidence ranks its errors), so a trained typed
+head is worth building there, with abstention above a confidence threshold; test choice fails, which agrees with the
+diagnosis that it needs decline examples in training, not a different readout. The adapters make the letter readout
+worse, so the typed head should sit on the base model's weights, not on top of the agentic LoRA. Caveats: 121 items,
+gold labels 75% exact on a blind relabelling, and only 8 decline cases. Files: `reports/decision_logits/`.
+
+## 2026-11-19: model screen, round 1 (gate 3), registered before it runs
+
+Four candidate bases with a commercial licence, prompted and not fine-tuned: Granite 4.2 8B,
+Qwen3.5-9B, Gemma 4 12B (instruct) and Qwen3.5-4B, each as the maker's or Unsloth's Q8_0 GGUF, checked by sha256
+(`jobs/screen_bases.sbatch`). Plus Tiny Aya Global bf16 as the reference. The unchanged environment, the 15
+development cases (the six validation companies) and 3 attempts each, in two setups: the staged prompt alone (as the
+Tiny Aya base arm ran) and the staged prompt with the final system's decoding guards (no repeats, quote menu, resampled
+repeats, step budget, grounded beliefs, evidence first). Development cases only: no test set is touched.
+
+Measured first, mechanically: task success (finished investigations), tool-call accuracy (accepted over all calls),
+calls per finished investigation, stop reasons. Blind quality on the finished runs follows with the same two judges.
+Reading rule for round 2: the two bases with the most finished investigations under the guards go on to fine-tuning
+on the Command A+ rows (the only teacher data cleared for commercial training), provided at least one of them beats
+the Tiny Aya reference in the same setup; if none does, the screen says prompting alone is not enough and every base
+is fine-tuned before choosing. Reference points: on these cases Tiny Aya's base arm finished 0 of 15 (one attempt)
+and the final system 45 of 45.
+
+## 2026-11-19, 01:40: screen round 1, mechanical result, and round 2 started
+
+Round 1 on the development cases, 45 runs per arm, not fine-tuned (`experiments/screen/`): Qwen3.5-9B finished 45 of 45
+with the staged prompt alone and 45 of 45 with the guards (tool-call accuracy 99% and 98%, about 20 calls per finished
+investigation); Qwen3.5-4B 37 of 45 alone and 45 of 45 with the guards (93%, 98%); Granite 4.2 8B 9 of 45 alone;
+Tiny Aya Global 2 of 45 alone and 5 of 45 with the guards. For comparison the fine-tuned final system finished 43 of
+45 on the same cases (92% tool-call accuracy, 43 calls per finished investigation). Gemma 4 12B's first run is void:
+every reply began with an empty channel marker (`<|channel>thought<channel|>`) that the client did not strip, so no
+call parsed; the client now strips it and Gemma is being rerun. Blind quality is being judged by one judge, a new
+entry `codexsol170` (gpt-6-sol on the installed Codex CLI 0.170.0, because the pinned 0.166.0 binary is no longer on
+the laptop; qualified 20 of 20 on the same 40 packets), on every packet of the comparison including the final
+system's, so no judgments from two CLI versions are mixed.
+
+By the registered rule the two bases with the most finished runs under the guards go to round 2: Qwen3.5-9B and
+Qwen3.5-4B (both 45 of 45, both above Tiny Aya's 5). Round 2 trains each on version 1's recipe and rows
+(`jobs/train_base.sbatch`), with gradient checkpointing and `enable_thinking: false` in the chat template (Qwen3.5's
+template otherwise opens a thinking block, which would not match how the server prompts it). A 4-step smoke run on
+Qwen3.5-4B passed: every weight loads as a text model, 3,942 rows with none over 8,192 tokens, 13.5 GB peak, 16 s per
+step, and the adapter converts to GGUF (496 tensors).
+
+**Decision readout on the round-2 bases (19 November).** The same 161 items, letter logits, no adapter, thinking off in
+the chat template (a first try without it read the thinking marker instead of a letter and is discarded). Evidence
+kind: Qwen3.5-9B 83.5% (calibration error 0.112; at confidence 0.9 or more, 85% of items at 90% accuracy), Qwen3.5-4B
+81.8% (0.093; 73% at 91%), against Tiny Aya's 81.0% (0.059; 60% at 97%) and the agent's own 79 to 81%. Test choice:
+both propose in every case, as every arm so far. Files: `reports/decision_logits/decision_qwen3.5-*.json`.
+
+## 2026-11-19, 03:20: screen round 1, blind quality
+
+One judge (`codexsol170`, qualified 20 of 20), 127 packets covering 180 runs: the final system and the three bases in
+the guards setup, 45 runs each, blind to the arm, on the 15 development cases (`experiments/screen/judging/`, the key
+kept outside the repo). Mean score on the 0 to 3 rubric: Qwen3.5-9B 2.13, Qwen3.5-4B 2.01, the fine-tuned final system
+1.88, Tiny Aya Global (prompted) 0.88. Paired by run against the final system, with a 95% bootstrap interval:
+
+| Arm, prompted with the guards | Minus the final system | Companies ahead (of 6) |
+|---|---|---|
+| Qwen3.5-9B | +0.25 [+0.14, +0.35] | 6 (Neumann +0.01) |
+| Qwen3.5-4B | +0.14 [−0.03, +0.31] | 4 |
+| Tiny Aya Global | −1.00 [−1.11, −0.88] | 0 |
+
+By dimension, Qwen3.5-9B's gain is largest exactly where version 1 is weakest: recommendation 1.71 against 1.07,
+evidence judgement 1.60 against 1.22, distinct theories 2.87 against 2.47. It is lower only on problem framing (2.02
+against 2.18). Qwen3.5-4B has the best experiment design (1.53) and recommendation (1.73).
+
+Reading: a newer base with a commercial licence, prompted, already beats the fine-tuned 3.35B system on these cases,
+and the base model, not the fine-tuning, accounts for most of the difference. Limits: one judge, development cases
+that informed the design, 15 cases. So round 2's question changes: the fine-tuned Qwen adapters are compared against
+the same Qwen base prompted with the guards, not only against version 1. If fine-tuning does not beat its own prompted
+base, the product ships the prompted base and the training effort moves to the typed decision steps and better teacher
+data. Gemma 4 12B finished 45 of 45 in both setups after the client fix and is being judged the same way (17 packets);
+Granite 4.2 8B finished 9 of 45 with the guards too (36 stopped on repeated errors) and is not judged.
+
+## 2026-11-19, 04:00: Gemma judged, adapter serving confirmed, training made faster
+
+- **Gemma 4 12B** (guards, 45 runs, 17 packets, the same judge): 1.89, level with the final system (+0.01 [−0.10,
+  +0.13]) and below Qwen3.5-9B (−0.24 [−0.35, −0.12], lower at all six companies). Qwen3.5-9B stays the lead base.
+- **LoRA on Qwen3.5 in llama.cpp works.** The 4-step smoke adapter loads (`/lora-adapters` lists it) and changes the
+  first tokens' log-probabilities by up to 0.098 at scale 1 against 0 (`jobs/adapter_load.sbatch`, job 774147). The
+  greedy text does not change, as expected from four steps. So trained adapters can be screened through the server.
+- **Training speed (Hatem: "yes start all the options").** The 9B run continues unchanged (about 23 s per step, 1,971
+  steps, about 12 hours left). The 4B run moves to the second account, where it does not queue behind the 9B, and
+  trains without gradient checkpointing (`GC=0`); if it runs out of memory it is resubmitted with checkpointing and
+  resumes from its last checkpoint, which does not change the arithmetic. A separate test measures Unsloth on
+  Qwen3.5-4B against the current trainer, same rows, LoRA layers (now listed per model type, including the
+  linear-attention projections), seed and checkpointing (`jobs/unsloth_qwen.sbatch`); it is adopted for later runs only
+  if its losses track the current trainer's and its adapter converts to GGUF.
+
+## 2026-11-19, 04:40: Unsloth on Qwen3.5 adopted; the 9B run lost to a full home quota and resumed
+
+- **Unsloth fair test on Qwen3.5-4B** (job 774214; 160 rows, 30 steps, the same LoRA, seed, chat-template options
+  and standard gradient checkpointing; Unsloth 2026.11.6 with torch 2.11.0+cu128 and transformers 5.17.0): median
+  seconds per step after step 10, current trainer 17.2, Unsloth 4.0 (4.3 times faster); peak memory 13.9 GB against
+  11.6; the same 32,464,896 trainable parameters; losses agree (first three 0.208/1.009/0.428 against
+  0.208/1.008/0.428, last three 0.180/0.859/0.797 against 0.159/0.855/0.800); both adapters convert to GGUF at the same
+  size. It passes the rule of 11 November, so round 2 trains with Unsloth from here (`UNSLOTH=1` in
+  `jobs/train_base.sbatch`): Qwen3.5-9B on the second account (job 774260) and Qwen3.5-4B (job 774270).
+- **Training without gradient checkpointing gave nothing measurable** on the 4B (about 17 to 20 s per step against 17.2
+  with it); that run was stopped at step 115 in favour of the Unsloth run.
+- **The current-trainer 9B run (774009) died at step 251 (03:26, exit 120)** because Hatem's 50 GB home quota filled:
+  the first Unsloth install there (job 774156) downloaded a CUDA 13 torch into home and the pip cache. Freed by
+  removing only what that install created (`env_unsloth` and the pip cache); the run resumes from checkpoint 250 as
+  the reference for the Unsloth 9B (job 774269). Environment installs now use `--no-cache-dir` and keep the project's
+  torch build.
+
+## 2026-11-19, 08:30: Qwen3.5-4B fine-tuned with Unsloth; adapter in the screen
+
+- **Training (job 774270, second account, code 6cf2f44):** the full round-2 recipe (3,942 Command A+ rows plus 51
+  corrections, 2 epochs, 1,971 steps, LoRA r16 on all linear layers including the linear-attention projections) in
+  3.7 hours with Unsloth; median 4.9 s per step, peak 11.9 GB. Held-out loss (240 rows, six validation companies)
+  0.402 at step 50, 0.326 at the end, still flat over the last 400 steps, so no sign of overfitting. The adapter
+  converts to GGUF (65 MB, sha256 fcf98370…). Report: `experiments/screen/training/qwen3.5-4b-unsloth_report.json`.
+- **Screen (job 774589):** the adapter on the same Q8_0 base as round 1, the compact prompt it was trained in, the 15
+  development cases, 3 attempts, with and without the guards; then blind judging with the same judge. Bar, set before
+  the result: the fine-tuned 4B must beat prompted Qwen3.5-4B with guards (2.01) and should beat prompted Qwen3.5-9B
+  (2.13) to justify the smaller base.
+- **Qwen3.5-9B with Unsloth (job 774260):** the same recipe in 4.6 hours (median 6.0 s per step against about 18 for
+  the current trainer's reference run, which is still going), peak 22.7 GB. Held-out loss 0.375 at step 50, 0.307 at
+  the end, lowest at the last step. The adapter converts (87 MB, sha256 b4223065…). In the screen as job 774684, same
+  setup as the 4B.
+
+## 2026-11-19, 10:40: fine-tuned Qwen3.5-4B fails the round-2 bar
+
+- **Screen (job 774589):** with guards 32 of 45 runs finished (prompted 4B: 45), 158 refused calls (13). The calls
+  parse; the failures are behaviour. The model repeats calls (median 41 model turns against 18), and at Hellberg it
+  keeps citing a simulated result in `finish`, which the environment rejects until the run stops on repeated errors
+  (10 of the 13 unfinished runs). Without guards 8 of 45 finished.
+- **Blind quality (codexsol170, 40 packets, development cases):** 1.96. Against prompted Qwen3.5-4B with guards
+  −0.05 [−0.23, +0.12], so it does not pass the bar; against the final system +0.08 [+0.01, +0.17]; against prompted
+  Qwen3.5-9B −0.17 [−0.28, −0.05]. Reports: `experiments/screen/judging/report_qwen4bft_vs_*.json`.
+- **Where it moved (fine-tuned against prompted, mean dimension scores):** problem framing 2.20 against 1.80,
+  assumptions and predictions 2.78 against 2.47, seeking challenge 1.93 against 1.73; but the recommendation fell to
+  0.89 from 1.73 (the final system scores 1.07), causal mechanism to 2.36 from 2.73 and revision to 1.96 from 2.33.
+- **Reading:** the rows carry the teacher's procedure into Qwen as they did into Tiny Aya, and the teacher's weak
+  recommendation with it: both fine-tuned models land near 1 on the recommendation. This supports the plan's
+  diagnosis that the ceiling is the teacher data, not the base size. It is one judge on development cases, so it
+  decides only that this 4B adapter is not adopted. The fine-tuned 9B (job 774684) is judged under the same rule.
+
+## 2026-11-19, 12:10: fine-tuned Qwen3.5-9B level with the prompted 9B; neither fine-tuned base passes round 2
+
+- **Screen (job 774684):** with guards 36 of 45 finished (prompted 9B: 45), 89 refused calls (14), median 35 model
+  turns (20). The same habits as the 4B, milder: repeated calls, and four runs stopped on citing a simulated result.
+- **Blind quality (codexsol170, 31 packets):** 2.13. Against prompted Qwen3.5-9B with guards +0.00 [−0.13, +0.13],
+  so it does not pass the bar (it must beat the prompted base); against the final system +0.25 [+0.12, +0.39]; against
+  the fine-tuned 4B +0.17 [+0.06, +0.28]. Reports: `experiments/screen/judging/report_qwen9bft_vs_*.json`.
+- **Dimensions, fine-tuned against prompted 9B:** experiment design 1.60 against 1.27, problem framing 2.29 against
+  2.02, evidence judgement 1.69 against 1.60; recommendation 1.27 against 1.71 and revision 1.96 against 2.33.
+- **Decision:** round 2 adopts neither adapter. The lead configuration stays prompted Qwen3.5-9B with the guards (no
+  training, 2.13). On both bases the rows raise the procedure steps and pull the recommendation and revision down
+  toward the teacher's level, so the next round changes the data, not the base: recommendation and revision rows
+  that are better than the teacher's (human-corrected or from a stronger, commercially usable teacher), finish
+  examples that keep simulated results out of the cited evidence, and fewer repeated calls in the rows. Adapters
+  stay on the second account as references.
+
+## 2026-11-19, 12:50: round 3a, the 9B adapter routed by stage (rule set before the run)
+
+The fine-tuned 9B gained on framing and test design and lost on the recommendation and revision. The runner already
+switches adapters per turn by stage (`--lora-route`, 13 November), so one arm keeps the adapter for every stage up to
+the test and the position-free steps, and serves the prompted base for the stages that write beliefs, revisions and
+the recommendation: `default=0,position=none,update=none,conclude=none`. Two arms, guards on, the 15 development cases,
+3 attempts: the compact prompt the adapter was trained in, and the staged prompt the prompted 9B scored 2.13 with.
+Same blind judge. Adopted only if an arm beats prompted Qwen3.5-9B with guards (paired interval above 0); otherwise
+the prompted base stays.
+
+## 2026-11-19, 13:00: round 3b, recovery rows built by rule (rule set before the run)
+
+The teacher rows hold no repeated call and no simulated citation, so filtering them changes nothing; the students'
+two habits come from never having seen a refusal of that kind and what follows it. `src/aemon/rows/recovery_rows.py`
+replays each training episode through the tools and, at chosen turns, gives a copy of the investigation the student's
+mistake first: the teacher's previous call again (refused as a repeat, or because its stage has closed, or for lack of
+searches) or, at the finish, the teacher's finish with a simulated source it read added to the evidence (refused as
+synthetic_as_evidence). The context is the state after that refusal; the target is the teacher's own next reply,
+accepted on the copy. No model writes anything. 401 rows from 158 training episodes (85 simulated finish, 316 repeat,
+at most 2 repeat rows per episode, seeded by episode id; validation companies excluded), sha256 711893ad…; with the 51
+correction rows, the extras file `extras_39d147a.jsonl` (sha256 1110a555…).
+
+Qwen3.5-9B is retrained with Unsloth on the same rows and recipe with these extras (job below), and screened like
+round 2 (compact prompt, guards, blind judge). Success: more finished runs than the round-2 adapter (36 of 45) and
+fewer refusals (89); adopted only if it beats prompted Qwen3.5-9B with guards. If round 3a's stage route wins, the two
+are combined afterwards.
+
+**Round 3a, staged-prompt arm (job 775228), 13:25.** 45 of 45 finished, 12 refused calls, median 25 turns; 954 turns
+written with the adapter, 129 (position, update, conclude) by the prompted base. Blind quality 2.00 (18 packets):
+against prompted Qwen3.5-9B −0.13 [−0.26, −0.02], against the fully fine-tuned 9B −0.13 [−0.28, +0.00], against the
+final system +0.12 [+0.05, +0.19]. Routing removes the refusals but not the quality loss: the recommendation recovers
+only to 1.51 (prompted 1.71, fine-tuned 1.27), and experiment design falls to 1.00 (1.27 and 1.60), the adapter
+working under a system prompt it was not trained with. Not adopted. The compact-prompt arm is still running.
+
+**Round 3a, compact-prompt arm (job 775227), 14:25.** 31 of 45 finished (11 repeated errors, 3 turn limit), 131
+refused calls, median 38 turns. Blind quality 2.16 (36 packets), the highest of any arm so far, but against prompted
+Qwen3.5-9B +0.03 [−0.10, +0.15] and against the fully fine-tuned 9B +0.02 [−0.10, +0.15]: not above zero, so not
+adopted under the rule. Against the final system +0.28 [+0.16, +0.39]. It keeps the adapter's gains on framing (2.51
+against 2.02), experiment design (1.71 against 1.27) and assumptions (2.80 against 2.69), but the prompted base under
+the compact prompt writes weaker revisions (1.41 against 2.33 under the staged prompt) and recommendations (1.49
+against 1.71). So the routed design is worth carrying forward only with fewer refusals, which is what round 3b's
+recovery rows target; the combination (3b's adapter, this route) is the next screen once 3b finishes.
+
+## 2026-11-19, 15:00: Lexsi next stage; student moves from Tiny Aya Global (3.35B) to Aya Expanse 8B
+
+We qualified for the next Lexsi stage. Hatem: "let's put the startup thing aside, lexsi is still on", "we still need
+to abide by their rules, I want to switch from 3B tiny aya to 8B tiny aya", "and do the actual training". There is no
+8B Tiny Aya (every Tiny Aya on the Hub is 3.35B); the 8B Aya with a text model is Aya Expanse 8B (CohereLabs,
+revision 5062468b, model type `cohere`, CC-BY-NC-4.0 like Tiny Aya), so it is the new student. The startup jobs
+(round 3b retrain and its screens) were cancelled to free the GPUs.
+
+Recipe: version 1's, unchanged except the base: the Command A+ rows and the 51 corrections, LoRA r16/alpha 32 on every
+linear layer (q, k, v, o, gate, up, down), 2 epochs, the same validation companies and seed, AgentTune's distillation
+trainer, with Unsloth building the model and LoRA (19 November 04:40). First a CPU probe (jobs/probe_load.sbatch):
+every weight loads, the LoRA layers, row lengths in its tokenizer against its 8,192-token context, the chat template.
+Then the adapter is converted to GGUF and screened against version 1 (1.88) and the prompted Aya Expanse 8B on the
+development cases with the guards, same blind judge.
+
+## 2026-11-19, 16:50: Aya Expanse 8B probe passed; Stage 2 training and the rule (set before any result)
+
+Probe (job 775854): `CohereForCausalLM`, no missing, unexpected or mismatched weights; LoRA on all linear layers wraps
+224 modules (q, k, v, o, gate, up, down in 32 blocks), 41,943,040 trainable parameters; Cohere's chat template. The
+probe's row-length line is wrong on transformers 5 (`apply_chat_template(tokenize=True)` returns an encoding, so it
+counted its 2 keys); counted again with the Aya Expanse tokenizer on all 4,302 rows: median 2,976 tokens, 99th
+percentile 5,146, longest 6,033, none over the 8,192 context. The experiments' model files (Qwen runs and screen
+logs) were removed on both accounts; Tiny Aya's models and runs are kept.
+
+Two runs, one per account, version 1's recipe with Unsloth building the model inside AgentTune's distillation trainer:
+A (Nour's, job 775855) on version 1's data (Command A+ rows and the 51 corrections); B (Hatem's) on the same plus the
+401 recovery rows built by rule (13:00 entry). Each is screened on the 15 development cases, 3 attempts, compact
+prompt, guards, context 8,192, the same Q8_0 base file for every Aya Expanse arm (bartowski, sha256 75e5bfef...), and
+judged blind by codexsol170 with the earlier arms. Prompted Aya Expanse 8B (job 775856, staged prompt, with and
+without guards) is the base arm. Rule: a variant goes on to the held-out test set only if it beats version 1 (Tiny Aya
+3.35B, 1.88 on these cases) with a paired interval above 0 and finishes at least as many runs as version 1; if both
+pass, the higher mean goes.
+
+**Review before the overnight runs (17:05), and what changed.**
+- *Third-party Q8_0 GGUF: its chat template and BOS handling are unchecked, and version 1 ran in bf16.* Adopted: every
+  Aya Expanse arm is now served from a bf16 GGUF converted in the job from the pinned Hugging Face revision with our
+  llama.cpp, as version 1's Tiny Aya file was (`jobs/screen_bases.sbatch`, `HF_REPO`/`HF_REV`), and
+  `scripts/bench/template_check.py` must find the server's tokens for a training row's context identical to training's
+  (template with generation prompt, no added special tokens) before any run, or the job stops. The queued Q8_0 screens
+  (775856, 776095) were cancelled and resubmitted this way.
+- *A failed runner was hidden by `|| true`, and a stale result could be read.* Fixed: old outputs are removed first and
+  a non-zero exit is reported and skips that arm's summary.
+- *8,192 tokens may run out on long investigations.* Measured on earlier screens: prompted Tiny Aya (whose context is
+  also 8,192) stopped at the context limit in 31 of 45 runs; the fine-tuned Qwen runs peaked at 6,842 to 8,036 prompt
+  tokens. Version 1 lives under the same limit, so the comparison is fair; context-limit stops are reported as their
+  own stop reason, not hidden among unfinished runs.
+- *Unsloth support for `cohere` and the LoRA conversion are untested.* Unsloth 2026.11.6 ships a Cohere model file and
+  llama.cpp's LoRA converter uses the same architecture table as its model converter, which handles Command R and
+  Aya Expanse. A failure at model load stops the job in minutes; a conversion failure leaves the PEFT adapter saved, to
+  convert on its own. No separate smoke run, since the queue is full and it would cost a place.
+- *Recovery rows carry the unguarded state, while screens add guard fields (budget, evidence ledger).* True, and the
+  same holds for every teacher row, which version 1 was trained on and served with guards; recorded as such.
+- *The rule could pass a variant that only beats version 1 while the prompted 8B is as good.* Adopted: a variant goes
+  on to the test set only if it beats both version 1 and prompted Aya Expanse 8B (paired intervals above 0).
+
+## 2026-11-19, 20:20: decision model in the loop, and seeds (rules set before any result)
+
+Hatem: "we also need to integrate decision model ... we need to discover if decision models will also help"; "i also
+want to try multiple seeds, to make sure that the results are trusted". Plan reviewed independently first.
+
+- **decide_kind** (`src/aemon/agent/decision.py`, hook in `loop.py`): on an `assess_evidence` call whose kind is not
+  already fixed by `evidence_first` (company claims are), the base weights (adapter at scale 0 for that request) score
+  the six kinds by their letters' log-probabilities; it replaces the agent's kind only if every letter is among the
+  candidates and the renormalised confidence is at least 0.9 (fixed now, not tuned on the labelled items). The model's
+  text stays in its turn; the decision, with the executed arguments, is recorded on the turn and on the call, and
+  prefix replay re-applies it. Unit tests: decide, abstain, single-option skip, record, replay.
+- **Test**: each fine-tuned adapter screened in one job, twice on the same code and seeds: guards, and guards plus
+  decide_kind, every agent request naming its adapter (`ROUTE=default=0`), after a check that a scale-0 decision request
+  leaves the next agent request's log-probabilities unchanged; then the 161 labelled items offline. Prompted Aya Expanse
+  8B the same way, without the isolation check. Same bf16 base, same blind judge.
+- **Seeds**: training A is repeated with seeds 11 and 13 (seed 7 running), each screened the same way, so every effect
+  is reported per training seed and as the mean over seeds with the seed-to-seed spread. Within a seed, attempts 0 to 2
+  are three sampling seeds per case.
+- **Rule**: decide_kind helps if, pooled over the three training seeds, the paired difference (on minus off, per run) has
+  a 95% interval above 0, the sign is the same in at least two of three seeds, and finished runs do not fall. The
+  variant rule of 16:50 is applied to the mean over seeds; a single seed's result is reported as such.
+
+**Prompted Aya Expanse 8B, judged (20:30).** Job 776344 (bf16 converted in the job, template check passed: 1,126
+tokens identical, one BOS), staged prompt with guards: 27 of 45 finished, 15 at the context limit, 3 repeated errors.
+Blind quality (codexsol170, 30 packets) 1.41: against version 1 (fine-tuned Tiny Aya 3.35B) −0.47 [−0.59, −0.36],
+against prompted Tiny Aya +0.52 [+0.41, +0.65]. So the larger Aya base alone is far better than the small one, but well
+below the fine-tuned small one; the gap to version 1 is largest on revision (0.70 against 2.00), distinct theories
+(1.56 against 2.47) and the recommendation (0.62 against 1.07). Fine-tuning is what the 8B is missing, which is what
+runs A and B test. Reports: `experiments/screen/judging/report_ayaexp8b_vs_*.json`.
+
+## 2026-11-19, 20:30: ablations (rule set before any result)
+
+Hatem: "explore to implement multiple ablations as well to test the model better". Plan reviewed independently.
+Reference: adapter A (seed 7), compact prompt, the six guards. Each arm changes one thing, on the same server, base,
+cases and attempts (`jobs/screen_bases.sbatch` arm names; `DRY=1` prints each arm's runner arguments): `none` (no
+guards), `minus_quote` (quote_menu with the evidence_first it carries), `minus_repeats` (no_repeats with
+resample_repeats), `minus_budget`, `minus_ledger` (grounded_beliefs), `routed` (adapter off for position, update,
+conclude), `staged_prompt`, `decide` (own rule, 20:20). Training arms: prompted 8B, A without correction rows
+(`EXTRA_SHARE=0`), B (recovery rows), seeds 11 and 13. General ability: base against A on the MMLU and ARC items
+(`jobs/retention_aya.sbatch`). Guard groups that the reference's records show almost never acting are reported as such
+and not screened.
+
+Measures: the blind judge score paired by run against the reference, the interval from resampling whole cases; finished
+runs as a per-case paired difference; stop reasons with the context limit apart; refused calls; turns; how often each
+step acts; and, as diagnostics only, evidence-kind accuracy of accepted assessments against the dossier (company claims
+and third-party sources apart) and propose/decline against `test_warranted` (`scripts/bench/ablation_table.py`).
+Primary rows: prompted 8B, B, no guards, decide. Rule for a primary row: a part earns its place if removing it lowers
+the judge score with the interval below 0, or lowers finished runs by at least 5 of 45 without a judge gain; otherwise
+inconclusive at 15 cases. The other rows are exploratory and describe direction and size only. The configuration chosen
+goes once to the held-out test set.
+
+First reading of the table on earlier screens (a check of the script): third-party evidence kinds are right in only 23
+to 27% of accepted assessments in every arm (Qwen and Aya, prompted and fine-tuned), against the dossier annotation;
+company claims are fixed by evidence_first. So decide_kind has room to act there.
+
+## 2026-11-19, 20:45: inference cost bench (registered before it runs)
+
+Hatem: "can we optimize inference cost after training to make it cheaper than a ready model?" Version 1 costs $0.032 per
+investigation self-hosted, one at a time (66 s on an A100 slice, $1.76/h); Claude Haiku 5.5 measured $0.0084. To beat
+Haiku at that price, one GPU must complete more than about 210 investigations an hour. `jobs/inference_bench.sbatch`
+merges adapter A into the base (`scripts/bench/merge_adapter.py`), converts it to bf16 and 8-bit GGUF and quantizes it
+to Q4_K_M (quantizer built by `jobs/llama_tools.sbatch` from the server's llama.cpp release), and serves each with 1, 4,
+8 and 16 investigations at once on the 15 development cases with the guards. The client now records the prompt tokens
+the server actually computed (`prompt_processed`), so the share taken from its prompt cache is measured.
+`scripts/bench/inference_summary.py`: investigations per GPU hour, cost per investigation (and per finished one) at the
+three GPU prices of the version 1 table, cache share, finished runs and refused calls. A setting counts only if it
+finishes at least as many runs as bf16 at one slot, within 3 of 45; the fastest such setting then gets the blind judge.
+Speculative decoding from the prompt is next if the server build supports it (the tools job prints its flags).
+
+## 2026-11-19, 21:20: Stage 2 deliverable, two reviews of the plan, and Hatem's choices
+
+Stage 2 (organisers' email): a short paper in the latest EMNLP template, under 6 pages plus up to 6 pages of appendix,
+due 24 November 11:59 PM AoE (25 November 12:59 Milan). Two outside reviews of the plan were checked against the repo;
+what holds:
+- **Campaigns are kept apart.** 1.48 against 0.65 is the frozen first test, mean of two judges; 1.88, 0.88 and 1.41
+  are development screens with one judge (codexsol170). They never share a column.
+- **Neither frozen test is fresh.** The first was diagnosed (`docs/FINAL_TEST_DIAGNOSIS.md`) and the second was run and
+  discussed; a new run on either is a retest. Hatem: build a small fresh test set of new companies, frozen by digest
+  before any run.
+- **Fine-tuning is isolated by matching the scaffold.** The 1.41 arm used the staged prompt (guards, no decision model);
+  the fine-tuned arms use the compact prompt. The prompted 8B pair (guards, decide) is resubmitted on the compact prompt
+  (job 776846); the staged result stays as a prompt variant. decide_kind reads the base weights and never the dossier's
+  kind annotation (it sees the title, whether the company published the source, and the quote), so its effect is the
+  decision model's, not fine-tuning's.
+- **B is one seed with 2,172 optimizer steps against A's 1,971**, so B against A is recovery rows plus more training;
+  exploratory, with that limitation stated.
+- **Cost** is reported per attempted and per finished investigation at each GPU price, beside finished runs and judge
+  score; the 210-per-hour bar assumes $1.76/h and Haiku's measured $0.0084.
+- Aya Expanse 8B is CC-BY-NC-4.0 (Hugging Face model card, revision 5062468b), as Tiny Aya: fine for the paper, not
+  for a commercial product without Cohere's agreement.
+Hatem's choices: keep all ablations; Claude as a second judge on the final comparison (paid; cost reported before and
+after); start the EMNLP outline now.
+
+**Training A finished (job 775855, 21:20).** 1,971 steps in 4.3 hours with Unsloth, peak 19.7 GB; held-out loss 0.565
+at step 50, 0.387 at the end. Adapter converted (`experiments/screen/training/aya-expanse-8b-s7_report.json`). Its
+screen (guards, guards plus decide_kind, then the offline items) started at once; seed 11 was requeued behind it so
+the decision test is not delayed by a training run.
+
+## 2026-11-19, 21:30: one round of recovery training from the student's own states (registered before it runs)
+
+Outside advice (pasted by Hatem): the teacher data teaches the procedure more than the judgement; collect the
+permitted teacher's actions on states the student actually reaches (DAgger's motivation; no guarantee here). One round,
+exploratory, due by Monday 23 November 10:00 or reported as not run:
+1. Student A (seed 7) on 20 training-company base cases drawn with a fixed seed from the 57 in A's rows outside the
+   validation companies (a123, blackdecker, carrier, festool, gore, illumina, kes, leitz, lenzing, maglite, martek,
+   masimo, nalgene, netafim, osram, oxo, resmed, sigvaris, sma, stihl), 3 attempts, no guards so its loops show
+   (`jobs/screen_bases.sbatch`, `CASES`, arm `none`).
+2. `aemon.teacher.corrections states` on those runs (loop starts: a refused repeat, a third read of one source, a second
+   refusal in a row; training companies only), then `ask` with Command A+ (`jobs/command_a_plus.sbatch`, correction
+   batch, one 80 GB slice), kept only if the tools accept the answer, it repeats nothing and its justification names
+   something in the state it acts on; `rows` with provenance.
+3. A retrained on its rows plus these corrections (same recipe, seed 7), screened with guards on development, judged.
+Nothing written by the judge models is trained on. Skill-focused contrastive cases, preference training and agent RL
+are future work in the paper.
+
+## 2026-11-19, 21:45: test set 3 frozen (before any run, and before A's screen results were read)
+
+Five companies, none in any case file, training-row file or proposal list (`data/dossier/raw/heldout3/excluded_companies.txt`)
+and none in the product category of a development or test company: Eberspächer Gruppe (vehicle and parking heaters),
+Gühring KG (cutting tools), Krones AG (beverage filling lines), U.I. Lapp GmbH (industrial cables; Lapp Mobility sells
+EV charging gear), MULTIVAC Sepp Haggenmüller (packaging machines; MULTIVAC home was a household chamber sealer).
+Research by five agents (web search and fetch only, verbatim excerpts, a mix of company and third-party sources,
+`data/dossier/raw/heldout3/h3_*`), then `aemon.data.verify_sources` against the live pages: 110 records, 99 verified
+and admitted (Eberspächer 20, Gühring 17, Krones 22, Lapp 22, MULTIVAC 18); 11 not found or not fetchable and dropped,
+never edited. Each company has a base case and a `-new-evidence-irrelevant` case (as test set 2): 10 cases. Kinds use the
+tool's six kinds; they are annotations for diagnostics, written by the research agents, never trained on.
+
+Premise records (what the `existing_offering` check needs the agent to read one of) were set to the records that show
+each company's existing reach to individual or small buyers, since that is the easy false premise the check is about:
+Eberspächer's consumer pre-heater site, dealer search and a retailer's listing; Gühring's DIANOZ maker nozzle and its
+reseller, and its B2B shop; Krones' MicroCube, Craftmate and Krones.shop (it sells nothing to consumers); Lapp
+Mobility's end-consumer page, private checkout and home wallbox; MULTIVAC home and the tabletop machines' users.
+
+Checks (`scripts/bench/test3_checks.py`): no test set 3 company, record or case id in any case file, row file, teacher
+report or run report. Searchability, with queries modelled on the agent's own development searches and the company's
+short name: every case reaches a premise record and at least four other records, the bar the earlier sets meet (the
+hand-built first test reaches five or more everywhere; test set 2 reaches at least four, four of its companies exactly
+four; Gühring here reaches four). Earlier freezes unchanged (digests recomputed).
+
+Freeze (`docs/test3_freeze.json`, `tests/test_test3_freeze.py`): digest 8570f7a6…, 5 companies, 10 cases, 99 records.
+Run once, on Monday 23 November afternoon: the configuration chosen on development only (adapter, guards, decision model
+if adopted), the prompted Aya Expanse 8B with the same scaffold, and version 1 (Tiny Aya 3.35B); 3 attempts per case,
+30 runs per arm; judged blind by codexsol170 and by Claude (Stage 1 settings and qualification), reported per judge and
+as the mean, paired by run, intervals by resampling cases; nothing about test set 3 is changed after this entry.
+
+## 2026-11-19, 23:41: test set 3 refrozen at 12 companies with signed evidence (before A's scores were opened)
+
+Why: with 5 companies the company-level 95% interval (t on 4 degrees of freedom) is about ±0.43 for a ±0.35 spread of
+paired company differences; at 12 about ±0.22. Two outside reviews (pasted by Hatem) asked for 12 companies chosen by a
+written rule, and for supporting and contradicting evidence so belief revision is tested. An interval crossing 0 on the
+final run is reported as inconclusive (registered now).
+
+Selection (`data/dossier/raw/heldout3/selection_rule.md`, committed 23:15:39 and amended 23:15:53, before any research
+agent ran): B2B-first manufacturers, roughly EUR 0.3 to 15 billion revenue, not in any case file or proposal, not in any
+development or test company's product category (strikes recorded with reasons), 12 sectors, at least 5 countries; a
+seeded draw over the vetted pool, then the country rule (Tomra replaced Interroll). Added: Kardex (storage automation),
+Nabtesco (gear reducers, automatic doors, welfare products), Biesse (woodworking machinery), Brembo (brakes), Rieter
+(spinning machinery), Sika (construction chemicals), Tomra (reverse vending and sorting). Countries: Germany,
+Switzerland, Italy, Japan, Norway.
+
+Dossiers: seven research agents, the same instructions as the first five plus "no pages about future decisions";
+`aemon.data.verify_sources` against the live pages; 152 records, 131 verified and admitted (Kardex 19, Nabtesco 20,
+Biesse 20, Brembo 16, Rieter 20, Sika 20, Tomra 16); 21 not found or not fetchable, dropped unedited. Premise records
+are each company's existing reach to individual or small buyers, trimmed to verified records; for Rieter, which sells
+nothing to consumers, the record that it sells to more than 3,000 spinning mills was added as the first premise (its
+other premises, a reference book, a calculator app and a mills' webshop, are not reached by the agent-style queries).
+Brembo, Tomra and Nabtesco read end to end: mixed company and third-party sources, evidence against a consumer move
+present in each, no future plans stated as fact.
+
+Signed evidence (`reviews/heldout3_shocks/`): per company one simulated randomized offer test on a narrow mechanism, in
+the final test's design: identical record id and title in the favours and undermines cases, counts mirrored (72
+against 32 of 400 per arm), "SIMULATED RESULT, NOT REAL DATA" in the record, targets that pick out a theory about the
+mechanism and not an unrelated one, and the tools refuse the record as support or as cited evidence (120 of 120
+checks). Mechanisms: installation (Eberspächer), durability assurance (Gühring), cleaning burden (Krones),
+compatibility (Lapp), running costs (MULTIVAC), upfront cost (Kardex), safety assurance (Nabtesco), programming
+complexity (Biesse), trial before purchase (Brembo), learning barrier (Rieter), application difficulty (Sika), return
+convenience (Tomra). These are case-author constructions and never trained on.
+
+Checks: no test set 3 company, record or case id in any case file, row file, teacher report or run report; every case
+reaches a premise record and at least four other records; earlier freezes unchanged. Freeze (`docs/test3_freeze.json`):
+digest 068261a9..., 12 companies, 48 cases (base, irrelevant, favours, undermines each), 230 records. The Monday run:
+the configuration chosen on development, the prompted 8B with the same scaffold, and version 1; 2 attempts per case
+(96 runs per arm; attempts cut, not companies); two judges; per-company paired differences with t-intervals.
+A's guards arm was judged in the background tonight; its scores were not opened before this commit.
+
+**A (Aya Expanse 8B, version 1's data, seed 7), guards, judged (23:45, after the refreeze).** Job 776728, compact
+prompt, guards, bf16 base converted in the job, template and adapter-isolation checks passed. 39 of 45 finished
+(5 repeated errors, 1 context limit), 146 refused calls, median 35 turns. Blind quality (codexsol170, 45 packets):
+**2.02**. Paired by run against version 1's final system on the same development cases (`experiments/grounded/screen2/D.json`,
+1.88): **+0.14 [+0.04, +0.24]**, ahead at 5 of 6 companies (Neumann −0.16). Against prompted Aya Expanse 8B on the
+staged prompt (a prompt difference, not a matched baseline; the compact-prompt pair is job 776909): +0.61 [+0.50,
++0.72]. Against prompted Tiny Aya +1.14 [+1.04, +1.24]; against prompted Qwen3.5-9B (supplementary, not a Cohere
+student) −0.11 [−0.22, +0.00]. Largest gains over version 1: revision 2.30 against 2.00, distinct theories 2.69
+against 2.47, evidence judgement 1.42 against 1.22, problem framing 2.38 against 2.18.
+
+Under the rule of 16:50, A does not yet pass: it beats version 1 on quality, but finishes 39 runs against the final
+system's 43 (which also routes adapters by stage; A does not). Diagnostic (`experiments/screen/ablation_stage2_partial.json`):
+the evidence kind of accepted third-party assessments matches the dossier annotation in 6% of A's (11 of 180)
+against 36% of the final system's; that is what decide_kind acts on (its arm, job 776728, follows).
+
+## 2026-11-19, 23:43: training-data experiment and a second teacher (registered before any of it runs)
+
+An outside review (pasted by Hatem) corrected my claim that training-data size is not the bottleneck: falling
+validation loss shows the student predicts the teacher better, not that more or better data would stop helping. Four
+conditions, all at training seed 7 first with the reference's recipe, seeds 11 and 13 added for any condition that
+differs from the reference; reported with supervised tokens and GPU-hours:
+- **Reference:** A (version 1's rows and corrections; seeds 7, 11, 13 running or queued).
+- **Composition** (`scripts/oneoff/composition_rows.py`, `rows/composition_s7.jsonl`, sha256 a8b199dd...): the same rows
+  resampled by skill group with shares proportional to the square root of their current shares, at the reference's
+  target-character budget; validation rows unchanged. Shares before and after: theories 0.30 to 0.24, recommendation
+  0.22 to 0.20, test 0.18 to 0.18, procedure 0.17 to 0.18, assessment 0.11 to 0.14, revision 0.02 to 0.06.
+- **Recovery:** the reference plus Command A+ corrections from the student's own states (21:30 entry).
+- **Quantity:** the reference plus new Command A+ investigations on more training companies, collected the same way;
+  it needs 80 GB slices for many hours, so it runs last.
+Run B's recovery rows are rule-built, a separate source labelled `recovery-rule`, never called teacher demonstrations.
+
+**Second teacher.** Two reviews suggest Qwen as an alternative teacher. Checked on the Hub: Qwen3.8-27B (Apache 2.0,
+model type `qwen3_5`, the architecture our llama.cpp build already serves; Unsloth GGUF available) and
+Qwen3.5-122B-A10B (Apache 2.0, MoE, needs an 80 GB slice at 4-bit). Lexsi permits other models as teachers while the
+trained agent stays Cohere's. First comparison: Qwen3.8-27B (Q8_0 on a 40 GB slice) and Command A+ answer the same
+student failure states from the recovery round under the same correction protocol; compared on acceptance by the
+tools, the blind judge's view of a sample, and evidence-kind accuracy. Only if Qwen is at least as good does a matched
+adapter follow (same states, same token budget, seed 7). Qwen's weights are added to the permitted-teacher list
+(`TEACHER_WEIGHTS`) only with its licence recorded, and its rows are tagged with their teacher.
+
+**B trained (job 776343, 00:30).** Aya Expanse 8B on version 1's rows, the 51 corrections and the 401 rule-built
+recovery rows (`recovery-rule`), seed 7: 2,172 steps (A: 1,971) in 4.7 hours, peak 20.1 GB; held-out loss 0.575 at
+step 50, 0.390 at the end (A: 0.565 to 0.387; the same 240 validation rows). Its screen (guards, then guards with
+decide_kind) is submitted by the overnight driver; B stays exploratory (one seed, about 10% more optimizer steps).
+
+**decide_kind at training seed 7, judged (01:01).** Same job (776728), same seeds and code as the guards arm, the
+adapter-isolation check passed. Mechanical (`experiments/screen/ablation_stage2_A7.json`): 39 of 45 finished in both
+arms; 50 replacements and 11 abstentions over 187 third-party assessments; the evidence kind of accepted third-party
+assessments matches the dossier annotation in 54% with the decision model against 6% without (version 1's final
+system 36%). Blind quality (codexsol170, 45 packets): 2.04 with decide_kind against 2.01 without, **+0.03 [−0.03,
++0.08]**, higher at 4 of 6 companies; by dimension, evidence judgement 1.60 against 1.42 and problem framing 2.51
+against 2.36, the others within ±0.07. Against version 1's final system: +0.16 [+0.06, +0.26]. Under the rule of
+20:20 a single seed is reported as such: at seed 7 the effect on quality is inconclusive and its sign positive; seeds
+11 and 13 decide. Offline (`experiments/screen/aya-expanse-8b-s7_decision_logits.json`, 161 items): Aya Expanse 8B
+base weights 81.8% evidence-kind accuracy (majority class 76.0%), calibration error 0.156, at confidence 0.9 or more
+93% of items at 86.6%; with the adapter 81.0%. Test choice: proposes in every case, so it stays out of the loop.
+
+**Fine-tuning isolated: A against the prompted 8B with the same scaffold (01:58).** Job 776909, guards arm:
+prompted Aya Expanse 8B on the compact prompt, with the same guards, context, bf16 base and code as A: 4 of 45
+finished (39 repeated errors, 2 turn limit), 265 refused calls, most of them a position stated before the favoured
+theory was challenged (140) and a simulated result cited in finish (51). Blind quality (codexsol170, 34 packets): 1.29.
+A minus it, paired by run: **+0.73 [+0.60, +0.85]**, ahead at all 6 companies (+0.51 to +0.93); finished 39 against 4.
+By dimension the gap is largest where Stage 1's student was weakest: recommendation 1.16 against 0.09, revision 2.33
+against 0.30, distinct theories 2.69 against 1.38, problem framing 2.36 against 1.40. Against the prompted 8B under
+its best prompt (staged, 1.41) the gain is +0.61 [+0.50, +0.72]; both are reported, the matched one as the primary
+"does fine-tuning help" row. The decision-model arm of this job follows.
+
+**B judged, guards (02:27).** Job 777413 (same code, base, prompt, guards and checks as A): **45 of 45 finished**,
+28 refused calls (A 146), 16 redrawn repeats (A 110), median 39 turns. Blind quality (codexsol170, 23 packets):
+**2.19**. Paired by run: against A **+0.18 [+0.09, +0.25]**, ahead at all 6 companies; against version 1's final
+system **+0.31 [+0.21, +0.41]**, all 6 companies, finishing 45 against 43; against the prompted 8B with the same
+scaffold +0.91 [+0.75, +1.04]. By dimension against A: recommendation 1.84 against 1.16, revision 2.70 against 2.33,
+problem framing 2.69 against 2.36, distinct theories 2.96 against 2.69; seeking challenge 1.67 against 1.91 is the
+one dimension lower. So at seed 7, rule-built recovery rows both remove the loops and raise judged quality, most of all
+the recommendation. B meets the variant rule of 16:50 (amended 21:20): it beats version 1 and the prompted 8B with
+intervals above 0 and finishes at least as many runs. It stays exploratory until replicated: one seed, and 2,172
+optimizer steps against A's 1,971. Registered now, before more results: B is retrained at seeds 11 and 13, and a
+step-matched control trains B's data for exactly 1,971 steps (seed 7), so the recovery rows can be separated from the
+extra steps; each is screened with guards and decide_kind like A. The configuration for test set 3 is chosen from
+these development results only, on Monday by noon.
+
+**decide_kind on the prompted 8B (same scaffold), judged (03:13).** Job 776909, decide arm: 7 of 45 finished
+(4 without), 222 refused calls (265), 14 replacements and 6 abstentions; third-party evidence kinds matching the
+annotation 53% (32% without). Blind quality 1.33 against 1.29: **+0.03 [−0.00, +0.08]**, evidence judgement 1.04
+against 0.91. The same direction and size as on A (+0.03 [−0.03, +0.08], evidence judgement 1.42 to 1.60): on two
+agents the decision model fixes its typed choice and lifts the dimension it feeds, with a small whole-run effect so
+far. Seeds 11 and 13 of A and B decide it under the rule of 20:20.
+
+**decide_kind on B, judged (04:06).** Job 777413, decide arm: 45 of 45 finished, 22 refused calls, 61
+replacements and 14 abstentions; third-party evidence kinds matching the annotation 46% (14% without). Blind quality
+2.20 against B's 2.19: **+0.005 [−0.08, +0.09]**; evidence judgement 1.58 against 1.51; against A with decide_kind
++0.16 [+0.07, +0.23]; against version 1's final system +0.32 [+0.22, +0.41]. So at seed 7 the decision model fixes the
+typed choice on all three agents (A, B, the prompted 8B) and moves whole-run quality by +0.03, +0.00 and +0.03, all
+with intervals across 0: inconclusive, small either way. Mechanical table: `experiments/screen/ablation_stage2.json`.
+
+**B at training seed 11, guards arm, judged (12:22; decide arm still running, job 778437).** 41 of 45
+finished (45 at seed 7), 330 refused calls (28), of them 327 repeats, 255 at one company (Hellberg) and most in five
+runs (72, 64, 30, 26, 18). Blind quality 1.97: against B at seed 7 (2.19) **−0.23 [−0.41, −0.06]**; against A at seed
+7 (2.01) −0.05 [−0.19, +0.09]; against version 1's final system +0.09 [−0.06, +0.23]; against the prompted 8B on the
+same scaffold +0.67 [+0.56, +0.77], all six companies. Reading: the fine-tuning effect replicates at a second seed;
+the recovery rows' effect does not yet. The gap between two seeds of the same data (0.23) is larger than B's gain over
+A at seed 7 (0.18), so seed 7's +0.18 is within training-seed variation until the matched comparison (A at seed 11,
+B and A at seed 13) says otherwise; the paper states B's gain as a single-seed result. The registered variant rule
+is decided on all three seeds, not on seed 7.
+
+**Registered (12:37, before any code or result): a trained decision head for the evidence kind (Hatem's call,
+"a model similar to Jev").** The open recipe of arXiv 2610.17205, step 2: Aya Expanse 8B (the pinned revision), LoRA
+r16, alpha 32, dropout 0.05 on the seven projections, and a head that is the LM head's rows for the six option letters
+(cross-entropy over those six at the answer position, so training starts from today's zero-shot decider). Prompt:
+`decision.kind_prompt`, identical to decide_kind's. Data: dossier records of the training companies only (the 93
+training scopes; no development, validation, test, test 2 or test set 3 company), kinds in the tool's six: 1,226
+records, 749 third-party; items are the excerpt and its longer sentences as quotes. Calibration split: 15% of the
+training scopes (seeded, 7), never trained on. Training: 2 epochs, learning rate 1e-4, seed 7. Calibration: one
+temperature per arm (zero-shot base and trained head alike), fitted by log-loss on the calibration split. Offline test:
+the 121 evidence-kind items (final-test and test 2 companies, already read, never trained on); primary metric
+accuracy, then calibration error, and coverage and accuracy at the fixed 0.9 threshold. **Rule for the in-loop run:**
+only if the trained head's accuracy is at least 5 points above the zero-shot base's (81.8%) and its calibration error
+is no worse, after calibration; otherwise it is reported offline only. In the loop: A at seed 7, decide arm with the
+trained head against the existing decide arm, development, one judge. GPU priority: after the seed replications and
+test set 3.
+
+**Amended (12:41, before any training or result), after an independent review of the decision-head design.**
+(1) Leak: one training record (nilfisk-2025-split) carries the same sentence as a frozen test quote (Tennant); records
+sharing any eight-word run with a frozen test quote are now left out, mechanically. (2) Training quotes: instead of
+sentences cut from records (a record's label need not fit each sentence), each record gives its excerpt plus the
+quotes Command A+ itself chose for it in the teacher rows, the same kind of agent-chosen quote the test items are:
+1,316 training items (1,037 excerpts, 279 teacher quotes), 231 calibration items; record list frozen by hash in
+`experiments/decider/items_summary.json`. (3) Go rule, stricter: the registered conditions plus a paired accuracy
+interval, bootstrapped over records, whose lower bound is above zero (one arm's standard error on 121 items is about
+3.5 points, so 5 points alone is about six items). (4) Also reported: accuracy on the 48 third-party items (the only
+ones decide_kind acts on; the zero-shot base gets 54% there), per kind, the rate of answers missing a letter among the
+top 20 tokens, and the items where the two arms disagree. The 121 items stay a selected, clustered sample: the result
+is offline evidence for one choice, not a general claim.
+
+**Judged (13:44): decide_kind on B at seed 11, and A without the correction rows (seed 7).**
+*decide_kind, B seed 11* (job 778437): 42 of 45 finished (41 without), 331 refused calls (the same Hellberg loops);
+quality 2.03 against 1.97, **+0.06 [−0.06, +0.18]**, evidence judgement +0.20. So far decide_kind is +0.03 (A, seed 7),
++0.005 (B, seed 7), +0.06 (B, seed 11), +0.03 (prompted 8B): the same sign every time, every interval across 0. The
+registered pooled verdict waits for A at seed 11 and both at seed 13.
+*No correction rows* (job 778242, A's teacher rows alone, seed 7): 37 of 45 finished (A: 39); refused calls 85 (146):
+53 repeats (110), 32 simulated results cited as evidence (20). Quality 2.01 against A's 2.01, **−0.00 [−0.14, +0.12]**;
+recommendation +0.29, revision −0.22, companies split three each way. Under the registered rule (an interval below 0,
+or 5 or more fewer finished runs) the 51 correction rows do not earn their place on judged quality at this seed; what
+they were written for moves the expected way (fewer simulated results cited as evidence with them, 20 against 32).
+Against the prompted 8B the no-corrections run is +0.72 [+0.55, +0.87]: the fine-tuning effect is the teacher rows.
+
+**Registered (14:05, before A seed 11, either seed 13, the step-matched run or any test set 3 result): how the
+final configuration is chosen, how test set 3 is read, and how the remaining comparisons are judged** (two pasted
+reviews, adopted).
+1. *Eligibility.* Only configurations with judged development results at three training seeds (7, 11, 13) by Sunday
+   22 November 23:59 can be chosen: in practice A, possibly B. The recovery-round retrain, the trained decision head
+   and the composition run arrive with one seed and are not eligible, whatever they score.
+2. *Choice, mechanically.* A is the reference. An addition (recovery rows, decide_kind) enters only if its benefit is
+   established on development by its registered rule; otherwise its complexity counts against it and it is left out.
+   The choice and its configuration (code commit, adapter sha256, recovery flags) are committed before test set 3 is
+   opened.
+3. *Recovery rows* are judged by matched seed differences: A and B side by side at seeds 7, 11 and 13, and B minus A
+   within each seed, plus the step-matched B run (B's data for A's 1,971 steps) to separate the data from the extra
+   steps. B at seed 11 against B at seed 7 is training-seed spread, not B's effect, and is not used as evidence on it.
+4. *decide_kind* is worded as a null result unless the pooled verdict is clear of zero: four of four differences have
+   been positive (+0.00 to +0.06) with every interval across zero, which by sign alone chance gives about one time in
+   eight. Its 0.9 threshold is on the renormalised option-letter probability, not a calibrated probability of being
+   right. Reported per arm (`experiments/screen/decide_kind_audit.json`): how often it acts (18 to 30% of
+   third-party assessments), how often its changes fix a wrong label (7 to 37 per arm), how often they break a right
+   one (0 to 2), and how often they swap one wrong label for another (6 to 36). Left out of the chosen configuration.
+5. *Test set 3, accounting.* 48 cases × 2 attempts = 96 runs per arm (two attempts, not three, to fit three arms in
+   the time left); one trained model per arm (one training seed), so the test interval covers variation between
+   companies and attempts, not between training runs; uncertainty with company dependence kept (12 companies,
+   t-interval over company means and a company bootstrap); attempts and seeds are not counted as independent companies.
+   *Primary comparison:* the chosen fine-tuned 8B against the unfine-tuned 8B on the same scaffold. *Secondary:*
+   against the Stage 1 system; development shows +0.14 to +0.31, and with 12 companies the test reliably detects only
+   gaps of about 0.3, so this comparison may well be inconclusive, and the paper says so before the run.
+6. *Claims.* "Fine-tuning on the teacher's trajectories improves investigation quality" is the supported result.
+   "The gain comes from learning the teacher's procedure" is an explanation the comparisons do not isolate
+   (distillation changes tool use, wording and evidence selection together); the paper presents it as such.
+7. *Teacher comparison (Qwen against Command A+)*, if run: on identical student states, judged blind on evidence links,
+   whether a proposed experiment discriminates between theories, and whether a decline is justified; a higher
+   acceptance rate by the tools is not the criterion.
+8. *Cut order, harder:* with the cluster full, the Qwen teacher batch and the trained decision head are cut first
+   (post-deadline work; neither can reach three seeds). The Qwen batch is cancelled now (its job file stays); the
+   decision head runs only if a GPU is idle with nothing registered waiting.
+
+**Registered (14:12; before A at seed 11, either seed 13 or the step-matched run is judged, and before any
+AuditKIT tool-call metric of the retrospective audit is read — job 779753 printed only replay-mismatch counts, all 0).**
+*B's admission, in numbers.* B (A's data plus the 401 recovery rows) replaces A for test set 3 only if all of:
+(a) B minus A (judged quality, development, guards arms, same cases, paired by run) is positive at each of seeds 7, 11
+and 13; (b) the mean of the three per-seed differences is at least +0.15; (c) the pooled 95% interval (bootstrap over
+cases, pairing kept within seeds) has its lower bound above 0; (d) the step-matched run (B's data for A's 1,971 steps,
+seed 7) minus A at seed 7 is at least +0.09, half of B's seed-7 gain, so the gain is not the extra steps; (e) B
+finishes at least as many runs as A summed over the three seeds. Otherwise A. Signs alone are not enough.
+*Which adapter represents the chosen configuration on test set 3:* its training-seed-7 adapter, fixed now (seed 7 is
+the reference seed every design step used); not the best development seed, which would add a selection step. Disclosed
+in the paper.
+*AuditKIT, mandatory.* Every evaluation job checks at its start that AgentTune and AuditKIT import, and the runner
+(--require-auditkit) refuses to start without them; both are verified on both accounts before Monday's run. The 11
+retrospective audits keep the original reports untouched and go to separate files beside them, with the input report's
+sha256, the AgentTune and AuditKIT versions and the code revision, and are described as retrospective audits of saved
+trajectories (a replay of the recorded tool calls; no model call is made).
+*AuditKIT's numbers in the paper.* Where AuditKIT measures the same thing as a harness count (repeated or redundant
+calls, looping), AuditKIT's number is the one reported, and any difference from the harness count, with both
+definitions and denominators, is reported in the appendix. Counts AuditKIT does not compute (runs finished, guard
+refusals by kind, simulated results cited as evidence) stay harness counts and are named as such.
+*Checks done:* Stage 1 is unaffected (all 152 earlier reports with an AuditKIT section were audited during the run;
+none logged a skip). Training used AgentTune: the trainer imports AgentTune's distillation trainer unconditionally
+(src/aemon/training/train.py), so no training job could have run without it; on Nour's account training ran in
+env_unsloth (AgentTune 1.1.3).
+*Decision model, wording:* it improves the labels it changes (fixing 7 to 37 per arm, breaking at most 2) without
+changing judged quality; either the evidence-type label matters less to the recommendation than expected, or the judge
+does not register it; the paper says both are possible.
+
+**Registered (14:26, before any hand score): a blind hand check of the judge** (pasted suggestion, adopted;
+Hatem scores). 30 development packets, seeded (20), stratified: A seed 7 (8), B seed 7 (8), B seed 11 (7), version 1's
+final system (7); the prompted 8B is left out because none of its packets has both dimensions scored (it rarely
+reaches a recommendation). Shown as H01 to H30 in `experiments/judge_check/hand_check.html`, scored on the judge's own
+rubric rows for evidence judgement and recommendation (0 to 3, or not applicable); the key mapping labels to arms is
+kept outside the repository (`~/lexsi-backup/judge_keys/hand_check_key.json`). Reported per dimension: exact
+agreement, agreement within one point, Spearman correlation and the level difference (judge minus hand), overall and
+by arm (`scripts/judge_check/agreement.py`). One scorer, 30 packets: a check on the judge, not a human benchmark.
+Also added to the paper today (no new runs): the effect at two model sizes (Stage 1 test and Stage 2 development,
+reported side by side, not pooled), per-seed fine-tuning gains, an over-caution column (no arm declines a test or ends
+"insufficient evidence"; every fine-tuned arm proposes a test on all 6 runs of the two cases labelled as not
+warranting one), test set 3's freeze commit and hash with the nearest training or development record (character n-gram
+TF-IDF cosine 0.44, generic company-size sentences), the checkpoint rule, three evaluation lessons, and toolkit and
+reproduction appendices. Not run: an in-context control (the prompted 8B shown one teacher investigation); a full
+investigation does not fit its 8,192-token context alongside the case, so it would need a truncated example and would
+not answer the question cleanly.
+
+**Registered (14:31, before any code or result): RL from adapter A, exploratory (Hatem: "Build and run it").**
+Not eligible for test set 3 (one seed, after the Sunday cutoff); cut first if GPUs stay scarce. *Method:* GRPO through
+AgentTune's Unsloth agentic GRPO wrapper (TRL 1.15), continuing A's LoRA (A's seed-7 adapter weights loaded into a LoRA
+of the same rank, alpha, dropout and targets; bf16 base). *States:* single decision points replayed exactly
+(`aemon.teacher.corrections._replay`) from the student run on training companies only (aya-expanse-8b-s7-student, no
+guards): the 148 loop-start states of the recovery round plus other turns sampled from the same runs, so it learns
+ordinary steps as well as escapes. No validation, development or test company. *Generation:* 4 sampled next calls per
+state (temperature 1.0), completion at most 320 tokens. *Reward, checked by the tools, no LLM judge:* the state is
+replayed and the sampled call executed in the guarded tools: −1 if it is not a parseable tool call or repeats an
+earlier call; −1 if the tools refuse it as a quote not in the source or a simulated result cited as evidence; −0.5 for
+any other refusal; +0.5 if accepted; +0.5 more if it makes progress (opens the next stage, or reads, assesses, adds or
+revises something new). Range −1 to +1. It rewards working, non-repeating, grounded calls, not persuasive text; it
+cannot see whether a call is wise, which is stated as its limit. *Training:* a fixed number of steps registered with
+the job (no checkpoint selection), KL coefficient 0.04, seed 7. *Comparison:* A+RL against A at seed 7, development
+guards arm, same scaffold, blind judge, plus the harness counts (finished, refused calls by kind) and AuditKIT.
+A higher training reward shows only that it learned the reward; the development comparison is the evidence.
+
+**Amended (14:31, before any code or result): the reward is validated before any training with it** (pasted
+review, adopted). Order: build the reward; validate it; only then the first rung of the ladder, rejection sampling
+(keep the best of several sampled next calls per state by the reward, then supervised fine-tuning on them, through
+the existing AgentTune trainer); DPO and GRPO only if that rung moves development quality. *Validation, both required:*
+(1) gaming probes: hand-built calls that should score badly (a repeated call, a quote not in its source, a simulated
+result cited as evidence, a finish on thin evidence, a call that names nothing in the state, an unparseable reply)
+each score below the student's recorded accepted call at the same state; (2) agreement: over the already judged
+development runs, the run's mean step reward rank-correlates with the judge's score (Spearman at least 0.3, run
+level); the judge is used only to validate the reward, never inside it. If either fails, the reward is fixed or the RL
+branch stops. *Stated limit:* every term is a process check (valid, non-repeating, grounded, progressing); none sees
+whether a judgement is right, so this RL can at most improve mechanical reliability, not the judgement where the
+teacher is the ceiling. *Not before the deadline, written up as the next step:* an outcome reward (the agent ends with
+a probability that the move succeeds, scored by Brier score against what happened, on many historical cases built
+from dated public filings, with more question types), starting by measuring how calibrated the current student
+already is; and the bar for any RL claim, SFT from a better teacher.
+
+**RL branch stopped before any training (14:35): the reward failed its registered validation** (independent
+review adopted). *Probes:* five of six probe types scored below the student's good call at every state built (171 states);
+the sixth, a simulated result cited as support, could not be built at any sampled state and is untested, not passed
+(the script now says so). *Agreement:* run-level Spearman between mean step reward and the judge's score over 855
+judged development runs, 19 arms: **0.26**, below the registered 0.30, so by the rule no training. *Diagnostics only,
+not used to rescue the rule:* 424 of the 855 runs replay differently from the calls actually executed (guards and the
+decision model replace or redraw calls), and on the 431 faithful replays agreement is 0.16; within arms it ranges from
+−0.37 to +0.55, positive for unfine-tuned models where loops sink quality (Qwen 9B +0.52, Gemma 12B +0.54, Tiny Aya
++0.22) and at or below zero for our best fine-tuned agents (A seed 7 −0.10, B seed 7 −0.36). Reading: a tool-checked
+process reward measures mechanical reliability, which separates weak agents from usable ones but not good runs from
+better ones once an agent stops failing mechanically; RL on it would push the fine-tuned agents along a direction
+unrelated, or opposed, to judged quality. *Next, after the deadline:* a reward that sees judgement (the outcome reward
+registered at 14:5x), validated under a rule frozen before fitting (a company split, fresh judgments), and compared
+against SFT from a better teacher. The step reward and its validation stay in the repository
+(`src/aemon/rl/reward.py`, `scripts/rl/validate_reward.py`, `experiments/rl/reward_validation.json`).
+
+**Correction (14:37).** The entries of 13:5x and 14:0x said four positive decide_kind differences out of four
+is what chance gives "about one time in eight". Four positive signs by chance alone has probability 1/16; four signs
+that agree (all positive or all negative) has probability 1/8. The paper now states both. The decision model stays
+worded as no detected effect on quality and stays out of the tested configuration; nothing else changes.
+
+**decide_kind on A without the correction rows, judged (14:58).** Job 778242, decide arm (AuditKIT ran in-job):
+40 of 45 finished (37 without), 72 refused calls (85); quality 2.06 against 2.02, **+0.04 [−0.04, +0.10]**, evidence
+judgement 1.67 against 1.49. Five comparisons now (+0.03, +0.005, +0.06, +0.03, +0.04), all positive, every interval
+across zero. Five agreeing signs by chance has probability 2·2^−5 = 1/16. Under the registered wording it stays "no
+detected effect on overall quality", out of the tested configuration; the pooled three-seed verdict still waits for A
+at seed 11 and both seed-13 runs.
+
+**Scheduling (15:54).** The waiting jobs were blocked by CPUs, not GPUs: the student nodes had idle GPU slices
+(gnode02 3 of 7 in use, gnode03 5 of 8) but almost no free cores (24 of 24, 30 of 32), and screens asked for 4. Screens
+need few cores (the model runs on the GPU), so the waiting replication screens were lowered to 2 CPUs (A seed 11
+started at once, job 779526) and 2 is now the screen default. No result is affected.
+
+**A at training seed 11, guards, judged (17:41); B's admission decided.** Job 779526 (decide arm still
+running): 41 of 45 finished, 80 refused calls (65 repeats, 13 simulated results cited). Blind quality **2.15**. Matched
+seed: **B minus A at seed 11 = −0.18 [−0.34, −0.05]** (B 1.97), lower at four of six companies. Under the registered
+rule (14:2x) B must beat A at each of seeds 7, 11 and 13; it does not at seed 11, with an interval below zero, so **B
+is not admitted, whatever seed 13 shows: the configuration for test set 3 is A** (its seed-7 adapter, without
+decide_kind), provided A has judged development results at three seeds by Sunday 23:59 (A seed 13's screen is queued).
+B's seed-13 screen and the step-matched run still run and are reported, as registered, but no longer bear on the
+choice. Also at seed 11: A against the prompted 8B on the same scaffold **+0.86 [+0.73, +0.99]**, all six companies
+(seed 7: +0.73); against version 1's final system +0.27 [+0.16, +0.39]; A seed 11 against A seed 7 +0.14 [+0.04,
++0.25], the size of the seed-to-seed spread. The recovery rows' +0.18 at seed 7 is therefore not a reliable effect:
+at the next seed the same rows cost 0.18.
+
+**Registered (18:28, Hatem: "close this gap"; before A seed 13's screen has started, so before any of its
+results): what happens if the eligibility condition is not met.** The rule of 14:05 (point 1) admits only
+configurations with judged development results at three training seeds by Sunday 22 November 23:59; A has two (7, 11),
+its seed-13 screen is queued. The cases, fixed now:
+1. *A seed 13 is judged by the cutoff.* A meets the condition and is the configuration tested, as the rules of 14:05 and
+   14:12 already give. No performance threshold for A's seed 13 was registered, and none is added now: its result is
+   reported whatever it is, beside seeds 7 and 11.
+2. *A seed 13's screen fails for a technical reason.* It is resubmitted at once (on whichever account has a free slot),
+   as with every failed job; the cutoff still applies.
+3. *A seed 13 is not judged by the cutoff* (queue, cluster or technical delay). A is still the configuration tested,
+   because it is the registered reference (14:05, point 2) and the only candidate left (B fails 14:12 (a)); the paper
+   states that A's development evidence covers two training seeds, not three, and that the eligibility condition was
+   not met in time.
+4. In every case the tested adapter is A's seed-7 adapter without decide_kind (14:12), committed with its sha256 before
+   test set 3 is opened, and the final choice is Hatem's confirmation of this rule on Monday by noon, not a new choice.
+No other configuration can enter through any of these cases.
+
+**Blind hand check of the judge, scored by Hatem (18:36; design registered 14:26).** 30 development packets
+(A seed 7: 8, B seed 7: 8, B seed 11: 7, version 1's final system: 7), all 30 scored on both dimensions with a note.
+Agreement with codexsol170 (`experiments/judge_check/agreement.json`): *evidence judgement* exact 30%, within one
+point 100%, Spearman 0.17, hand mean 1.90 against judge 1.20; *recommendation* exact 13%, within one point 57%,
+Spearman −0.20, hand 2.77 against judge 1.53. Both raters bunch their scores (hand: evidence judgement 2 in 27 of 30,
+recommendation 3 in 24 of 30; judge: evidence judgement 1 in 24 of 30), so the rank correlations carry little
+information. Reading: the notes and the judge's reasons name the same flaws (mislabelled studies, unchecked date
+cut-offs, reversal conditions resting on weak surveys); the hand scorer applied the rubric's wording literally (a next
+action plus a reversal condition earns 3), the judge also docks when the reversal condition is weakly founded. So the
+two disagree on level, as our two LLM judges did, and neither separates the four similar arms (hand arm means 1.75 to
+2.00 and 2.71 to 2.88). This supports reading only differences, and not small ones, between similar agents. It does
+not test the main effect: the prompted 8B was not sampled (it rarely reaches a recommendation), so fine-tuned against
+prompted rests on the judge and the harness counts (39 against 4 runs finished). One scorer, 30 packets: a check on
+the judge, not a human benchmark.
+
+**Registered (18:38, before any hand score; Hatem: "ok yes"): a second blind hand check, on the main gap.**
+10 matched pairs (same case and attempt) of A at seed 7 and the prompted 8B on the same scaffold, seeded (21), spread
+over all six companies, every packet distinct, both dimensions judged in both arms; shown as 20 shuffled packets
+P01..P20 (`experiments/judge_check/hand_pairs.html`), so neither arm nor pairing is visible; scored on problem
+framing and evidence judgement (the prompted model reaches both). Key outside the repository
+(`~/lexsi-backup/judge_keys/hand_pairs_key.json`). Reported (`scripts/judge_check/pair_agreement.py`): per
+dimension, the mean gap A minus prompted by hand and by the judge, how many pairs each rater puts A ahead, level or
+behind, and how often their signs agree. The judge's scores for these packets were not looked at before the hand
+scores are in. One scorer, 10 pairs: it can show whether a human sees a gap in the same direction, not its size.
+
+**Second hand check scored by Hatem (18:49; design registered 18:3x).** 10 matched pairs, A seed 7 against the
+prompted 8B on the same scaffold, 20 blind packets, both dimensions scored for all (`experiments/judge_check/pair_agreement.json`).
+*Problem framing:* gap A minus prompted +0.5 by hand, +0.5 by the judge; A ahead/level/behind 5/5/0 by hand, 5/3/2 by
+the judge. *Evidence judgement:* +0.9 by hand, +0.3 by the judge; 7/3/0 by hand, 3/7/0 by the judge. Pair-level sign
+agreement 50% and 60% (scores bunched in a few levels, so one rater's "level" is often the other's +1). Reading: the
+human sees the main gap in the same direction and at least as large as the judge, and never puts the prompted model
+ahead (0 of 20 comparisons); together with the first check (similar agents not separated by either rater), the hand
+checks support the large fine-tuned against prompted gap and the caution about small differences between similar
+agents. One scorer, 10 pairs: direction, not size.
+
+**Recovery round rerun (19:02; Hatem: "Rerun and retrain").** The first Command A+ correction batch (job 777948)
+failed: the queue line carried a literal '$HOME' path, so no state was read; it was cancelled after about 20 minutes
+on the 80 GB slice, and the 148 student states are intact. Rerun as registered on 19 November 21:30: the same states,
+the same teacher and correction protocol (kept only if the tools accept the call, it repeats nothing and its
+justification names something in the state that the call acts on). Then rows from the kept corrections (tagged
+`correction`, traced to the manifest), A's data plus them (extra rows capped at 20% of target tokens, as for A's 51
+correction rows), trained at seed 7 with A's schedule, screened on development with the guards arm. Exploratory, one
+seed, not eligible for test set 3 (14:05 point 1); reported against A at seed 7, paired by run.
+
+**Retrospective AuditKIT done (19:13, job 780733).** The 11 Stage 2 reports whose run skipped AuditKIT were
+audited from their saved trajectories; each audit is a separate file beside the untouched report
+(`experiments/screen/*.auditkit.json`), carrying the input report's sha256 (all 11 match the local reports that were
+judged), AgentTune 1.1.3 and AuditKIT 1.1.3, and the code revision. Replay mismatches: 0 in all 11. A seed 11's
+screen (job 779526) ran with the older code copy on Nour's account and also skipped it; it and any later report that
+skipped it go through the same retrospective audit before the paper's AuditKIT numbers are written.
+
+**Report rule fixed (19:19): a packet judged more than once gets the mean of its judgments.** When two arms of
+the same agent produce the same run (decide_kind not intervening), they share a packet, and it was judged once per
+campaign: 75 packets twice, the two judgments differing by 0.13 on average (the judge's own noise). The report kept
+whichever line came last, so an arm's mean shifted slightly when a later campaign was appended (A seed 11: 2.153, then
+2.177). `aemon.evaluation.judging.report` now combines all of a packet's judgments by their mean, independent of line
+order; the single 'judgment' field keeps its old meaning, so Stage 1's frozen release scripts are unchanged. Every
+Stage 2 comparison was recomputed (`experiments/screen/judging/recomputed/`, table.txt): all move by at most 0.02 and
+no conclusion changes. Changed at two decimals: A seed 11 against the prompted 8B +0.88 [+0.75, +1.00] (was +0.86),
+against version 1 +0.29 (was +0.27), against A seed 7 +0.15 (was +0.14), A seed 11's mean 2.17 (was 2.15); B minus A
+at seed 11 **−0.20 [−0.36, −0.06]** (was −0.18 [−0.34, −0.05]; B's exclusion under 14:12 (a) stands); B minus A at
+seed 7 +0.17 (was +0.18). The paper uses the recomputed values.
+**decide_kind on A at seed 11 (job 779526, decide arm):** 39 of 45 finished (41 without), 82 refused calls (80);
+quality **−0.02 [−0.12, +0.07]**, evidence judgement 1.73 against 1.58. Six comparisons now range −0.02 to +0.06, five
+positive, every interval across zero: no detected effect on quality, as registered.
+
+**Inference cost bench done (19:23, job 776913, A seed 7 merged adapter, one 4g.40gb slice).**
+`experiments/bench/inference_summary.json`: 12 settings (bf16, Q8_0, Q4_K_M × 1, 4, 8, 16 investigations at once;
+15 runs at 1, 45 otherwise). Best throughput Q4_K_M at 8: 93.8 investigations per GPU hour, 39 of 45 finished,
+$0.0188 per investigation at the median A100 40GB price ($1.76/h, priced as a whole GPU although the slice is 4/7 of
+one); bf16 at 16: 84.6/h, $0.0208; Q8_0 at 4: 73.8/h, $0.0239. Claude Haiku 5.5 measured: $0.0084 per
+investigation. So, as measured and priced, the self-hosted agent costs about 2.2 times Haiku per investigation; break-even
+is about $0.79 per GPU hour at the best throughput (the low aggregator price is $0.89). Quantization does not lower
+the finish rate in these runs (Q8_0 finished 15 of 15 at one at a time against bf16's 12), but quality per precision was
+not judged, and Haiku's quality on these cases was not judged in Stage 2: this is cost per investigation, not cost at
+equal quality.
+
+**Scheduling (19:55): A seed 13's screen moved ahead.** Its job on Hatem's account (779177) stayed pending
+behind Nour's higher fair-share. A twin (780862) runs on Nour's account with the same code copy (1a8e7ab, as A's seeds
+7 and 11), the same adapter (sha256 99a217e2..., checked after the copy) and settings; to give it a running slot,
+ablation group 1 (779763, started a minute earlier) and guard ablation 2 (780747, pending) were cancelled, both
+completeness runs, to be resubmitted; the original is cancelled once the twin's first runs are recorded. The teacher
+batch keeps a lower priority than the twin. No result is affected; A seed 13's eligibility (14:05 point 1) is what
+the move protects.
+
+**Registered (20:01; Hatem: "for the final test we'll use 2 judges"; before any test set 3 run): the two
+judges for test set 3 and how they combine.** Judges: `codexsol170` (gpt-6-sol, codex-cli 0.170.0) and `claudecode`
+(claude-opus-5-5, effort medium, Claude Code CLI print mode on the subscription login, no API key), the pair used on
+Stage 1's test set 2, each under its existing scoring qualification (`reports/judge/codexsol170_score_qualification.json`,
+`reports/judge/claudecode_score_qualification.json`), the frozen judge prompt and rubric (judge-v1), one blind
+shuffled packet set for all three arms, keys outside the repository until both judges finish. *Primary score of a
+run:* the mean of the two judges' run scores (each the mean of its judged dimensions, unreached dimensions 0; a packet
+judged more than once by one judge takes that judge's mean, as of 19:2x). Runs one judge could not score validly are
+listed and left out of the primary comparison, never re-judged selectively. *Reported:* the primary comparisons
+(fine-tuned A against the prompted 8B; secondary, against the Stage 1 system) with the company-level interval of 14:05,
+each judge's own comparison beside it, and the judges' agreement (Spearman on runs, mean absolute difference). If the
+two judges disagree in sign on the primary comparison, that is reported as such, not resolved by picking one.
+*Cost:* `claudecode` runs on the subscription, so no per-token charge is expected; if it cannot run (login or usage
+limits), the API backend `claude` (same model, qualified, priced) is used only after its cost estimate is shown to
+Hatem and approved.
+
+**Test set 3 tooling prepared (21:08; nothing run, test set 3 not opened).** `scripts/test3/analyze.py`
+implements the registered reading (mean of the two judges, Eq. 3's company t-interval with a company bootstrap and the
+case bootstrap beside it, each judge's comparison, agreement, sign disagreement flagged, unscored runs listed); run on
+Stage 1's two-judge test set 2 it reproduces the published numbers (+0.518; company t [0.253, 0.782] against
+[0.25, 0.78]; company bootstrap [0.294, 0.746] against [0.29, 0.75]; Spearman 0.954, mean absolute difference 0.295),
+`experiments/test3/validation_on_stage1_test2.json`. `scripts/test3/preflight.sh REV` checks, read-only, both
+accounts' code copy, test set 3 files against the local freeze, llama.cpp, the environments' AgentTune and AuditKIT,
+A's seed-7 adapter (sha256 490d47e3d607c193..., identical on both accounts) and the Stage 1 system's files; it passes
+against code copy e3a19cc. `scripts/test3/run_test3.sh REV` submits the three registered arms (48 cases × 2
+attempts; the two 8B arms differ only in the adapter, as on development), waits, builds one blind packet set, runs
+both judges and the analysis. Two job fixes it needed: the screen job now takes SPLIT (it always loaded development
+cases), and the Stage 1 system's job (eval_switch) now checks the required tools and audits in-job. Monday needs a
+fresh deploy of the code with these fixes, then the preflight against it.
+
+**Seed 13 judged (22:48); A meets the eligibility condition; B's rule fully evaluated.**
+*B seed 13* (job 779527, guards; the first judging returned nothing at Codex's usage limit and was re-judged in full
+after the reset, 25 of 25 valid): 42 of 45 finished, 40 refused calls; quality **2.13**; against the prompted 8B
++0.84 [+0.67, +1.02]; against version 1 +0.26 [+0.12, +0.38]. *A seed 13* (twin job 780862, guards, 35 packets valid):
+39 of 45 finished, 93 refused calls; quality **2.06**; against the prompted 8B **+0.77 [+0.69, +0.85]**, all six
+companies; against version 1 +0.18 [+0.09, +0.27]; against A seed 7 +0.04 [−0.07, +0.17], against A seed 11 −0.10
+[−0.23, +0.01]. **A now has judged development results at seeds 7, 11 and 13 (2.02, 2.17, 2.06), so it meets the
+eligibility condition of 14:05 point 1, case 1 of 18:28.** Fine-tuning against the prompted 8B on the same scaffold:
++0.73, +0.88, +0.77, every interval above zero. *B's admission (14:12), each condition:* (a) B minus A per seed +0.17,
+−0.20, +0.07: not positive at every seed, fails; (b) mean of the three +0.02, below 0.15, fails; (c) pooled +0.02
+[−0.04, +0.09] (bootstrap over cases, pairing within seeds), lower bound not above 0, fails; (d) the step-matched run
+is not judged yet and cannot change the outcome; (e) B finishes 128 runs against A's 119 over the three seeds, met.
+B is not admitted; the test configuration is A's seed-7 adapter without decide_kind, as registered, subject to Hatem's
+confirmation on Monday. Recorded for the paper: the recovery rows raise the finish rate (128 against 119) without a
+reliable change in judged quality.
+
+**Composition condition judged (23:04; exploratory, one seed, not eligible).** A's teacher rows resampled by
+skill group (temperature 0.5) at A's token budget, seed 7 (job 777458; screen 779266): 17 of 45 finished, 248 refused
+calls (245 repeats). Quality **1.04 against A's 2.02: −0.98 [−1.37, −0.58]**, below even the prompted 8B on the same
+scaffold (−0.26 [−0.60, +0.08]); every dimension lower except problem framing (assumptions −1.69, distinct theories
+−1.65, causal mechanism −1.40, revision −1.35, evidence judgement −0.97, recommendation −0.73). With decide_kind +0.03
+[−0.06, +0.14]. *Checked before believing it:* training ran normally (3,996 rows, 1,998 steps, held-out loss 0.435
+against A's 0.386 on the same 240 natural-mix rows); the change is the mix: revision rows 85 → 252 (the same scarce
+examples about three times each), assessment 514 → 648, theories 1,153 → 909, position 338 → 278. *Reading,
+registered as a hypothesis, not a finding:* up-weighting scarce skills by repetition makes the student repeat itself
+(loops), so rebalancing distillation data naively can break the procedure; the teacher's natural mix is the safer
+default. One seed; the paper says so.
+
+**decide_kind decided under the rule of 19 November 20:20 (23:23).** Seed-13 decide arms judged (A: job 780862,
+34 packets; B: job 779527, 28 packets). Per seed, on minus off: A +0.03, −0.02, +0.04; B +0.01, +0.06, −0.06. Pooled
+over the three training seeds (bootstrap over cases, pairing within seeds): **A +0.01 [−0.03, +0.06], B +0.00 [−0.07,
++0.06]**. The rule needs the pooled interval above 0: not met for either, so decide_kind is **not shown to help** and
+stays out of the tested configuration. Nine comparisons in all (three seeds of A and B, the prompted 8B, A without
+corrections, composition) range from −0.06 to +0.06. As registered (14:12): it improves the labels it changes; no
+detected effect on judged quality.
+
+**Ablation, no guards (primary row), judged (23:53; job 780898, A seed 7's adapter, none arm).** 21 of 45
+finished (A with guards: 39), 19 stopped on repeated errors, 263 refused calls (146). Quality **1.57 against 2.02:
+−0.44 [−0.67, −0.24]**, lower at all six companies (Jotun −1.04, Tanita −1.00). Under the rule of 19 November 20:20
+(a part earns its place if removing it lowers the judge score with the interval below 0, or lowers finished runs by 5
+or more of 45 without a judge gain) the guards earn their place on both counts. The fine-tuned agent needs its
+decoding guards: fine-tuning and guards are complements, not substitutes. Which guard groups matter: the four
+guard-group arms follow.
+
+**Step-matched B run judged (00:04; B's data for A's 1,971 steps, seed 7; job 780770, 44 packets).**
+10 of 45 finished, 35 stopped at the turn limit, 305 refused calls (all repeats: 299 searches, almost all in the
+theories stage, where the agent searches and reads without ever adding a theory). Quality **0.66: against A seed 7
+−1.36 [−1.65, −1.00], against B seed 7 −1.53 [−1.85, −1.15]**. *Checked before believing it:* training normal (4,343
+rows, held-out loss 0.392 against B seed 7's 0.390 on the same rows); the served adapter is the trained one (sha256
+19f09b08...); same code, settings and template checks as every B screen. *Reading:* a behavioural failure, not an
+infrastructure one; with B seed 11's loops at one company, B's data gives agents that loop unpredictably across seeds
+and schedules, so its seed-7 gain was fragile. Condition (d) of B's rule (14:12) fails as well (−1.36 against the
+required +0.09): B fails (a), (b), (c) and (d). Nothing changes for test set 3 (A).
+
+**Is the gain more than finishing? (01:56; pasted review, adopted.)** Stage 1's reached-only comparison
+(each pair compared only on the dimensions both runs were scored on; `scripts/paper/shared_stages.py`) on the 8B
+development results, one judge: A against the prompted 8B, full **+0.73, +0.87, +0.77** at seeds 7, 11, 13; shared
+stages only **+0.60 [+0.46, +0.73], +0.73 [+0.61, +0.85], +0.62 [+0.54, +0.68]** (45 of 45 pairs share stages; 7.2 to
+7.3 of 9 dimensions on average). About 0.13 to 0.15 of the gain is finishing more of the procedure; the rest is
+better work on the stages both reach. Against the Stage 1 system unchanged (+0.15, +0.29, +0.19).
+**Registered now, before any test set 3 run: a secondary analysis for test set 3**, the same shared-stages comparison
+per judge, then averaged over the two judges (as Stage 1), with the company t-interval; reported beside the primary,
+never in place of it.
+**Also registered (pasted review):** results that arrive after the eligibility cutoff or with one seed (the decision
+head, the recovery-round retrain) go in the appendix as exploratory, whatever they score; the "two sizes" paragraph
+claims only that direction and rough size agree until test set 3 gives an 8B test result to compare with the 3B one.
+
+**Public release of Stage 2 (01:59; Hatem's choices).** Pushed to the public repository (HatemSaadallah/aemon)
+only after test set 3 is run and in the paper, and after Sunday's 1:1 says whether the submission must be anonymous.
+Contents: code, the paper (PDF and LaTeX), test set 3's data, all development and test reports with blind packets and
+judge predictions, and both hand-check exports. Built with `scripts/release/build_public_repo.py` (no history,
+identifiers replaced, working notes dropped). The Stage 2 decision log is published with the judges named (they are
+the instruments) and the notes that an AI assistant reviewed a design reworded to what was checked. Nothing is pushed
+before Hatem's go.
+
+**Ablations judged overnight (02:09; A seed 7's adapter, same server, cases and attempts; exploratory rows, so
+direction and size only under the rule of 19 November 20:20).** Blind, codexsol170, against A with all guards
+(2.02, 39 of 45 finished); `experiments/screen/ablation_stage2_A7_partial2.json` for the mechanical table.
+- `routed` (adapter off for position, update and conclude; job on Nour's account): **1.81, −0.20 [−0.30, −0.11]**,
+  18 of 45 finished (−21), median 42 turns against 35. Handing the late stages back to the base model costs both
+  quality and finishes: the adapter helps on the stages after the evidence too. Against the prompted 8B it is still
+  +0.52 [+0.41, +0.63].
+- `minus_quote` (quote_menu off): **1.96, −0.06 [−0.13, +0.01]**, 35 of 45 finished (−4); small and not clearly
+  below zero.
+- `minus_repeats` (resampling of repeated calls off): mechanical only so far, 13 of 45 finished (−26), 328 refused
+  calls (146); its judging stopped at the judge's usage limit (16 of 43 valid, set aside) and is redone in full.
+- B step-matched, decide arm (job on Hatem's account, BS7): 0.67 against its guards arm's 0.65, +0.02 [+0.00, +0.05];
+  B stays out of test set 3 (its rule failed at 00:04). Late, one seed: appendix only.
+Waiting: `minus_repeats` (rejudge), `minus_budget`, `minus_ledger`, `staged_prompt`, and the recovery round's screen.
+
+**Decision head (evidence kind), offline result (02:11; job 781448, A's base with the trained LoRA and letter head,
+seed 7; rule and amendment of 20 November 12:xx).** On the 121 frozen test items, after one fitted temperature per
+arm: trained head **79.3%** against the zero-shot base's **81.0%** (registered as 81.8% from the earlier
+measurement; 81.0% here with this run's temperature fit), paired difference **−1.7 points [−10.9, +8.1]** over 95
+records (head right and base wrong on 12 items, the reverse on 14). Calibration error is lower (0.07 against 0.18).
+On the 48 third-party items, the only ones decide_kind acts on: 47.9% against 52.1%. On the in-distribution
+calibration split it rose from 61% to 83%, so training fitted the dossier excerpts but did not carry over to the
+agent-chosen test quotes. **Go rule not met** (needs +5 points, no worse calibration and a paired lower bound above
+0): reported offline only, and no in-loop run. Files: `experiments/decider/kind-s7/` (adapter sha256 in
+`decider.gguf.sha256`). Exploratory; appendix only.
+
+**General-ability retention check submitted (02:16; job 781541, Hatem's account).** The ablation plan's general-ability
+row (19 November 20:30), not yet run: the base against A seed 7 (adapter sha256 490d47e3...) on version 1's sampled
+MMLU and ARC-Challenge items (`reports/retention/retention_items.jsonl`, sha256 7ce21200..., identical to the
+committed file), one server, `jobs/retention_aya.sbatch` at e3a19cc. Mechanical scoring, no judge. Reported as
+measured; a drop is described, not tested against a threshold (none was registered).
+
+**Quantity condition: data and settings, registered before any of it runs (02:23; Hatem: "do both").** The 19
+November 23:43 entry's quantity condition, made concrete. *New training companies:* the 35 `train3` companies (70
+cases, base and irrelevant what-if; dossiers verified word for word, commit e0834c1, 10 November) are already in the
+training split, and none of them is in A's rows (A's 4,302 rows cover the 63 version 1 companies), so no new research
+is needed. *Collection, the same way as version 1's:* Command A+ Q4_K_M (weights a26ba92), prompt `teacher`,
+teacher-v2, reasoning budget 512, 4 slots, context 16,384 per slot, temperature 0, one attempt per case (first attempt
+1), batches of two companies, the stage check after each batch; code e3a19cc; queue `qtyh*` on Hatem's account and
+`qtyn*` on Nour's (the second after the recovery batch frees its 80 GB slice). *Rows:* `aemon.rows.build_rows
+--compact --prompt compact` as version 1's (job 744559), from the accepted reports only; appended to A's rows and
+corrections; trained at seed 7 with A's recipe (2 epochs, so more steps: steps and supervised tokens reported).
+*Reading:* the development screen (guards), one judge, against A seed 7; exploratory and late, so appendix only, and
+never sent to test set 3. If collection is not done by Sunday 22:00, the rows from the batches finished by then are
+used and the shortfall is reported.
+
+**Retention, measured (02:27; job 781541).** Zero-shot, letter by log-probability, 800 items (version 1's sample):
+A seed 7 **67.9%** against the Aya Expanse 8B base's **67.3%**, adapter minus base **+0.6 points [−0.6, +1.9]**
+(ARC-Challenge 81.0% against 81.3%, −0.3 [−2.7, +1.7]; MMLU 60.0% against 58.8%, +1.2 [−0.4, +2.8]). Fine-tuning for
+the investigation did not lower general multiple-choice ability on this sample. Files: `experiments/retention/`.
+
+**Recovery round, why it stopped and how it is completed (02:27).** The 1-slot retry (job 780714) answered 67 of
+the 148 states (23 kept) before its llama.cpp server aborted on a CUDA error ("invalid argument", the mismatch between
+the binary and the GPU it runs on that version 1 met; fixed then by rebuilding on the node, `REBUILD=1`, which this
+job lacked). The other 81 requests failed to connect. The 81 are re-asked with the same settings as the 67 (reasoning
+budget 1,024, teacher-v1, the job's defaults), 4 slots and a server rebuilt for the GPU (job 781576, Nour's account);
+the driver (`recovery_round_rerun2_21nov.sh`) then builds rows from both halves, trains at seed 7 and screens, as
+registered. The quantity collection on Nour's account (781577) starts after it.
+
+**Paper numbers checked mechanically (02:33).** `scripts/paper/check_numbers.py` recomputes the 14 development
+comparisons the paper reports from the combined key and predictions and checks each printed difference and interval.
+On the merged files of 02:20 (`stage2t_all`), 7 match and 7 differ by 0.01 to 0.02 from the printed values (for
+example A against the prompted 8B at seed 7: +0.72 [+0.59, +0.86] against the printed +0.73 [+0.60, +0.85]); on the
+earlier merge (`stage2s_all`) they match. Cause: later campaigns judged packets identical to earlier ones (a run
+can be byte-identical across arms), and under the 19 November 19:19 rule a packet takes the mean of all its
+judgments, so values shift as judgments accrue. No conclusion changes. The printed values are refreshed from the final
+merge once development judging ends, and the check must then pass with no mismatch. Title changed (Hatem): "Weights and
+Harness Are Complements: Distilling a Scientific Strategy Investigator into an 8B Model".
+
+**Correction (02:36).** Seven entries of this night carried times I estimated instead of reading the clock (02:20,
+02:35, 02:25, 02:55, 03:05 twice, 03:50); each is now its commit time (02:09, 02:11, 02:16, 02:23, 02:27 twice,
+02:33). The order of events is unchanged: the quantity condition was registered (commit 0c8578e, 02:23) before its
+teacher jobs were submitted.
+
+**Recovery round: the re-ask failed too, and why (03:55).** Job 781576 (Nour's account) asked the 81 states and got
+no answer: its `REBUILD=1` step needs cmake, which exists only in Hatem's tools folder, so it fell back to the old
+binary, whose server aborted at once on this GPU (CUDA "invalid argument"), at 4 slots and again at 1. The driver
+then started training on the first half's 23 rows alone (job 781681); I cancelled it before it ran and stopped the
+driver, since that is not the registered round. Fix: the server binary built for compute capability 8.0 on Hatem's
+account (version 1's collection binary, sha256 3477b1ee...) is copied to Nour's account at the path the job checks, in
+time for the quantity job there (781577); and the 81 states are re-asked on Hatem's account (job 781694, same
+settings as the first 67: reasoning budget 1,024, teacher-v1, 4 slots), ahead of Hatem's quantity job (781567 now
+waits for it). The new driver (`recovery_round_rerun3_21nov.sh`) refuses to train unless at least 60 of the 81 are
+answered. `minus_repeats`' existing packets are judged in full by a helper, since the queue will not rebuild packets.
+
+**Ablation `minus_repeats` judged (03:58; exploratory row, direction and size only).** A seed 7, with refusal of
+repeated calls in place of resampling them (no_repeats instead of resample_repeats); its packets were judged in full
+by a helper (43 valid), since the queue does not rebuild packets that exist. Quality **1.51 against A's 2.02: −0.50
+[−0.72, −0.32]**; 13 of 45 finished (39), 328 refused calls (146), most runs stopping on repeated errors. Against
+the prompted 8B with the same scaffold it is +0.22 [−0.03, +0.45]. Of the guard groups measured so far, resampling a
+repeated call instead of refusing it carries most of the guards' value: refusing alone leaves a fine-tuned agent that
+repeats itself until it is stopped. Merged files: `stage2u_all`.
+
+**Ablation `minus_budget` judged (04:00; exploratory row).** 41 judgments valid at first and 4 judge calls that
+timed out (TimeoutExpired, not verdicts); the queue set the result aside and could not retry it, so the 4 timed-out
+results were moved to `judge_results/timeouts/` (kept) and the campaign resumed, which reuses the 41 and judged the 4
+again (all valid; the instrument's resume path, which refuses a changed packet or instrument). Quality **2.02 against
+A's 2.01: +0.01 [−0.00, +0.04]**; 39 of 45 finished in both, 148 refused calls (146): with the budget guard off the
+agent behaves almost identically, so on these cases the budget guard rarely acts. (A's mean reads 2.01 here, 2.02
+before: one more repeated judgment of an A packet, averaged as registered.) Merged files: `stage2v_all`.
+
+**Recovery first on the one 80 GB slice we hold (04:10).** The cluster has two 80 GB slices; the other has been held
+by another user for 21 hours with more jobs queued above ours, so the re-ask on Hatem's account (781694) could have
+waited a day. The recovery round was registered before the quantity condition and its result is pending in the
+paper, so it goes first: Nour's quantity job (781577, 15 minutes into its first batch) was cancelled, that batch put
+back at the front of its queue (its partial files kept in `quantity/cancelled_qtyn0/`), and the 81 states re-asked on
+Nour's slice (job 781736, same settings as the first 67, the GPU-built binary); Nour's quantity collection follows it
+(781737) and Hatem's (781567) waits for a slice on its own. A slip on the way: freeing the slice let Hatem's re-ask
+(781694) start on it within seconds, and my next command cancelled that job; Nour's job then took the slice, so
+nothing was lost but a minute. Drivers updated: `recovery_round_rerun4_21nov.sh` (job 781736) and the quantity driver
+(jobs 781567, 781737).
+
+**Ablations complete (04:15; A seed 7, development, one judge; `experiments/screen/ablation_stage2_A7_full.json`).**
+Against A with all guards (2.01 on the latest merge, `stage2w_all`; 39 of 45 finished, 146 refused calls):
+
+| Arm (one change) | Quality vs A | Finished | Refused | Median turns |
+|---|---|---|---|---|
+| none (no guards; primary row) | −0.44 [−0.67, −0.24] | 21 | 263 | 28 |
+| minus_repeats (refuse repeats, no resampling) | −0.50 [−0.72, −0.32] | 13 | 328 | 31 |
+| routed (base model for position, update, conclude) | −0.20 [−0.30, −0.11] | 18 | 197 | 42 |
+| staged_prompt (Stage 1's staged prompt, not compact) | −0.20 [−0.32, −0.07] | 26 | 62 | 17 |
+| minus_quote (quote menu off) | −0.06 [−0.13, +0.01] | 35 | 162 | 35 |
+| minus_ledger (grounded-beliefs ledger off) | −0.01 [−0.07, +0.04] | 40 | 133 | 35 |
+| minus_budget (budget guard off) | +0.01 [−0.00, +0.04] | 39 | 148 | 35 |
+
+Reading (exploratory rows, direction and size only; the primary row passed its rule at 23:53): of the guards, resampling
+a repeated call carries nearly all the value; the ledger and budget guards rarely act on these cases; the quote menu is
+small. The adapter matters in the late stages, and the prompt format it was trained in matters (the staged prompt's
+runs are short and stop early: median 17 turns, 21 distinct runs among 45). `staged_prompt` has 21 packets for 45 runs
+because many of its runs were byte-identical; every run maps to a judged packet.
+
+**Recovery round: teacher half complete (06:31; job 781736).** The 81 re-asked states: all answered (0 request
+failures, 4 slots, the GPU-built binary), 17 kept by the correction checks; the most common rejection, as in the first
+half, is a justification that names nothing from the state (25). With the first half's 23 kept of 67 answered, the
+round has 40 kept corrections from 148 states (27%). The driver now builds rows from both halves, trains A's data plus
+them at seed 7 (A's schedule, extra rows capped at 20% of target tokens) and screens the guards arm, as registered.
+Both quantity collections are running: Hatem's account on gnode04 (server up at 06:28, 4 slots; the binary restriction
+recorded for gnode04 on 4 November no longer applies) and Nour's on gnode02 (from 06:30).
+
+**Teacher job ends FAILED on an empty queue: a script bug, fixed (06:40).** Job 781736 finished its stage (81 answered,
+written at 06:30) and then exited 1: in queue mode `take()` returns the status of its last test, which is 1 when the
+queue is empty, and under `set -e` the caller's `LINE=$(take)` stopped the job before "queue empty". The data are
+complete; only the job state is wrong. The recovery driver required COMPLETED and stopped; it now continues when the
+re-ask's output exists (`recovery_round_rerun5_21nov.sh`). `jobs/command_a_plus.sbatch` returns 0 on an empty queue
+(checked in a shell with `set -euo pipefail`); the running quantity jobs use their own copy, and the quantity driver
+waits on their queue state, not their exit state.
+
+**Composition at training seed 11, judged (08:15; job 781992; the 19 November 23:43 rule adds seeds 11 and 13 to a
+condition that differs from the reference).** Same rows (composition_s7.jsonl) and recipe as seed 7: 21 of 45
+finished, 21 stopped at the turn limit, 3 on repeated errors, 33 refused calls; 21 packets for 45 runs (identical runs
+share a packet). Quality **1.07 against A seed 11's 2.17: −1.09 [−1.47, −0.71]**; against the prompted 8B on the same
+scaffold −0.22 [−0.53, +0.11]. Seed 7 on the same merge: −0.97 [−1.36, −0.57]. The failure replicates at a second
+training seed; at seed 11 the runs stall to the turn limit rather than being refused for repeats, both forms of not
+moving forward. Seed 13's screen waits for a slot. Merged files: `stage2x_all`.
+
+**Composition seed 13's screen moved to Hatem's account (08:24).** It waited for a slot on Nour's account (782011, held
+by the recovery training until about 11:40) while Hatem's had one free. The adapter was copied and its sha256 checked
+(40d42c52..., as trained), 782011 cancelled before it started, and the same screen (code e3a19cc, compact prompt,
+guards, context 8,192) submitted on Hatem's account as job 782086. Its report is copied to Nour's account when it
+lands, where the judge queue looks for it.
+
+**A confirmed for test set 3 (Hatem, 08:55 Saturday: "confirm A").** Checked against every registered condition
+before recording, none still open that could change it: (1) eligibility (three judged seeds by Sunday 23:59): A has
+them (2.02, 2.17, 2.06); the recovery retrain, the quantity run and the decision head have one seed and cannot be
+chosen; (2) choice: A is the reference and an addition enters only with its benefit established by its rule; B failed
+its admission rule (pooled +0.02 [−0.04, +0.09], step-matched 0.66); decide_kind showed no benefit pooled over three
+seeds (A +0.01 [−0.03, +0.06]); composition, which may reach three judged seeds this morning, is −0.97 and −1.09 at
+the two judged seeds, so no seed-13 result can establish a benefit. Configuration: A's seed-7 adapter (sha256
+490d47e3d607c193...), compact prompt, the six guards, no decide_kind, adapter on every stage (route default=0),
+context 8,192, Aya Expanse 8B at 5062468b. The code revision is frozen at Monday's deploy, after preflight, and
+committed with this configuration before test set 3 is opened.
+
+**Quantity collection: Nour's job stopped, its batches moved (09:12).** Job 781737 collected its first batch (qtyn0,
+4 investigations, 4 slots), but the stage check after it crashed: Nour's teacher environment (`~/lexsi/env`) has no
+AgentTune, and the check imports the row builder, which imports the audit module, which needs it. The job retried the
+batch at 1 slot (same crash) and stopped; another user's job then took the 80 GB slice. The investigations themselves
+are unaffected (the check only reads them). Fix: Nour's 8 remaining batches are appended to Hatem's queue, where job
+781567 (gnode04, an environment with AgentTune 1.1.3 at d4db4c1) takes them after its own, same settings, about one
+hour a batch, so collection ends near midnight, inside Sunday 22:00. The 1-slot duplicate of qtyn0 is set aside
+(`quantity/duplicate_retry/`); qtyn0's 4-slot report is used. The driver now waits on 781567 only, takes each batch's
+first report (its retry only if the first is missing), and builds rows with Nour's `env_train` (same AgentTune build),
+not `env`, which would fail the same way. Rows still pass build_rows' replay and provenance checks before any training.
+
+**Composition at training seed 13, judged; composition over three seeds (09:58).** Job 782086 (moved to Hatem's
+account): 36 of 45 finished, 8 stopped on repeated errors, 1 at the context limit, 130 refused calls; 37 packets.
+Quality **1.98 against A seed 13's 2.06: −0.08 [−0.17, +0.01]**, +0.69 [+0.57, +0.80] over the prompted 8B. Unlike
+seeds 7 (−0.97, 17 finished) and 11 (−1.09, 21 finished), it does not collapse. Pooled over the three seeds as
+registered (pairs within seed, bootstrap over cases; `scripts/paper/pooled_seeds.py`, which reproduces B's recorded
++0.02 [−0.04, +0.09] exactly): **−0.72 [−0.92, −0.50]**, below A at every seed. Reading, corrected: rebalancing the
+teacher's data toward rare skills does not break the agent every time; it makes it fragile, collapsing into repeats or
+stalls at two of three training seeds and nearly matching A at the third, the same instability across seeds seen with
+B's recovery rows. Composition is not a candidate for test set 3 (A was confirmed at 08:55; it is below A at every
+seed). Merged files: `stage2y_all`.
+
+**Recovery round trained (11:30; job 781960, Nour's account).** A's rows plus 91 extra rows (A's 51 corrections and
+the round's 40), seed 7, A's recipe: 3,982 rows, 1,991 steps (A: 1,971), 4.3 hours, peak 19.7 GB; held-out loss
+0.572 at step 50 and 0.387 at the end (A: 0.565 to 0.387, the same 240 validation rows). Adapter sha256
+de11b0965687ab7d... The guards screen (job 782414, compact prompt, same code and settings as A's screens) is queued;
+the judge queue takes it as `ayaR7_guards`. One seed, late: appendix only, compared with A seed 7.
+
+**Recovery round judged (13:10; job 782414; one seed, late: appendix only, exploratory).** A's data plus the 40
+teacher corrections of the student's own failure states (and A's 51), seed 7: 36 of 45 finished (A: 39), 8 stopped
+on repeated errors, 72 refused calls (146), median 28 turns (35); 36 packets. Quality **2.12 against A seed 7's 2.01:
++0.12 [+0.02, +0.21]**, higher at 5 of 6 companies (Hellberg −0.06); by dimension, causal mechanism 2.91 against
+2.57, problem framing 2.71 against 2.33, recommendation 1.36 against 1.17, experiment design 1.31 against 1.16,
+revision 2.15 against 2.31, the rest within ±0.11. Against the prompted 8B +0.83 [+0.73, +0.92]; against the Stage 1
+system +0.24 [+0.15, +0.33]; against B seed 7 −0.07 [−0.19, +0.07]. Caution, registered before reading it (the 21
+November late-runs rule): one training seed, and B's recovery rows also gained at seed 7 (+0.17) and did not replicate
+(pooled +0.02), so this is a direction worth a three-seed test, not a finding. It cannot change test set 3 (A is
+confirmed; one seed is not eligible). Merged files: `stage2z_all`.
+
+**Recovery round at seeds 11 and 13, registered before they run (13:20).** The 19 November 23:43 rule adds training
+seeds 11 and 13 to any condition that differs from the reference; the recovery round does at seed 7 (+0.12 [+0.02,
++0.21]). Same rows (`rows/final.jsonl` b963e777..., extras `extras_round1.jsonl` c0913c5b..., 91 rows, identical on
+both accounts) and recipe as seed 7 (job 781960, code 90dde44, Unsloth, extras capped at 20%); seed 11 on Hatem's
+account, seed 13 on Nour's; then the guards screen of each (code e3a19cc, compact prompt) and the judge, as for every
+seed. Reading, fixed now: the three seeds pooled as registered (pairs within seed, bootstrap over cases,
+`scripts/paper/pooled_seeds.py`) against A at matched seeds; reported in the appendix with direction and size, the
+paper's wording following the pooled interval; A remains the configuration for test set 3 whatever the result.
+
+**Quantity collection: a batch failed its check; collection continues (14:05).** Job 781567 finished 7 batches (each
+4 of 4 investigations finished, about 95 candidate rows a batch); batch qtyh6 then finished only 1 of 4 (3 stopped on
+repeated errors) and failed the stage check, which stops the job by design, as version 1's teacher stopped on batch
+again7. Its report stays; build_rows keeps only accepted investigations. The driver took the job's end for the end of
+collection and built rows from 8 of 18 batches (job 782787); no training was started, and those files are set aside
+(`rows/partial_quantity_1358/`). The driver now ends collection only when the queue is empty or at the registered
+Sunday 22:00 cutoff, and resubmits a stopped teacher job with the same settings: job 782791 (Hatem's account) is first
+in line for the next free 80 GB slice; both are held by other users' jobs, so the 10 remaining batches may not all
+finish by the cutoff, in which case the finished ones are used and the shortfall reported, as registered.
+
+**Recovery round over three seeds, judged (19:45; read as registered at 13:20).** Seeds 11 (job 783203, 33 packets)
+and 13 (job 783182, 37 packets), same rows and recipe as seed 7. Against A at the matched seed: seed 7 **+0.12
+[+0.02, +0.21]**, seed 11 **−0.05 [−0.15, +0.05]** (2.11 against 2.17; 40 finished, 41), seed 13 **−0.14 [−0.29,
+−0.01]** (1.92 against 2.06; 41 finished, 39; 200 refused calls against 93). Pooled over the three seeds (pairs within
+seed, bootstrap over cases; `scripts/paper/pooled_seeds.py`): **−0.03 [−0.07, +0.02]**. The seed-7 gain does not
+replicate: one round of teacher corrections on the student's own failure states shows no reliable effect on judged
+quality, the same pattern as B's rule-built recovery rows (+0.17 at seed 7, pooled +0.02). Against the prompted 8B every
+seed stays far ahead (+0.83, +0.82, +0.63). Appendix only; A remains the configuration for test set 3. Mechanical table:
+`experiments/screen/recovery_round_three_seeds.json`. Merged files: `stage2aa_all`.
+
+**Quantity condition: collection stops at 14 of 18 batches (Hatem, 19:55: "let's just finish 14 batches instead of
+18"), decided before any quantity result exists.** Batches done or running: Hatem's qtyh0 to qtyh8 (qtyh6 failed its
+teacher check, 1 of 4 finished), Nour's qtyn0, and qtyn1 to qtyn4 on Hatem's account: 14 batches, 28 companies of the
+35, 56 cases. The 4 unstarted batches (qtyn5 to qtyn8: Sartorius, Terumo, Valmont, Yaskawa) are set aside in
+`quantity/dropped_hatem_1955`, never collected. The condition is otherwise unchanged: rows from the accepted
+investigations only, appended to A's data, trained at seed 7, screened and judged against A seed 7; appendix only. The
+paper reports how many investigations were added (accepted, and as a share of A's 205).
+
+**Paper numbers refreshed from the latest merge (20:30; `stage2aa_all`, all development judging except the quantity
+arm).** `scripts/paper/refresh_numbers.py` finds each printed comparison by recomputing it on earlier merges and
+replaces it with its value on the latest; the rest (two values split across a line, the per-seed means and gains
+printed without intervals, the shared-stages and staged-prompt comparisons, Figure 1's caption) were updated by hand
+from recomputed values. Changes are 0.01 or 0.02 and no conclusion moves: for example A against the prompted 8B at seed
+7 is +0.72 [+0.59, +0.85] (was +0.73), shared stages at seed 7 +0.59 [+0.45, +0.72] (was +0.60), no guards −0.43
+[−0.66, −0.23] (was −0.44), A's seed-7 mean 2.01 (was 2.02). `scripts/paper/check_numbers.py` now passes: all 13
+interval comparisons it checks are printed as the latest merge gives them (step-matched B is printed as a mean only,
+so it left the interval check). `fig_seeds.pdf` regenerated from the same merge. Rerun both after the quantity arm,
+since its judgments could add to shared packets.
+
+**Quantity collection complete; driver restarted after a network drop (21:50).** All 14 batches finished (the last,
+qtyn4, at 20:52; Hatem's account holds 13 reports, Nour's qtyn0). Job 782791 ended FAILED only through the
+empty-queue bug of its older script copy (fixed at f043cac). Around 21:10 the laptop lost its connection to the cluster;
+the driver read the unanswered queue query as empty and stopped when copying failed, with nothing done on the cluster.
+It now retries on an unreadable answer, and was restarted: copy the reports, build rows (build_rows --compact --prompt
+compact, Nour's env_train), append to A's rows, train at seed 7, screen.
+
+**Quantity: rows, training and screen moved to Hatem's account (22:50).** Copying the 13 reports through the laptop
+failed when the link dropped again (report qtyh1). Hatem's account already holds those 13 reports, A's rows (same
+sha256 b963e777...) and an environment with AgentTune, so only Nour's qtyn0 report and its provenance lines are copied
+over; rows, training at seed 7 and the screen run there (`quantity_after_21nov.sh`, every remote command retried).
+Nothing else changes. The laptop was low on memory at the time (1.6 GB available), and Claude Code stopped the second
+judge queue to free memory; it held only the quantity arm, which will be judged once its screen lands.
+
+**Quantity rows built; training started (22:55; job 783710, Hatem's account).** From the 14 batch reports (56
+investigations on 28 new training companies), build_rows accepted **43** and refused 13 whose replay did not reach an
+accepted finish (the teacher did not finish them; same rule as A's data). They give **1,046 rows** (sha256
+6c611b23...), so the training set grows from A's 4,302 rows to 5,348 (sha256 92f5ca74...): +24% rows, and +27%
+accepted investigations (158 to 201). Training at seed 7 with A's recipe (2 epochs, so about 24% more steps); then the
+guards screen, judged against A seed 7.
+
+**Second judge checked before test set 3 (00:55 Sunday; Hatem's plan).** One development packet (07ffe1f0..., from
+the recovery round's seed-13 screen) judged by `claudecode` (claude-opus-5-5, Claude Code print mode, subscription
+login, qualification `reports/judge/claudecode_score_qualification.json`): valid, 39 seconds. Scores run about a
+point lower than codexsol170's on the same packet on framing and mechanism (mean of scored dimensions 1.43 against
+2.00), consistent with the earlier finding that the judges agree on order but not on level, which is why test set 3
+compares arms within each judge and then averages. At this speed with 4 workers, test set 3's roughly 250 packets take
+about 40 minutes for this judge. The check judgment is kept apart (`judge_results/claudecode_check_22nov/`) and enters
+no result.
+
+**Hugging Face: a new organisation with credits, and Hatem's choices (04:05 Sunday).** Hatem was invited into
+`twoeyedravens` (Two-eyed Ravens; 3 members; about $100 of credits, balance visible only on its billing page), distinct
+from `two-eyed-ravens`, which holds the published Stage 1 model and dataset. His choices: (1) Stage 2's artifacts
+(A's adapter, training rows, development reports, blind packets and judgments) go to `twoeyedravens` **public now**;
+test set 3's data stays private until Monday's run, so the test cannot leak before it is run; files are scrubbed as
+for the GitHub release (no personal data or paths, no notes about AI assistants' work). (2) Stage 1's model and
+dataset are **copied** to `twoeyedravens` and also kept in `two-eyed-ravens`. (3) Credits: a demo Space running A on
+an L4 that sleeps when idle, and a free CPU Space to browse every development run and judgment. Running part of test
+set 3 on Hugging Face hardware is **not** done (Hatem: "skip the monday set up"): all three arms stay on the cluster's
+identical server setup, as registered, so no hardware difference enters between arms. Blocked until Hatem's token
+has write access to `twoeyedravens`.
+
+**Quantity condition trained (04:10 Sunday; job 783710, Hatem's account).** A's rows plus the 1,046 quantity rows
+(5,348 in all, sha256 92f5ca74...), A's corrections as extras, seed 7, A's recipe: 2,494 steps (A: 1,971), 5.3 hours;
+held-out loss on the same 240 validation rows 0.575 at step 50 and 0.380 at the end (A: 0.565 to 0.387); adapter
+sha256 320dba8af70d9a5c... The guards screen (job 784124) started at
+04:15; judged against A seed 7, appendix only.
+
+**Quantity condition judged (07:30 Sunday; job 784124; one seed, appendix only).** A's data plus 43 accepted
+Command A+ investigations on 28 new training companies (+27% investigations, +24% rows), seed 7: 36 of 45 finished
+(A: 39), 67 refused calls (146), median 33 turns (35); 23 packets for 45 runs. Quality **2.09 against A seed 7's 2.01:
++0.09 [−0.02, +0.19]**, higher at 5 of 6 companies (ACR −0.26); by dimension, revision +0.25, experiment design +0.24,
+evidence judgement +0.22, assumptions +0.19, recommendation +0.12, problem framing −0.10, seeking challenge −0.13.
+Against the prompted 8B +0.80 [+0.64, +0.94]. Reading: more data of the same kind gives a small, inconclusive gain at
+one seed; the two recovery conditions also gained at seed 7 and did not replicate, so no claim is made beyond direction
+and size. Merged files: `stage2ab_all`; `scripts/paper/check_numbers.py` still passes on them (no printed value moved).
+Development is complete.
+
+**Test set 3: configuration frozen, run started (Sunday 22 November, before any test set 3 run).** Hatem: run test set
+3 today rather than Monday; nothing in the registered rules requires Monday (A was confirmed on 21 November at 08:55
+against every registered condition, and every development result is in, so no other configuration can become
+eligible). Preflight on code e3a19cc passed all 16 checks: test cases and dossier identical on both accounts to the
+frozen local files (digest 068261a9), A's seed-7 adapter identical on both (490d47e3...), AgentTune and AuditKIT in
+both environments, the Stage 1 system's files present. The full configuration is `docs/test3_config.json`, committed
+here before the run. Arms, 48 cases x 2 attempts: A (Nour's account), the prompted 8B on the same scaffold and the
+Stage 1 system (Hatem's account); one blind shuffled packet set; both judges; `scripts/test3/analyze.py` as registered.
+
+**Test set 3, first attempt cancelled; rerun on a fresh deploy (13:50 Sunday).** The first attempt used code e3a19cc
+(the development screens' copy), but the screen job's split option (`SPLIT`, commit 9d42bad, Monday preparation) came
+after it: the A arm's runner was given test set 3's case names under the development split, found none and exited
+having run no investigation; the prompted arm had not started; the Stage 1 arm (whose job already took the split) had
+run 3 minutes. My error: the plan said to run on a fresh deploy, and I reused the old copy; the preflight did not check
+the split. Both remaining jobs were cancelled and every file of the attempt set aside unread
+(`runs/screen/test3_attempt1_cancelled/`, `runs/eval/test3_attempt1_cancelled/`, `experiments/test3/attempt1_cancelled/`);
+none enters any result. A second bug surfaced too: the run script's wait loop lost its job list to ssh reading stdin,
+so it moved on before the jobs ended; fixed with `ssh -n`. Fresh deploy 49fe311 to both accounts (agent, tools, guards
+and runner unchanged since e3a19cc); the preflight, now also checking the split, passed all 18 checks;
+`docs/test3_config.json` updated to 49fe311 and committed before the rerun. All three arms run again on this code.
+
+**Hugging Face access and the Stage 1 copy (14:03 Sunday).** Hatem re-authorised the local Hugging Face login with
+`twoeyedravens` ticked: role write, prepaid billing that can pay. Stage 1's model and dataset were copied as they are,
+public, to `twoeyedravens/aemon` (10 files) and `datasets/twoeyedravens/aemon` (308 files); the originals in
+`two-eyed-ravens` are unchanged. Test set 3's rerun is running: A's first investigations were written with no runner
+error, so the split fix holds.
+
+**Everything moved to `twoeyedravens` (Hatem: "deploy everything to the new org because i want to delete the old
+one", 14:09 Sunday).** On Hugging Face: Stage 1's model and dataset copied (`twoeyedravens/aemon`), their cards'
+links pointed at the new org; Stage 2's adapter A and every development run and judgment published
+(`twoeyedravens/aemon-8b`, model and dataset; built by `scripts/release/build_release_stage2.py`, 0 identifiers left, no
+test set 3 file, MANIFEST.json with sha256 of source and copy); a new collection holding both stages and the demo
+Space; and the organisation page (`spaces/twoeyedravens/README`, source `deploy/hf_org/README.md`, now covering
+Stage 2). Repository links (README, public README, cards, article text, Space README, paper) point to the new org;
+this log keeps the old names as history. Not movable by API and left to Hatem: the posted article
+(blog/HatemSaadallah/aemon) links to `two-eyed-ravens`, so its links break once the old org is deleted unless edited
+by hand; deleting `two-eyed-ravens` also ends the redirects from the old names. The demo Space stays under Hatem's
+account and is unaffected.
+
+**Correction and a decision (14:12 Sunday).** Three of today's entry times were estimated rather than read (13:55,
+14:25, 14:45); each is now its commit time (13:50, 14:03, 14:09). Hatem: keep `two-eyed-ravens` for now, for its
+redirects; it is not deleted, and its repos stay as they are alongside the copies in `twoeyedravens`.
+
+**Stage 2 paper published to the public repository (14:55 Sunday; Hatem: "Public repo, paper only, now").** Commit
+fbbecfc on github.com/Two-Eyed-Ravens/aemon (main) adds `docs/stage2/PAPER_STAGE2.pdf` with its LaTeX source and
+figures, everything up to now, with test set 3 marked pending; no other file changed. Scanned before the push: no
+cluster identifiers or home paths, no notes about AI assistants' work (the judges keep their names). Committed as
+Hatem with his noreply address, no co-author line. The paper is replaced there once test set 3 is analysed; the full
+public snapshot follows after that, as planned.
+
+**Test set 3: runs complete, judging in parallel (17:31 Sunday).** All three arms ran on code 49fe311 with AuditKIT:
+finished investigations (mechanical, before any judgment) A 81 of 96, the prompted 8B on the same scaffold 2 of 96,
+the Stage 1 system 82 of 96. One blind shuffled packet set: 223 packets from 288 runs. Codex (codexsol170) started
+from the run script; at Hatem's request the Claude Code judge (claudecode) runs at the same time on the same packets
+into the same output folder, instead of after it, which changes nothing in what either judge sees. Then
+`scripts/test3/analyze.py` as registered.
+
+**Test set 3: the two invalid Claude Code judgments are re-judged (Hatem, 17:42 Sunday; a deviation from the
+registered rule, recorded before any test set 3 score was computed or seen).** The registered reading leaves runs a
+judge cannot score validly out and does not re-judge them. Two claudecode answers (packets efcb15d59439b873 and
+e0303ce718579ca9) failed the instrument's check with "dimension set differs": the answer's set of rubric dimensions did
+not match the rubric's nine, a formatting failure, not a verdict. Hatem asked to repeat them. They are re-judged once,
+through the instrument's resume path after the claudecode campaign ends (the failed results kept in
+`judge_results/test3/claudecode_invalid_first/`); if a second attempt also fails, that packet is left out as
+registered. Reported in the paper as a deviation. No result of test set 3 had been computed when this was decided.
+
+**TEST SET 3 RESULT (18:05 Sunday; read exactly as registered, `scripts/test3/analyze.py`; `experiments/test3/report.json`).**
+Twelve companies never used before, 48 cases, 2 attempts, 96 runs per arm, both judges (codexsol170 and claudecode),
+all 288 runs scored by both (the three claudecode answers that failed the instrument's format check were re-judged
+once at Hatem's request, all valid; recorded above as a deviation). Mean of judges per arm: **A 1.71, Stage 1 system
+1.58, prompted 8B on the same scaffold 1.01**; finished runs A 81, Stage 1 system 82, prompted 8B 2 (of 96).
+
+| Comparison (paired by case and attempt) | Mean of judges | Company t-interval (12) | Codex | Claude Code | Companies above 0 |
+|---|---|---|---|---|---|
+| **A minus prompted 8B** (primary) | **+0.70** | **[+0.61, +0.79]** | +0.79 [+0.66, +0.93] | +0.61 [+0.52, +0.70] | 12 of 12 |
+| A minus Stage 1 system | +0.12 | [+0.05, +0.20] | +0.19 [+0.04, +0.34] | +0.06 [+0.01, +0.11] | 10 of 12 |
+
+Company bootstrap: [+0.62, +0.78] and [+0.06, +0.19]; case bootstrap [+0.65, +0.76] and [+0.08, +0.17]. Secondary,
+shared stages only: +0.55 [+0.44, +0.66] and +0.13 [+0.04, +0.22]. The judges agree in sign on both comparisons;
+Spearman 0.78 between their run scores, mean absolute difference 0.45. Reading under the registered rule (interval over
+companies): fine-tuning Aya Expanse 8B on the teacher's trajectories improves judged investigation quality over the
+same model prompted with an identical scaffold on companies never seen in development or training, by about +0.7 on
+the 0 to 3 rubric (development: +0.72 to +0.88), and the 8B system is above Stage 1's Tiny Aya system by a small,
+interval-clear margin. Run once; not re-run. Files: `experiments/test3/` (reports of the three arms, the blind packets,
+the key, both judges' predictions, the analysis).

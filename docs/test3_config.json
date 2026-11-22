@@ -1,0 +1,41 @@
+{
+ "frozen_at": "2026-11-22 Sunday, before any test set 3 run",
+ "decided_by": "Hatem confirmed A on 21 November 08:55; Hatem asked to run test set 3 on 22 November (\"today\")",
+ "code_revision": "49fe311 (fresh deploy, identical on both accounts; the agent, tools, guards and runner are unchanged since e3a19cc, the development screens' code: only the judging report and new RL files differ)",
+ "test_set_digest": "068261a91fb3d8b81d89e8750b0594f769c7cd3dae9a9fbdfe3c5e6ab3c6ad3b",
+ "cases": 48,
+ "companies": 12,
+ "attempts_per_case": 2,
+ "arms": {
+  "A": {
+   "model": "CohereLabs/aya-expanse-8b @ 5062468bf9bc0c6035fd64e06274333ec127d980 (bf16 GGUF converted in the job)",
+   "adapter_sha256": "490d47e3d607c193e9a020db29c7e1d8f8ce744cfeb7c22258bd0b698d7e228e",
+   "prompt": "compact",
+   "route": "default=0 (adapter on every stage)",
+   "decide_kind": false,
+   "guards": "no_repeats,quote_menu,resample_repeats,budget,grounded_beliefs,evidence_first",
+   "context": 8192,
+   "account": "Nour's"
+  },
+  "prompted": {
+   "model": "the same base, no adapter, identical prompt, guards, context and server",
+   "account": "Hatem's"
+  },
+  "stage1": {
+   "model": "Tiny Aya Global bf16 with version 1 and version 3 adapters routed as in Stage 1 (default=1,brief=0,frame=0,evidence=0), the same six guards",
+   "job": "jobs/eval_switch.sbatch",
+   "account": "Hatem's"
+  }
+ },
+ "judges": [
+  "codexsol170 (gpt-6-sol, codex-cli 0.170.0)",
+  "claudecode (claude-opus-5-5, Claude Code print mode)"
+ ],
+ "reading": "scripts/test3/analyze.py as registered: primary = mean of the two judges; company t-interval over 12 companies; company and case bootstraps beside it; each judge reported; sign disagreement flagged; shared-stages secondary",
+ "comparisons": [
+  "A minus prompted",
+  "A minus stage1"
+ ],
+ "preflight": "scripts/test3/preflight.sh 49fe311: PREFLIGHT PASSED (18 checks, including that the screen job takes the test split)",
+ "first_attempt": "cancelled 22 November 13:40 on code e3a19cc, which predates the screen job's split option (9d42bad): the A arm ran no investigation, the prompted arm never started, the Stage 1 arm ran 3 minutes; their files were set aside unread (test3_attempt1_cancelled) and are not used"
+}

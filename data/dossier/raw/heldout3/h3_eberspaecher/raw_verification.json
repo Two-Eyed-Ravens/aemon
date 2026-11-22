@@ -1,0 +1,118 @@
+{
+ "summary": {
+  "verified": 20,
+  "not_found": 2
+ },
+ "results": [
+  {
+   "id": "eberspaecher-group-size",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-fy2025-results",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-asia-pressure",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-oem-heaters",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-dealer-network",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-rv-retrofit",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-boat-heaters",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-car-consumer-site",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-caravan-salon-2024",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "eberspaecher-booth-owners",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "autohaus-plant-closures",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "ec-parking-heater-duopoly",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "civd-private-motorhome-registrations",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "civd-used-vehicle-record",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "reimo-retrofit-listing",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rvdaily-price-gap",
+   "status": "not_found",
+   "detail": "page has 19370 characters"
+  },
+  {
+   "id": "rvdaily-owners-tempted",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "motorhomefun-diy-kit",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "iims-boat-owner-diy",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "opss-vevor-portable-heater",
+   "status": "not_found",
+   "detail": "page has 1601 characters"
+  },
+  {
+   "id": "truma-portable-coolers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "webasto-rv-installation-partners",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

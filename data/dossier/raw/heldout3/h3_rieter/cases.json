@@ -1,0 +1,21 @@
+{
+ "cases": [
+  {
+   "company": "Rieter Holding AG",
+   "question": "Should Rieter Holding AG develop a differentiated consumer proposition for a specific use case, beyond its existing short-staple spinning machines, components and after-sales services for industrial spinning mills? What evidence would justify that investment?",
+   "brief": "Rieter Holding AG makes systems for short-staple fibre spinning, from fibre preparation to ring, compact, rotor and air-jet spinning and winding, together with components and after-sales services, for spinning mills; since February 2026 it also owns Barmag, a maker of man-made fibre equipment. It is a listed group headquartered in Winterthur, Switzerland, with more than 3,000 mill customers. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "rieter",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "rieter-base",
+   "premise_records": [
+    "rieter-customers-3000",
+    "rieter-spinning-documentation",
+    "rieter-textile-calculator",
+    "rieter-webshop"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

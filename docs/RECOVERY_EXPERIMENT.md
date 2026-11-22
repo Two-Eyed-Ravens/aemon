@@ -3,7 +3,7 @@
 Question: how much of version 1's unreliability can a failure-aware controller fix without retraining, without weakening
 any guard and without lowering quality, and which failures need a better learned policy?
 
-Branch `claude/failure-recovery`. Nothing here changes version 1, the evaluated runner defaults, either frozen test set
+Branch `failure-recovery`. Nothing here changes version 1, the evaluated runner defaults, either frozen test set
 or their results. All new artifacts live in `experiments/recovery/`.
 
 ## A. Architecture audit (verified in code, not assumed)

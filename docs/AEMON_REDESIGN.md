@@ -1,6 +1,6 @@
 # aemon redesign (2026-11-11)
 
-The interface was rebuilt as one workspace on branch `claude/strategy-lab-ui`. The frozen V1 model, adapter, inference settings, tool schemas, guards, test cases and metrics are untouched. Only `app/web` changed, apart from the cache header noted below. Before and after screenshots, dark theme at 1440 px: `docs/figures/ui/redesign/{before,after}/`.
+The interface was rebuilt as one workspace on branch `strategy-lab-ui`. The frozen V1 model, adapter, inference settings, tool schemas, guards, test cases and metrics are untouched. Only `app/web` changed, apart from the cache header noted below. Before and after screenshots, dark theme at 1440 px: `docs/figures/ui/redesign/{before,after}/`.
 
 ## Foundation
 - **Design system.**

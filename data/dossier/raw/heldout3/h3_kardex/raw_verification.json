@@ -1,0 +1,113 @@
+{
+ "summary": {
+  "verified": 19,
+  "not_found": 2
+ },
+ "results": [
+  {
+   "id": "kardex-size",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-portfolio",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-revenue-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-entry-price",
+   "status": "not_found",
+   "detail": "page has 90488 characters"
+  },
+  {
+   "id": "kardex-channels",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-remstar-industries",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-installed-base",
+   "status": "not_found",
+   "detail": "page has 90488 characters"
+  },
+  {
+   "id": "kardex-vlm-price",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-certified-install",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-small-warehouse-survey",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-pre-owned",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-dealership-parts",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-filing-history",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-maine-oxy",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-dealer-raymond-west",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-analogy-pio",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-analogy-modula-slim",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-analogy-haenel-office",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-analogy-bumblebee",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-self-storage-demand",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "kardex-raas-by-size",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

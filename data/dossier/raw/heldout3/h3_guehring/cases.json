@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "Gühring KG",
+   "question": "Should Gühring KG develop a differentiated consumer proposition for a specific use case, beyond its existing precision rotary cutting tools for industrial metal machining? What evidence would justify that investment?",
+   "brief": "Gühring KG makes precision rotary cutting tools for metal machining, such as drills, milling cutters, reamers and threading tools, for customers in the automotive, aerospace, mechanical engineering and medical technology industries. It is a family-owned company from Albstadt, Germany, owner-managed in the fourth generation, with production sites in 48 countries. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "guehring",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "guehring-base",
+   "premise_records": [
+    "guehring-dianoz-development",
+    "guehring-dianoz-reseller",
+    "guehring-b2b-shop"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

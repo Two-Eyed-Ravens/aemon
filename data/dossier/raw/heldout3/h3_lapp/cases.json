@@ -1,0 +1,20 @@
+{
+ "cases": [
+  {
+   "company": "U.I. Lapp GmbH",
+   "question": "Should U.I. Lapp GmbH develop a differentiated consumer proposition for a specific use case, beyond its existing cables and connection technology for industrial machinery and plant engineering? What evidence would justify that investment?",
+   "brief": "U.I. Lapp GmbH, of the Stuttgart-based LAPP Group, makes cables, industrial connectors, cable glands, customised assemblies and automation accessories, including the ÖLFLEX brand, whose core market is machinery and plant engineering, with further markets in food, logistics, energy and mobility. The group is fully family-owned, employs around 5,700 people and reported sales of EUR 1.93 billion in fiscal year 2025. You have not been told how far it already reaches individual buyers, so find out. You are an outside analyst working only from public sources. This company has not asked this question, has not been contacted, and nothing here describes its intentions. Some of its financial and contractual detail may not be public, so say what you could not find. Product redesign, a different route to buyers, a different customer group and no expansion are all open. The test budget of 20000 euros and the 12-week limit are analyst assumptions for this exercise, not company figures. ",
+   "scope": "lapp",
+   "search_budget": 8,
+   "test_budget": 20000,
+   "max_test_weeks": 12,
+   "id": "lapp-base",
+   "premise_records": [
+    "lapp-mobility-end-consumer",
+    "lapp-mobility-private-checkout",
+    "lapp-wallbox-light-home"
+   ],
+   "test_warranted": true
+  }
+ ]
+}

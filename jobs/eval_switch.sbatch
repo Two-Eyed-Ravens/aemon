@@ -4,7 +4,7 @@
 #SBATCH --qos=stud
 #SBATCH --account=CLUSTER_ACCOUNT
 #SBATCH --gres=gpu:4g.40gb:1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=48G
 #SBATCH --time=06:00:00
 #SBATCH --output=%x-%j.out
@@ -15,6 +15,9 @@
 # STATUS_CHECK=1 adds the company_status step; SPLIT=heldout is for the labelled Aquaporin diagnostic only.
 set -euo pipefail
 L=$HOME/lexsi
+# PY must have agenttune and auditkit: every run is audited with AuditKIT in-job (DECISIONS 20 November)
+PY=${PY:-$L/env/bin/python}
+$PY -c "import agenttune, auditkit" || { echo "agenttune or auditkit missing in $PY"; exit 1; }
 G=$L/models/tiny-aya-global-bf16.gguf
 OUT=$L/runs/eval
 V1=$OUT/final_test_trained_adapter.gguf
@@ -34,7 +37,7 @@ trap 'kill $SERVER 2>/dev/null || true' EXIT
 for i in $(seq 1 120); do curl -sf http://127.0.0.1:$PORT/health > /dev/null && break; kill -0 $SERVER || { echo "server died"; tail -5 $OUT/${NAME}.server.log; exit 1; }; sleep 5; done
 curl -s http://127.0.0.1:$PORT/lora-adapters; echo
 cd $L/code_$REVISION
-PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 CODE_REVISION=$REVISION $L/env/bin/python -W ignore -m aemon.agent.run_investigations --url http://127.0.0.1:$PORT --prompt compact --cases "$CASES" --split ${SPLIT:-development} ${STATUS_CHECK:+--status-check} \
+PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 CODE_REVISION=$REVISION $PY -W ignore -m aemon.agent.run_investigations --require-auditkit --url http://127.0.0.1:$PORT --prompt compact --cases "$CASES" --split ${SPLIT:-development} ${STATUS_CHECK:+--status-check} \
   --context 12288 --max-tokens 520 --max-turns 45 --attempts ${ATTEMPTS:-3} --lora-route "$ROUTE" ${RECOVERY:+--recovery $RECOVERY} --model-label "tiny-aya-global bf16 af89d21 route $ROUTE" --weights-sha256 $WEIGHTS \
   --manifest $OUT/provenance.jsonl --output $OUT/${NAME}.json > $OUT/${NAME}.log 2>&1
 $L/env/bin/python -c "import json; s=json.load(open('$OUT/${NAME}.json'))['summary']; print('$NAME', json.dumps({k: s[k] for k in ('episodes', 'finished', 'end_to_end_success', 'stop_reasons', 'refused_calls', 'mean_calls')}))"

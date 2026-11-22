@@ -46,6 +46,6 @@ what it is for. Plans marked *registered* were fixed before the runs they descri
 | [COMPANY_PROFILES.md](COMPANY_PROFILES.md) | Company profiles in the app |
 
 ## Background
-[ABSTRACT.md](ABSTRACT.md) is a short abstract. [reviews/](reviews/) holds reviews and handovers made during the work,
+[ABSTRACT.md](ABSTRACT.md) is a short abstract. [reviews/](reviews/) holds reviews made during the work,
 [archive/](archive/) older documents kept for the record, [history/](history/) the commit maps between the working and
 public repositories, and [briefs/](briefs/) the prompts used to start the work.

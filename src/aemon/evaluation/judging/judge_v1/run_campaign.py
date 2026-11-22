@@ -21,7 +21,7 @@ REPO = Path(__file__).resolve().parents[5]  # the repository root
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument('--backend', choices=('claude', 'codex', 'codexsol', 'claudecode'), required=True)
+    p.add_argument('--backend', choices=('claude', 'codex', 'codexsol', 'codexsol170', 'claudecode'), required=True)
     p.add_argument('--packets', required=True)
     p.add_argument('--output', required=True)
     p.add_argument('--qualification', required=True)

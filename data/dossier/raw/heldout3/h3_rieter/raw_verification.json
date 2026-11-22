@@ -1,0 +1,113 @@
+{
+ "summary": {
+  "verified": 20,
+  "not_found": 1
+ },
+ "results": [
+  {
+   "id": "rieter-size",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-sales-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-net-loss-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-customers-3000",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-market-share",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-webshop",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-spinning-documentation",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-textile-calculator",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-com4recycling-license",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-wool-small-lots",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-mini-mill-artisan-line",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-mini-mill-spindles",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-mini-mill-waitlists",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-mini-mill-customers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-mini-mill-niche",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-ashford-wheels-made",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-electric-spinner-crowdfunding",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-craft-yarn-survey",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-eu-textile-collection",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "rieter-recycled-fibre-share",
+   "status": "not_found",
+   "detail": "page has 1373595 characters"
+  },
+  {
+   "id": "rieter-industry-in-asia",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

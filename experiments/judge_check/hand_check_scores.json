@@ -1,0 +1,159 @@
+{
+ "scorer": "hand",
+ "dimensions": [
+  "evidence_judgement",
+  "recommendation"
+ ],
+ "scores": {
+  "H01": {
+   "recommendation": 3,
+   "evidence_judgement": 2,
+   "note": "Distinguishes source types and acknowledges gaps, but misses date and customer applicability checks. Gives a clear next action and reversal conditions, though stated willingness to pay alone would not justify investment."
+  },
+  "H02": {
+   "evidence_judgement": 2,
+   "recommendation": 1,
+   "note": "Acknowledges evidence gaps but mislabels patents as studies and overstates accuracy. Recommends investment without demonstrated consumer demand or willingness to pay. Although next steps and reversal conditions are stated, the proposed test has contradictory decision rules."
+  },
+  "H03": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Acknowledges evidence gaps and specifies a next action and investment threshold. However, descriptive sources are mislabeled as studies, identical predictions prevent the test from distinguishing the theories, and stated willingness to pay alone would not justify investment."
+  },
+  "H04": {
+   "evidence_judgement": 2,
+   "recommendation": 2,
+   "note": "Distinguishes source types and acknowledges limitations, but fails to exclude 1963 evidence from a mid-1962 decision. The cautious recommendation reflects uncertainty, but its proposed online survey is infeasible in 1962, and stated preferences alone would not justify investment."
+  },
+  "H05": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Acknowledges evidence gaps but repeats older growth claims despite later market weakness. Specifies a test and reversal conditions, although thresholds shift from 60% to 55%, and preference for Neumann over competitors does not establish demand for differentiation from its existing range."
+  },
+  "H06": {
+   "note": "Acknowledges source limitations but fails to exclude 1963 evidence and mislabels historical accounts as studies. Deferring investment reflects uncertainty, but an online survey is infeasible in 1962, and the reversal conditions do not clearly specify what decision would follow.",
+   "evidence_judgement": 2,
+   "recommendation": 2
+  },
+  "H07": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Acknowledges demand gaps and specifies a test with decision thresholds. However, regulatory sources are mislabeled as studies, the 2002 cutoff is unchecked, and mandatory registration is incorrectly described as optional. Weak consumer demand would not itself justify switching to SAR customers."
+  },
+  "H08": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Acknowledges evidence limits but mislabels reviews as studies and inadequately checks timing and customer fit. Specifies a clear test and reversal threshold, although stronger messaging for an existing microphone would not itself justify expanding the product line."
+  },
+  "H09": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Separates company claims and acknowledges source limits, but misses the mid-1962 cutoff. Specifies a next action and evidence that would shift the recommendation toward small-farm owners, although the 0.5-point decision rule inconsistently handles which group scores higher."
+  },
+  "H10": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Separates company claims and acknowledges evidence limits, but mislabels reviews as studies and omits date/place applicability checks. Commits to a specific test and states thresholds for changing course, although the offers combine differences in price, bundles, and branding."
+  },
+  "H11": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Distinguishes company claims from studies and acknowledges demand gaps, but misses the 1993 cutoff for data extending to 1995. Specifies a survey and reversal conditions, although the 10% threshold changes from comparing messages to comparing against a baseline price."
+  },
+  "H12": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Separates company claims and recognizes demand gaps, but overlooks evidence extending beyond 1993. Specifies a next action and reversal thresholds, although failure of the health-focused proposition does not support the lifestyle theory, and the two success thresholds overlap."
+  },
+  "H13": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Separates company claims from market facts and acknowledges limits, but misclassifies the review and misreads post-pandemic contraction as growth. Commits to a specific test and states conditions for retaining the professional range, satisfying the recommendation’s level-3 anchor."
+  },
+  "H14": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Distinguishes claims and acknowledges limits. Commits to a test and alternative outcomes, though reviews are mislabeled as studies."
+  },
+  "H15": {
+   "evidence_judgement": 2,
+   "recommendation": 2,
+   "note": "Acknowledges source limits but misses the date cutoff. Commits to a survey; incomplete outcome branches do not clearly specify the resulting investment decision."
+  },
+  "H16": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tSeparates source types but introduces an unsupported 1960–1979 period for the sales figure. Specifies a test and conditions for changing course."
+  },
+  "H17": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tRecognizes regulatory evidence and its demand limitations, but leaves key observations unassessed. Specifies a test and reversal threshold; the theories are effectively identical."
+  },
+  "H18": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tDistinguishes company claims but mislabels regulation as a study and misses date/place checks. Provides a test and explicit reversal conditions."
+  },
+  "H19": {
+   "evidence_judgement": 2,
+   "recommendation": 2,
+   "note": "\tStates evidence limits, uncertainty, and reversal conditions. However, the final recommendation commits only to continuing existing operations, without a concrete investigation step."
+  },
+  "H20": {
+   "evidence_judgement": 1,
+   "recommendation": 3,
+   "note": "\tLabels all sources as company assertions and contradicts evidence of existing DIY reach. Commits to monitoring specified demand indicators and states conditions for reconsideration."
+  },
+  "H21": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tSeparates company claims but mislabels regulatory sources as studies and misses date checks. Specifies a test and reversal thresholds."
+  },
+  "H22": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Identifies company claims and their demand limitations. Commits to a test with explicit investment, fashion-focused, and no-expansion outcomes."
+  },
+  "H23": {
+   "evidence_judgement": 1,
+   "recommendation": 3,
+   "note": "\tAssesses only one yacht-business excerpt, labels it a study, and does not meaningfully distinguish source types. Gives explicit test-dependent decisions."
+  },
+  "H24": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tSeparates claims but misses date and population applicability. Specifies testing and conditions to switch focus or abandon expansion."
+  },
+  "H25": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "Acknowledges demand gaps but overlooks data extending to 1995 and assumes an unsupported professional price. Gives explicit investment thresholds."
+  },
+  "H26": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tDistinguishes claims but fails to exclude 1963 evidence from a 1962 decision. Commits to a messaging test and conditional investment."
+  },
+  "H27": {
+   "evidence_judgement": 1,
+   "recommendation": 3,
+   "note": "\tMisclassifies observations as company claims and extends decorative-paint weakness to marine buyers. Specifies testing and a condition for switching to DIY."
+  },
+  "H28": {
+   "evidence_judgement": 2,
+   "recommendation": 2,
+   "note": "\tSeparates claims and acknowledges uncertainty. Gives reversal evidence, but commits only to existing operations; the proposed test is not adopted."
+  },
+  "H29": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tDistinguishes claims but mislabels regulation as a study and misses date/place checks. Specifies a test and conditions for changing course."
+  },
+  "H30": {
+   "evidence_judgement": 2,
+   "recommendation": 3,
+   "note": "\tSeparates claims and acknowledges limitations, though reviews are mislabeled as studies. Specifies testing with kit, subscription, or no-expansion outcomes."
+  }
+ }
+}

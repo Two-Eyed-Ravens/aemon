@@ -7,10 +7,14 @@
 
 *weigh what is known. test what is not.*
 
-**Teaching a 3B model to investigate a strategy question, with AgentTune and AuditKIT.**
+**Teaching a 3B model, then an 8B model, to investigate a strategy question, with AgentTune and AuditKIT.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026
 
-
+> **Stage 2, run once.** On twelve companies never used before, Aya Expanse 8B fine-tuned on the teacher's
+> investigations scores **1.71** against **1.01** for the same model prompted with the same tools, guards and context,
+> mean of two blind LLM judges: **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It
+> finishes **81 of 96** investigations against **2**, and is above the Stage 1 system by +0.12 (0.05 to 0.20).
+> Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf).
 
 > **Result, run once.** On four companies it never saw, with the same environment, tools, stage controller and
 > budgets for both arms, the fine-tuned Tiny Aya agent scored **1.48** against the best-prompted base model's **0.65**
@@ -37,16 +41,30 @@ them. Click the thumbnail to watch it on YouTube.
 | | |
 |---|---|
 | **Live demo** | **[huggingface.co/spaces/HatemSaadallah/aemon](https://huggingface.co/spaces/HatemSaadallah/aemon)** (pick any username to sign in, no password; it runs the final system on two CPU cores and sleeps when idle, so the first page takes a moment; finished investigations open at once, a new one takes a while, and it runs one at a time for everyone) |
-| Model | [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon) |
-| Dataset | [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon) |
-| Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd) |
+| Model | [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon) |
+| Dataset | [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon) |
+| Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
 | Article | [huggingface.co/blog/HatemSaadallah/aemon](https://huggingface.co/blog/HatemSaadallah/aemon) |
 | Demo video | [youtu.be/Uow3miSSIIY](https://youtu.be/Uow3miSSIIY) |
-| Paper | [docs/PAPER.pdf](docs/PAPER.pdf) |
+| Paper | Stage 2: [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) · Stage 1: [docs/PAPER.pdf](docs/PAPER.pdf) |
+| Stage 2 model and data | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Every test run, browsable | [first test](docs/replays/final/README.md) (96 runs) and [second test](docs/replays/test2/README.md) (144 runs), base and fine-tuned side by side, no GPU needed |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) |
 
-**Version 1, frozen tests run once**
+**Stage 2: Aya Expanse 8B, test set 3 run once (twelve new companies, two judges)**
+
+| **+0.70** | **12 of 12** | **81 of 96** |
+|:---:|:---:|:---:|
+| blind quality over the same 8B prompted with an identical scaffold (0–3 scale, 95% interval 0.61 to 0.79 over companies; Codex +0.79, Claude Code +0.61) | companies where the fine-tuned model scores higher | investigations finished, against 2 of 96 for the prompted 8B and 82 for the Stage 1 system |
+
+On development the gain replicates over three training seeds (+0.72, +0.88, +0.77), and general ability is unchanged
+(MMLU and ARC, +0.6 points). The ablations say the weights and the harness are complements: removing the decoding
+guards costs 0.43, serving the base model for the later stages costs 0.19. Three ways of adding data (rule-built
+recovery rows, teacher corrections of the student's own failures, rebalancing toward rare skills) each looked good or
+neutral at one seed and did not hold over three; rebalancing made the agent loop. Every rule was registered before its
+result in [docs/DECISIONS.md](docs/DECISIONS.md).
+
+**Stage 1: version 1, frozen tests run once**
 
 | **+0.83** | **+0.52** | **$0.03** |
 |:---:|:---:|:---:|
@@ -62,7 +80,7 @@ them. Click the thumbnail to watch it on YouTube.
 
 | | What it is | Files | Numbers |
 |---|---|---|---|
-| **Version 1** | the evaluated adapter: one LoRA on Tiny Aya Global, distilled from Command A+ | `tiny-aya-global-strategy-lora-bf16.gguf` on the [model page](https://huggingface.co/two-eyed-ravens/aemon) (with the PEFT adapter) | +0.83 and +0.52 on the two frozen tests, run once (section 7) |
+| **Version 1** | the evaluated adapter: one LoRA on Tiny Aya Global, distilled from Command A+ | `tiny-aya-global-strategy-lora-bf16.gguf` on the [model page](https://huggingface.co/twoeyedravens/aemon) (with the PEFT adapter) | +0.83 and +0.52 on the two frozen tests, run once (section 7) |
 | **Final system** | what the app and the live demo run: version 1 gathers the evidence, version 3 (continued on a second teacher's runs) reasons, with decoding-time guards that remove failing actions | both adapters (`v3_adapter.gguf` added); `app/run_model.sh` serves them and `app/server.py` sets the guards ([Run it](#run-it)) | +1.02 and +1.11 over the base model on the same cases, measured after the tests (not held out) |
 | Experimental variants | adapter-switching rules, a company status check, a recovery controller, corrective distillation, a verification layer, grounded beliefs | runs and judgments under `experiments/` | [docs/FINAL_SYSTEM.md](docs/FINAL_SYSTEM.md); none is in the app |
 
@@ -250,8 +268,8 @@ and the mechanical checks limit that, the human review we did not do would limit
 
 ## 5. Model artifacts
 
-Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/two-eyed-ravens/aemon-a-strategy-investigation-agent-6af71da6a81fe397ad0b38dd).
-Model: [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon)
+Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf).
+Model: [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon)
 (a derivative of Tiny Aya, so CC-BY-NC-4.0):
 - the LoRA adapter (`adapter_model.safetensors`, `adapter_config.json`; sha256 740c4a9b…);
 - the converted GGUF adapter for llama.cpp (`tiny-aya-global-strategy-lora-bf16.gguf`, sha256 41794b57…), the exact
@@ -261,7 +279,7 @@ Model: [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon)
 
 ## 6. Data artifacts
 
-Dataset: [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon)
+Dataset: [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon)
 (in the same collection):
 - the training rows: 4,302 from the Command A+ teacher, 51 correction rows, and 3,611 (plus 262 for validation) from
   the DeepSeek V4-Pro teacher, each bound to its teacher episode;
@@ -607,7 +625,7 @@ curl -L https://github.com/ggml-org/llama.cpp/releases/download/b12032/llama-b12
   --revision a602ea7eeec3a4ad6f77a1b8cf6a53512824922b
 
 # the adapters, saved under the names the app loads
-.venv/bin/hf download two-eyed-ravens/aemon tiny-aya-global-strategy-lora-bf16.gguf \
+.venv/bin/hf download twoeyedravens/aemon tiny-aya-global-strategy-lora-bf16.gguf \
   v3_adapter.gguf --local-dir /tmp/aemon-adapters
 cp /tmp/aemon-adapters/tiny-aya-global-strategy-lora-bf16.gguf ~/.cache/lexsi/adapters/final_adapter.gguf   # version 1
 cp /tmp/aemon-adapters/v3_adapter.gguf ~/.cache/lexsi/adapters/v3_adapter.gguf                  # version 3

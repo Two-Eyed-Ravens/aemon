@@ -35,12 +35,30 @@ def episode_scores(judgment: Json) -> tuple[float | None, dict[str, float]]:
 
 
 def load(path: str) -> dict[str, Json]:
-    out = {}
+    """Predictions by packet. A packet judged more than once (two arms that produced the same run share a packet) keeps
+    all its judgments, combined by episode_scores_all (DECISIONS, 20 November): the order of lines does not matter."""
+    out: dict[str, Json] = {}
     for line in Path(path).read_text().splitlines():
         if line.strip():
             r = json.loads(line)
-            out[r['packet_id']] = r
+            judgments = out[r['packet_id']]['judgments'] if r['packet_id'] in out else []
+            if 'judgment' in r:
+                judgments.append(r['judgment'])
+            # the row itself is the last line, as before, so callers that read 'judgment' (Stage 1's frozen release
+            # scripts) are unchanged; Stage 2 reports combine all judgments
+            out[r['packet_id']] = dict(r, judgments=judgments)
     return out
+
+
+def episode_scores_all(judgments: list[Json]) -> tuple[float | None, dict[str, float]]:
+    """The mean of a packet's judgments, per dimension and overall."""
+    scored = [episode_scores(j) for j in judgments]
+    scored = [(score, dims) for score, dims in scored if score is not None]
+    if not scored:
+        return None, {}
+    names = {d for _, dims in scored for d in dims}
+    dims = {d: statistics.mean(dims[d] for _, dims in scored if d in dims) for d in names}
+    return statistics.mean(score for score, _ in scored), dims
 
 
 def bootstrap(pairs: dict[str, list[float]], reps: int = 4000, seed: int = 20261106) -> tuple[float, float, float] | None:
@@ -77,10 +95,10 @@ def report(key_path: str, judges: dict[str, str], compare: tuple[str, str] | Non
         by_arm_dim: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
         for i, k in enumerate(key):
             p = predictions.get(k['packet_id'])
-            if not p or 'judgment' not in p:
+            if not p or not p['judgments']:
                 out['missing'].append({'judge': judge, 'packet_id': k['packet_id'], 'arm': k['arm'], 'case': k['case'], 'error': (p or {}).get('error')})
                 continue
-            score, dims = episode_scores(p['judgment'])
+            score, dims = episode_scores_all(p['judgments'])
             if score is None:
                 continue
             scores[i] = score

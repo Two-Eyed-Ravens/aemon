@@ -1,0 +1,241 @@
+{
+ "note": "Signed what-if evidence for test set 3, one pair per company, in the design of the final test's pairs (reviews/heldout_shocks/README.md): one simulated randomized offer test on a narrow mechanism, identical record id and title in both variants, outcome counts mirrored (72 against 32 of 400 per arm). Case-author constructions, labelled simulated in the record itself; never trained on. relevant and unrelated are theory claims used only by validate.py to check that the targets pick out the theory the evidence bears on.",
+ "pairs": {
+  "eberspaecher": {
+   "topic": "installation",
+   "title": "Simulated parking-heater installation offer test",
+   "mechanism": "installation friction",
+   "population": "synthetic camper-van and motorhome owners",
+   "setup": "In a hypothetical randomized offer test, 800 recruited camper-van and motorhome owners interested in a diesel parking heater were assigned equally to two offers. Both showed the identical heater, brand, heat output, total installed price, warranty and delivery time. One offer included fitting by a certified mobile technician at the owner's home on a booked date; the other required the owner to book the same fitting at a dealer workshop. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable deposit remaining uncancelled after 30 days",
+   "result": "There were {treatment} deposits for the mobile-fitting offer and {control} for the workshop offer.",
+   "limits": "This tests whether installation friction changes choice in that recruited group. It does not show demand at today's prices, that mobile fitting can be staffed or earns a margin, or that it would win buyers from cheaper self-fitted heaters. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\binstall\\w*",
+    "\\bfitt?ing\\w*",
+    "\\bfitted\\b",
+    "\\bworkshops?\\b",
+    "\\bmobile (?:service|technician)\\w*"
+   ],
+   "relevant": "Owners who must arrange fitting at a workshop give up, so a heater offered with fitting at home is bought more often.",
+   "unrelated": "Owners buy the brand because it signals reliability to other campers."
+  },
+  "guehring": {
+   "topic": "durability",
+   "title": "Simulated printer-nozzle durability offer test",
+   "mechanism": "durability assurance",
+   "population": "synthetic hobby 3D-printer owners",
+   "setup": "In a hypothetical randomized offer test, 800 recruited hobby 3D-printer owners were assigned equally to two offers for the same diamond-tipped nozzle. Both showed the identical product, price, compatibility list, delivery time and return policy. One offer added a written wear guarantee with a free replacement if the nozzle wore out within two years of printing abrasive filament; the other described the same nozzle as wear resistant without a guarantee. Contact time was matched and neither offer gave a discount.",
+   "outcome": "completed purchase not returned within 30 days",
+   "result": "There were {treatment} purchases for the guaranteed offer and {control} for the standard offer.",
+   "limits": "This tests whether a durability assurance changes choice in that recruited group. It does not show how many hobbyists print abrasive filament, what the guarantee would cost the company, or that cutting-tool customers would follow. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bdurab\\w*",
+    "\\bwear\\w*",
+    "\\bguarant\\w*",
+    "\\bwarrant\\w*",
+    "\\blast(?:s|ing)? longer\\b",
+    "\\blifespan\\b"
+   ],
+   "relevant": "Makers distrust claims that a nozzle lasts, so a guaranteed wear life is what makes them pay a premium.",
+   "unrelated": "Hobbyists buy industrial brands to signal expertise to their online community."
+  },
+  "krones": {
+   "topic": "cleaning",
+   "title": "Simulated compact-brewing-system cleaning offer test",
+   "mechanism": "cleaning and hygiene burden",
+   "population": "synthetic hobby and very small craft brewers",
+   "setup": "In a hypothetical randomized offer test, 800 recruited hobby and very small craft brewers were assigned equally to two offers for the same compact brewing system. Both showed the identical batch size, brewing steps, price, warranty and delivery time. One offer included an automated clean-in-place cycle that cleans and sanitises the vessels after each brew; the other required the same cleaning to be done by hand following a written procedure. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable reservation remaining uncancelled after 30 days",
+   "result": "There were {treatment} reservations for the automated-cleaning offer and {control} for the manual-cleaning offer.",
+   "limits": "This tests whether the cleaning burden changes choice in that recruited group. It does not show that such a system could be built at a price these buyers pay, that the market is large enough, or that it fits Krones' industrial business. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bclean\\w*",
+    "\\bhygien\\w*",
+    "\\bsani\\w*",
+    "\\bCIP\\b",
+    "\\bcontaminat\\w*"
+   ],
+   "relevant": "Small brewers give up because cleaning and sanitising take longer than brewing, so automated cleaning is what makes them buy.",
+   "unrelated": "Hobby brewers want equipment that looks professional in their kitchen."
+  },
+  "lapp": {
+   "topic": "compatibility",
+   "title": "Simulated home-charging compatibility offer test",
+   "mechanism": "compatibility uncertainty",
+   "population": "synthetic private electric-car owners",
+   "setup": "In a hypothetical randomized offer test, 800 recruited private electric-car owners shopping for a home charging cable and wallbox were assigned equally to two offers. Both showed the identical products, charging power, price, warranty and delivery time. One offer added a free check of the owner's car model and home wiring with a written assurance that the set would work with both; the other listed the same compatibility tables for the owner to check. Contact time was matched and neither offer gave a discount.",
+   "outcome": "completed purchase not returned within 30 days",
+   "result": "There were {treatment} purchases for the checked-compatibility offer and {control} for the self-checked offer.",
+   "limits": "This tests whether compatibility uncertainty changes choice in that recruited group. It does not show demand beyond that group, the cost of running the checks, or how established wallbox brands would respond. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bcompatib\\w*",
+    "\\bwork with\\b",
+    "\\bfits? (?:their|the|my) car\\b",
+    "\\bplug type\\w*",
+    "\\bwiring\\b"
+   ],
+   "relevant": "Drivers hesitate because they cannot tell whether a cable or wallbox is compatible with their car and home, so assured compatibility makes them buy.",
+   "unrelated": "Drivers prefer a German brand because they trust its quality."
+  },
+  "multivac": {
+   "topic": "running-costs",
+   "title": "Simulated household chamber-sealer running-cost offer test",
+   "mechanism": "running cost of consumables",
+   "population": "synthetic home cooks, hunters and anglers",
+   "setup": "In a hypothetical randomized offer test, 800 recruited home cooks, hunters and anglers interested in a chamber vacuum sealer were assigned equally to two offers. Both showed the identical machine, price, warranty and delivery time. One offer stated that the machine uses plain chamber pouches costing a fraction of embossed bags and showed the yearly bag cost for typical use; the other showed the same machine and listed the pouch type without a cost comparison. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable reservation remaining uncancelled after 30 days",
+   "result": "There were {treatment} reservations for the running-cost offer and {control} for the standard offer.",
+   "limits": "This tests whether running costs change choice in that recruited group. It does not show demand at the machine's price, that the household market is large enough, or that it would sustain a consumer business beside the industrial one. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\brunning cost\\w*",
+    "\\bbags?\\b",
+    "\\bpouch\\w*",
+    "\\bconsumabl\\w*",
+    "\\bcost per use\\b"
+   ],
+   "relevant": "Households stop vacuum sealing because embossed bags are expensive, so a machine that uses cheap pouches is bought more.",
+   "unrelated": "Buyers want professional equipment as a status object in the kitchen."
+  },
+  "rieter": {
+   "topic": "onboarding",
+   "title": "Simulated mini-spinning-machine onboarding offer test",
+   "mechanism": "skill and learning barrier",
+   "population": "synthetic hobby spinners and small fibre farms",
+   "setup": "In a hypothetical randomized offer test, 800 recruited hobby spinners and small fibre-farm owners interested in a compact electric spinning machine were assigned equally to two offers. Both showed the identical machine, output, price, warranty and delivery time. One offer included two live training sessions with a spinning instructor and a setup visit; the other included the same machine with a printed manual and video links. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable deposit remaining uncancelled after 30 days",
+   "result": "There were {treatment} deposits for the instructor-onboarding offer and {control} for the manual-only offer.",
+   "limits": "This tests whether the skill barrier changes choice in that recruited group. It does not show that a spinning-machine maker could build such a machine at a price these buyers pay, that the hobby market is large enough, or that it would fit an industrial business. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\btrain(?:ing|ed)?\\b",
+    "\\blearn\\w*",
+    "\\bskill\\w*",
+    "\\bonboard\\w*",
+    "\\binstruct\\w*",
+    "\\btutorial\\w*"
+   ],
+   "relevant": "Hobby spinners give up because spinning is hard to learn, so a machine sold with instruction is what makes them buy.",
+   "unrelated": "Small fibre farms want to sell yarn under their own label at farmers markets."
+  },
+  "kardex": {
+   "topic": "rental",
+   "title": "Simulated compact storage-module payment offer test",
+   "mechanism": "upfront cost barrier",
+   "population": "synthetic small workshops, shops and garages",
+   "setup": "In a hypothetical randomized offer test, 800 recruited owners of small workshops, shops and garages were assigned equally to two offers for the same compact automated storage module. Both showed the identical machine, capacity, installation, service and total cost over five years. One offer was a monthly rental with service included and no upfront payment; the other was an outright purchase with the same service contract. Contact time was matched and neither offer gave a discount.",
+   "outcome": "signed letter of intent not withdrawn after 30 days",
+   "result": "There were {treatment} letters of intent for the rental offer and {control} for the purchase offer.",
+   "limits": "This tests whether the upfront cost changes choice in that recruited group. It does not show that a module small and cheap enough could be built, that installation and service would pay at this scale, or that private households would follow. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\brent\\w*",
+    "\\bleas\\w*",
+    "\\bsubscri\\w*",
+    "\\bmonthly\\b",
+    "\\bfinanc\\w*",
+    "\\bupfront\\b",
+    "\\bas-a-service\\b",
+    "\\bpay[- ]per[- ]use\\b"
+   ],
+   "relevant": "Small businesses cannot pay the upfront cost of automation, so renting the machine monthly is what makes them adopt it.",
+   "unrelated": "Workshop owners care mostly about how the storage looks to visiting customers."
+  },
+  "sika": {
+   "topic": "application",
+   "title": "Simulated home-sealant application offer test",
+   "mechanism": "application difficulty",
+   "population": "synthetic home owners doing their own repairs",
+   "setup": "In a hypothetical randomized offer test, 800 recruited home owners planning to reseal a bathroom or window were assigned equally to two offers for the same sealant. Both showed the identical product, colour range, cure time, price, shelf life and return policy. One offer was a kit with a smoothing tool, masking tape and a step-by-step guide for a clean finish; the other was the same cartridge with the standard label instructions. Contact time was matched and neither offer gave a discount.",
+   "outcome": "completed purchase not returned within 30 days",
+   "result": "There were {treatment} purchases for the application-kit offer and {control} for the cartridge-only offer.",
+   "limits": "This tests whether application difficulty changes choice in that recruited group. It does not show demand beyond that group, the margin on a kit, how retailers would stock it, or that DIY volumes would matter beside professional sales. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bapplicat\\w*",
+    "\\bapply(?:ing)?\\b",
+    "\\beas(?:e|y) (?:of use|to (?:use|apply))\\b",
+    "\\bmess\\w*",
+    "\\bkits?\\b",
+    "\\bsmooth\\w*"
+   ],
+   "relevant": "Home owners avoid sealing jobs because the sealant is hard to apply neatly, so a kit that makes a clean finish easy is what they buy.",
+   "unrelated": "Home owners choose the cheapest sealant on the shelf."
+  },
+  "tomra": {
+   "topic": "convenience",
+   "title": "Simulated home container-collection offer test",
+   "mechanism": "return-trip convenience",
+   "population": "synthetic households in a deposit-return scheme",
+   "setup": "In a hypothetical randomized offer test, 800 recruited households in a deposit-return scheme were assigned equally to two offers for returning empty containers. Both paid the identical deposit refund into the same app, with the same fee and payout time. One offer collected bagged containers from the household's door every two weeks; the other asked the household to drop the same bags at a return point in a nearby store. Contact time was matched and neither offer gave a bonus.",
+   "outcome": "paid sign-up still active after 30 days",
+   "result": "There were {treatment} active sign-ups for the doorstep-collection offer and {control} for the store drop-off offer.",
+   "limits": "This tests whether the return trip changes choice in that recruited group. It does not show that collection could be run at that fee, how store partners would respond, or that households would pay for anything beyond the refund. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bconvenien\\w*",
+    "\\bdoor(?:step)?\\b",
+    "\\bcollect(?:ion|ed)? from\\b",
+    "\\bhome (?:collection|pick-?up)\\b",
+    "\\bpick-?up\\b",
+    "\\btrip\\w*"
+   ],
+   "relevant": "Households skip deposit returns because the trip to a store is inconvenient, so doorstep pickup makes them sign up.",
+   "unrelated": "People return containers mainly because they care about the environment."
+  },
+  "brembo": {
+   "topic": "trial",
+   "title": "Simulated bicycle-brake trial offer test",
+   "mechanism": "trial before purchase",
+   "population": "synthetic mountain-bike and e-bike riders",
+   "setup": "In a hypothetical randomized offer test, 800 recruited mountain-bike and e-bike riders considering a premium brake upgrade were assigned equally to two offers. Both showed the identical brake kit, specifications, price, fitting service, warranty and delivery time. One offer included a free demo ride on a bike fitted with the brakes at a partner shop before ordering; the other showed the same kit with test reports and specification sheets. Contact time was matched and neither offer gave a discount.",
+   "outcome": "completed purchase not returned within 30 days",
+   "result": "There were {treatment} purchases for the demo-ride offer and {control} for the specification-only offer.",
+   "limits": "This tests whether trying the product first changes choice in that recruited group. It does not show demand at this price beyond that group, the cost of running demo rides, or how established bicycle-brake brands would respond. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\btest[- ]rid\\w*",
+    "\\bdemo\\w*",
+    "\\btry(?:ing)? (?:it|them|the brakes?|before)\\b",
+    "\\btrial\\w*",
+    "\\bfeel\\b"
+   ],
+   "relevant": "Riders will not pay a premium for brakes they cannot feel first, so a demo ride is what makes them buy.",
+   "unrelated": "Riders buy a famous racing brand to show it off to other riders."
+  },
+  "biesse": {
+   "topic": "software",
+   "title": "Simulated small-workshop CNC software offer test",
+   "mechanism": "programming complexity",
+   "population": "synthetic small carpentry workshops and skilled hobbyists",
+   "setup": "In a hypothetical randomized offer test, 800 recruited owners of small carpentry workshops and skilled hobby woodworkers were assigned equally to two offers for the same compact CNC router. Both showed the identical machine, working area, price, installation, warranty and delivery time. One offer came with simplified design software and a library of ready-to-cut furniture templates that need no programming; the other came with the standard professional CAD/CAM software. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable deposit remaining uncancelled after 30 days",
+   "result": "There were {treatment} deposits for the template-software offer and {control} for the standard-software offer.",
+   "limits": "This tests whether programming complexity changes choice in that recruited group. It does not show that a machine at a price these buyers pay could be built, that the market is large enough, or that it fits the company's industrial dealers. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bsoftware\\b",
+    "\\bprogramm\\w*",
+    "\\bCAM\\b",
+    "\\btemplates?\\b",
+    "\\bdesign files?\\b",
+    "\\blearning curve\\b"
+   ],
+   "relevant": "Small workshops avoid CNC because programming it is too hard, so ready-made templates and simple software are what make them buy.",
+   "unrelated": "Workshop owners want the prestige of an Italian machine brand."
+  },
+  "nabtesco": {
+   "topic": "safety",
+   "title": "Simulated home automatic-door safety offer test",
+   "mechanism": "safety assurance",
+   "population": "synthetic older home owners and their families",
+   "setup": "In a hypothetical randomized offer test, 800 recruited older home owners and family members considering an automatic opener for a home entrance door were assigned equally to two offers. Both showed the identical opener, installation, price, warranty and delivery time. One offer added an independent safety certificate for the door's anti-pinch sensors and an in-home demonstration of the door stopping on contact; the other showed the same opener with its specification sheet. Contact time was matched and neither offer gave a discount.",
+   "outcome": "paid refundable deposit remaining uncancelled after 30 days",
+   "result": "There were {treatment} deposits for the safety-assurance offer and {control} for the specification-only offer.",
+   "limits": "This tests whether safety assurance changes choice in that recruited group. It does not show demand at this price beyond that group, that installers would carry the product, or why a rival's home opener left the market. A business recommendation can remain unchanged while belief about this narrow mechanism changes.",
+   "targets": [
+    "\\bsafe(?:ty)?\\b",
+    "\\bpinch\\w*",
+    "\\binjur\\w*",
+    "\\bcertif\\w*",
+    "\\baccident\\w*"
+   ],
+   "relevant": "Families fear an automatic door could hurt an older relative, so proven pinch safety is what makes them buy one.",
+   "unrelated": "Home owners want an automatic door because it looks modern."
+  }
+ }
+}

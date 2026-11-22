@@ -1,0 +1,117 @@
+{
+ "summary": {
+  "verified": 22
+ },
+ "results": [
+  {
+   "id": "krones-size-2025",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-industries",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-service-network",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-price-discipline",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-online-shop",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-compact-class",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-microcube",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-craftmate",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-craft-trade-fair",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-rittmayer-quote",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-craft-fillers-2010",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-us-craft-2024",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-us-homebrewers",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-de-brewery-closures",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-de-craft-wave",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-de-hobby-brewing-law",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-khs-can-c",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-gea-craft-star",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-speidel-braumeister",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-lg-homebrew",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-picobrew-shutdown",
+   "status": "verified",
+   "detail": "exact"
+  },
+  {
+   "id": "krones-home-brew-machine-market",
+   "status": "verified",
+   "detail": "exact"
+  }
+ ]
+}

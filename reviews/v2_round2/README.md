@@ -1,7 +1,7 @@
 # Version 2, second round: review of the third batch
 
 `targeted3_kept_for_review.md` holds the 5 answers (of 54) kept by the gates after the offline re-check. Three
-independent advisory reviews (Claude agents, each with a different lens, none shown the others' or the author's view)
+independent advisory reviews (language-model reviewers, each with a different lens, none shown the others' or the author's view)
 assessed them. They advise; Hatem decides which examples, if any, train.
 
 | Example | Experimental design | Strategy and decision | Evidence and period |
