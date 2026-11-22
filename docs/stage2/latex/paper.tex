@@ -110,7 +110,7 @@ and admitted and the rest dropped unedited. Each company has four cases: base, i
 pair of simulated randomized offer tests on one narrow mechanism (for example installation friction for parking
 heaters) whose two versions share the record's id and title and differ only in mirrored outcome counts (72 against 32
 of 400 per arm). The tools refuse that record as support for a theory or as cited evidence. Leakage and searchability
-checks pass, and the set was frozen before any result of the fine-tuned 8B was opened (commit \texttt{f5e0b6b}, 19 November; content
+checks pass, and the set was frozen before any result of the fine-tuned 8B was opened (commit \texttt{f5e0b6b} in our private repository, readable on request, 19 November; content
 sha256 \texttt{068261a91fb3d8b8\ldots}): 48 cases $\times$ 2 attempts = 96 runs per arm. Against the 1,554 records of
 the training and development dossiers, the closest test record has a character n-gram TF-IDF cosine of 0.44 (median
 nearest neighbour 0.17); the closest pairs are generic company-size sentences, not shared content.
@@ -316,10 +316,9 @@ the best setting (4-bit weights, 8 investigations at once) runs 93.8 investigati
 finished; at the median on-demand A100 price (\$1.76/h, a whole GPU) that is \$0.019 per investigation, about 2.2
 times Claude Haiku 5.5 as measured (\$0.0084), with break-even near \$0.79 per GPU hour. Quantizing to 8 or 4 bits
 did not lower the finish rate; quality per precision was not judged. On test set 3, added after the three-arm result
-under a rule registered before its run, Haiku through the same environment scores 1.92 against A's 1.71: Haiku minus A
-is +0.20 [+0.05, +0.35] (88 paired runs; +0.44 on shared stages), a third of its Stage~1 lead ($-0.67$), while A
-finishes more runs (81 of 96 against 70 of 91); Claude Code, of Haiku's model family, gives +0.30, Codex +0.12
-[$-0.08$, +0.31] (Table~\ref{tab:track3}). The case for this agent is therefore not quality
+under a rule registered before its run, Haiku (Stage~1's staged prompt, no guards) scores 1.92 against A's 1.71:
+Haiku minus A is +0.20 [+0.05, +0.35] as registered (Claude Code, of Haiku's family, +0.30; Codex +0.12). 11 of its 91
+runs ended on API refusals; without them, post hoc, it is +0.42 [+0.32, +0.52] (Table~\ref{tab:track3}). The case for this agent is therefore not quality
 or cost against a closed model: it is an open model that runs where the case data cannot leave, close behind, with a
 measured, reproducible gain from fine-tuning over its own base.
 
@@ -555,6 +554,11 @@ Claude Haiku 5.5 & 70/91 & 87.2\% & 25 & 49 \\
 \caption{Track 3 metrics on test set 3: task success; tool-call accuracy (accepted over all calls); calls per finished run; median model seconds per run (different hardware per arm, so rough).}
 \label{tab:track3}
 \end{table}
+
+\paragraph{Distinct runs.} Decoding is greedy, so the second attempt at a case often repeats the first: of 96 runs, A
+has 81 distinct, the Stage~1 system 88, the prompted 8B 54. Identical runs share one blind packet and one judgment;
+intervals are over the twelve companies, so repeats do not narrow them. All 15 of A's unfinished runs end on the same
+refusal: \texttt{finish} citing a simulated result as evidence.
 
 \paragraph{Judge agreement on test set 3.} Over all 288 runs the two judges' scores have Spearman 0.78 (Stage~1's
 tests, with a different Codex model: 0.94 and 0.95) and differ by 0.45 per run on average. Most of that difference is a level offset: Claude Code

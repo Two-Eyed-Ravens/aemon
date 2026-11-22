@@ -3486,3 +3486,14 @@ Shared stages: +0.44 and +0.56. Reading: the closed model is still ahead of the 
 small margin whose interval is clear of zero under the mean of judges but not under Codex alone; the gap is about a
 third of Stage 1's (final system minus Haiku −0.67 and −0.63). The fine-tuned 8B finishes more runs (81 of 96 against
 70 of 91). Added after the three-arm result, as registered.
+
+**Haiku arm: 11 runs ended on API refusals; a second reading, post hoc (23 November, after an outside review).** In
+11 of Haiku's 91 test set 3 runs the API returned `stop_reason: "refusal"` with no output on the last three or four
+turns; the harness logged each as invalid JSON and stopped the run as "repeated errors" (Stage 1's 120 Haiku runs had
+none; for 9 of the 11 the other attempt at the same case finished). The registered result stands: Haiku minus A
++0.20 [+0.05, +0.35]. They are not rerun: the HTTP 500 rule covers server errors, which are not the model's behaviour,
+and a refusal is the model's own response, so rerunning until it answers would bias the comparison toward Haiku. Read
+post hoc, with those 11 runs left out (77 pairs): Haiku minus A +0.42 [+0.32, +0.52] (Codex +0.35 [+0.21, +0.50],
+Claude Code +0.49), higher at all twelve companies; Haiku minus the Stage 1 system +0.55 [+0.46, +0.63]; Haiku then
+finishes 70 of 80. Both readings are reported. Haiku ran with Stage 1's registered settings: the staged prompt, effort
+medium, none of the six decoding guards. `experiments/test3/haiku/report_without_refusals.json`.

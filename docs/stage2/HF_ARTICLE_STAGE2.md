@@ -33,7 +33,7 @@ The answer to the first is yes, clearly. On development, fine-tuning lifts the 8
 
 The answer to the second is more interesting. The trained weights do not replace the harness: removing the decoding guards costs 0.43 and half the finished runs, and serving the base weights for the late stages costs 0.19. And several ways of adding training data looked like gains at one training seed and vanished over three. Single-seed gains in agent fine-tuning should not be trusted.
 
-A closed model, Claude Haiku 5.5, run through the same environment, is still ahead, by +0.20 [0.05, 0.35], a third of its lead in Stage 1. The fine-tuned 8B finishes more investigations than Haiku, with more of its calls accepted, and runs where the case data cannot leave.
+A closed model, Claude Haiku 5.5, run through the same tools, is still ahead: by +0.20 [0.05, 0.35] as registered, and by +0.42 [0.32, 0.52] if the 11 of its runs that ended on API refusals are left out. What the fine-tuned 8B offers instead is an open model that runs where the case data cannot leave.
 
 ![Stages reached by every run: the prompted 8B against the fine-tuned 8B](https://raw.githubusercontent.com/Two-Eyed-Ravens/aemon/main/docs/stage2/figures/fig_stages.png)
 
@@ -94,7 +94,10 @@ Every rule (which configuration to test, how to read it, what counts as a gain) 
 
 - **Fine-tuned minus prompted: +0.70 [0.61, 0.79]** over companies, higher at all twelve. Codex +0.79, Claude Code +0.61. On the stages both runs reach, still +0.55 [0.44, 0.66], so the gain is not only finishing more.
 - **Against the Stage 1 system: +0.12 [0.05, 0.20]**, near zero at four companies, and the two finish as often. Against a fine-tuned 3.35B with the same guards, the larger model adds little: most of the gain comes from fine-tuning and the guards.
-- **Against Claude Haiku 5.5** (added after the main result, rule registered before its run): Haiku leads by +0.20 [0.05, 0.35], and by +0.44 on shared stages, so part of the 8B's catch-up comes from finishing more runs. Claude Code, of Haiku's own model family, gives Haiku +0.30; Codex +0.12, an interval crossing zero. In Stage 1 Haiku led by 0.67. Haiku costs $0.008 per investigation; the 8B about $0.02 self-hosted.
+- **Against Claude Haiku 5.5** (added after the main result, rule registered before its run; Stage 1's settings: its staged prompt, none of the six guards): Haiku leads by **+0.20 [0.05, 0.35]** as registered, +0.44 on shared stages. 11 of its 91 runs ended on API refusals (empty responses with stop reason "refusal"), stopped by the harness as repeated errors; read post hoc without them, Haiku leads by **+0.42 [0.32, 0.52]** at all twelve companies and finishes 70 of 80. Claude Code, of Haiku's own model family, gives it +0.30 as registered; Codex +0.12. Haiku costs $0.008 per investigation; the 8B about $0.02 self-hosted.
+- **The baseline**: the headline uses the 8B prompted with the fine-tuned agent's own compact prompt and guards. Under its best prompt the prompted 8B finishes 27 of 45 development runs, and the fine-tuned agent still leads by +0.60 [0.49, 0.70].
+- **What still fails**: all 15 of the fine-tuned 8B's unfinished runs end the same way: the environment refuses `finish` because the recommendation cites a simulated result as evidence, and the agent does not recover.
+- **Runs and packets**: decoding is greedy, so the second attempt often repeats the first (the fine-tuned 8B has 81 distinct runs of 96). Identical runs share one blind packet; intervals are over companies, so repeats do not narrow them.
 - Seconds are model time on different hardware per arm (A100 slices for the local models, Anthropic's API for Haiku), so latency is rough.
 
 ### Why it works: weights and harness are complements (development, seed 7, one judge)

@@ -34,6 +34,9 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |:---:|:---:|:---:|
 | blind quality over the same 8B prompted with an identical scaffold (0–3 scale, 95% interval 0.61 to 0.79 over companies; Codex +0.79, Claude Code +0.61) | companies where the fine-tuned model scores higher | investigations finished, against 2 of 96 for the prompted 8B |
 
+- **The baseline:** the headline compares with the 8B prompted with the fine-tuned agent's own compact prompt and
+  guards. Under its best prompt (Stage 1's staged one) the prompted 8B finishes 27 of 45 development runs, and the
+  fine-tuned agent still leads it by +0.60 [0.49, 0.70].
 - **Replicated:** on development the gain holds at three training seeds (+0.72, +0.88, +0.77); general ability is
   unchanged (MMLU and ARC, +0.6 points).
 - **Negative results, reported:** two kinds of added data (rule-built recovery rows, teacher corrections of the
@@ -43,14 +46,14 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 - **Against the Stage 1 system (Tiny Aya 3.35B, two adapters):** the 8B is ahead by only +0.12 [0.05, 0.20], near
   zero at four of twelve companies, and finishes as often (81 against 82). Against a fine-tuned 3.35B system with the
   same guards, the larger model adds little; most of the gain comes from fine-tuning and the guards.
-- **Against a closed model:** on test set 3, Claude Haiku 5.5 through the same environment scores 1.92 against the
-  fine-tuned 8B's 1.71: ahead by +0.20 [0.05, 0.35], about a third of the 0.67 it led by in Stage 1, at $0.008 per
-  investigation. On the stages both runs reach, Haiku leads by more, +0.44 [0.35, 0.54], so part of the 8B's catch-up
-  comes from finishing more runs (81 of 96 against 70 of 91). The judge from Haiku's own model family, Claude Code,
-  gives it +0.30; Codex, not judging its own family, +0.12, an interval that crosses zero. What
-  aemon offers instead is an open model (CC-BY-NC 4.0, non-commercial) that runs offline, with the case data kept on
-  the machine and weights that can be audited. This arm was added after the three-arm result, under a rule registered
-  before its run.
+- **Against a closed model:** Claude Haiku 5.5 through the same tools, with Stage 1's settings (its staged prompt,
+  none of the six decoding guards), scores 1.92 against the fine-tuned 8B's 1.71: **+0.20 [0.05, 0.35]** as
+  registered. 11 of its 91 runs ended on API refusals (empty responses with stop reason "refusal"), which the harness
+  stopped as repeated errors; read post hoc without them, Haiku leads by **+0.42 [0.32, 0.52]** at all twelve
+  companies and finishes 70 of 80. Claude Code, of Haiku's own model family, gives it +0.30 as registered; Codex
+  +0.12. Haiku costs $0.008 per investigation. What aemon offers instead is an open model (CC-BY-NC 4.0,
+  non-commercial) that runs offline, with the case data kept on the machine and weights that can be audited. This arm
+  was added after the three-arm result, under a rule registered before its run.
 
 **A judge's 60-second view (Stage 2)**
 1. Open the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b), pick a company and start an
@@ -103,8 +106,9 @@ different hardware per arm, so rough):
 | **Fine-tuned Aya Expanse 8B (A)** | **81 of 96 (84%)** | **92.4%** | **44** | **125** |
 | Claude Haiku 5.5 | 70 of 91 (77%) | 87.2% | 25 | 49 |
 
-The fine-tuned 8B finishes more investigations than Haiku and with more of its calls accepted, while Haiku uses fewer
-calls per finished run and scores 0.20 higher on judged quality.
+Haiku's unfinished runs are mostly API refusals (11 of 21); without them it finishes 70 of 80 and uses fewer calls per
+finished run. All 15 of the fine-tuned 8B's unfinished runs end the same way: the environment refuses `finish`
+because the recommendation cites a simulated result as evidence, and the agent does not recover.
 
 **Artifacts.** Model: [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) (`aemon-8b-adapter.gguf`,
 the adapter as served in every evaluation, and `peft/`). Data:
@@ -126,6 +130,12 @@ LIVE_MODEL=aemon8b ./app/run.sh
 **Reproduce the numbers.** `scripts/test3/analyze.py` recomputes test set 3 from `experiments/test3/` (key and both
 judges' predictions); `scripts/paper/check_numbers.py` recomputes every development comparison printed in the paper.
 Training and evaluation jobs: `jobs/train_base.sbatch` and `jobs/screen_bases.sbatch` (paper, appendix "Reproducing").
+
+**Runs and packets.** Decoding is greedy, so the second attempt at a case often repeats the first: of 96 runs, the
+fine-tuned 8B has 81 distinct, the Stage 1 system 88, the prompted 8B 54. Identical runs share one blind packet and
+one judgment; the intervals are over the twelve companies, so repeats do not shrink them. The freeze commits cited in
+the decision log (`f5e0b6b`, `49fe311`) are in our private development repository; the frozen files and their sha256
+digests are public, and we can give judges read access on request.
 
 **Limits.** The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on direction and
 ordering only. The test ran one trained adapter, so its interval covers companies and attempts; training-seed variation
