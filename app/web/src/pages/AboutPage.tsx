@@ -113,7 +113,7 @@ function Different() {
         <article className="ab-feature">
           <span className="ab-eyebrow">Research approach</span>
           <h3 className="display">A smaller model. A more rigorous process.</h3>
-          <p>aemon explores whether a small open model can learn careful investigation. Tiny Aya Global, with 3 billion parameters, was fine-tuned on investigations carried out by a more capable teacher model, Command A+, under strict research rules.</p>
+          <p>aemon explores whether an open model can learn careful investigation. Aya Expanse 8B (and, in Stage 1, Tiny Aya Global with 3 billion parameters) was fine-tuned on investigations carried out by a more capable teacher model, Command A+, under strict research rules.</p>
           <p>The aim is not plausible-sounding answers. It is investigations whose claims can be checked: every quote must match its source, every hypothesis must say who would change their behaviour and why, and a simulated result never counts as evidence.</p>
           <div className="ab-rules" aria-label="Rules every investigation follows">
             <span><Icon name="check" size={13} /> Quotes checked against sources</span>

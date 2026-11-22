@@ -100,9 +100,9 @@ export function HomePage({ workspace: w, running, onError }: { workspace: Worksp
           <section className="panel pad trust" aria-label="How to read results">
             <h2 className="kicker"><Icon name="flag" size={13} /> How to read results</h2>
             <ul>
-              <li><b>A hypothesis to test, not advice.</b> Recommendations come from a small fine-tuned research model (Tiny Aya, 3B).</li>
+              <li><b>A hypothesis to test, not advice.</b> Recommendations come from a fine-tuned open research model (Aya Expanse 8B; Tiny Aya 3B in the Stage 1 demo).</li>
               <li><b>Traceable is not the same as true.</b> Quotes are checked word for word against their source; the agent's reading of them is not.</li>
-              <li><b>Numbers need checking.</b> On our frozen tests, 21% and 31% of finished answers used a number found in no source read. Every report flags its own.</li>
+              <li><b>Numbers need checking.</b> On Stage 1's frozen tests, 21% and 31% of finished answers used a number found in no source read. Every report flags its own.</li>
               <li><b>Unfinished stays unfinished.</b> Runs that stop early are shown as stopped, never as finished.</li>
             </ul>
             <Link to="/how" className="small">How the agent works and how it was evaluated →</Link>

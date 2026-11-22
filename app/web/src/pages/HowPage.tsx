@@ -116,23 +116,29 @@ export function HowPage({ workspace: w }: { workspace?: Workspace | null }) {
         <div className="tech-grid">
           <article className="panel pad"><Icon name="compass" size={18} /><h3>An AI agent</h3><p>A language model that works in steps: it decides what to do next, calls a tool, reads the result, and continues, instead of answering in one go.</p></article>
           <article className="panel pad"><Icon name="search" size={18} /><h3>Why tools</h3><p>Searching, reading and recording are tools with strict rules. A step that breaks a rule (a quote not in the source, a missing rival) is refused and changes nothing.</p></article>
-          <article className="panel pad"><Icon name="book" size={18} /><h3>Fine-tuning</h3><p>A small open model (Tiny Aya Global, 3B) learned the workflow from 158 investigations by a much larger teacher model, Command A+, on 57 training companies.</p></article>
-          <article className="panel pad"><Icon name="check" size={18} /><h3>What V1 showed</h3><p>On a frozen test of 4 new companies, blind judges scored the fine-tuned agent higher than the base model, and it finished far more investigations.</p></article>
+          <article className="panel pad"><Icon name="book" size={18} /><h3>Fine-tuning</h3><p>An open model (Aya Expanse 8B; Tiny Aya Global 3B in Stage 1) learned the workflow from 158 investigations by a much larger teacher model, Command A+, on 57 training companies.</p></article>
+          <article className="panel pad"><Icon name="check" size={18} /><h3>What the tests showed</h3><p>On twelve companies never seen before, blind judges scored the fine-tuned 8B higher than the same model prompted at every company, and it finished 81 of 96 investigations against 2.</p></article>
           <article className="panel pad"><Icon name="alert" size={18} /><h3>Where it falls short</h3><p>Exact quotes do not guarantee sound readings. Numbers can be invented, evidence types misjudged, and test designs weak. Every report flags its own.</p></article>
         </div>
       </section>
 
       <section className="sec">
-        <div className="sec-head"><h2 className="display">Measured results</h2><span className="muted small">Strategy Agent V1, frozen; scores 0 to 3 from blind judges</span></div>
+        <div className="sec-head"><h2 className="display">Measured results</h2><span className="muted small">Frozen tests, run once; scores 0 to 3 from two blind judges</span></div>
         <div className="res-grid">
           <div className="panel pad res">
-            <span className="kicker">Final test · 4 companies, 48 runs per arm</span>
+            <span className="kicker">Stage 2 · test set 3 · 12 new companies, 96 runs per arm</span>
+            <p className="res-big">1.01 → 1.71</p>
+            <p className="muted small">Aya Expanse 8B prompted against fine-tuned, same tools and guards, mean of two blind judges. Difference +0.70, 95% interval 0.61 to 0.79 over companies; higher at all 12.</p>
+            <p className="small">Finished investigations: <b>2 of 96</b> prompted, <b>81 of 96</b> fine-tuned. Claude Haiku 5.5, a closed model, scores 1.92 (70 of 91 finished).</p>
+          </div>
+          <div className="panel pad res">
+            <span className="kicker">Stage 1 · final test · 4 companies, 48 runs per arm</span>
             <p className="res-big">0.65 → 1.48</p>
             <p className="muted small">Base model against V1, mean of two blind judges. Difference +0.83, 95% interval 0.69 to 0.97.</p>
             <p className="small">Finished investigations: <b>4 of 48</b> base, <b>28 of 48</b> V1.</p>
           </div>
           <div className="panel pad res">
-            <span className="kicker">Second frozen test · 12 companies, 72 runs per arm</span>
+            <span className="kicker">Stage 1 · second test · 12 companies, 72 runs per arm</span>
             <p className="res-big">0.57 → 1.09</p>
             <p className="muted small">Base model against V1, mean of two blind judges, 144 runs. Difference +0.52, 95% interval 0.33 to 0.70 (Claude +0.41 [0.24, 0.57]; Codex +0.63 [0.43, 0.84]).</p>
             <p className="small">Finished investigations: <b>2 of 72</b> base, <b>32 of 72</b> V1.</p>
@@ -140,7 +146,7 @@ export function HowPage({ workspace: w }: { workspace?: Workspace | null }) {
           <div className="panel pad res warnish">
             <span className="kicker">Reliability audit</span>
             <ul className="res-list">
-              <li><b>21% and 31%</b> of V1’s finished recommendations on the two test sets (46% on development) use a number found in no source it read.</li>
+              <li><b>Stage 1: 21% and 31%</b> of V1’s finished recommendations on the two test sets (46% on development) use a number found in no source it read.</li>
               <li>Evidence types are often wrong: “independent study” is applied to news and company text.</li>
               <li>Only 1 of 27 proposed development tests passed the stricter design checks.</li>
               <li>Finishing is not the same as being right: only 1 of 48 final-test runs passed every mechanical check.</li>
