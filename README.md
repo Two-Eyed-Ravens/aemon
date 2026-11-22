@@ -23,6 +23,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |---|---|
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
+| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (12 slides) |
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (rules registered before their results; deviations marked as such) |
