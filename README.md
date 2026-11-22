@@ -10,6 +10,8 @@
 **Teaching a 3B model to investigate a strategy question, with AgentTune and AuditKIT.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026
 
+
+
 > **Result, run once.** On four companies it never saw, with the same environment, tools, stage controller and
 > budgets for both arms, the fine-tuned Tiny Aya agent scored **1.48** against the best-prompted base model's **0.65**
 > on a 0–3 blind rubric, the mean of two LLM judges: **+0.83**, 95% interval 0.69 to 0.97 over cases and 0.44 to 1.23
