@@ -10,7 +10,7 @@
 **Distilling a strategy investigator into Aya Expanse 8B, with AgentTune and AuditKIT: the fine-tuned weights and the
 harness's guards are complements, and each is needed.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026 ·
-**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf)**
+**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [12-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf)**
 
 > **Stage 2, run once.** On twelve companies never used before, Aya Expanse 8B fine-tuned on a teacher's investigations
 > scores **1.71** against **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric,
@@ -18,6 +18,10 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **81 of 96** investigations against **2**, and still leads by **+0.55** on the stages both reach. The weights and the
 > harness each add to the other: on development cases (one judge, training seed 7), removing the decoding guards from
 > the fine-tuned model costs 0.43, and serving the base weights for the late stages costs 0.19.
+
+<a href="docs/stage2/SLIDES_STAGE2.pdf"><img alt="Stage 2 slides: fine-tuning holds on new companies, +0.70 blind quality, 12 of 12 companies, 81 of 96 investigations finished" src="docs/stage2/figures/slides_preview.png" width="720"></a>
+
+*The Stage 2 slides: [open the full deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf).*
 
 | | |
 |---|---|
