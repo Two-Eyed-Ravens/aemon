@@ -43,10 +43,12 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 - **Against the Stage 1 system (Tiny Aya 3.35B, two adapters):** the 8B is ahead by only +0.12 [0.05, 0.20], near
   zero at four of twelve companies, and finishes as often (81 against 82). Against a fine-tuned 3.35B system with the
   same guards, the larger model adds little; most of the gain comes from fine-tuning and the guards.
-- **Against a closed model:** in Stage 1, Claude Haiku 5.5 through the same environment scored higher than our system
-  (2.28 against 1.62) at a quarter of the cost; it was not run on test set 3. What aemon offers instead is an open
-  model (CC-BY-NC 4.0, non-commercial) that runs offline, with the case data kept on the machine and weights that can
-  be audited.
+- **Against a closed model:** on test set 3, Claude Haiku 5.5 through the same environment scores 1.92 against the
+  fine-tuned 8B's 1.71: ahead by +0.20 [0.05, 0.35] (Codex alone +0.12, interval crossing zero), about a third of
+  the 0.67 it led by in Stage 1, at $0.008 per investigation; the 8B finishes more runs (81 of 96 against 70 of 91). What
+  aemon offers instead is an open model (CC-BY-NC 4.0, non-commercial) that runs offline, with the case data kept on
+  the machine and weights that can be audited. This arm was added after the three-arm result, under a rule registered
+  before its run.
 
 **A judge's 60-second view (Stage 2)**
 1. Open the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b), pick a company and start an

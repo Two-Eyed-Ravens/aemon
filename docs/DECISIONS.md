@@ -3455,3 +3455,34 @@ the open question is how the fine-tuned 8B compares with a closed model on these
 packets (efcb15d59439b873, e0303ce718579ca9). A third (9f6d06d3a5bcc397) failed the same format check later in the same
 campaign, before any test set 3 score was computed, and was re-judged once under the same rule; the result entry lists
 all three. The paper says so.
+
+**Test set 3, Haiku arm: 22 of 96 episodes lost to Anthropic API errors (19:00 Sunday, before any Haiku packet was
+built or judged).** Every one ended in `anthropic.InternalServerError: 500` after the SDK's retries, as in Stage 1's
+Haiku run (13 November), so they are rerun once each by the same rule (`experiments/test3/haiku/rerun.sh`, a copy of
+`experiments/haiku/rerun.sh`) and merged; any still lost are reported as lost. The 74 runs that ended normally (60
+finished) are kept as they are. AuditKIT was skipped at run time (the laptop environment lacks AgentTune, which its
+replay imports); it is run on the saved trajectories in the cluster's training environment, as for the eleven
+development reports. API cost of the first pass: $0.62.
+
+**Test set 3 Haiku arm: invalid judgments re-judged once (22:40 Sunday, before any Haiku score was computed).** Of the
+91 new packets, claudecode returned 33 invalid answers: 31 "Claude Code invocation failed" (the CLI exited non-zero
+after its answer, during an account usage limit; not judgments) and 2 "dimension set differs"; codexsol170 returned 1
+(an accepted trajectory with a critical red flag, which the instrument rejects). As registered for this arm, each is
+re-judged once; the first attempts are kept in `judge_results/test3_haiku/invalid_first/`. AuditKIT on the merged
+Haiku report (cluster job 786076, training environment): 0 replay mismatches.
+
+**TEST SET 3, HAIKU ARM RESULT (23:00 Sunday; read as registered, `experiments/test3/haiku/analyze.sh` ->
+`scripts/test3/analyze.py`; `experiments/test3/haiku/report.json`).** Claude Haiku 5.5 through the same environment,
+Stage 1's settings: 91 of 96 runs (5 lost twice to API errors), 70 finished; AuditKIT 0 replay mismatches; $0.74 in
+all, $0.008 per investigation. After one re-judge of failed answers, 3 Haiku packets lacked a valid judgment from one
+judge and are left out (88 paired runs). Mean of judges: Haiku 1.92, A 1.71, Stage 1 system 1.58, prompted 8B 1.01.
+
+| Comparison | Mean of judges | Company t-interval (12) | Codex | Claude Code | Companies above 0 |
+|---|---|---|---|---|---|
+| Haiku minus A | +0.20 | [+0.05, +0.35] | +0.12 [−0.08, +0.31] | +0.30 [+0.20, +0.41] | 9 of 12 |
+| Haiku minus Stage 1 system | +0.33 | [+0.17, +0.48] | +0.32 [+0.12, +0.52] | +0.36 [+0.27, +0.46] | 10 of 12 |
+
+Shared stages: +0.44 and +0.56. Reading: the closed model is still ahead of the fine-tuned 8B on judged quality, by a
+small margin whose interval is clear of zero under the mean of judges but not under Codex alone; the gap is about a
+third of Stage 1's (final system minus Haiku −0.67 and −0.63). The fine-tuned 8B finishes more runs (81 of 96 against
+70 of 91). Added after the three-arm result, as registered.

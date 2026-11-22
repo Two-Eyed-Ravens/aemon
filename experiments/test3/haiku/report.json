@@ -1,0 +1,254 @@
+{
+ "runs": 379,
+ "missing": {
+  "codexsol170": [
+   "028f5a2ff359337c"
+  ],
+  "claudecode": [
+   "b65dd8fb30263237",
+   "40bc6233b2082df1"
+  ]
+ },
+ "left_out_of_primary": 3,
+ "agreement": {
+  "runs_scored_by_both": 376,
+  "spearman": 0.8569437462097165,
+  "mean_absolute_difference": 0.4354683806146572
+ },
+ "comparisons": [
+  {
+   "primary_mean_of_judges": {
+    "arms": "haiku minus A",
+    "pairs": 88,
+    "companies": 12,
+    "unpaired_runs": 8,
+    "mean_of_company_means": 0.19774098875661375,
+    "company_t_interval": [
+     0.04492321406440028,
+     0.3505587634488272
+    ],
+    "company_bootstrap_interval": [
+     0.07194767441860465,
+     0.3273358585858586
+    ],
+    "pooled_mean": 0.20754419191919193,
+    "case_bootstrap_interval": [
+     0.0778256704980843,
+     0.3353061868686869
+    ],
+    "by_company": {
+     "biesse": 0.3940972222222223,
+     "brembo": 0.43229166666666674,
+     "eberspaecher": 0.27976190476190477,
+     "guehring": 0.18154761904761893,
+     "kardex": -0.2094907407407408,
+     "krones": -0.16319444444444436,
+     "lapp": 0.3968253968253969,
+     "multivac": 0.20949074074074073,
+     "nabtesco": 0.21788194444444448,
+     "rieter": -0.13888888888888898,
+     "sika": 0.4730902777777778,
+     "tomra": 0.29947916666666663
+    }
+   },
+   "codexsol170": {
+    "arms": "haiku minus A",
+    "pairs": 90,
+    "companies": 12,
+    "unpaired_runs": 6,
+    "mean_of_company_means": 0.11769042107583777,
+    "company_t_interval": [
+     -0.07466783572297125,
+     0.3100486778746468
+    ],
+    "company_bootstrap_interval": [
+     -0.045061728395061694,
+     0.27699750312109866
+    ],
+    "pooled_mean": 0.12438271604938274,
+    "case_bootstrap_interval": [
+     -0.03653381642512075,
+     0.2828144078144078
+    ],
+    "by_company": {
+     "biesse": 0.3819444444444444,
+     "brembo": 0.3680555555555556,
+     "eberspaecher": 0.12499999999999997,
+     "guehring": 0.10912698412698409,
+     "kardex": -0.26984126984126994,
+     "krones": -0.39583333333333326,
+     "lapp": 0.3350694444444445,
+     "multivac": 0.25925925925925936,
+     "nabtesco": 0.10937500000000006,
+     "rieter": -0.3789682539682539,
+     "sika": 0.43576388888888895,
+     "tomra": 0.33333333333333337
+    }
+   },
+   "claudecode": {
+    "arms": "haiku minus A",
+    "pairs": 89,
+    "companies": 12,
+    "unpaired_runs": 7,
+    "mean_of_company_means": 0.3034267526455026,
+    "company_t_interval": [
+     0.19815586009017572,
+     0.4086976452008295
+    ],
+    "company_bootstrap_interval": [
+     0.21785268414481895,
+     0.3966547192353644
+    ],
+    "pooled_mean": 0.307896379525593,
+    "case_bootstrap_interval": [
+     0.1955749354005168,
+     0.4136473429951691
+    ],
+    "by_company": {
+     "biesse": 0.40625,
+     "brembo": 0.4965277777777778,
+     "eberspaecher": 0.4345238095238095,
+     "guehring": 0.25396825396825395,
+     "kardex": 0.11706349206349202,
+     "krones": 0.06944444444444442,
+     "lapp": 0.5,
+     "multivac": 0.1597222222222222,
+     "nabtesco": 0.32638888888888884,
+     "rieter": 0.10119047619047618,
+     "sika": 0.5104166666666667,
+     "tomra": 0.265625
+    }
+   },
+   "secondary_shared_stages": {
+    "pairs": 86,
+    "mean_of_company_means": 0.4427365795855379,
+    "company_t_interval": [
+     0.34524943961083887,
+     0.540223719560237
+    ],
+    "company_bootstrap_interval": [
+     0.3580212234706617,
+     0.5324931412894376
+    ]
+   },
+   "judges_disagree_in_sign": false
+  },
+  {
+   "primary_mean_of_judges": {
+    "arms": "haiku minus stage1",
+    "pairs": 88,
+    "companies": 12,
+    "unpaired_runs": 8,
+    "mean_of_company_means": 0.3271501598324515,
+    "company_t_interval": [
+     0.1717605971367434,
+     0.4825397225281596
+    ],
+    "company_bootstrap_interval": [
+     0.20767973856209151,
+     0.45497815230961297
+    ],
+    "pooled_mean": 0.3366477272727273,
+    "case_bootstrap_interval": [
+     0.20915032679738566,
+     0.45721583652618136
+    ],
+    "by_company": {
+     "biesse": 0.4071180555555556,
+     "brembo": 0.6684027777777779,
+     "eberspaecher": 0.6408730158730158,
+     "guehring": 0.308531746031746,
+     "kardex": -0.17708333333333337,
+     "krones": 0.16059027777777785,
+     "lapp": 0.4444444444444444,
+     "multivac": 0.3773148148148148,
+     "nabtesco": 0.33940972222222227,
+     "rieter": -0.012896825396825415,
+     "sika": 0.47309027777777773,
+     "tomra": 0.2960069444444444
+    }
+   },
+   "codexsol170": {
+    "arms": "haiku minus stage1",
+    "pairs": 90,
+    "companies": 12,
+    "unpaired_runs": 6,
+    "mean_of_company_means": 0.32068452380952384,
+    "company_t_interval": [
+     0.12177725354786353,
+     0.5195917940711842
+    ],
+    "company_bootstrap_interval": [
+     0.15881642512077296,
+     0.4940245478036176
+    ],
+    "pooled_mean": 0.3242283950617284,
+    "case_bootstrap_interval": [
+     0.16882716049382718,
+     0.47146739130434784
+    ],
+    "by_company": {
+     "biesse": 0.38368055555555547,
+     "brembo": 0.8038194444444444,
+     "eberspaecher": 0.8988095238095238,
+     "guehring": 0.25396825396825395,
+     "kardex": -0.08730158730158734,
+     "krones": 0.07812500000000008,
+     "lapp": 0.28645833333333337,
+     "multivac": 0.36111111111111116,
+     "nabtesco": 0.29861111111111116,
+     "rieter": -0.1825396825396825,
+     "sika": 0.46006944444444453,
+     "tomra": 0.2934027777777778
+    }
+   },
+   "claudecode": {
+    "arms": "haiku minus stage1",
+    "pairs": 89,
+    "companies": 12,
+    "unpaired_runs": 7,
+    "mean_of_company_means": 0.3612075617283951,
+    "company_t_interval": [
+     0.26498046272426423,
+     0.4574346607325259
+    ],
+    "company_bootstrap_interval": [
+     0.28148148148148144,
+     0.44163545568039947
+    ],
+    "pooled_mean": 0.3631398252184769,
+    "case_bootstrap_interval": [
+     0.2544802867383512,
+     0.46542874396135264
+    ],
+    "by_company": {
+     "biesse": 0.4305555555555556,
+     "brembo": 0.5329861111111112,
+     "eberspaecher": 0.38293650793650796,
+     "guehring": 0.3630952380952381,
+     "kardex": 0.06944444444444442,
+     "krones": 0.24305555555555552,
+     "lapp": 0.5972222222222222,
+     "multivac": 0.39351851851851855,
+     "nabtesco": 0.38020833333333326,
+     "rieter": 0.15674603174603172,
+     "sika": 0.4861111111111111,
+     "tomra": 0.29861111111111105
+    }
+   },
+   "secondary_shared_stages": {
+    "pairs": 86,
+    "mean_of_company_means": 0.5644331459435626,
+    "company_t_interval": [
+     0.4456432654130096,
+     0.6832230264741157
+    ],
+    "company_bootstrap_interval": [
+     0.4762611749680715,
+     0.6749842171717172
+    ]
+   },
+   "judges_disagree_in_sign": false
+  }
+ ]
+}

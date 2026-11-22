@@ -68,6 +68,10 @@ def test3_items() -> list[Item]:
     )
     items = [Item(run / name, f'test3/{name}') for name in names]
     items += [Item(p, f'test3/judging/{p.name}') for p in sorted((run / 'judging').glob('*.jsonl'))]
+    haiku = run / 'haiku'
+    names = ('haiku_merged.json', 'haiku_merged.auditkit.json', 'packets.jsonl', 'test3_haiku_key.jsonl', 'report.json', 'judge.sh', 'rerun.sh', 'analyze.sh')
+    items += [Item(haiku / name, f'test3/haiku/{name}') for name in names]
+    items += [Item(p, f'test3/haiku/judging/{p.name}') for p in sorted((haiku / 'judging').glob('*.jsonl'))]
     dossier = REPO / 'data' / 'dossier'
     items.append(Item(dossier / 'cases_heldout3.json', 'test3/frozen/cases_heldout3.json'))
     items.append(Item(REPO / 'docs' / 'test3_freeze.json', 'test3/frozen/test3_freeze.json'))

@@ -45,7 +45,7 @@ a model.
 | `decider/` | The evidence-kind decision model's items and offline results |
 | `recovery_round1/` | Teacher corrections of the student's own failure states and the rows built from them |
 | `quantity/` | Rows from 43 accepted teacher investigations on 28 new training companies |
-| `test3/` | Test set 3 (twelve new companies, run once): the three arms' reports, blind packets, answer key, both judges' predictions (`judging/`), run logs and the analysis (`report.json`); `frozen/` holds the frozen cases, the freeze record and the verified dossiers |
+| `test3/` | Test set 3 (twelve new companies, run once): the three arms' reports, blind packets, answer key, both judges' predictions (`judging/`), run logs and the analysis (`report.json`); `frozen/` holds the frozen cases, the freeze record and the verified dossiers; `haiku/` the Claude Haiku 5.5 arm (runs, AuditKIT replay, packets, key, both judges, analysis) |
 
 To recompute a comparison: merge the keys and predictions as in `judging/` and run the code repository's
 `aemon.evaluation.judging.report` or `scripts/paper/check_numbers.py`. A packet judged more than once takes the mean

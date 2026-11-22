@@ -96,9 +96,7 @@ trajectories (Section~\ref{sec:analysis}).
 
 Development uses 15 cases of six validation companies, 3 attempts each (45 runs per arm), and one qualified blind
 judge (codexsol170: the Codex CLI on gpt-6-sol). The \emph{Stage~1 system} is Tiny Aya Global 3.35B with two
-adapters (one gathers the evidence, one trained on a second teacher's runs reasons) and the same six guards. The Stage~1 final test (four companies) and second test (twelve companies) have both been read:
-the first was diagnosed in detail, the second run and discussed. A new run on either is a retest, and we report it as
-such.
+adapters (one gathers the evidence, one trained on a second teacher's runs reasons) and the same six guards. Stage~1's two test sets have been read, so we use neither as a test.
 
 \subsection{Test set 3}
 \label{sec:test3}
@@ -313,16 +311,16 @@ clear of zero, at ten of twelve companies.
 
 \subsection{Cost}
 
-Unsloth made a training step 4.3 times faster than our trainer in a matched test on Qwen3.5-4B (17.2 to 4.0 seconds,
-the same losses and parameters); an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Serving the merged adapter on one 40 GB slice,
+Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Serving the merged adapter on one 40 GB slice,
 the best setting (4-bit weights, 8 investigations at once) runs 93.8 investigations per GPU hour with 39 of 45
 finished; at the median on-demand A100 price (\$1.76/h, a whole GPU) that is \$0.019 per investigation, about 2.2
 times Claude Haiku 5.5 as measured (\$0.0084), with break-even near \$0.79 per GPU hour. Quantizing to 8 or 4 bits
-did not lower the finish rate, but quality per precision and Haiku's quality on these cases were not judged, so this
-is cost per investigation, not cost at equal quality. On Stage~1's tests Claude Haiku 5.5 also
-scored higher than our system (2.28 and 2.30 against 1.62 and 1.67, two judges) at a quarter of the cost. The case for
-this agent is therefore neither cost nor quality against a closed model: it is an open model that runs where the
-case data cannot leave, and a measured, reproducible gain from fine-tuning over its own base.
+did not lower the finish rate; quality per precision was not judged. On test set 3, added after the three-arm result
+under a rule registered before its run, Haiku through the same environment scores 1.92 against A's 1.71: Haiku minus A
+is +0.20 [+0.05, +0.35] (Codex alone +0.12 [$-0.08$, +0.31]; 88 paired runs), a third of its Stage~1 lead
+($-0.67$), while A finishes more runs (81 of 96 against 70 of 91). The case for this agent is therefore not quality
+or cost against a closed model: it is an open model that runs where the case data cannot leave, close behind, with a
+measured, reproducible gain from fine-tuning over its own base.
 
 \section{Analysis and limits}
 \label{sec:analysis}

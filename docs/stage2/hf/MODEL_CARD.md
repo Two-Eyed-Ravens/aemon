@@ -53,6 +53,7 @@ over the 12 companies.
 
 | Arm | Mean score (0–3, mean of judges) | Finished runs |
 |---|---|---|
+| Claude Haiku 5.5 (closed model, same environment; added after, rule registered before its run) | 1.92 | 70 of 91 |
 | **This adapter (A, seed 7)** | **1.71** | **81 of 96** |
 | Stage 1 system (Tiny Aya Global 3.35B, two adapters) | 1.58 | 82 of 96 |
 | Aya Expanse 8B prompted with the same scaffold | 1.01 | 2 of 96 |
@@ -61,6 +62,8 @@ over the 12 companies.
   +0.61; +0.55 [+0.44, +0.66] on the rubric stages both reach.
 - Fine-tuned minus the Stage 1 system: +0.12 [+0.05, +0.20], higher at ten of twelve companies.
 - The two judges agree in sign on both comparisons (Spearman 0.78 between their run scores).
+- Claude Haiku 5.5 minus this adapter: +0.20 [+0.05, +0.35] (Codex alone +0.12 [−0.08, +0.31]), at $0.008 per
+  investigation; in Stage 1 it led by 0.67.
 
 ## Files
 

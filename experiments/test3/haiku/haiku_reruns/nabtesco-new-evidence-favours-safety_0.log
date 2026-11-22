@@ -1,0 +1,149 @@
+{"case": "nabtesco-new-evidence-favours-safety", "attempt": 0, "stop": "repeated errors", "turns": 35, "passed": 8, "failed": ["finished", "testable_predictions", "evidence_classes"]}
+{
+ "summary": {
+  "episodes": 1,
+  "finished": 0,
+  "end_to_end_success": 0,
+  "stop_reasons": {
+   "repeated errors": 1
+  },
+  "furthest_stage": {
+   "revise_theory": 1
+  },
+  "checks": {
+   "finished": {
+    "passed": 0,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "framing": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "theories": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "causal_form": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "testable_predictions": {
+    "passed": 0,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "evidence_use": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "evidence_classes": {
+    "passed": 0,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "evidence_kinds": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "evidence_limits": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "disconfirmation": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "experiment": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   },
+   "revision": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "existing_offering": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "no_invented_numbers": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "simulated_not_used": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "recommendation": {
+    "passed": 0,
+    "reached": 0,
+    "applied": 1,
+    "of_all": 1
+   },
+   "tool_use": {
+    "passed": 1,
+    "reached": 1,
+    "applied": 1,
+    "of_all": 1
+   }
+  },
+  "rejections": {
+   "arguments": 1,
+   "unread_evidence": 1,
+   "stage": 1
+  },
+  "shock_coverage": {
+   "cases": 1,
+   "delivered": 1,
+   "read": 1,
+   "held_affected_theory": 0,
+   "addressed_an_affected_theory": 0,
+   "bore_on_favoured": 0,
+   "cited_in_revision": 0,
+   "favoured_changed": 0
+  },
+  "supporting_evidence_attempted": 1,
+  "rejected_finishes": 1,
+  "harness_actions": 0,
+  "refused_calls": 3,
+  "recovered_after_refusal": 2,
+  "harness_corrections": 0,
+  "resources": {
+   "prompt_tokens": 140,
+   "completion_tokens": 12693,
+   "seconds": 70.179,
+   "usd": 0.012
+  },
+  "mean_calls": 24.0
+ },
+ "auditkit": {
+  "skipped": "No module named 'agenttune'"
+ }
+}
