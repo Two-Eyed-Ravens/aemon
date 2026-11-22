@@ -36,8 +36,9 @@ $-0.19$. Data changes matter less than expected or backfire: correction rows mov
 two kinds of recovery data each gained at one training seed and vanished over three (pooled +0.02 and $-0.03$), so
 single-seed gains in agent fine-tuning should not be trusted, and rebalancing the teacher's data toward rare skills makes the agent fragile, collapsing into loops at two of three
 training seeds ($-0.72$ [$-0.92$, $-0.50$] pooled). A decision model for one typed
-choice improves labels, not judged quality. A single run on a fresh twelve-company test set with supporting and
-contradicting evidence, read by two judges, is \pending{pending}.
+choice improves labels, not judged quality. On a fresh test set of twelve companies, run once and read by two judges,
+the fine-tuned 8B beats the same model prompted on the same scaffold by \textbf{+0.70 [0.61, 0.79]} (interval over
+companies), at all twelve companies, and finishes 81 of 96 investigations against 2.
 \end{abstract}
 
 \section{Introduction}
@@ -216,15 +217,12 @@ both runs reached (7.2 of 9 on average), as in Stage~1, A leads by +0.59 [+0.45,
 \paragraph{Two model sizes.} The same comparison, fine-tuned against prompted base, gave +0.83 [0.69, 0.97] for Tiny
 Aya Global (3.35B) on Stage~1's frozen final test with two judges, and gives +0.72 to +0.88 for Aya Expanse 8B
 on development with one judge. The splits, judges and scaffolds differ (a test result with two judges against a development
-result with one), so only the direction and rough size agree; the like-for-like comparison is the 8B result on test
-set 3 \pending{Monday}. Per training seed, against the prompted 8B on the same scaffold: A +0.72 (seed 7), +0.88 [+0.75, +1.00] (seed 11), +0.77 [+0.69, +0.85] (seed 13); B
-+0.90, +0.68 and +0.84; A without the correction rows +0.72 (seed 7). No seed's
-fine-tuned agent comes near the prompted model's 1.29.
+result with one), so only the direction and rough size agree; on test set 3, with two judges, the 8B
+gain is +0.70 [0.61, 0.79] (Section~\ref{sec:test3run}).
 
 Against the Stage~1 system the fine-tuned 8B is ahead by +0.13 [+0.03, +0.23], +0.29 [+0.18, +0.39] and +0.18
 [+0.09, +0.27] at seeds 7, 11 and 13, with the largest gains on revision and distinct theories, but finishes 39, 41 and
-39 runs against its 43; this secondary comparison is the one test set 3 may leave inconclusive
-(Section~\ref{sec:test3run}).
+39 runs against its 43; on test set 3 the gap is +0.12 [+0.05, +0.20].
 
 \subsection{Which parts of the agent earn their place?}
 
@@ -242,13 +240,11 @@ checkable error the rows were written for moves, judged quality does not. Withou
 [+0.56, +0.87] above the prompted 8B.
 
 \paragraph{Corrections of the student's own states.} One round of teacher corrections on 148 states where A failed
-(40 kept by the checks), added to A's data, gains +0.12 [+0.02, +0.21] at seed 7 but $-0.05$ [$-0.15$, +0.05] at
-seed 11 and $-0.14$ [$-0.29$, $-0.01$] at seed 13; pooled over seeds, $-0.03$ [$-0.07$, +0.02]. Like the rule-built
-recovery rows, a seed-7 gain that does not replicate.
+(40 kept by the checks) gains +0.12 [+0.02, +0.21] at seed 7, $-0.05$ and $-0.14$ at seeds 11 and 13; pooled,
+$-0.03$ [$-0.07$, +0.02]: again a seed-7 gain that does not replicate.
 
 \paragraph{More of the same data.} Adding 43 teacher investigations on 28 new training companies (+27\%), collected
-as before, gives +0.09 [$-0.02$, +0.19] at seed 7 with half the refused calls: small, inconclusive at one seed, and
-after two seed-7 gains that did not replicate, not a finding.
+as before, gives +0.09 [$-0.02$, +0.19] at seed 7: inconclusive, and not a finding.
 
 \paragraph{Composition.} Resampling the same teacher rows toward the rarer skills at the same token budget makes
 the agent fragile: it collapses at two of three training seeds ($-0.97$ [$-1.36$, $-0.57$] and $-1.09$ [$-1.47$,
@@ -277,27 +273,44 @@ the belief ledger ($-0.01$) and the budget guard (+0.01) barely move quality (on
 
 In the loop the decision model replaces a quarter of the third-party evidence kinds and fixes far more than it spoils,
 but on judged quality it has no detected effect: pooled over three training seeds, as registered, it changes A by
-+0.01 [$-0.03$, +0.06] and B by +0.00 [$-0.07$, +0.06]. A LoRA head trained for the choice did no better offline
-than the base weights. Both are left out of the tested configuration (Appendix~\ref{app:decide}).
++0.01 [$-0.03$, +0.06] and B by +0.00 [$-0.07$, +0.06]. Both it and a trained LoRA head are left out of the tested configuration (Appendix~\ref{app:decide}).
 
 \subsection{Test set 3}
 \label{sec:test3run}
 
-Registered before the run: the configuration is chosen mechanically from development among those with three
-training seeds and frozen before test set 3 is opened; three arms (it, the prompted 8B with the same scaffold, and the
-Stage~1 system), 48 cases $\times$ 2 attempts = 96 runs each, two judges; intervals over the 12 companies. The
-primary comparison is fine-tuned against prompted 8B. Against the Stage~1 system development shows +0.14 to +0.31,
-while 12 companies reliably detect only gaps of about 0.3, so that secondary comparison may well be inconclusive.
+Registered before the run: the configuration is chosen mechanically from development and frozen before test set 3
+is opened; three arms (it, the prompted 8B with the same scaffold, the Stage~1 system), 48 cases $\times$ 2 attempts
+= 96 runs each, two judges; the primary comparison is fine-tuned against prompted 8B.
 With $\bar\delta_g$ the mean paired difference at company $g$, the company interval is
 \begin{equation}
 \bar\delta \pm t_{0.975,\,11} \, \frac{\operatorname{sd}(\bar\delta_g)}{\sqrt{12}}, \qquad \bar\delta = \tfrac{1}{12}\textstyle\sum_g \bar\delta_g .
 \end{equation}
-B replaces A only if, with $\hat\Delta_\sigma$ its difference from A at training seed $\sigma$,
-$\min_\sigma \hat\Delta_\sigma > 0$, $\tfrac{1}{3}\sum_\sigma \hat\Delta_\sigma \ge 0.15$, the pooled interval's lower
-bound is above 0, and B's data trained for A's 1,971 steps gains at least 0.09 over A at seed 7.
-Each arm is one trained model, the chosen configuration's training-seed-7 adapter, fixed before the run (seed 7 is
-the reference seed of every design step, not the best development seed), so the interval covers companies and
-attempts, not training runs. \pending{Monday}
+Each arm is one trained model (A at seed 7, the reference seed of every design step, not the best one), so the
+interval covers companies and attempts, not training runs.
+
+\paragraph{Result.} Every run was scored by both judges (three answers that failed the instrument's format check
+were judged once more, a recorded deviation). Mean of the two judges: A 1.71, the Stage~1 system 1.58, the prompted
+8B 1.01; finished runs 81, 82 and 2 of 96.
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\toprule
+A minus & Both judges & Codex & Claude \\
+\midrule
+prompted 8B & \textbf{+0.70} [.61, .79] & +0.79 & +0.61 \\
+Stage~1 & +0.12 [.05, .20] & +0.19 & +0.06 \\
+\bottomrule
+\end{tabular}
+\caption{Test set 3 (run once). Mean of the two judges with its $t$-interval over 12 companies; both judges agree in sign (Spearman 0.78).}
+\label{tab:test3}
+\end{table}
+
+Fine-tuning holds on unseen companies: A is above the prompted 8B at all twelve, about as much as on development,
+and by +0.55 [+0.44, +0.66] on shared stages only. Against the Stage~1 system the gain is small but
+clear of zero, at ten of twelve companies.
 
 \subsection{Cost}
 
@@ -352,8 +365,9 @@ outcomes.
 \section{Related work and conclusion}
 
 On development, under the same investigation scaffold, fine-tuning Aya Expanse 8B on teacher trajectories improves
-investigation quality across training seeds; the additional components have not yet shown a reliable quality benefit.
-Test set 3 decides whether the first finding holds on unseen companies \pending{Monday}.
+investigation quality across training seeds, and on twelve unseen companies it holds: +0.70 [0.61, 0.79] over the
+prompted model, with two judges agreeing. The additional data components have not shown a reliable quality benefit;
+the guards and the fine-tuned weights are both needed.
 
 We build on tool-using agents \citep{yao2023react,schick2023toolformer}, fine-tuning on stronger models' trajectories
 \citep{chen2023fireact,zeng2023agenttuning}, distillation \citep{hinton2015distilling} at the level of tool calls with
@@ -478,12 +492,50 @@ SEED, UNSLOTH=1). Evaluate: \texttt{sbatch jobs/screen\_bases.sbatch} (ADAPTER, 
 \texttt{python -m aemon.evaluation.judging.packets}, then \texttt{judge\_v1/run\_campaign.py}, then
 \texttt{python -m aemon.evaluation.judging.report}. Tables and figure: \texttt{scripts/bench/ablation\_table.py},
 \texttt{scripts/paper/caution\_counts.py}, \texttt{scripts/paper/fig\_effects.py}. Decision log with every
-registered rule: \texttt{docs/DECISIONS.md}.
+registered rule: \texttt{docs/DECISIONS.md}. Every printed number: \texttt{scripts/paper/check\_numbers.py};
+test set 3: \texttt{scripts/test3/analyze.py} on \texttt{experiments/test3/}.
 
-\section{Appendix plan}
+\section{Per-seed and per-company results}
+\label{app:detail}
 
-A. Stage~1 frozen results, unchanged. B. Full ablation table with how often each guard acts. C. Decision model
-offline. D. Per-company results. E. Training details, seeds, data conditions. F. Inference bench. G. Prompts, rubric,
-judge qualification, data and model cards, licences, test set 3 selection rule and signed-evidence designs.
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+Seed & A $-$ prompted 8B & Recovery $-$ A \\
+\midrule
+7 & +0.72 [+0.59, +0.85] & +0.12 [+0.02, +0.21] \\
+11 & +0.88 [+0.75, +1.00] & $-$0.05 [$-$0.15, +0.05] \\
+13 & +0.77 [+0.69, +0.85] & $-$0.14 [$-$0.29, $-$0.01] \\
+\bottomrule
+\end{tabular}
+\caption{Development by training seed (15 cases $\times$ 3 attempts, one judge), case-bootstrap intervals.}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+Company & A $-$ prompted 8B & A $-$ Stage~1 \\
+\midrule
+Biesse & +0.53 & +0.01 \\
+Brembo & +0.73 & +0.24 \\
+Ebersp\"acher & +0.54 & +0.34 \\
+G\"uhring & +0.64 & +0.11 \\
+Kardex & +0.78 & +0.07 \\
+Krones & +0.61 & +0.32 \\
+Lapp & +0.75 & +0.02 \\
+Multivac & +0.88 & +0.13 \\
+Nabtesco & +0.82 & +0.12 \\
+Rieter & +0.89 & +0.13 \\
+Sika & +0.81 & 0.00 \\
+Tomra & +0.44 & $-$0.00 \\
+\bottomrule
+\end{tabular}
+\caption{Test set 3 by company: mean paired difference, mean of the two judges, 8 runs per arm and company.}
+\end{table}
 
 \end{document}
