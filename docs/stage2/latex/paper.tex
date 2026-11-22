@@ -33,7 +33,7 @@ quality by +0.72, +0.88 and +0.77 on a 0 to 3 rubric at three training seeds, ev
 ability unchanged (+0.6 points on MMLU and ARC). The trained weights do not replace the harness around them: removing
 the decoding guards costs $-0.43$ and half the finished runs, and serving the base model for the late stages costs
 $-0.19$. Data changes matter less than expected or backfire: correction rows move a checkable error but not quality,
-two kinds of recovery data each gained at one training seed and vanished over three (pooled +0.02 and $-0.03$), so
+rule-built recovery rows and teacher corrections of the student's own failure states each gained at one training seed and vanished over three (pooled +0.02 and $-0.03$), so
 single-seed gains in agent fine-tuning should not be trusted, and rebalancing the teacher's data toward rare skills makes the agent fragile, collapsing into loops at two of three
 training seeds ($-0.72$ [$-0.92$, $-0.50$] pooled). A decision model for one typed
 choice improves labels, not judged quality. On a fresh test set of twelve companies, run once and read by two judges,
@@ -65,7 +65,7 @@ We make three contributions.
 \begin{enumerate}
 \item \textbf{Agent fine-tuning measured part by part.} An 8B Cohere student (Aya Expanse 8B) trained with AgentTune
 on the Stage~1 teacher data, and ablations of the guards, the training data (correction rows, rule-built recovery
-rows, a skill-balanced composition, recovery from the student's own failure states) and the prompt, each against one
+rows, a skill-balanced composition, teacher corrections of the student's own failure states) and the prompt, each against one
 reference with matched training seeds (Sections~\ref{sec:method} and~\ref{sec:results}).
 \item \textbf{Weights and harness are complements.} Fine-tuning moves the 8B from finishing 9\% of runs to 87\%
 on an identical scaffold (Figure~\ref{fig:stages}), yet the fine-tuned agent still needs its decoding guards, needs its
@@ -73,7 +73,7 @@ adapter in the late stages, and breaks when its data are naively rebalanced; gen
 decision model for one typed choice improves labels but not judged quality (Section~\ref{sec:results}).
 \item \textbf{An honest test.} A fresh test set of twelve companies chosen by a committed rule, 230 records verified
 against their live pages, four cases per company including supporting and contradicting simulated evidence, frozen
-before any result of the new models was opened; two blind judges; company-level intervals (Section~\ref{sec:test3}).
+before any result of the fine-tuned 8B was opened; two blind judges; company-level intervals (Section~\ref{sec:test3}).
 \end{enumerate}
 
 \section{Task, environment and tests}
@@ -89,16 +89,14 @@ decision rule, or decline one; state a position with a belief per theory; revise
 controller opens only the current step's tools. Guards refuse what the procedure forbids: a quote that is not in the
 source, a theory that repeats another, a simulated result cited as support or in the recommendation. Every run is
 recorded and replayed with AuditKIT \citep{lexsi_auditkit}, which re-executes every recorded tool call through the
-guarded tools and scores the calls. For eleven Stage~2 development reports the audit was skipped at run time: AuditKIT's replay reads AgentTune's
-event-log format, and the evaluation runner's Python environment on one cluster account did not have the AgentTune
-package installed. Training always used AgentTune (Section~\ref{sec:method}) and was not affected. The eleven audits
-were performed retrospectively on the saved trajectories, a replay of the recorded calls with no model call, and
-evaluation jobs now stop if either package is missing.
+guarded tools and scores the calls; eleven development audits skipped at run time were run afterwards on the saved
+trajectories (Section~\ref{sec:analysis}).
 
 \subsection{Development and the earlier tests}
 
 Development uses 15 cases of six validation companies, 3 attempts each (45 runs per arm), and one qualified blind
-judge (codexsol170). The Stage~1 final test (four companies) and second test (twelve companies) have both been read:
+judge (codexsol170: the Codex CLI on gpt-6-sol). The \emph{Stage~1 system} is Tiny Aya Global 3.35B with two
+adapters (one gathers the evidence, one trained on a second teacher's runs reasons) and the same six guards. The Stage~1 final test (four companies) and second test (twelve companies) have both been read:
 the first was diagnosed in detail, the second run and discussed. A new run on either is a retest, and we report it as
 such.
 
@@ -106,7 +104,7 @@ such.
 \label{sec:test3}
 
 Twelve companies: five chosen first (Eberspächer, Gühring, Krones, Lapp, MULTIVAC) and seven drawn by a written rule
-committed before any research agent ran (Kardex, Nabtesco, Biesse, Brembo, Rieter, Sika, Tomra): manufacturers mainly
+committed before any dossier research began (Kardex, Nabtesco, Biesse, Brembo, Rieter, Sika, Tomra): manufacturers mainly
 selling to businesses, EUR 0.3 to 15 billion in revenue, absent from every case file and proposal, outside every
 development and test company's product category, covering twelve sectors and five countries. Records are short
 verbatim excerpts from public pages, checked mechanically against the live page; of 262 gathered, 230 were verified
@@ -114,7 +112,7 @@ and admitted and the rest dropped unedited. Each company has four cases: base, i
 pair of simulated randomized offer tests on one narrow mechanism (for example installation friction for parking
 heaters) whose two versions share the record's id and title and differ only in mirrored outcome counts (72 against 32
 of 400 per arm). The tools refuse that record as support for a theory or as cited evidence. Leakage and searchability
-checks pass, and the set was frozen before any 8B result was opened (commit \texttt{f5e0b6b}, 19 November; content
+checks pass, and the set was frozen before any result of the fine-tuned 8B was opened (commit \texttt{f5e0b6b}, 19 November; content
 sha256 \texttt{068261a91fb3d8b8\ldots}): 48 cases $\times$ 2 attempts = 96 runs per arm. Against the 1,554 records of
 the training and development dossiers, the closest test record has a character n-gram TF-IDF cosine of 0.44 (median
 nearest neighbour 0.17); the closest pairs are generic company-size sentences, not shared content.
@@ -125,8 +123,8 @@ nearest neighbour 0.17); the closest pairs are generic company-size sentences, n
 \subsection{Student and training}
 
 The student is Aya Expanse 8B (CohereLabs, revision \texttt{5062468b}, CC-BY-NC-4.0); the trained agent stays a Cohere
-model, as the track requires. The data are 3,942 replay-exact Command~A+ tool-call rows from 158 investigations on 63
-training companies plus 51 correction rows, about 410,000 supervised tokens, with the loss on the target call only.
+model, as the track requires. The data are 3,891 replay-exact Command~A+ tool-call rows from 158 investigations on 57
+training companies plus 51 correction rows (3,942 in all), about 410,000 supervised tokens, with the loss on the target call only.
 LoRA \citep{hu2022lora} has rank 16, alpha 32 and dropout 0.05 on all seven linear projections of each block (224
 modules, 41.9M trainable parameters); training runs two epochs, 1,971 optimizer steps, at learning rate $10^{-4}$,
 through AgentTune's distillation trainer \citep{lexsi_agenttune,hinton2015distilling}, with Unsloth building the model
@@ -158,9 +156,9 @@ weights' option-letter log-probabilities, abstaining below a fixed confidence (A
 \label{sec:results}
 
 All development numbers use one judge (codexsol170), 15 cases and 45 runs per arm. One judge suffices for
-comparing arms because in Stage~1 our two judges (Claude and gpt-6-sol) agreed on order but not on level: their run
+comparing arms because in Stage~1 our two judges (Claude and a Codex model) agreed on order but not on level: their run
 scores rank-correlated 0.90 to 0.95 over five campaigns of 60 to 360 runs, they put all five arms of test set 2 in the
-same order, and they differed only in level (gpt-6-sol higher by 0.3 to 0.4 per run) and in the order of two arms
+same order, and they differed only in level (Codex higher by 0.3 to 0.4 per run) and in the order of two arms
 0.05 apart. We therefore compare arms with one judge on development, report differences rather than levels, and
 add the second judge for the test. A run's score is the mean of its
 judged dimensions, $s = \tfrac{1}{|D|}\sum_{d \in D} s_d$ with $s_d \in \{0,1,2,3\}$ and an unreached dimension
@@ -182,12 +180,12 @@ Development & Score & Fin. & No-test & vs St.\,1 \\
 Stage 1 system (3.35B) & 1.88 & 43 & 6/6 & -- \\
 8B prompted, staged & 1.41 & 27 & & $-0.47$ \\
 8B prompted, same & 1.29 & 4 & 4/6 & $-0.59$ \\
-A: 8B fine-tuned & 2.02 & 39 & 6/6 & $+0.14$ \\
+A: 8B fine-tuned & 2.01 & 39 & 6/6 & $+0.13$ \\
 B: A + recovery & 2.19 & 45 & 6/6 & $+0.31$ \\
 A, seed 11 & 2.17 & 41 & 6/6 & $+0.29$ \\
 B, seed 11 & 1.97 & 41 & 6/6 & $+0.09$ \\
 A, seed 13 & 2.06 & 39 & 6/6 & $+0.18$ \\
-B, seed 13 & 2.13 & 42 & 6/6 & $+0.26$ \\
+B, seed 13 & 2.14 & 42 & 6/6 & $+0.26$ \\
 \bottomrule
 \end{tabular}
 \caption{Judge score (0 to 3) and runs finished of 45; rows without a seed are training seed 7. No-test: runs that propose a test on the two
@@ -232,7 +230,7 @@ and a simulated result cited in the recommendation, each followed by the teacher
 seed 7 (45 of 45 finished; refused calls 28 against 146) and gains +0.18 [+0.10, +0.25] over A. It does not replicate:
 B minus A is $-0.20$ [$-0.36$, $-0.06$] at seed 11 (330 refused calls, loops at one company) and +0.08 [$-0.08$, +0.26]
 at seed 13; pooled over seeds +0.02 [$-0.04$, +0.09], while B finishes 128 runs against 119. B fails its registered
-admission rule, and A is the configuration for test set 3. B's data trained for A's 1,971 steps collapses to 0.66,
+admission rule, and A is the configuration for test set 3. B's data trained for A's 1,971 steps collapses to 0.65,
 looping in the theories stage: the rows make the agent finish more often but loop unpredictably across training runs.
 
 \paragraph{Correction rows.} Without A's 51 correction rows (seed 7) quality is unchanged (+0.01 [$-0.12$, +0.12]),
@@ -263,7 +261,7 @@ and guards are complements, not substitutes.
 update, conclude) and the adapter for the rest costs $-0.19$ [$-0.29$, $-0.10$] and 21 finished runs (18 of 45): the
 fine-tuned weights matter after the evidence is gathered too, not only for the search. Serving the agent with
 Stage~1's staged prompt instead of the compact one it was trained in costs $-0.20$ [$-0.32$, $-0.07$] (26 finished).
-Of the guards, one carries nearly all the value: refusing a repeated call instead of resampling it costs $-0.49$ [$-0.70$, $-0.31$] and 26 finished runs, more than removing every guard; the quote menu ($-0.05$ [$-0.11$, +0.01]),
+Of the guards, one carries nearly all the value: refusing a repeated call instead of resampling it costs $-0.49$ [$-0.70$, $-0.31$] and finishes 13 of 45, fewer than with no guards at all; the quote menu ($-0.05$ [$-0.11$, +0.01]),
 the belief ledger ($-0.01$) and the budget guard (+0.01) barely move quality (one seed each, exploratory).
 
 \paragraph{General ability.} On 800 sampled MMLU and ARC-Challenge items, zero-shot, A scores 67.9\% and the base
@@ -286,11 +284,11 @@ With $\bar\delta_g$ the mean paired difference at company $g$, the company inter
 \begin{equation}
 \bar\delta \pm t_{0.975,\,11} \, \frac{\operatorname{sd}(\bar\delta_g)}{\sqrt{12}}, \qquad \bar\delta = \tfrac{1}{12}\textstyle\sum_g \bar\delta_g .
 \end{equation}
-Each arm is one trained model (A at seed 7, the reference seed of every design step, not the best one), so the
+The fine-tuned arm is one trained model (A at seed 7, the reference seed of every design step, not the best one), so the
 interval covers companies and attempts, not training runs.
 
-\paragraph{Result.} Every run was scored by both judges (three answers that failed the instrument's format check
-were judged once more, a recorded deviation). Mean of the two judges: A 1.71, the Stage~1 system 1.58, the prompted
+\paragraph{Result.} Every run was scored by both judges (answers that failed the instrument's format check were
+judged once more, a deviation recorded before any score: two named then, a third that failed later in the same run). Mean of the two judges: A 1.71, the Stage~1 system 1.58, the prompted
 8B 1.01; finished runs 81, 82 and 2 of 96.
 
 \begin{table}[h]
@@ -299,13 +297,13 @@ were judged once more, a recorded deviation). Mean of the two judges: A 1.71, th
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{lccc}
 \toprule
-A minus & Both judges & Codex & Claude \\
+A minus & Both judges & Codex & Claude Code \\
 \midrule
 prompted 8B & \textbf{+0.70} [.61, .79] & +0.79 & +0.61 \\
 Stage~1 & +0.12 [.05, .20] & +0.19 & +0.06 \\
 \bottomrule
 \end{tabular}
-\caption{Test set 3 (run once). Mean of the two judges with its $t$-interval over 12 companies; both judges agree in sign (Spearman 0.78).}
+\caption{Test set 3 (run once). Mean of the two judges with its $t$-interval over 12 companies; both judges agree in sign on both comparisons; their run scores have Spearman 0.78.}
 \label{tab:test3}
 \end{table}
 
@@ -327,6 +325,7 @@ this agent is therefore neither cost nor quality against a closed model: it is a
 case data cannot leave, and a measured, reproducible gain from fine-tuning over its own base.
 
 \section{Analysis and limits}
+\label{sec:analysis}
 
 \paragraph{Result and explanation.} The result is that fine-tuning on the teacher's trajectories improves judged
 investigation quality on the same scaffold, at three
@@ -355,7 +354,8 @@ screens. Our two LLM judges agree on the order of arms but not on the level of s
 2.90 for the same runs), so we report differences, never absolute scores, across judges. And AuditKIT was skipped,
 logged and not noticed in 11 of 12 Stage~2 development reports, because the evaluation runner's environment on one
 account lacked the AgentTune package that AuditKIT's replay imports (training, which uses AgentTune, was not
-affected); the reports looked complete. Every evaluation job now stops if a required tool is missing.
+affected); the reports looked complete. The audits were then run on the saved trajectories (a replay with no model
+call), and every evaluation job now stops if a required tool is missing.
 
 \paragraph{A reward for RL, validated before use.} Before any RL we built a step reward checked by the tools (Appendix~\ref{app:reward}); it failed its registered agreement test with the judge (Spearman 0.26 against 0.30), tracking quality for broken agents but not for good ones, so we trained nothing on it.
 
@@ -378,7 +378,7 @@ Recent agent distillation moves on-policy: the student acts and the teacher corr
 or the student learns only what the teacher adds beyond the harness \citep{choi2026had}. Our corrections are the first
 kind with mechanical acceptance checks, and our ablations bear on the last: here the harness's guards and the
 fine-tuned weights are complements, since removing either costs quality and finished runs.
-Future work: skill-focused contrastive cases, iterative recovery from the student's own states beyond one round,
+Future work: skill-focused contrastive cases, iterative teacher corrections of the student's own states beyond one round,
 preference training with labels from the permitted teacher, and agent RL through AgentTune once a reward is validated
 against judged runs.
 
@@ -421,7 +421,7 @@ recommendation than we expected, or the judge does not register it; our data do 
 of the configuration tested on test set 3.
 
 \paragraph{A trained head.} A LoRA adapter with a letter head trained on 1,316 dossier excerpts and teacher quotes
-(seed 7, calibrated by one temperature) scores 79.3\% on the 121 test quotes against the base weights' 81.0\%
+(seed 7, calibrated by one temperature) scores 79.3\% on the 121 test quotes against the base weights' 81.0\% (81.8\% as first measured, with a different temperature fit)
 ($-1.7$ points [$-10.9$, +8.1], paired over 95 records), with lower calibration error (0.07 against 0.18) and 47.9\%
 against 52.1\% on the third-party quotes. It rose from 61\% to 83\% on held-out excerpts of its own kind, so it
 learned the dossier's excerpts but not the quotes agents choose; it failed its registered rule and never ran in the
@@ -487,7 +487,7 @@ used for no reported model.
 \section{Reproducing}
 
 Pinned environments: \texttt{requirements.lock.txt} (Python), llama.cpp b12032, Aya Expanse 8B revision
-\texttt{5062468b}. Data: \texttt{rows/final.jsonl} (teacher rows), \texttt{python scripts/oneoff/composition\_rows.py},
+\texttt{5062468b}. Data: the teacher rows in the Stage~1 dataset (\texttt{twoeyedravens/aemon}), \texttt{python scripts/oneoff/composition\_rows.py},
 \texttt{python -m aemon.rows.recovery\_rows}. Train: \texttt{sbatch jobs/train\_base.sbatch} (NAME, HF\_REPO, HF\_REV,
 SEED, UNSLOTH=1). Evaluate: \texttt{sbatch jobs/screen\_bases.sbatch} (ADAPTER, ARMS, CASES). Judge:
 \texttt{python -m aemon.evaluation.judging.packets}, then \texttt{judge\_v1/run\_campaign.py}, then
@@ -540,7 +540,7 @@ Tomra & +0.44 & $-$0.00 \\
 \end{table}
 
 \paragraph{Judge agreement on test set 3.} Over all 288 runs the two judges' scores have Spearman 0.78 (Stage~1's
-tests: 0.94 and 0.95) and differ by 0.45 per run on average. Most of that difference is a level offset: Claude Code
+tests, with a different Codex model: 0.94 and 0.95) and differ by 0.45 per run on average. Most of that difference is a level offset: Claude Code
 scores every arm about 0.45 lower than Codex (A 1.43 against 1.98, Stage~1 system 1.37 against 1.79, prompted 8B 0.82
 against 1.19), so both judges give the same ordering of arms and the same sign for every comparison. Within an arm
 they agree only weakly on which run is better (Spearman 0.31, 0.47 and 0.38). Stage~1's tests compared arms much

@@ -3437,3 +3437,21 @@ same model prompted with an identical scaffold on companies never seen in develo
 the 0 to 3 rubric (development: +0.72 to +0.88), and the 8B system is above Stage 1's Tiny Aya system by a small,
 interval-clear margin. Run once; not re-run. Files: `experiments/test3/` (reports of the three arms, the blind packets,
 the key, both judges' predictions, the analysis).
+
+**Test set 3: Claude Haiku 5.5 as a fourth arm (Hatem, 22 November ~19:00; registered before the run; a comparison
+added after the three-arm result, reported as such and leaving that result unchanged).** Asked by an outside review:
+the open question is how the fine-tuned 8B compares with a closed model on these cases. Rule:
+- Haiku 5.5 through the same environment and tools, settings as Stage 1's registered Haiku baseline (13 November:
+  `--backend claude --claude-model claude-haiku-5-5 --prompt staged`, default effort), on the same 48 test set 3
+  cases x 2 attempts (`--split heldout3`), agent and environment code unchanged since 49fe311; cost capped at $5.
+- Packets rebuilt from all four arms' reports; judgments of packets already judged are reused by packet id, and only
+  Haiku's new packets are judged, blind, by both judges (codexsol170 and claudecode). An answer that fails the
+  instrument's format check is re-judged once, as for the three arms.
+- Reading: `scripts/test3/analyze.py` unchanged, comparisons Haiku minus A (primary of this addition) and Haiku minus
+  the Stage 1 system; mean of judges, company t-interval over 12 companies. Whatever it shows goes into the paper
+  and README, with cost per investigation.
+
+**Correction to the 17:42 re-judging entry (recorded 22 November, 18:55).** That entry named two invalid claudecode
+packets (efcb15d59439b873, e0303ce718579ca9). A third (9f6d06d3a5bcc397) failed the same format check later in the same
+campaign, before any test set 3 score was computed, and was re-judged once under the same rule; the result entry lists
+all three. The paper says so.

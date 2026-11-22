@@ -75,7 +75,8 @@ the code repository; the adapter alone does not reproduce the agent.
 
 Aya Expanse 8B, LoRA rank 16 on all seven linear projections (41.9M trainable parameters), two epochs, 1,971 steps,
 learning rate 1e-4, loss on the target tool call only, through AgentTune's distillation trainer with Unsloth.
-Data: 3,942 replay-exact Command A+ rows from 158 investigations on 63 training companies plus 51 correction rows.
+Data: 3,891 replay-exact Command A+ rows from 158 investigations on 57 training companies plus 51 correction rows
+(3,942 in all).
 Held-out loss on six validation companies 0.565 to 0.387.
 
 ## Licence and limits

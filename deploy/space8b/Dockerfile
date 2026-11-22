@@ -13,7 +13,7 @@ FROM nvidia/cuda:12.6.3-devel-ubuntu24.04 AS llama
 RUN apt-get update && apt-get install -y --no-install-recommends git cmake build-essential ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 RUN git clone --depth 1 --branch b12032 https://github.com/ggml-org/llama.cpp /src \
-    && cmake -S /src -B /build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES="75;86;89" -DBUILD_SHARED_LIBS=OFF -DLLAMA_CURL=OFF -DLLAMA_BUILD_UI=OFF -DLLAMA_USE_PREBUILT_UI=OFF \
+    && cmake -S /src -B /build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86 -DBUILD_SHARED_LIBS=OFF -DLLAMA_CURL=OFF -DLLAMA_BUILD_UI=OFF -DLLAMA_USE_PREBUILT_UI=OFF \
        -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release \
     && cmake --build /build --target llama-server -j 2
 

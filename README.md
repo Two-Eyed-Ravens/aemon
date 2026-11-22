@@ -15,9 +15,9 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **Stage 2, run once.** On twelve companies never used before, Aya Expanse 8B fine-tuned on a teacher's investigations
 > scores **1.71** against **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric,
 > mean of two LLM judges): **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It finishes
-> **81 of 96** investigations against **2**, and still leads by **+0.55** on the stages both reach. Neither part works
-> alone: removing the decoding guards from the fine-tuned model costs 0.43, and serving the base weights for the late
-> stages costs 0.19.
+> **81 of 96** investigations against **2**, and still leads by **+0.55** on the stages both reach. The weights and the
+> harness each add to the other: on development cases (one judge, training seed 7), removing the decoding guards from
+> the fine-tuned model costs 0.43, and serving the base weights for the late stages costs 0.19.
 
 | | |
 |---|---|
@@ -25,7 +25,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
-| Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (every rule written down before its result) |
+| Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (rules registered before their results; deviations marked as such) |
 | Stage 1 | [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (Tiny Aya 3.35B on two CPU cores; any username, no password) · [model](https://huggingface.co/twoeyedravens/aemon) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon) · [paper](docs/PAPER.pdf) · [article](https://huggingface.co/blog/HatemSaadallah/aemon) · browsable runs of the [first](docs/replays/final/README.md) and [second](docs/replays/test2/README.md) tests |
 
 **Stage 2: Aya Expanse 8B, test set 3 run once (twelve new companies, two judges)**
@@ -36,18 +36,88 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 
 - **Replicated:** on development the gain holds at three training seeds (+0.72, +0.88, +0.77); general ability is
   unchanged (MMLU and ARC, +0.6 points).
-- **Negative results, reported:** three ways of adding data (rule-built recovery rows, teacher corrections of the
-  student's own failures, rebalancing toward rare skills) each looked good or neutral at one seed and did not hold
-  over three; rebalancing made the agent loop. Single-seed gains in agent fine-tuning should not be trusted.
+- **Negative results, reported:** two kinds of added data (rule-built recovery rows, teacher corrections of the
+  student's own failure states) each gained at training seed 7 and did not hold over three seeds; rebalancing the
+  teacher's rows toward rare skills made the agent loop at two of three seeds. Single-seed gains in agent fine-tuning
+  should not be trusted.
 - **Against the Stage 1 system (Tiny Aya 3.35B, two adapters):** the 8B is ahead by only +0.12 [0.05, 0.20], near
-  zero at four of twelve companies, and finishes as often (81 against 82). The larger model is not where the gain
-  comes from; the fine-tuning and the guards are.
+  zero at four of twelve companies, and finishes as often (81 against 82). Against a fine-tuned 3.35B system with the
+  same guards, the larger model adds little; most of the gain comes from fine-tuning and the guards.
 - **Against a closed model:** in Stage 1, Claude Haiku 5.5 through the same environment scored higher than our system
   (2.28 against 1.62) at a quarter of the cost; it was not run on test set 3. What aemon offers instead is an open
   model (CC-BY-NC 4.0, non-commercial) that runs offline, with the case data kept on the machine and weights that can
   be audited.
 
+**A judge's 60-second view (Stage 2)**
+1. Open the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b), pick a company and start an
+   investigation; every tool call shows as it happens, including what the environment refused and why.
+2. Read the paper's abstract and Table 2 ([PDF](docs/stage2/PAPER_STAGE2.pdf)): the test set 3 result with both judges.
+3. Browse test set 3 in the [dataset viewer](https://huggingface.co/datasets/twoeyedravens/aemon-8b): the answer key,
+   the blind packets each judge saw, and both judges' scores.
+
+## Stage 2 in detail
+
+**Problem and approach.** Stage 1 distilled a strategy-investigation procedure from Command A+ into Tiny Aya 3.35B.
+Stage 2 asks two questions with a larger Cohere student, Aya Expanse 8B: does fine-tuning on the teacher's
+trajectories still help a stronger model on companies it has never seen, and which parts of the agent (the trained
+weights, the decoding guards, the kinds of training data) actually earn their place. Every rule was registered in
+[docs/DECISIONS.md](docs/DECISIONS.md) before its result; the paper is
+[docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf).
+
+**How AgentTune and AuditKIT were used.** AgentTune 1.1.3's distillation trainer (`create_distill_trainer`) trained
+every Stage 2 adapter, with Unsloth building the model (4.3 times faster per step than our earlier trainer in a matched
+test). AuditKIT 1.1.3 replays every recorded investigation through the guarded tools and scores its calls; all three
+test set 3 arms passed. For eleven development reports the audit was skipped at run time (one account's evaluation
+environment lacked AgentTune, which AuditKIT's replay imports); those audits were run afterwards on the saved
+trajectories, with zero replay mismatches, and every evaluation job now stops if either package is missing.
+
+**Model and training.** Aya Expanse 8B (CohereLabs, revision `5062468b`, CC-BY-NC-4.0). LoRA rank 16, alpha 32, on all
+seven linear projections; two epochs, 1,971 steps, learning rate 1e-4, loss on the target tool call only. Data: 3,891
+replay-exact Command A+ rows from 158 investigations on 57 training companies plus 51 correction rows (3,942 in all),
+the same teacher data as Stage 1; about 4.3 hours on one A100 slice. The tested adapter is A at training seed 7, fixed
+before test set 3 (seed 7 is the reference seed of every design step, not the best one).
+
+**Data and cases.** Development: 15 cases of six validation companies, 3 attempts each. Test set 3: twelve companies
+never used before (Biesse, Brembo, Eberspächer, Gühring, Kardex, Krones, Lapp, MULTIVAC, Nabtesco, Rieter, Sika,
+Tomra), seven of them drawn by a committed rule; 230 records verified against their live pages; four cases per company,
+including a pair of simulated tests whose outcomes support or undermine one theory; frozen by digest before any result
+of the fine-tuned 8B was opened. 48 cases x 2 attempts = 96 runs per arm.
+
+**Evaluation.** Two blind LLM judges, Codex (`gpt-6-sol`, codex-cli 0.170.0) and Claude Code (`claude-opus-5-5`), score
+every run on a nine-dimension 0–3 rubric; the primary reading is the mean of the two judges with a t-interval over the
+twelve companies. They agree in sign on every comparison; Claude Code scores about 0.45 lower on every arm, and within
+an arm they agree only weakly on which run is better, so we read differences between arms, never single runs.
+
+**Artifacts.** Model: [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) (`aemon-8b-adapter.gguf`,
+the adapter as served in every evaluation, and `peft/`). Data:
+[datasets/twoeyedravens/aemon-8b](https://huggingface.co/datasets/twoeyedravens/aemon-8b): every development screen,
+blind packet, judgment and answer key; test set 3's frozen cases and dossiers, the three arms' runs, both judges'
+predictions and the analysis (`test3/`).
+
+**Run the Stage 2 agent locally** (one GPU with about 12 GB; the demo serves the base at 8 bits, the evaluated runs used
+bf16):
+
+```bash
+hf download bartowski/aya-expanse-8b-GGUF aya-expanse-8b-Q8_0.gguf --local-dir models
+hf download twoeyedravens/aemon-8b aemon-8b-adapter.gguf --local-dir app/adapters
+llama-server -m models/aya-expanse-8b-Q8_0.gguf --lora app/adapters/aemon-8b-adapter.gguf --lora-init-without-apply \
+  -ngl 99 -c 16384 --parallel 2 --jinja --port 8091 &
+LIVE_MODEL=aemon8b ./app/run.sh
+```
+
+**Reproduce the numbers.** `scripts/test3/analyze.py` recomputes test set 3 from `experiments/test3/` (key and both
+judges' predictions); `scripts/paper/check_numbers.py` recomputes every development comparison printed in the paper.
+Training and evaluation jobs: `jobs/train_base.sbatch` and `jobs/screen_bases.sbatch` (paper, appendix "Reproducing").
+
+**Limits.** The judges are LLMs on a fixed rubric, and two small blind hand checks agreed with them on direction and
+ordering only. The test ran one trained adapter, so its interval covers companies and attempts; training-seed variation
+comes from development (three seeds). Every case is a strategy question about a business-to-business manufacturer.
+Aya Expanse is CC-BY-NC: research use, not a commercial product without Cohere's agreement.
+
 ## Stage 1
+
+The rest of this page is the Stage 1 write-up (Tiny Aya Global 3.35B), kept as submitted apart from links and the
+corrections marked; its numbered sections 1–9 describe Stage 1.
 
 > **Result, run once.** On four companies it never saw, with the same environment, tools, stage controller and
 > budgets for both arms, the fine-tuned Tiny Aya agent scored **1.48** against the best-prompted base model's **0.65**
@@ -77,7 +147,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |---|---|---|---|
 | **aemon-8b (Stage 2)** | one LoRA on Aya Expanse 8B (adapter A, training seed 7), distilled from Command A+, served with the same guards | `aemon-8b-adapter.gguf` on the [8B model page](https://huggingface.co/twoeyedravens/aemon-8b) (with the PEFT adapter); the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) runs it | +0.70 over the prompted 8B on test set 3, run once ([paper](docs/stage2/PAPER_STAGE2.pdf)) |
 | **Version 1** | the evaluated adapter: one LoRA on Tiny Aya Global, distilled from Command A+ | `tiny-aya-global-strategy-lora-bf16.gguf` on the [model page](https://huggingface.co/twoeyedravens/aemon) (with the PEFT adapter) | +0.83 and +0.52 on the two frozen tests, run once (section 7) |
-| **Final system** | what the app and the live demo run: version 1 gathers the evidence, version 3 (continued on a second teacher's runs) reasons, with decoding-time guards that remove failing actions | both adapters (`v3_adapter.gguf` added); `app/run_model.sh` serves them and `app/server.py` sets the guards ([Run it](#run-it)) | +1.02 and +1.11 over the base model on the same cases, measured after the tests (not held out) |
+| **Final system (Stage 1)** | what the Stage 1 app and its live demo run: version 1 gathers the evidence, version 3 (continued on a second teacher's runs) reasons, with decoding-time guards that remove failing actions | both adapters (`v3_adapter.gguf` added); `app/run_model.sh` serves them and `app/server.py` sets the guards ([Run it](#run-it)) | +1.02 and +1.11 over the base model on the same cases, measured after the tests (not held out) |
 | Experimental variants | adapter-switching rules, a company status check, a recovery controller, corrective distillation, a verification layer, grounded beliefs | runs and judgments under `experiments/` | [docs/FINAL_SYSTEM.md](docs/FINAL_SYSTEM.md); none is in the app |
 
 <picture>
@@ -101,7 +171,7 @@ cases** and in 44 of 47 paired runs (exact sign test, p = 2.5e-10); on the secon
 runs (`reports/judge/*/paired_counts.json`, mean of two judges).
 
 **In brief**
-- **What it is.** A small open-weights model (3.35B; CC-BY-NC 4.0, non-commercial) that runs a strategy investigation
+- **What it is.** In Stage 1, a small open-weights model (3.35B; CC-BY-NC 4.0, non-commercial) that runs a strategy investigation
   as an auditable procedure, locally: it frames the decision, states rival causal explanations, weighs evidence for and
   against each, designs a test with a decision rule, and recommends. The environment checks every step: a quote that
   is not word for word in its source is refused, rival explanations must differ, and a simulated result cannot stand
@@ -123,10 +193,11 @@ situations.
 
 ## The app
 
-Try it at the [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon), or run it yourself:
-`./app/run.sh` starts the interface at http://127.0.0.1:8000. Pick a company, ask a question, and watch the
-investigation step by step, then read the report, the reasoning map and the sources. By default it runs the
-two-adapter system with the loop guards and evidence first (section 7).
+Try it at the [Stage 2 live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) (the fine-tuned 8B) or the
+[Stage 1 one](https://huggingface.co/spaces/HatemSaadallah/aemon), or run it yourself: `./app/run.sh` starts the
+interface at http://127.0.0.1:8000. Pick a company, ask a question, and watch the investigation step by step, then read
+the report, the reasoning map and the sources. By default it runs the Stage 1 two-adapter system with the loop guards
+and evidence first (section 7); `LIVE_MODEL=aemon8b` runs the Stage 2 agent ([Stage 2 in detail](#stage-2-in-detail)).
 
 **What it is for.** A first pass that an analyst can check, not a verdict. Every claim in the report links to a
 quote that the environment verified word for word against its source; rival explanations are set side by side with
@@ -172,7 +243,7 @@ very likely, a signal within one run rather than a calibrated probability. The f
 **The setup.**
 - **An investigation environment** with twelve tools (`read_brief`, `frame_problem`, `search_evidence`, `read_source`,
   `add_theory`, `assess_evidence`, `challenge_theory`, `propose_test`, `decline_test`, `state_position`,
-  `revise_theory`, `finish`) over a dossier of public records (1,334 when version 1 was trained and first tested; 1,958 now). Quotes must match a source exactly; theories must
+  `revise_theory`, `finish`) over a dossier of public records (1,334 when version 1 was trained and first tested; 2,188 now, with test set 3's). Quotes must match a source exactly; theories must
   give distinct causal explanations; a simulated what-if result may change beliefs but cannot support a recommendation
   about real demand. Refused calls return the reason.
 - **A stage controller** that offers the tools of the current stage: brief, frame, read, theories, assessment,
@@ -226,7 +297,8 @@ CuratorKIT filters the rows.
 - **Dossier** (`data/dossier/evidence.json`): public records, each with its URL, date and an excerpt. Version 1 was
   trained and first tested on 1,334 of them (935 independent observations, such as standards, regulatory filings,
   studies and trade press; 399 company claims, kept apart so a theory cannot rest only on what a company says about
-  itself). With the second test's companies and the later training cases it now holds 1,958 (1,246 and 712). Records
+  itself). With the second test's companies and the later training cases it held 1,958 (1,246 and 712); Stage 2's test set 3
+  added 230 verified records, 2,188 in all. Records
   written after a decision date are flagged.
 - **Cases**: when version 1 was trained, 137 development cases on 64 companies, plus 16 held-out cases on 4 companies
   (207 development cases on 99 companies now, after the cases written for version 3). Each case is a company and a
@@ -279,7 +351,7 @@ Dataset: [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aem
 (in the same collection):
 - the training rows: 4,302 from the Command A+ teacher, 51 correction rows, and 3,611 (plus 262 for validation) from
   the DeepSeek V4-Pro teacher, each bound to its teacher episode;
-- the dossier in full (1,958 records, byte-identical to the one in this repository) and every case: 207 development,
+- the dossier in full as of Stage 1 (1,958 records; this repository's copy adds test set 3's 230) and every case: 207 development,
   16 final-test and 24 second-test cases, with both freeze files;
 - the second teacher's investigations (transcripts, provenance, request logs);
 - evaluation runs, blinded judge packets, judge outputs and reports for every campaign: development, both frozen
@@ -561,8 +633,8 @@ companies. What we already tried beyond the final system is in [docs/FINAL_SYSTE
 Team Two-eyed Ravens: Hatem Saadallah and Nour Jennane, Master's students in artificial intelligence and AI
 researchers.
 
-Built with AgentTune, AuditKIT and CuratorKIT (Lexsi Labs), Tiny Aya and Command A+ (Cohere), PEFT, TRL and llama.cpp,
-on NVIDIA A100 GPUs (40 GB and 80 GB slices, Slurm). Claude (Anthropic) and Codex (OpenAI) served as blind judges and as coding assistants.
+Built with AgentTune, AuditKIT and CuratorKIT (Lexsi Labs), Tiny Aya, Aya Expanse and Command A+ (Cohere), Unsloth, PEFT, TRL and llama.cpp,
+on NVIDIA A100 GPUs (40 GB and 80 GB slices, Slurm). Claude (Anthropic) and Codex (OpenAI) served as blind judges.
 
 ---
 
@@ -577,14 +649,14 @@ src/aemon/training/      AgentTune distillation training, the masking gate
 src/aemon/evaluation/    AuditKIT replay and diagnostics, the conversion gate, blind judging
 data/dossier/            the public-source dossier the agent searches and quotes
 app/                     the interface (FastAPI and React)
-deploy/                  the hosted demo (Modal) and the Hugging Face pages
+deploy/                  the demos (space8b: the Stage 2 GPU Space; space: Stage 1's) and the Hugging Face pages
 ops/                     MLflow tracking of runs, metrics and adapters
 tests/                   the test suites (./run_tests.sh)
 jobs/                    Slurm job scripts for every stage
 scripts/                 cluster helpers and the release builders (public repository, Hugging Face, replay pages)
 reports/                 every result: teacher runs, evaluations, judge packets, outputs and reports
-experiments/             the final system's campaigns: runs, packets, judgments and reports
-paper/                   the paper's LaTeX source (built to docs/PAPER.pdf)
+experiments/             campaigns: Stage 2's screens and test set 3 (screen/, test3/), Stage 1's final system
+paper/                   Stage 1's LaTeX source (docs/PAPER.pdf); Stage 2's is docs/stage2/latex/ (PAPER_STAGE2.pdf)
 docs/                    the decisions log, plans frozen before each test, model and dataset cards
 ```
 
@@ -663,4 +735,4 @@ the excerpt the agent quotes from.
 
 ## Licence
 
-Code: Apache 2.0. The adapter derives from Tiny Aya Global and is CC-BY-NC-4.0.
+Code: Apache 2.0. The adapters derive from Tiny Aya Global (Stage 1) and Aya Expanse 8B (Stage 2) and are CC-BY-NC-4.0.
