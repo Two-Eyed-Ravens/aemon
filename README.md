@@ -26,7 +26,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (every rule written down before its result) |
-| Stage 1 | [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (Tiny Aya 3.35B on two CPU cores; any username, no password) · [model](https://huggingface.co/twoeyedravens/aemon) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon) · [paper](docs/PAPER.pdf) · [article](https://huggingface.co/blog/HatemSaadallah/aemon) · [demo video](https://youtu.be/Uow3miSSIIY) · browsable runs of the [first](docs/replays/final/README.md) and [second](docs/replays/test2/README.md) tests |
+| Stage 1 | [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (Tiny Aya 3.35B on two CPU cores; any username, no password) · [model](https://huggingface.co/twoeyedravens/aemon) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon) · [paper](docs/PAPER.pdf) · [article](https://huggingface.co/blog/HatemSaadallah/aemon) · browsable runs of the [first](docs/replays/final/README.md) and [second](docs/replays/test2/README.md) tests |
 
 **Stage 2: Aya Expanse 8B, test set 3 run once (twelve new companies, two judges)**
 
@@ -58,13 +58,6 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **Afterwards.** The final system, built after both tests by adding a second adapter and decoding-time guards, so its
 > numbers are not held out, scores **+1.02** and **+1.11** over the base model on the same cases and finishes **46 of
 > 48** and **65 of 72** investigations (the base model 4 and 2).
-
-<a href="https://youtu.be/Uow3miSSIIY">
-  <img alt="Watch the Stage 1 demo" src="https://img.youtube.com/vi/Uow3miSSIIY/maxresdefault.jpg" width="560">
-</a>
-
-The Stage 1 video shows aemon at work: its agentic investigations, the interactive reasoning map, and the research
-behind them.
 
 **Stage 1: version 1, frozen tests run once**
 
