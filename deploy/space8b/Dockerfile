@@ -7,21 +7,17 @@ RUN npm ci --no-audit --no-fund
 COPY app/web ./
 RUN npm run build
 
-# llama.cpp b12032, the release every evaluated run used, compiled for the L4 (compute capability 8.9); two compile
-# jobs, since eight ran the build machine out of memory (exit 137)
-FROM nvidia/cuda:12.6.3-devel-ubuntu24.04 AS llama
-RUN apt-get update && apt-get install -y --no-install-recommends git cmake build-essential ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-RUN git clone --depth 1 --branch b12032 https://github.com/ggml-org/llama.cpp /src \
-    && cmake -S /src -B /build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=89 -DBUILD_SHARED_LIBS=OFF -DLLAMA_CURL=OFF -DLLAMA_BUILD_UI=OFF -DLLAMA_USE_PREBUILT_UI=OFF \
-       -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release \
-    && cmake --build /build --target llama-server -j 2
+# llama.cpp's official prebuilt CUDA server (llama-server plus its shared libraries in /app), pinned by digest. Compiling
+# it in the Space ran the builder out of memory or past its 30-minute limit, and the one binary that did build never
+# began serving. The evaluated runs used release b12032; this demo uses a newer llama.cpp with the same model and adapter.
+FROM ghcr.io/ggml-org/llama.cpp:server-cuda@sha256:f46a7938f84a62f7c2eba2dfc985d921cb54fb3ec7b4e729cec2cee2cbace609 AS llama
 
-FROM nvidia/cuda:12.6.3-runtime-ubuntu24.04
+FROM nvidia/cuda:12.8.1-runtime-ubuntu24.04
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv ca-certificates curl libgomp1 \
     && rm -rf /var/lib/apt/lists/*
-COPY --from=llama /build/bin/llama-server /opt/llama/llama-server
+COPY --from=llama /app/ /opt/llama/
+ENV LD_LIBRARY_PATH=/opt/llama:/usr/local/nvidia/lib64:/usr/local/nvidia/lib
 COPY app/requirements-app.txt /tmp/requirements-app.txt
 RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements-app.txt huggingface_hub==1.33.0
 # Aya Expanse 8B (CohereLabs, CC-BY-NC 4.0) at 8 bits, a fixed revision of bartowski's conversion; the evaluated runs
