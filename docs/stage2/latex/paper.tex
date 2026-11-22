@@ -317,8 +317,9 @@ finished; at the median on-demand A100 price (\$1.76/h, a whole GPU) that is \$0
 times Claude Haiku 5.5 as measured (\$0.0084), with break-even near \$0.79 per GPU hour. Quantizing to 8 or 4 bits
 did not lower the finish rate; quality per precision was not judged. On test set 3, added after the three-arm result
 under a rule registered before its run, Haiku through the same environment scores 1.92 against A's 1.71: Haiku minus A
-is +0.20 [+0.05, +0.35] (Codex alone +0.12 [$-0.08$, +0.31]; 88 paired runs), a third of its Stage~1 lead
-($-0.67$), while A finishes more runs (81 of 96 against 70 of 91). The case for this agent is therefore not quality
+is +0.20 [+0.05, +0.35] (88 paired runs; +0.44 on shared stages), a third of its Stage~1 lead ($-0.67$), while A
+finishes more runs (81 of 96 against 70 of 91); Claude Code, of Haiku's model family, gives +0.30, Codex +0.12
+[$-0.08$, +0.31] (Table~\ref{tab:track3}). The case for this agent is therefore not quality
 or cost against a closed model: it is an open model that runs where the case data cannot leave, close behind, with a
 measured, reproducible gain from fine-tuning over its own base.
 
@@ -535,6 +536,24 @@ Tomra & +0.44 & $-$0.00 \\
 \bottomrule
 \end{tabular}
 \caption{Test set 3 by company: mean paired difference, mean of the two judges, 8 runs per arm and company.}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccc}
+\toprule
+Arm & Finished & Accepted & Calls & Seconds \\
+\midrule
+Prompted 8B & 2/96 & 79.8\% & 1,135 & 73 \\
+Stage~1 system & 82/96 & 91.2\% & 44 & 105 \\
+A (fine-tuned 8B) & 81/96 & 92.4\% & 44 & 125 \\
+Claude Haiku 5.5 & 70/91 & 87.2\% & 25 & 49 \\
+\bottomrule
+\end{tabular}
+\caption{Track 3 metrics on test set 3: task success; tool-call accuracy (accepted over all calls); calls per finished run; median model seconds per run (different hardware per arm, so rough).}
+\label{tab:track3}
 \end{table}
 
 \paragraph{Judge agreement on test set 3.} Over all 288 runs the two judges' scores have Spearman 0.78 (Stage~1's

@@ -1,0 +1,42 @@
+{
+ "Prompted Aya Expanse 8B": {
+  "runs": 96,
+  "finished": 2,
+  "task_success": 0.020833333333333332,
+  "calls": 2270,
+  "accepted": 1811,
+  "tool_call_accuracy": 0.7977973568281939,
+  "calls_per_finished_run": 1135.0,
+  "median_seconds_per_run": 73.17344489181414
+ },
+ "Stage 1 system (Tiny Aya 3.35B)": {
+  "runs": 96,
+  "finished": 82,
+  "task_success": 0.8541666666666666,
+  "calls": 3601,
+  "accepted": 3285,
+  "tool_call_accuracy": 0.9122465981671758,
+  "calls_per_finished_run": 43.91463414634146,
+  "median_seconds_per_run": 105.2889739095699
+ },
+ "Fine-tuned Aya Expanse 8B (A)": {
+  "runs": 96,
+  "finished": 81,
+  "task_success": 0.84375,
+  "calls": 3591,
+  "accepted": 3317,
+  "tool_call_accuracy": 0.92369813422445,
+  "calls_per_finished_run": 44.333333333333336,
+  "median_seconds_per_run": 124.7744315250311
+ },
+ "Claude Haiku 5.5": {
+  "runs": 91,
+  "finished": 70,
+  "task_success": 0.7692307692307693,
+  "calls": 1769,
+  "accepted": 1543,
+  "tool_call_accuracy": 0.8722442057659695,
+  "calls_per_finished_run": 25.271428571428572,
+  "median_seconds_per_run": 49.42697208415484
+ }
+}

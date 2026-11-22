@@ -22,8 +22,10 @@ COPY app/requirements-app.txt /tmp/requirements-app.txt
 RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements-app.txt huggingface_hub==1.33.0
 # Aya Expanse 8B (CohereLabs, CC-BY-NC 4.0) at 8 bits, a fixed revision of bartowski's conversion; the evaluated runs
 # used a bf16 conversion of the same weights, and the inference bench found 4-bit finished as many runs
-RUN /opt/venv/bin/python -c "from huggingface_hub import hf_hub_download; hf_hub_download('bartowski/aya-expanse-8b-GGUF', 'aya-expanse-8b-Q8_0.gguf', revision='f9d62ed0c58e6f2ae17975df990b1b8a4013b596', local_dir='/opt/model')" \
-    && rm -rf /opt/model/.cache
+# A plain streamed download, checked by sha256: the Hub client's transfer backend ran the builder out of memory (137)
+RUN mkdir -p /opt/model && curl -fsSL --retry 5 -o /opt/model/aya-expanse-8b-Q8_0.gguf \
+      https://huggingface.co/bartowski/aya-expanse-8b-GGUF/resolve/f9d62ed0c58e6f2ae17975df990b1b8a4013b596/aya-expanse-8b-Q8_0.gguf \
+    && echo "75e5bfef4bee065bf07903ad941cac35a2809ecd84baba098f5307645655c22d  /opt/model/aya-expanse-8b-Q8_0.gguf" | sha256sum -c -
 RUN id -u 1000 >/dev/null 2>&1 || useradd -m -u 1000 user
 WORKDIR /home/aemon
 COPY --chown=1000:1000 . .

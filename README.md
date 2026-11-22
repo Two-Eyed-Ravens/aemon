@@ -44,8 +44,10 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
   zero at four of twelve companies, and finishes as often (81 against 82). Against a fine-tuned 3.35B system with the
   same guards, the larger model adds little; most of the gain comes from fine-tuning and the guards.
 - **Against a closed model:** on test set 3, Claude Haiku 5.5 through the same environment scores 1.92 against the
-  fine-tuned 8B's 1.71: ahead by +0.20 [0.05, 0.35] (Codex alone +0.12, interval crossing zero), about a third of
-  the 0.67 it led by in Stage 1, at $0.008 per investigation; the 8B finishes more runs (81 of 96 against 70 of 91). What
+  fine-tuned 8B's 1.71: ahead by +0.20 [0.05, 0.35], about a third of the 0.67 it led by in Stage 1, at $0.008 per
+  investigation. On the stages both runs reach, Haiku leads by more, +0.44 [0.35, 0.54], so part of the 8B's catch-up
+  comes from finishing more runs (81 of 96 against 70 of 91). The judge from Haiku's own model family, Claude Code,
+  gives it +0.30; Codex, not judging its own family, +0.12, an interval that crosses zero. What
   aemon offers instead is an open model (CC-BY-NC 4.0, non-commercial) that runs offline, with the case data kept on
   the machine and weights that can be audited. This arm was added after the three-arm result, under a rule registered
   before its run.
@@ -89,6 +91,20 @@ of the fine-tuned 8B was opened. 48 cases x 2 attempts = 96 runs per arm.
 every run on a nine-dimension 0–3 rubric; the primary reading is the mean of the two judges with a t-interval over the
 twelve companies. They agree in sign on every comparison; Claude Code scores about 0.45 lower on every arm, and within
 an arm they agree only weakly on which run is better, so we read differences between arms, never single runs.
+
+**Track 3 metrics on test set 3** (`scripts/test3/track3_metrics.py`; Stage 1's definitions: task success = finished
+investigations, tool-call accuracy = accepted calls over all calls; latency = the model time each run recorded, on
+different hardware per arm, so rough):
+
+| Arm | Task success | Tool-call accuracy | Calls per finished run | Median model seconds per run |
+|---|---|---|---|---|
+| Prompted Aya Expanse 8B | 2 of 96 (2%) | 79.8% | 1,135 | 73 |
+| Stage 1 system (Tiny Aya 3.35B) | 82 of 96 (85%) | 91.2% | 44 | 105 |
+| **Fine-tuned Aya Expanse 8B (A)** | **81 of 96 (84%)** | **92.4%** | **44** | **125** |
+| Claude Haiku 5.5 | 70 of 91 (77%) | 87.2% | 25 | 49 |
+
+The fine-tuned 8B finishes more investigations than Haiku and with more of its calls accepted, while Haiku uses fewer
+calls per finished run and scores 0.20 higher on judged quality.
 
 **Artifacts.** Model: [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) (`aemon-8b-adapter.gguf`,
 the adapter as served in every evaluation, and `peft/`). Data:
