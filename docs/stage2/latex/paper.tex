@@ -26,19 +26,15 @@
 Asked whether a manufacturer should take its technology to a new kind of customer, language models write consulting
 prose; good strategy work instead frames the decision, states rival causal theories, weighs evidence for and against
 each, designs a test that separates them, and revises on new evidence. We distil that procedure from a Command~A+
-teacher into Aya Expanse 8B, trained with AgentTune and Unsloth inside an executable environment of twelve guarded
-tools, and measure what each part of the agent contributes. On development cases (one blind judge, 45 paired runs per
-arm), fine-tuning on an identical scaffold lifts the 8B from finishing 9\% of investigations to 87\% and raises judged
-quality by +0.72, +0.88 and +0.77 on a 0 to 3 rubric at three training seeds, every interval above zero, with general
-ability unchanged (+0.6 points on MMLU and ARC). The trained weights do not replace the harness around them: on the
-held-out test, removing the decoding guards costs $-0.48$ [$-0.65$, $-0.31$] at all twelve companies (finished runs
-81 to 34), and on development serving the base model for the late stages costs $-0.19$. Data changes matter less than expected or backfire: correction rows move a checkable error but not quality,
-rule-built recovery rows and teacher corrections of the student's own failure states each gained at one training seed and vanished over three (pooled +0.02 and $-0.03$), so
-single-seed gains in agent fine-tuning should not be trusted, and rebalancing the teacher's data toward rare skills makes the agent fragile, collapsing into loops at two of three
-training seeds ($-0.72$ [$-0.92$, $-0.50$] pooled). A decision model for one typed
-choice improves labels, not judged quality. On a fresh test set of twelve companies, run once and read by two judges,
-the fine-tuned 8B beats the same model prompted on the same scaffold by \textbf{+0.70 [0.61, 0.79]} (interval over
-companies), at all twelve companies, and finishes 81 of 96 investigations against 2.
+teacher into Aya Expanse 8B with AgentTune and Unsloth, inside an executable environment of twelve guarded tools. On a
+fresh test set of twelve companies, run once and read by two blind judges, the fine-tuned 8B beats the same model
+prompted on the same scaffold by \textbf{+0.70 [0.61, 0.79]} on a 0 to 3 rubric (interval over companies), at all
+twelve companies, finishing 81 of 96 investigations against 2, and by +0.55 on the stages both reach. The trained
+weights and the harness need each other: on the same companies, removing the decoding guards costs $-0.48$ [$-0.65$,
+$-0.31$], again at all twelve. On development the gain replicates at three training seeds (+0.72, +0.88, +0.77) with
+general ability unchanged, while data changes matter less than expected or backfire: rule-built recovery rows and
+teacher corrections of the student's own failures each gained at one seed and vanished over three, and rebalancing
+the data toward rare skills makes the agent loop. Single-seed gains in agent fine-tuning should not be trusted.
 \end{abstract}
 
 \section{Introduction}
@@ -314,7 +310,7 @@ finished), and A without guards is still above the prompted 8B with them, +0.22 
 
 Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Served at 4 bits on one 40 GB
 slice, it runs 93.8 investigations per GPU hour, \$0.019 each at \$1.76 per A100 hour, about 2.2 times Claude Haiku
-5.5 (\$0.0084). On test set 3, added after the three-arm result
+5.5 (\$0.0084); every quality number here is at bf16, and quality at 4 bits was not judged. On test set 3, added after the three-arm result
 under a rule registered before its run, Haiku (Stage~1's staged prompt, no guards) scores 1.92 against A's 1.71:
 Haiku minus A is +0.20 [+0.05, +0.35] as registered (Claude Code, of Haiku's family, +0.30; Codex +0.12). 11 of its 91
 runs ended on API refusals; without them, post hoc, it is +0.42 [+0.32, +0.52] (Table~\ref{tab:track3}). The case for this agent is an open model that runs where
@@ -492,6 +488,39 @@ SEED, UNSLOTH=1). Evaluate: \texttt{sbatch jobs/screen\_bases.sbatch} (ADAPTER, 
 registered rule: \texttt{docs/DECISIONS.md}. Every printed number: \texttt{scripts/paper/check\_numbers.py};
 test set 3: \texttt{scripts/test3/analyze.py} on \texttt{experiments/test3/}.
 
+\section{The rubric and the guards}
+\label{app:instrument}
+
+\begin{table*}[h]
+\centering
+\small
+\begin{tabular}{p{3.0cm}p{12.1cm}}
+\toprule
+Rubric dimension (0--3) & What a 3 requires \\
+\midrule
+Problem framing & Separates the objective from the suggested solution, and finds an option or constraint a good analyst would not miss \\
+Causal mechanism & Traces the full chain from who changes behaviour, and why, to the value this manufacturer captures \\
+Distinct theories & Rival explanations that imply different products, customers or channels \\
+Assumptions and predictions & Observable predictions that would put the theory in trouble if they failed \\
+Evidence judgement & Separates company assertions, observations, studies and analogies, and says what each key source cannot establish \\
+Seeking challenge & Genuinely searches against the favoured theory and reports fairly what it found \\
+Experiment design & A feasible test, with a valid measure and enough cases, that separates the theories and would change the decision \\
+Revision & Changes the affected theory with a reason, traces what changes for the recommendation, does not overreact \\
+Recommendation & Follows from the evidence with stated uncertainty, commits to a next action and says what would reverse it \\
+\midrule
+Guard & What it does at decoding time \\
+\midrule
+\texttt{no\_repeats} & For each theory, offers only the sources not yet weighed for it \\
+\texttt{quote\_menu} & A quote must be chosen from the source's own sentences \\
+\texttt{resample\_repeats} & A call refused as an exact repeat is redrawn (temperature 0.8, new seed) up to three times; the refusals stay on the record \\
+\texttt{budget} & When the remaining turns are tight, a budget note, and optional exploration is withdrawn \\
+\texttt{grounded\_beliefs} & ``Likely'' is offered only for a theory supported by a weighed real (not simulated) source \\
+\texttt{evidence\_first} & Asks for the quote and what it does not show before the evidence kind; a company's own claim is offered only as a company assertion \\
+\bottomrule
+\end{tabular}
+\caption{The judges' nine rubric dimensions (each 0 to 3; a run's score is the mean of its judged dimensions) and the six decoding guards. No guard writes to the record, invents evidence or chooses a recommendation; every refusal stays on the record.}
+\end{table*}
+
 \section{Per-seed and per-company results}
 \label{app:detail}
 
@@ -557,6 +586,11 @@ Claude Haiku 5.5 & 70/91 & 87.2\% & 25 & 49 \\
 has 81 distinct, the Stage~1 system 88, the prompted 8B 54. Identical runs share one blind packet and one judgment;
 intervals are over the twelve companies, so repeats do not narrow them. All 15 of A's unfinished runs end on the same
 refusal: \texttt{finish} citing a simulated result as evidence.
+
+\paragraph{What one development judge can resolve.} Between similar agents the judges disagree on single runs, so
+development differences of about 0.1 between two fine-tuned agents, read by one judge, are \emph{no detectable gain}
+rather than \emph{no effect}: the pooled data conditions (+0.02 and $-0.03$) are of this kind, while fine-tuning
+(+0.79) and the guards ($-0.48$ held out) are far larger.
 
 \paragraph{Judge agreement on test set 3.} Over all 288 runs the two judges' scores have Spearman 0.78 (Stage~1's
 tests, with a different Codex model: 0.94 and 0.95) and differ by 0.45 per run on average. Most of that difference is a level offset: Claude Code

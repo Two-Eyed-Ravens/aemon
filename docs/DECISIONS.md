@@ -3527,3 +3527,18 @@ guards 1.23, prompted 8B 1.01, Stage 1 system 1.58.
 Shared stages: +0.11 [+0.02, +0.20] and +0.56. Reading under the registered rule: the interval of A minus A without
 guards is above zero, so the complements claim holds on held-out data: the guards add +0.48 to the fine-tuned model
 (finished 81 against 34), and the fine-tuned weights without guards are still above the prompted model with guards.
+
+**Test set 3: two more prompted-8B arms (Hatem, 23 November ~11:50; registered before their runs; added after the
+main result, reported as such and leaving it unchanged).** An outside review asked for the complete weights-and-guards
+grid on one scaffold, held out, and for the best-prompt baseline on test set 3. Both run exactly as the prompted arm
+(code 49fe311, `jobs/screen_bases.sbatch`, the same bf16 base, no adapter, context 8192, `SPLIT=heldout3`, 48 cases x 2
+attempts):
+- **prompted 8B, compact prompt, no guards** (`PROMPT=compact ARMS=none`): with A, A without guards and the prompted 8B
+  with guards it completes the 2x2 on the compact scaffold.
+- **prompted 8B, staged prompt with guards** (`PROMPT=staged ARMS=guards`): its best development configuration (27 of 45
+  finished; the +0.60 baseline).
+Judged blind by both judges as for the earlier added arms (existing judgments reused by packet id; a failed answer
+re-judged once); `scripts/test3/analyze.py` unchanged with A minus each new arm, and A-without-guards minus
+prompted-compact-without-guards (does the fine-tuned model need fewer guards than the base?). Jobs are submitted with
+5-hour limits because the queue estimates a start after the deadline; if they have not finished in time for the
+submission they are reported later, not partially.
