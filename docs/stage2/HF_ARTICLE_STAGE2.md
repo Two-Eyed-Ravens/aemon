@@ -6,7 +6,7 @@
 
 Team Two-Eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning), Stage 2 · November 2026
 
-> **Two stages, one project.** The Lexsi hackathon ran in two rounds. In **Stage 1** (1–15 November) we built aemon: an agent that investigates a strategy question through twelve guarded tools over verified dossiers of real manufacturers, distilled from a teacher (Command A+) into a small open student, Tiny Aya 3.35B, with AgentTune. It beat its prompted base by +0.83 and +0.52 on two frozen tests, and we were shortlisted as one of 20 finalists ([Stage 1 article](https://huggingface.co/blog/HatemSaadallah/aemon)). **Stage 2** (19–24 November), this article, moves the student to Aya Expanse 8B, tests it on twelve companies it has never seen, and measures which parts of the agent earn their place.
+> **Two stages, one project.** The Lexsi hackathon ran in two rounds. In **Stage 1** (1–15 November) we built aemon: an agent that investigates a strategy question through twelve guarded tools over verified dossiers of real manufacturers, distilled from a teacher (Command A+) into a small open student, Tiny Aya 3.35B, with AgentTune. It beat its prompted base by +0.83 and +0.52 on two frozen tests ([Stage 1 article](https://huggingface.co/blog/HatemSaadallah/aemon)). **Stage 2** (19–24 November), this article, moves the student to Aya Expanse 8B, tests it on twelve companies it has never seen, and measures which parts of the agent earn their place.
 
 **One-line claim.** Distilling a teacher's investigations into Aya Expanse 8B with AgentTune makes it a far better strategy investigator on twelve companies it has never seen, **+0.70 [0.61, 0.79]** in blind quality over the same model prompted with the same tools, at all twelve, and the fine-tuned weights still need the harness around them: each part adds to the other.
 
@@ -156,7 +156,7 @@ The judges are LLMs on a fixed rubric, and two small blind hand checks agreed wi
 
 ## 8. With more credits
 
-We used the finalist Hugging Face credits to host the 8B agent as a live GPU demo. With more compute we would:
+We used Hugging Face credits to host the 8B agent as a live GPU demo. With more compute we would:
 
 - **Run iterative teacher corrections of the student's own failure states**, judged at three seeds from the start, since one round gained only at seed 7.
 - **Train with reinforcement learning** once a step reward passes its registered agreement test with the judges; our first one did not.

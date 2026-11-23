@@ -17,7 +17,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **Stage 1** (1–15 November): we built aemon, an agent that investigates a strategy question the way a careful
 > analyst would, through twelve guarded tools over verified dossiers of real manufacturers. A teacher model (Command
 > A+) ran investigations; we distilled them into a small open student, Tiny Aya 3.35B, with AgentTune. On two frozen
-> tests it beat its prompted base by +0.83 and +0.52, and we were shortlisted as one of 20 finalists.
+> tests it beat its prompted base by +0.83 and +0.52.
 > **Stage 2** (19–24 November, this page's headline): we moved the student to a stronger Cohere model, Aya Expanse
 > 8B, built a fresh test of twelve unseen companies, and measured which parts of the agent earn their place.
 
