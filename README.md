@@ -11,7 +11,7 @@
 never seen, it beats the same model prompted by +0.70 at every company, and the fine-tuned weights and the harness's
 guards turn out to need each other.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026 ·
-**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [14-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/aemon-v2)**
+**Video: [watch the presentation](https://youtu.be/ChovfdwBemo) · Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [14-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/aemon-v2)**
 
 > **Two stages, one project.** The Lexsi hackathon ran in two rounds.
 > **Stage 1** (1–15 November): we built aemon, an agent that investigates a strategy question the way a careful
@@ -27,12 +27,17 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > investigations against **2**, with **92%** of its tool calls accepted against 80%. And its guards matter: on the same
 > twelve companies, removing them costs **−0.48** [0.31, 0.65] at every company.
 
+<a href="https://youtu.be/ChovfdwBemo"><img alt="Watch the aemon presentation video" src="https://img.youtube.com/vi/ChovfdwBemo/maxresdefault.jpg" width="720"></a>
+
+*The presentation video: [watch it on YouTube](https://youtu.be/ChovfdwBemo).*
+
 <a href="docs/stage2/SLIDES_STAGE2.pdf"><img alt="Stage 2 slides: fine-tuning holds on unseen companies, +0.70 blind quality, 12 of 12 companies, 81 of 96 investigations finished" src="docs/stage2/figures/slides_preview.png" width="720"></a>
 
 *The Stage 2 slides: [open the full deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf).*
 
 | | |
 |---|---|
+| **Video** | **[youtu.be/ChovfdwBemo](https://youtu.be/ChovfdwBemo)** (the presentation) |
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
 | Article (Stage 2) | [huggingface.co/blog/HatemSaadallah/aemon-v2](https://huggingface.co/blog/HatemSaadallah/aemon-v2) |
