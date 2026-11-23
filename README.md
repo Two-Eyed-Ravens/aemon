@@ -11,7 +11,7 @@
 never seen, it beats the same model prompted by +0.70 at every company, and the fine-tuned weights and the harness's
 guards turn out to need each other.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026 ·
-**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [13-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/weights-and-harness-are-complements-aemon-8b-a-str)**
+**Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [13-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/aemon-v2)**
 
 > **Two stages, one project.** The Lexsi hackathon ran in two rounds.
 > **Stage 1** (1–15 November): we built aemon, an agent that investigates a strategy question the way a careful
@@ -35,7 +35,7 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 |---|---|
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
-| Article (Stage 2) | [huggingface.co/blog/HatemSaadallah/weights-and-harness-are-complements-aemon-8b-a-str](https://huggingface.co/blog/HatemSaadallah/weights-and-harness-are-complements-aemon-8b-a-str) |
+| Article (Stage 2) | [huggingface.co/blog/HatemSaadallah/aemon-v2](https://huggingface.co/blog/HatemSaadallah/aemon-v2) |
 | Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (13 slides, clickable links) |
 | Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
 | Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
