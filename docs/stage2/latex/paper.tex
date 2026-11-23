@@ -30,9 +30,9 @@ teacher into Aya Expanse 8B, trained with AgentTune and Unsloth inside an execut
 tools, and measure what each part of the agent contributes. On development cases (one blind judge, 45 paired runs per
 arm), fine-tuning on an identical scaffold lifts the 8B from finishing 9\% of investigations to 87\% and raises judged
 quality by +0.72, +0.88 and +0.77 on a 0 to 3 rubric at three training seeds, every interval above zero, with general
-ability unchanged (+0.6 points on MMLU and ARC). The trained weights do not replace the harness around them: removing
-the decoding guards costs $-0.43$ and half the finished runs, and serving the base model for the late stages costs
-$-0.19$. Data changes matter less than expected or backfire: correction rows move a checkable error but not quality,
+ability unchanged (+0.6 points on MMLU and ARC). The trained weights do not replace the harness around them: on the
+held-out test, removing the decoding guards costs $-0.48$ [$-0.65$, $-0.31$] at all twelve companies (finished runs
+81 to 34), and on development serving the base model for the late stages costs $-0.19$. Data changes matter less than expected or backfire: correction rows move a checkable error but not quality,
 rule-built recovery rows and teacher corrections of the student's own failure states each gained at one training seed and vanished over three (pooled +0.02 and $-0.03$), so
 single-seed gains in agent fine-tuning should not be trusted, and rebalancing the teacher's data toward rare skills makes the agent fragile, collapsing into loops at two of three
 training seeds ($-0.72$ [$-0.92$, $-0.50$] pooled). A decision model for one typed
@@ -306,20 +306,19 @@ Stage~1 & +0.12 [.05, .20] & +0.19 & +0.06 \\
 
 Fine-tuning holds on unseen companies: A is above the prompted 8B at all twelve, about as much as on development,
 and by +0.55 [+0.44, +0.66] on shared stages only. Against the Stage~1 system the gain is small but
-clear of zero, at ten of twelve companies.
+clear of zero, at ten of twelve companies. A fifth arm, A without guards (registered before its run), shows the
+complements on held-out data: the guards add +0.48 [+0.31, +0.65] (both judges, all twelve companies; 81 against 34
+finished), and A without guards is still above the prompted 8B with them, +0.22 [+0.01, +0.43].
 
 \subsection{Cost}
 
-Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Serving the merged adapter on one 40 GB slice,
-the best setting (4-bit weights, 8 investigations at once) runs 93.8 investigations per GPU hour with 39 of 45
-finished; at the median on-demand A100 price (\$1.76/h, a whole GPU) that is \$0.019 per investigation, about 2.2
-times Claude Haiku 5.5 as measured (\$0.0084), with break-even near \$0.79 per GPU hour. Quantizing to 8 or 4 bits
-did not lower the finish rate; quality per precision was not judged. On test set 3, added after the three-arm result
+Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Served at 4 bits on one 40 GB
+slice, it runs 93.8 investigations per GPU hour, \$0.019 each at \$1.76 per A100 hour, about 2.2 times Claude Haiku
+5.5 (\$0.0084). On test set 3, added after the three-arm result
 under a rule registered before its run, Haiku (Stage~1's staged prompt, no guards) scores 1.92 against A's 1.71:
 Haiku minus A is +0.20 [+0.05, +0.35] as registered (Claude Code, of Haiku's family, +0.30; Codex +0.12). 11 of its 91
-runs ended on API refusals; without them, post hoc, it is +0.42 [+0.32, +0.52] (Table~\ref{tab:track3}). The case for this agent is therefore not quality
-or cost against a closed model: it is an open model that runs where the case data cannot leave, close behind, with a
-measured, reproducible gain from fine-tuning over its own base.
+runs ended on API refusals; without them, post hoc, it is +0.42 [+0.32, +0.52] (Table~\ref{tab:track3}). The case for this agent is an open model that runs where
+the case data cannot leave, with a measured, reproducible gain from fine-tuning over its own base.
 
 \section{Analysis and limits}
 \label{sec:analysis}
@@ -364,8 +363,8 @@ outcomes.
 
 On development, under the same investigation scaffold, fine-tuning Aya Expanse 8B on teacher trajectories improves
 investigation quality across training seeds, and on twelve unseen companies it holds: +0.70 [0.61, 0.79] over the
-prompted model, with two judges agreeing. The additional data components have not shown a reliable quality benefit;
-the guards and the fine-tuned weights are both needed.
+prompted model, with two judges agreeing. On the same companies the guards add +0.48 to the
+fine-tuned model: the guards and the fine-tuned weights are both needed.
 
 We build on tool-using agents \citep{yao2023react,schick2023toolformer}, fine-tuning on stronger models' trajectories
 \citep{chen2023fireact,zeng2023agenttuning}, distillation \citep{hinton2015distilling} at the level of tool calls with

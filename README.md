@@ -24,7 +24,8 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **Stage 2 result, run once.** Fine-tuned on a teacher's investigations, Aya Expanse 8B scores **1.71** against
 > **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric, mean of two LLM
 > judges): **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It finishes **81 of 96**
-> investigations against **2**, with **92%** of its tool calls accepted against 80%.
+> investigations against **2**, with **92%** of its tool calls accepted against 80%. And its guards matter: on the same
+> twelve companies, removing them costs **−0.48** [0.31, 0.65] at every company.
 
 <a href="docs/stage2/SLIDES_STAGE2.pdf"><img alt="Stage 2 slides: fine-tuning holds on unseen companies, +0.70 blind quality, 12 of 12 companies, 81 of 96 investigations finished" src="docs/stage2/figures/slides_preview.png" width="720"></a>
 
@@ -48,8 +49,10 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 
 - **It replicates.** On development the gain holds at all three training seeds (+0.72, +0.88, +0.77; **+0.79 [0.70,
   0.88]** pooled), and general ability is unchanged (MMLU and ARC, +0.6 points).
-- **Weights and guards need each other.** On development (45 runs per cell, seed 7, one judge), each model under its
-  best prompt finishes:
+- **Weights and guards need each other, on held-out companies.** On test set 3, removing the guards from the
+  fine-tuned 8B costs **−0.48 [0.31, 0.65]**, lower at all twelve companies under both judges, and finished runs fall
+  from 81 to 34; without guards it still beats the prompted 8B with them (+0.22 [0.01, 0.43]). On development (45 runs
+  per cell, seed 7, one judge), each model under its best prompt finishes:
 
   | | No guards | Six guards |
   |---|---|---|

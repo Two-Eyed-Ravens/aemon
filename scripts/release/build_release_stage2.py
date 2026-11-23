@@ -83,6 +83,10 @@ def test3_items() -> list[Item]:
     )
     items += [Item(haiku / name, f'test3/haiku/{name}') for name in names]
     items += [Item(p, f'test3/haiku/judging/{p.name}') for p in sorted((haiku / 'judging').glob('*.jsonl'))]
+    noguards = run / 'noguards'
+    names = ('test3-A-noguards_none.json', 'packets.jsonl', 'test3_noguards_key.jsonl', 'report.json', 'run_after.sh')
+    items += [Item(noguards / name, f'test3/noguards/{name}') for name in names]
+    items += [Item(p, f'test3/noguards/judging/{p.name}') for p in sorted((noguards / 'judging').glob('*.jsonl'))]
     dossier = REPO / 'data' / 'dossier'
     items.append(Item(dossier / 'cases_heldout3.json', 'test3/frozen/cases_heldout3.json'))
     items.append(Item(REPO / 'docs' / 'test3_freeze.json', 'test3/frozen/test3_freeze.json'))

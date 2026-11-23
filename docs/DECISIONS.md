@@ -3512,3 +3512,18 @@ Rule:
   A-without-guards minus the prompted 8B; mean of judges, company t-interval over 12 companies; finished runs
   reported. The complements claim holds on held-out data if A minus A-without-guards has its interval above zero;
   whatever it shows goes into the paper, README and slides.
+
+**TEST SET 3, GUARDS-OFF ARM RESULT (23 November 03:23; read as registered, `experiments/test3/noguards/run_after.sh`
+-> `scripts/test3/analyze.py`; `experiments/test3/noguards/report.json`).** A without guards, 96 runs (job 786573, code
+49fe311): 34 finished (57 stopped on repeated errors, 5 at the turn limit), 77.1% of calls accepted. 86 new packets,
+all judged validly by both judges at the first attempt; all 384 runs scored by both. Mean of judges: A 1.71, A without
+guards 1.23, prompted 8B 1.01, Stage 1 system 1.58.
+
+| Comparison | Mean of judges | Company t-interval (12) | Codex | Claude Code | Companies above 0 |
+|---|---|---|---|---|---|
+| A minus A without guards (primary of this addition) | +0.48 | [+0.31, +0.65] | +0.50 | +0.46 | 12 of 12 |
+| A without guards minus prompted 8B (with guards) | +0.22 | [+0.01, +0.43] | +0.29 | +0.15 | 10 of 12 |
+
+Shared stages: +0.11 [+0.02, +0.20] and +0.56. Reading under the registered rule: the interval of A minus A without
+guards is above zero, so the complements claim holds on held-out data: the guards add +0.48 to the fine-tuned model
+(finished 81 against 34), and the fine-tuned weights without guards are still above the prompted model with guards.

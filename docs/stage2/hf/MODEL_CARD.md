@@ -62,6 +62,8 @@ over the 12 companies.
   +0.61; +0.55 [+0.44, +0.66] on the rubric stages both reach.
 - Fine-tuned minus the Stage 1 system: +0.12 [+0.05, +0.20], higher at ten of twelve companies.
 - The two judges agree in sign on both comparisons (Spearman 0.78 between their run scores).
+- The guards matter on held-out data: without them this adapter scores 1.23 and finishes 34 of 96; with them, +0.48
+  [+0.31, +0.65] higher at all twelve companies.
 - Claude Haiku 5.5 (Stage 1's staged prompt, no guards) minus this adapter: +0.20 [+0.05, +0.35] as registered; 11 of
   its 91 runs ended on API refusals, and without them, post hoc, +0.42 [+0.32, +0.52]. $0.008 per investigation.
 

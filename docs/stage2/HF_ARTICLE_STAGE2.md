@@ -37,7 +37,7 @@ In Stage 1 we distilled that procedure into Tiny Aya Global (3.35B). In Stage 2 
 
 The answer to the first is yes, clearly. On development, fine-tuning lifts the 8B from finishing 9% of investigations to 87% and raises judged quality by +0.72, +0.88 and +0.77 at three training seeds, with general ability unchanged. On a fresh test set of twelve companies, run once, the fine-tuned 8B beats the same model prompted with an identical scaffold by +0.70 [0.61, 0.79] at every company.
 
-The answer to the second is that the trained weights and the guards need each other. Without guards, the fine-tuned model finishes fewer runs than the prompted one; with them it finishes 39 of 45 development runs and scores highest. Fine-tuning lifts the share of tool calls the environment accepts from 80% to 92%, and every remaining unfinished run fails at one precise check, which makes the next round of training a targeted one. Along the way, two data additions that looked like gains at one training seed vanished over three, so we replicate before we believe.
+The answer to the second is that the trained weights and the guards need each other, on held-out companies too: removing the guards from the fine-tuned 8B costs **−0.48 [0.31, 0.65]** on test set 3, lower at all twelve companies under both judges, with finished runs falling from 81 to 34. Fine-tuning lifts the share of tool calls the environment accepts from 80% to 92%, and every remaining unfinished run fails at one precise check, which makes the next round of training a targeted one. Along the way, two data additions that looked like gains at one training seed vanished over three, so we replicate before we believe.
 
 aemon-8b is fully open: the weights, every run and judgment, and the code. Against a closed model, Claude Haiku 5.5, it trails on judged quality (by +0.20 [0.05, 0.35] as registered; +0.42 post hoc without 11 Haiku runs that ended on API refusals), and its case is control: it runs where the case data cannot leave, and every call is checked and replayable.
 
@@ -106,7 +106,11 @@ Every rule (which configuration to test, how to read it, what counts as a gain) 
 - **Runs and packets**: decoding is greedy, so the second attempt often repeats the first (the fine-tuned 8B has 81 distinct runs of 96). Identical runs share one blind packet; intervals are over companies, so repeats do not narrow them.
 - Seconds are model time on different hardware per arm (A100 slices for the local models, Anthropic's API for Haiku), so latency is rough.
 
-### Why it works: weights and harness are complements (development, seed 7, one judge)
+### Why it works: weights and harness are complements
+
+**On test set 3** (registered before its run): the fine-tuned 8B without its guards scores 1.23 and finishes 34 of 96, against 1.71 and 81 of 96 with them. The guards add **+0.48 [0.31, 0.65]**, at all twelve companies, under both judges (Codex +0.50, Claude Code +0.46). Without guards it still beats the prompted 8B with them, +0.22 [0.01, 0.43].
+
+**On development** (seed 7, one judge):
 
 Each model under its best prompt, with and without the six guards (finished of 45, judged score):
 

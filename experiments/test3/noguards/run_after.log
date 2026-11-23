@@ -1,0 +1,6 @@
+03:11 job done
+{"packets": 309, "runs": 384, "runs_by_arm": {"A": 96, "prompted": 96, "stage1": 96, "A_noguards": 96}}
+{"new_packets": 86}
+codexsol170: 86 valid first, 0 re-judged
+claudecode: 86 valid first, 0 re-judged
+03:23 report: experiments/test3/noguards/report.json
