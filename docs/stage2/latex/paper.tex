@@ -29,9 +29,10 @@ each, designs a test that separates them, and revises on new evidence. We distil
 teacher into Aya Expanse 8B with AgentTune and Unsloth, inside an executable environment of twelve guarded tools. On a
 fresh test set of twelve companies, run once and read by two blind judges, the fine-tuned 8B beats the same model
 prompted on the same scaffold by \textbf{+0.70 [0.61, 0.79]} on a 0 to 3 rubric (interval over companies), at all
-twelve companies, finishing 81 of 96 investigations against 2, and by +0.55 on the stages both reach. The trained
-weights and the harness need each other: on the same companies, removing the decoding guards costs $-0.48$ [$-0.65$,
-$-0.31$], again at all twelve. On development the gain replicates at three training seeds (+0.72, +0.88, +0.77) with
+twelve companies, finishing 81 of 96 investigations against 2; against the same model's best prompt it still leads
+by +0.54 [0.46, 0.62], again at all twelve. The trained
+weights and the harness need each other: on the same companies the decoding guards add +0.48 [0.31, 0.65] to the
+fine-tuned model, at all twelve, but only +0.14 to the prompted one. On development the gain replicates at three training seeds (+0.72, +0.88, +0.77) with
 general ability unchanged, while data changes matter less than expected or backfire: rule-built recovery rows and
 teacher corrections of the student's own failures each gained at one seed and vanished over three, and rebalancing
 the data toward rare skills makes the agent loop. Single-seed gains in agent fine-tuning should not be trusted.
@@ -302,9 +303,12 @@ Stage~1 & +0.12 [.05, .20] & +0.19 & +0.06 \\
 
 Fine-tuning holds on unseen companies: A is above the prompted 8B at all twelve, about as much as on development,
 and by +0.55 [+0.44, +0.66] on shared stages only. Against the Stage~1 system the gain is small but
-clear of zero, at ten of twelve companies. A fifth arm, A without guards (registered before its run), shows the
-complements on held-out data: the guards add +0.48 [+0.31, +0.65] (both judges, all twelve companies; 81 against 34
-finished), and A without guards is still above the prompted 8B with them, +0.22 [+0.01, +0.43].
+clear of zero, at ten of twelve companies. Two arms added afterwards, each registered before its run, complete
+a 2$\times$2 on the compact scaffold (Table~\ref{tab:grid}): the guards add +0.14 [+0.02, +0.25] to the prompted 8B
+but +0.48 [+0.31, +0.65] to A (all twelve companies; finished 34 to 81), and fine-tuning adds +0.36 [+0.16, +0.55]
+without guards but +0.70 with them. Each part makes the other worth more. Against the prompted 8B under its best prompt
+(staged, with guards; 1.17, 48 of 96 finished), A leads by +0.54 [+0.46, +0.62] at all twelve companies (Codex
++0.64, Claude Code +0.44).
 
 \subsection{Cost}
 
@@ -487,6 +491,29 @@ SEED, UNSLOTH=1). Evaluate: \texttt{sbatch jobs/screen\_bases.sbatch} (ADAPTER, 
 \texttt{scripts/paper/caution\_counts.py}, \texttt{scripts/paper/fig\_effects.py}. Decision log with every
 registered rule: \texttt{docs/DECISIONS.md}. Every printed number: \texttt{scripts/paper/check\_numbers.py};
 test set 3: \texttt{scripts/test3/analyze.py} on \texttt{experiments/test3/}.
+
+\section{Weights and guards on test set 3}
+\label{app:grid}
+
+\begin{table*}[h]
+\centering
+\small
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lccc}
+\toprule
+Test set 3 & No guards & Six guards & Guards add \\
+\midrule
+Prompted 8B & 0.87 (1) & 1.01 (2) & +0.14 [.02, .25] \\
+A, fine-tuned & 1.23 (34) & \textbf{1.71 (81)} & +0.48 [.31, .65] \\
+\midrule
+Fine-tuning adds & +0.36 [.16, .55] & +0.70 [.61, .79] & \\
+\bottomrule
+\end{tabular}
+\caption{The compact scaffold on the twelve held-out companies: mean of the two judges (finished runs of 96), with
+company $t$-intervals. The two left-hand arms and the prompted arm without guards were added after the main result,
+each registered before its run.}
+\label{tab:grid}
+\end{table*}
 
 \section{The rubric and the guards}
 \label{app:instrument}

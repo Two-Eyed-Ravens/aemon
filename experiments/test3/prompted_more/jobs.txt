@@ -1,0 +1,2 @@
+prompted compact no guards N 787455
+prompted staged guards H 787456

@@ -50,21 +50,21 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 
 - **It replicates.** On development the gain holds at all three training seeds (+0.72, +0.88, +0.77; **+0.79 [0.70,
   0.88]** pooled), and general ability is unchanged (MMLU and ARC, +0.6 points).
-- **Weights and guards need each other, on held-out companies.** On test set 3, removing the guards from the
-  fine-tuned 8B costs **−0.48 [0.31, 0.65]**, lower at all twelve companies under both judges, and finished runs fall
-  from 81 to 34; without guards it still beats the prompted 8B with them (+0.22 [0.01, 0.43]). On development (45 runs
-  per cell, seed 7, one judge), each model under its best prompt finishes:
+- **Weights and guards need each other, on held-out companies.** On test set 3, all on the same compact prompt (mean of
+  both judges; finished of 96):
 
-  | | No guards | Six guards |
-  |---|---|---|
-  | Prompted 8B | 32 of 45 (not judged) | 27 of 45 (score 1.41) |
-  | **Fine-tuned 8B** | 21 of 45 (1.57) | **39 of 45 (2.01)** |
+  | | No guards | Six guards | Guards add |
+  |---|---|---|---|
+  | Prompted 8B | 0.87 (1) | 1.01 (2) | +0.14 [0.02, 0.25] |
+  | **Fine-tuned 8B** | 1.23 (34) | **1.71 (81)** | **+0.48 [0.31, 0.65]** |
+  | Fine-tuning adds | +0.36 [0.16, 0.55] | **+0.70 [0.61, 0.79]** | |
 
-  Fine-tuning alone finishes fewer runs than prompting alone, and guards alone don't help; together they finish the
-  most and score highest. Within the guards, resampling a repeated call carries most of it (−0.49 without it), and
-  the fine-tuned weights matter in the late stages too (−0.19 with base weights there).
-- **A strong baseline.** Even against the 8B under its own best prompt, the fine-tuned agent leads by +0.60 [0.49,
-  0.70] on development, and still +0.55 on test set 3's stages both runs reach.
+  Each part makes the other worth more: the guards add three times as much to the fine-tuned model as to the prompted
+  one, and fine-tuning adds twice as much with the guards as without. Within the guards, resampling a repeated call
+  carries most of it (development, −0.49 without it).
+- **Against the strongest baseline.** Under its own best prompt (staged, with guards) the prompted 8B finishes 48 of
+  96 test set 3 investigations and scores 1.17; the fine-tuned agent still leads it by **+0.54 [0.46, 0.62]**, at all
+  twelve companies, under both judges (+0.51 on the stages both reach).
 - **Method over size.** Our Stage 1 system on a 3.35B model scores 1.58 on the same test (+0.12 [0.05, 0.20] to the
   8B), so most of the gain comes from fine-tuning and guards, not from the larger model.
 - **One precise failure left.** All 15 of the fine-tuned 8B's unfinished runs stop at the same check (a simulated

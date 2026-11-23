@@ -1,0 +1,6 @@
+14:10 P_compact_none job done
+{"packets": 268, "runs": 384, "runs_by_arm": {"A": 96, "prompted": 96, "A_noguards": 96, "P_compact_none": 96}}
+{"new_packets": 47}
+claudecode: 47 valid first, 0 re-judged
+codexsol170: 47 valid first, 0 re-judged
+14:16 report: experiments/test3/prompted_more/P_compact_none/report.json

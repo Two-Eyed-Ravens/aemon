@@ -3542,3 +3542,34 @@ re-judged once); `scripts/test3/analyze.py` unchanged with A minus each new arm,
 prompted-compact-without-guards (does the fine-tuned model need fewer guards than the base?). Jobs are submitted with
 5-hour limits because the queue estimates a start after the deadline; if they have not finished in time for the
 submission they are reported later, not partially.
+
+**TEST SET 3: PROMPTED 8B, COMPACT PROMPT, NO GUARDS (23 November 14:16; read as registered,
+`experiments/test3/prompted_more/run_after.sh` -> `scripts/test3/analyze.py`; `.../P_compact_none/report.json`).** Job
+787455: 1 of 96 finished (95 stopped on repeated errors), 72.7% of calls accepted. 47 new packets, all judged validly
+by both judges at the first attempt; every run scored by both. Mean of judges 0.87. The 2x2 on the compact scaffold,
+held out (mean of judges; finished of 96):
+
+| | No guards | Six guards | Guards add (company t-interval) |
+|---|---|---|---|
+| Prompted 8B | 0.87 (1) | 1.01 (2) | +0.14 [+0.02, +0.25], 8 of 12 companies |
+| Fine-tuned 8B (A) | 1.23 (34) | 1.71 (81) | +0.48 [+0.31, +0.65], 12 of 12 |
+| Fine-tuning adds | +0.36 [+0.16, +0.55], 11 of 12 | +0.70 [+0.61, +0.79], 12 of 12 | |
+
+A minus the prompted 8B without guards: +0.84 [+0.70, +0.98], 12 of 12. Reading: on held-out companies each part makes
+the other worth more: the guards add more to the fine-tuned model than to the prompted one, and fine-tuning adds more
+with the guards than without. The complements claim now rests on all four cells of one scaffold, held out.
+
+**Test set 3, staged-prompt arm: Claude Code judging repeated after a billing block (23 November ~18:10).** Every
+claudecode call on the arm's 62 new packets, first attempt and the registered re-judge, returned HTTP 403 ("can't use
+your Claude subscription, usually because a payment is past due") before any answer: no judgment was produced, so
+neither attempt counts. After Hatem paid, the 62 packets are judged again; the failed attempts are kept in
+`judge_results/test3_P_staged_guards/`. A preliminary Codex-only reading (A minus this arm +0.64 [+0.51, +0.77]) was
+computed while waiting and is not the registered result.
+
+**TEST SET 3: PROMPTED 8B, STAGED PROMPT WITH GUARDS, ITS BEST CONFIGURATION (23 November ~18:45; read as registered;
+`experiments/test3/prompted_more/P_staged_guards/report.json`).** Job 787456: 48 of 96 finished (39 at the context
+limit, 9 on repeated errors), 95.7% of calls accepted. 62 new packets: codexsol170 all valid; claudecode, after the
+billing block above, 61 valid and 1 re-judged once (valid). Every run scored by both judges. Mean of judges 1.17.
+A minus this arm: **+0.54 [+0.46, +0.62]**, 12 of 12 companies (Codex +0.64, Claude Code +0.44); on shared stages +0.51
+[+0.43, +0.60]. A without guards minus this arm: +0.06 [−0.12, +0.24], inconclusive. Reading: against the prompted
+8B's best prompt the fine-tuned agent still leads by about half a point at every held-out company.

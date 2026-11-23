@@ -60,6 +60,8 @@ over the 12 companies.
 
 - **Fine-tuned minus prompted: +0.70 [+0.61, +0.79]**, higher at all twelve companies; Codex +0.79, Claude Code
   +0.61; +0.55 [+0.44, +0.66] on the rubric stages both reach.
+- Fine-tuned minus the prompted 8B under its best prompt (staged, with guards; 48 of 96 finished): +0.54 [+0.46,
+  +0.62], at all twelve companies.
 - Fine-tuned minus the Stage 1 system: +0.12 [+0.05, +0.20], higher at ten of twelve companies.
 - The two judges agree in sign on both comparisons (Spearman 0.78 between their run scores).
 - The guards matter on held-out data: without them this adapter scores 1.23 and finishes 34 of 96; with them, +0.48

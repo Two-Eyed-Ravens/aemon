@@ -87,6 +87,10 @@ def test3_items() -> list[Item]:
     names = ('test3-A-noguards_none.json', 'packets.jsonl', 'test3_noguards_key.jsonl', 'report.json', 'run_after.sh')
     items += [Item(noguards / name, f'test3/noguards/{name}') for name in names]
     items += [Item(p, f'test3/noguards/judging/{p.name}') for p in sorted((noguards / 'judging').glob('*.jsonl'))]
+    more = run / 'prompted_more'
+    items += [
+        Item(p, f'test3/prompted_more/{p.relative_to(more)}') for p in sorted(more.rglob('*')) if p.is_file() and p.suffix in ('.json', '.jsonl', '.sh', '.txt')
+    ]
     dossier = REPO / 'data' / 'dossier'
     items.append(Item(dossier / 'cases_heldout3.json', 'test3/frozen/cases_heldout3.json'))
     items.append(Item(REPO / 'docs' / 'test3_freeze.json', 'test3/frozen/test3_freeze.json'))
