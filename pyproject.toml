@@ -1,7 +1,7 @@
 [project]
 name = "aemon"
 version = "0.1.0"
-description = "A theory-driven strategic investigation agent, distilled into Tiny Aya with AgentTune and evaluated with AuditKIT"
+description = "A strategy-investigation agent distilled from Command A+ into Aya Expanse 8B (Stage 1: Tiny Aya) with AgentTune, evaluated with AuditKIT and two blind judges"
 requires-python = ">=3.12"
 # Lower bounds are the versions the frozen runs used; requirements.lock.txt pins the exact set.
 dependencies = [

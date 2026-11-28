@@ -378,8 +378,11 @@ against judged runs.
 \section*{Limitations}
 
 The evidence covers one task and one environment: strategy investigations over frozen dossiers of verified public records,
-twelve held-out companies and, on development, 15 cases of six companies. It measures evidence-grounded reasoning and procedure, not
-commercial outcomes. Quality is scored by two LLM judges, checked by hand on a sample; they agree on the order of arms
+twelve held-out companies and, on development, 15 cases of six companies. All 48 held-out cases and 185 of the 207 development cases ask one question type (whether to develop a
+differentiated consumer proposition), so the result shows one investigation learned well across new companies, not
+transfer to other strategy questions. It measures evidence-grounded reasoning and procedure, not commercial outcomes.
+Some mechanical checks match keywords (one recognises reliance on a simulated result by words such as
+``simulated''); they serve as guards, not as evidence of quality. Quality is scored by two LLM judges, checked by hand on a sample; they agree on the order of arms
 but not on absolute levels, so we report differences. The held-out test uses one training seed (7); the development
 gain is replicated over three. All demonstrations come from one teacher, Command A+. The closed Claude Haiku 5.5 scores
 higher on test set 3, and every unfinished held-out run of our 8B stops at the same rule (a simulated result cited as

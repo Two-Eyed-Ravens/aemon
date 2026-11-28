@@ -11,7 +11,7 @@
 never seen, it beats the same model prompted by +0.70 at every company, and the fine-tuned weights and the harness's
 guards turn out to need each other.**
 Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · November 2026 ·
-**Video: [watch the presentation](https://youtu.be/ChovfdwBemo) · Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [14-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/aemon-v2)**
+**Video: [watch the presentation](https://youtu.be/ChovfdwBemo) · Paper: [Weights and Harness Are Complements](docs/stage2/PAPER_STAGE2.pdf) · Slides: [15-slide deck (PDF)](docs/stage2/SLIDES_STAGE2.pdf) · Article: [on Hugging Face](https://huggingface.co/blog/HatemSaadallah/aemon-v2)**
 
 > **Two stages, one project.** The Lexsi hackathon ran in two rounds.
 > **Stage 1** (1–15 November): we built aemon, an agent that investigates a strategy question the way a careful
@@ -24,8 +24,10 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 > **Stage 2 result, run once.** Fine-tuned on a teacher's investigations, Aya Expanse 8B scores **1.71** against
 > **1.01** for the same model prompted with the same tools, guards and context (0–3 blind rubric, mean of two LLM
 > judges): **+0.70**, 95% interval 0.61 to 0.79 over companies, higher at **all twelve**. It finishes **81 of 96**
-> investigations against **2**, with **92%** of its tool calls accepted against 80%. And its guards matter: on the same
-> twelve companies, removing them costs **−0.48** [0.31, 0.65] at every company.
+> investigations against **2**, with **92%** of its tool calls accepted against 80%. The gain is not only finishing
+> more: on the rubric stages both arms reach it is **+0.55** [0.44, 0.66], and against the prompted 8B under its own best
+> prompt (48 of 96 finished) it is **+0.54** [0.46, 0.62], at all twelve. And its guards matter: on the same twelve
+> companies, removing them costs **−0.48** [0.31, 0.65] at every company.
 
 <a href="https://youtu.be/ChovfdwBemo"><img alt="Watch the aemon presentation video" src="https://img.youtube.com/vi/ChovfdwBemo/maxresdefault.jpg" width="720"></a>
 
