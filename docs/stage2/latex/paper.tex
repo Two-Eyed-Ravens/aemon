@@ -494,8 +494,12 @@ building the model. The trainer imports it unconditionally, so no adapter could 
 scores its tool calls (replay mismatches, known tool names, redundant calls, looping, guards cleared). For eleven
 Stage~2 development reports it was skipped at run time and run retrospectively on the saved trajectories, written
 beside the untouched reports with their sha256 and the tool versions (zero replay mismatches); evaluation jobs now stop
-if AgentTune or AuditKIT cannot be imported. \textbf{CuratorKIT} 0.1.25 was tested in Stage~1 for row curation and
-used for no reported model.
+if AgentTune or AuditKIT cannot be imported. \textbf{CuratorKIT} 0.1.25 \citep{lexsi_curatorkit} was tested in Stage~1 for row curation and
+used for no reported model. Other models and software: the teacher Command A+ \citep{cohere2025commanda}, served
+from GGUF with llama.cpp \citep{llamacpp}, which also serves every student; Unsloth \citep{unsloth} and PEFT
+\citep{peft} for training and merging; MMLU \citep{hendrycks2021mmlu} and ARC-Challenge \citep{clark2018arc} for the
+general-ability check; Claude Haiku 5.5 and Claude Code \citep{anthropic2026claude} as a comparison arm and a judge,
+and the Codex CLI \citep{openai2026codex} as the other judge.
 
 \section{Reproducing}
 
