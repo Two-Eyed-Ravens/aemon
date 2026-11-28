@@ -163,9 +163,23 @@ LIVE_MODEL=aemon8b ./app/run.sh
 On a smaller GPU, the 4-bit file needs about 6.5 GB at 8,192 tokens of context, with no separate base or adapter:
 [two-eyed-ravens/aemon-8b-GGUF](https://huggingface.co/two-eyed-ravens/aemon-8b-GGUF) has the commands.
 
-**Reproduce the numbers.** `scripts/test3/analyze.py` recomputes test set 3 from `experiments/test3/` (key and both
-judges' predictions); `scripts/paper/check_numbers.py` recomputes every development comparison printed in the paper.
-Training and evaluation jobs: `jobs/train_base.sbatch` and `jobs/screen_bases.sbatch` (paper, appendix "Reproducing").
+**Reproduce the numbers.** Everything below runs from a fresh clone with relative paths; models and data load from
+Hugging Face. The held-out result and the 4-bit arm, from the committed key and both judges' predictions:
+
+```bash
+uv sync
+E=experiments/test3
+PYTHONPATH=src uv run python scripts/test3/analyze.py --key $E/q4/test3_A_q4_key.jsonl \
+  --judge codexsol170=$E/q4/judging/codexsol170_predictions.jsonl --judge claudecode=$E/q4/judging/claudecode_predictions.jsonl \
+  --compare A,prompted --compare A_q4,A --out report.json
+# A minus prompted +0.70 [0.61, 0.79]; A_q4 minus A -0.12 [-0.19, -0.06]
+```
+
+`scripts/paper/check_numbers.py` recomputes every development comparison printed in the paper. Training and evaluation:
+`jobs/train_base.sbatch` and `jobs/screen_bases.sbatch` (paper, appendix "Reproducing"). The other `jobs/*.sbatch` and the
+shell drivers under `experiments/` are kept as the exact records of what ran on our Slurm cluster (its account, host
+and home folder appear as `CLUSTER_ACCOUNT`, `CLUSTER_HOST` and `$HOME/lexsi`); they are not needed to reproduce any
+number. The frozen judge's paths (`judge_v1/`) are inside its sandbox and are part of the qualified instrument.
 
 **Runs and packets.** Decoding is greedy, so the second attempt at a case often repeats the first: of 96 runs, the
 fine-tuned 8B has 81 distinct, the Stage 1 system 88, the prompted 8B 54. Identical runs share one blind packet and

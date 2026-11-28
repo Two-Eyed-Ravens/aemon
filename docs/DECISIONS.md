@@ -3746,3 +3746,13 @@ needs an efficiency gain, so no candidate is eligible: the baseline stays, and t
 protocol says. Reading: the loop ran end to end and refused changes that did not pay for themselves; the one signal
 worth a follow-up is that every candidate finished the run the baseline did not, at a token cost. Results in
 `experiments/harness/recovery_v1/results/`, shown on the app's harness page.
+
+**Stage 2 submission prepared (28 November; organisers' reminder: deadline Sunday 29 November 11:59 UTC).** Hatem lost
+write access to `twoeyedravens` and asked for everything in `two-eyed-ravens`. Copied there: model and dataset
+`aemon-8b` (cards' links rewritten, data untouched), the 4-bit `aemon-8b-GGUF` (transferred by Hatem; sha256 5ad8d535...
+checked), the Stage 1 cards. The live demo stays at `spaces/twoeyedravens/aemon-8b`: a Docker Space in
+`two-eyed-ravens` needs a paid Team plan (HTTP 402), and the existing Space still runs. New public collections:
+`two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e` and `two-eyed-ravens/aemon-datasets-6b0ad51c08e24bb8c2b8ee1b`.
+Paper checked against the email: main body 6 pages; Limitations and Ethics sections added after the conclusion;
+Aya Expanse and Tiny Aya now cited beside AgentTune and AuditKIT. Public GitHub snapshot 05c7636 (no personal data,
+tokens or cluster identifiers found by scan); every README link returns 200.
