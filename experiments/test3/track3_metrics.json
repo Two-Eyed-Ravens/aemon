@@ -29,6 +29,16 @@
   "calls_per_finished_run": 44.333333333333336,
   "median_seconds_per_run": 124.7744315250311
  },
+ "A at 4 bits, merged, 8 at once": {
+  "runs": 96,
+  "finished": 79,
+  "task_success": 0.8229166666666666,
+  "calls": 3155,
+  "accepted": 2862,
+  "tool_call_accuracy": 0.9071315372424723,
+  "calls_per_finished_run": 39.936708860759495,
+  "median_seconds_per_run": 331.9726483159902
+ },
  "Claude Haiku 5.5": {
   "runs": 91,
   "finished": 70,

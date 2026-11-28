@@ -41,11 +41,12 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
 | **Live demo (Stage 2)** | **[huggingface.co/spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b)** (the fine-tuned 8B on one GPU; it sleeps when idle, so the first visit takes a few minutes to wake it) |
 | Paper (Stage 2) | [docs/stage2/PAPER_STAGE2.pdf](docs/stage2/PAPER_STAGE2.pdf) |
 | Article (Stage 2) | [huggingface.co/blog/HatemSaadallah/aemon-v2](https://huggingface.co/blog/HatemSaadallah/aemon-v2) |
-| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (14 slides, clickable links) |
-| Model and data (Stage 2) | [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
-| Collection | [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) |
+| Slides (Stage 2) | [docs/stage2/SLIDES_STAGE2.pdf](docs/stage2/SLIDES_STAGE2.pdf) (15 slides, clickable links) |
+| Model and data (Stage 2) | [two-eyed-ravens/aemon-8b](https://huggingface.co/two-eyed-ravens/aemon-8b) · [dataset](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b) (every development and test set 3 run, packet, judgment and key) |
+| 4-bit model (Stage 2) | [two-eyed-ravens/aemon-8b-GGUF](https://huggingface.co/two-eyed-ravens/aemon-8b-GGUF) (one 5.1 GB file, the adapter merged and quantized; the configuration behind $0.019 per investigation, judged on test set 3) |
+| Collections | [models](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e) · [datasets](https://huggingface.co/collections/two-eyed-ravens/aemon-datasets-6b0ad51c08e24bb8c2b8ee1b) |
 | Every decision, dated | [docs/DECISIONS.md](docs/DECISIONS.md) (rules registered before their results; deviations marked as such) |
-| Stage 1 | [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (Tiny Aya 3.35B on two CPU cores; any username, no password) · [model](https://huggingface.co/twoeyedravens/aemon) · [dataset](https://huggingface.co/datasets/twoeyedravens/aemon) · [paper](docs/PAPER.pdf) · [article](https://huggingface.co/blog/HatemSaadallah/aemon) · browsable runs of the [first](docs/replays/final/README.md) and [second](docs/replays/test2/README.md) tests |
+| Stage 1 | [live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (Tiny Aya 3.35B on two CPU cores; any username, no password) · [model](https://huggingface.co/two-eyed-ravens/aemon) · [dataset](https://huggingface.co/datasets/two-eyed-ravens/aemon) · [paper](docs/PAPER.pdf) · [article](https://huggingface.co/blog/HatemSaadallah/aemon) · browsable runs of the [first](docs/replays/final/README.md) and [second](docs/replays/test2/README.md) tests |
 
 **Stage 2: Aya Expanse 8B, test set 3 run once (twelve new companies, two judges)**
 
@@ -82,12 +83,16 @@ Team Two-eyed Ravens · Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning) · Nov
   +0.42 [0.32, 0.52] post hoc without the 11 of its 91 runs that ended on API refusals; $0.008 per investigation.
   aemon-8b's case is control: open weights (CC-BY-NC 4.0, non-commercial), every call checked and replayable, and the
   case data never leaves the machine.
+- **The whole agent in one 5 GB file.** Merged and quantized to 4 bits (Q4_K_M, from 16.1 GB), the fine-tuned 8B runs
+  twice as many investigations per GPU hour (65.8 against 32.3) at **$0.019** each. On test set 3 it keeps 93% of its
+  full-precision score (1.59 against 1.71; −0.12 [−0.19, −0.06]) and still beats the prompted 8B by **+0.58**
+  [0.51, 0.64] at all twelve companies.
 
 **A judge's 60-second view (Stage 2)**
 1. Open the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b), pick a company and start an
    investigation; every tool call shows as it happens, including what the environment refused and why.
 2. Read the paper's abstract and Table 2 ([PDF](docs/stage2/PAPER_STAGE2.pdf)): the test set 3 result with both judges.
-3. Browse test set 3 in the [dataset viewer](https://huggingface.co/datasets/twoeyedravens/aemon-8b): the answer key,
+3. Browse test set 3 in the [dataset viewer](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b): the answer key,
    the blind packets each judge saw, and both judges' scores.
 
 ## Stage 2 in detail
@@ -138,9 +143,9 @@ Haiku's unfinished runs are mostly API refusals (11 of 21); without them it fini
 finished run. All 15 of the fine-tuned 8B's unfinished runs end the same way: the environment refuses `finish`
 because the recommendation cites a simulated result as evidence, and the agent does not recover.
 
-**Artifacts.** Model: [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) (`aemon-8b-adapter.gguf`,
+**Artifacts.** Model: [two-eyed-ravens/aemon-8b](https://huggingface.co/two-eyed-ravens/aemon-8b) (`aemon-8b-adapter.gguf`,
 the adapter as served in every evaluation, and `peft/`). Data:
-[datasets/twoeyedravens/aemon-8b](https://huggingface.co/datasets/twoeyedravens/aemon-8b): every development screen,
+[datasets/two-eyed-ravens/aemon-8b](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b): every development screen,
 blind packet, judgment and answer key; test set 3's frozen cases and dossiers, the three arms' runs, both judges'
 predictions and the analysis (`test3/`).
 
@@ -149,11 +154,14 @@ bf16):
 
 ```bash
 hf download bartowski/aya-expanse-8b-GGUF aya-expanse-8b-Q8_0.gguf --local-dir models
-hf download twoeyedravens/aemon-8b aemon-8b-adapter.gguf --local-dir app/adapters
+hf download two-eyed-ravens/aemon-8b aemon-8b-adapter.gguf --local-dir app/adapters
 llama-server -m models/aya-expanse-8b-Q8_0.gguf --lora app/adapters/aemon-8b-adapter.gguf --lora-init-without-apply \
   -ngl 99 -c 16384 --parallel 2 --jinja --port 8091 &
 LIVE_MODEL=aemon8b ./app/run.sh
 ```
+
+On a smaller GPU, the 4-bit file needs about 6.5 GB at 8,192 tokens of context, with no separate base or adapter:
+[two-eyed-ravens/aemon-8b-GGUF](https://huggingface.co/two-eyed-ravens/aemon-8b-GGUF) has the commands.
 
 **Reproduce the numbers.** `scripts/test3/analyze.py` recomputes test set 3 from `experiments/test3/` (key and both
 judges' predictions); `scripts/paper/check_numbers.py` recomputes every development comparison printed in the paper.
@@ -253,7 +261,7 @@ curl -L https://github.com/ggml-org/llama.cpp/releases/download/b12032/llama-b12
   --revision a602ea7eeec3a4ad6f77a1b8cf6a53512824922b
 
 # the adapters, saved under the names the app loads
-.venv/bin/hf download twoeyedravens/aemon tiny-aya-global-strategy-lora-bf16.gguf \
+.venv/bin/hf download two-eyed-ravens/aemon tiny-aya-global-strategy-lora-bf16.gguf \
   v3_adapter.gguf --local-dir /tmp/aemon-adapters
 cp /tmp/aemon-adapters/tiny-aya-global-strategy-lora-bf16.gguf ~/.cache/lexsi/adapters/final_adapter.gguf   # version 1
 cp /tmp/aemon-adapters/v3_adapter.gguf ~/.cache/lexsi/adapters/v3_adapter.gguf                  # version 3

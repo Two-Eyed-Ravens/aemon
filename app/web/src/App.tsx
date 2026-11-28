@@ -9,6 +9,7 @@ import { CompaniesPage } from './pages/CompaniesPage.tsx';
 import { ComparePage } from './pages/ComparePage.tsx';
 import { CompanyPage } from './pages/CompanyPage.tsx';
 import { HistoryPage } from './pages/HistoryPage.tsx';
+import { HarnessPage } from './pages/HarnessPage.tsx';
 import { HomePage } from './pages/HomePage.tsx';
 import { MapPage } from './pages/MapPage.tsx';
 import { HowPage } from './pages/HowPage.tsx';
@@ -23,7 +24,7 @@ import { loadWorkflow } from './workflow.ts';
 // The workspace: one sidebar for the whole app. The company switcher sets the context; the reasoning map is a view of
 // one investigation, so it lives with each investigation rather than here.
 const NAV = [['home', 'Home', 'home'], ['history', 'Investigations', 'library'], ['companies', 'Companies', 'building']] as const;
-const RESEARCH = [['how', 'Methodology', 'compass'], ['about', 'About', 'eye'], ['team', 'Who we are', 'spark']] as const;
+const RESEARCH = [['how', 'Methodology', 'compass'], ['harness', 'Harness experiments', 'library'], ['about', 'About', 'eye'], ['team', 'Who we are', 'spark']] as const;
 
 export type OnError = (error: unknown) => void;
 export interface Running { id: string; workspace: string; question: string; resuming: boolean }
@@ -201,6 +202,7 @@ export function App() {
           <Route path="/investigate" element={<section id="try">{investigate}</section>} />
           <Route path="/investigate/:id" element={<section id="try">{investigate}</section>} />
           <Route path="/how" element={<section id="how"><HowPage workspace={workspace} /></section>} />
+          <Route path="/harness" element={<section id="harness"><HarnessPage /></section>} />
           <Route path="/about" element={<section id="about"><AboutPage /></section>} />
           <Route path="/team" element={<section id="team"><TeamPage /></section>} />
           <Route path="/review" element={<section id="review"><ReviewPage onError={onError} /></section>} />

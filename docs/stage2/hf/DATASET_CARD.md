@@ -30,8 +30,8 @@ configs:
 # aemon-8b: Stage 2 runs, judgments and data
 
 Team Two-eyed Ravens, Lexsi AI Hackathon, Track 3, Stage 2. Model:
-[twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b). Stage 1 data (dossier, cases, version 1
-training rows, Stage 1 evaluations): [datasets/twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon). Code: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon).
+[two-eyed-ravens/aemon-8b](https://huggingface.co/two-eyed-ravens/aemon-8b). Stage 1 data (dossier, cases, version 1
+training rows, Stage 1 evaluations): [datasets/two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon). Code: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon).
 
 Everything behind the Stage 2 paper's numbers, development and test set 3, so each can be recomputed without running
 a model.

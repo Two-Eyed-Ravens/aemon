@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "rereads",
+  "features": [
+    "budget",
+    "evidence_first",
+    "grounded_beliefs",
+    "mask_rereads",
+    "no_repeats",
+    "quote_menu",
+    "resample_repeats"
+  ]
+}

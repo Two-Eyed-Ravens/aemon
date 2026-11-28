@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "progress",
+  "features": [
+    "budget",
+    "evidence_first",
+    "grounded_beliefs",
+    "no_repeats",
+    "progress",
+    "quote_menu",
+    "resample_repeats"
+  ]
+}

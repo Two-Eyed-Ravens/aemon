@@ -18,6 +18,7 @@ ARMS = {
     'Prompted Aya Expanse 8B': TEST3 / 'prompted.json',
     'Stage 1 system (Tiny Aya 3.35B)': TEST3 / 'stage1.json',
     'Fine-tuned Aya Expanse 8B (A)': TEST3 / 'A.json',
+    'A at 4 bits, merged, 8 at once': TEST3 / 'q4' / 'q4_k_m_s8.json',
     'Claude Haiku 5.5': TEST3 / 'haiku' / 'haiku_merged.json',
 }
 

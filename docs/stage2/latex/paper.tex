@@ -42,7 +42,7 @@ the data toward rare skills makes the agent loop. Single-seed gains in agent fin
 
 The Lexsi AI Hackathon ran in two stages. In Stage~1 we built aemon, an environment of guarded tools for a
 scientific investigation of a strategy question \citep{camuffo2020scientific,camuffo2024theory}, and showed that a
-small open model (Tiny Aya 3.35B) learns its form by copying a teacher's tool calls, beating its prompted base on two
+small open model (Tiny Aya 3.35B; \citealp{cohere2026tinyaya}) learns its form by copying a teacher's tool calls, beating its prompted base on two
 frozen tests. This paper is Stage~2. Stage~1 also showed where the student stops: it learns the procedure better than the
 judgement, and fails mechanically by looping and by citing simulated results. The agent is the model plus the steps
 around it: its training data, the decoding constraints on each call, and the choices it makes itself.
@@ -59,7 +59,7 @@ its runs at the theories stage. Blind judged quality: 1.29, 2.01 and 1.57 of 3.}
 
 We make three contributions.
 \begin{enumerate}
-\item \textbf{Agent fine-tuning measured part by part.} An 8B Cohere student (Aya Expanse 8B) trained with AgentTune
+\item \textbf{Agent fine-tuning measured part by part.} An 8B Cohere student (Aya Expanse 8B; \citealp{dang2024aya}) trained with AgentTune
 on the Stage~1 teacher data, and ablations of the guards, the training data (correction rows, rule-built recovery
 rows, a skill-balanced composition, teacher corrections of the student's own failure states) and the prompt, each against one
 reference with matched training seeds (Sections~\ref{sec:method} and~\ref{sec:results}).
@@ -312,9 +312,10 @@ without guards but +0.70 with them. Each part makes the other worth more. Agains
 
 \subsection{Cost}
 
-Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. Served at 4 bits on one 40 GB
-slice, it runs 93.8 investigations per GPU hour, \$0.019 each at \$1.76 per A100 hour, about 2.2 times Claude Haiku
-5.5 (\$0.0084); every quality number here is at bf16, and quality at 4 bits was not judged. On test set 3, added after the three-arm result
+Unsloth made a training step 4.3 times faster than our trainer in a matched test; an Aya Expanse 8B training run takes about 4.3 hours on one A100 slice. At 4 bits (merged, Q4\_K\_M, 5.1 GB) and 8 at once on one 40 GB
+slice it runs 93.8 investigations per GPU hour (bf16 56.8), \$0.019 each at \$1.76 per A100 hour, about 2.2 times
+Claude Haiku 5.5 (\$0.0084); judged on test set 3 it keeps +0.58 over the prompted 8B and 93\% of A's bf16 score
+(Appendix~\ref{app:q4}). On test set 3, added after the three-arm result
 under a rule registered before its run, Haiku (Stage~1's staged prompt, no guards) scores 1.92 against A's 1.71:
 Haiku minus A is +0.20 [+0.05, +0.35] as registered (Claude Code, of Haiku's family, +0.30; Codex +0.12). 11 of its 91
 runs ended on API refusals; without them, post hoc, it is +0.42 [+0.32, +0.52] (Table~\ref{tab:track3}). The case for this agent is an open model that runs where
@@ -355,10 +356,6 @@ call), and every evaluation job now stops if a required tool is missing.
 
 \paragraph{A reward for RL, validated before use.} Before any RL we built a step reward checked by the tools (Appendix~\ref{app:reward}); it failed its registered agreement test with the judge (Spearman 0.26 against 0.30), tracking quality for broken agents but not for good ones, so we trained nothing on it.
 
-\paragraph{Licence and scope.} Aya Expanse 8B and Tiny Aya are CC-BY-NC: fine for research, not a commercial product
-without Cohere's agreement. The dossiers support evaluating evidence-grounded reasoning and procedure, not commercial
-outcomes.
-
 \section{Related work and conclusion}
 
 On development, under the same investigation scaffold, fine-tuning Aya Expanse 8B on teacher trajectories improves
@@ -377,6 +374,26 @@ fine-tuned weights are complements, since removing either costs quality and fini
 Future work: skill-focused contrastive cases, iterative teacher corrections of the student's own states beyond one round,
 preference training with labels from the permitted teacher, and agent RL through AgentTune once a reward is validated
 against judged runs.
+
+\section*{Limitations}
+
+The evidence covers one task and one environment: strategy investigations over frozen dossiers of verified public records,
+twelve held-out companies and, on development, 15 cases of six companies. It measures evidence-grounded reasoning and procedure, not
+commercial outcomes. Quality is scored by two LLM judges, checked by hand on a sample; they agree on the order of arms
+but not on absolute levels, so we report differences. The held-out test uses one training seed (7); the development
+gain is replicated over three. All demonstrations come from one teacher, Command A+. The closed Claude Haiku 5.5 scores
+higher on test set 3, and every unfinished held-out run of our 8B stops at the same rule (a simulated result cited as
+evidence). Serving at 4 bits keeps 93\% of the bf16 score; the remaining loss is measured, not removed.
+
+\section*{Ethics Statement}
+
+The dossiers are built from verified public records, with verbatim excerpts and their URLs. They contain no personal data, and the cases are research questions about
+real companies, not claims about them. The agent is meant to give an analyst an auditable first pass: every tool call is
+checked, logged and replayable, and its recommendations should not be the sole basis for an investment or market-entry
+decision. Aya Expanse 8B and Tiny Aya are released under CC BY-NC 4.0, so our models are for research, not a commercial
+product without Cohere's agreement. Claude serves only as a comparison arm and as a judge, never as a teacher, as its
+terms require. A training run takes about 4.3 hours on one A100 slice, and serving at 4 bits halves the compute per
+investigation.
 
 \bibliography{paper}
 
@@ -483,7 +500,7 @@ used for no reported model.
 \section{Reproducing}
 
 Pinned environments: \texttt{requirements.lock.txt} (Python), llama.cpp b12032, Aya Expanse 8B revision
-\texttt{5062468b}. Data: the teacher rows in the Stage~1 dataset (\texttt{twoeyedravens/aemon}), \texttt{python scripts/oneoff/composition\_rows.py},
+\texttt{5062468b}. Data: the teacher rows in the Stage~1 dataset (\texttt{two-eyed-ravens/aemon}), \texttt{python scripts/oneoff/composition\_rows.py},
 \texttt{python -m aemon.rows.recovery\_rows}. Train: \texttt{sbatch jobs/train\_base.sbatch} (NAME, HF\_REPO, HF\_REV,
 SEED, UNSLOTH=1). Evaluate: \texttt{sbatch jobs/screen\_bases.sbatch} (ADAPTER, ARMS, CASES). Judge:
 \texttt{python -m aemon.evaluation.judging.packets}, then \texttt{judge\_v1/run\_campaign.py}, then
@@ -548,6 +565,20 @@ Guard & What it does at decoding time \\
 \caption{The judges' nine rubric dimensions (each 0 to 3; a run's score is the mean of its judged dimensions) and the six decoding guards. No guard writes to the record, invents evidence or chooses a recommendation; every refusal stays on the record.}
 \end{table*}
 
+\section{Serving at 4 bits}
+\label{app:q4}
+
+A merged into its base by PEFT, converted to bf16 GGUF (16.1 GB) and quantized with llama.cpp to Q4\_K\_M (5.1 GB).
+On one 40 GB A100 slice and the 15 development cases it runs 65.8 investigations per GPU hour one at a time (bf16 32.3)
+and 93.8 at 8 at once (bf16 56.8): \$0.019 against \$0.031 per investigation at \$1.76 per A100 hour. Judged by both
+judges on development, Q4\_K\_M minus bf16 (both merged, 8 at once) is +0.01 [$-$0.17, +0.20] over six companies, too
+wide to show no loss, and merged bf16 minus the LoRA as evaluated is $-$0.00 [$-$0.09, +0.09]. On test set 3, as one more
+arm registered before its run, the 4-bit configuration scores 1.59 with 79 of 96 finished: minus A at bf16
+$-$0.12 [$-$0.19, $-$0.06], lower at 11 of 12 companies, so the registered no-loss bound ($-$0.15) is not met; minus the
+prompted 8B +0.58 [+0.51, +0.64], higher at all 12. The arm changes quantization, merging and batching together; given
+the development reading the loss most likely comes from quantization. Every other quality number in the paper is at
+bf16. The file is released as \texttt{two-eyed-ravens/aemon-8b-GGUF} (sha256 \texttt{5ad8d535}\ldots).
+
 \section{Per-seed and per-company results}
 \label{app:detail}
 
@@ -602,10 +633,11 @@ Arm & Finished & Accepted & Calls & Seconds \\
 Prompted 8B & 2/96 & 79.8\% & 1,135 & 73 \\
 Stage~1 system & 82/96 & 91.2\% & 44 & 105 \\
 A (fine-tuned 8B) & 81/96 & 92.4\% & 44 & 125 \\
+A at 4 bits, 8 at once & 79/96 & 90.7\% & 40 & 332 \\
 Claude Haiku 5.5 & 70/91 & 87.2\% & 25 & 49 \\
 \bottomrule
 \end{tabular}
-\caption{Track 3 metrics on test set 3: task success; tool-call accuracy (accepted over all calls); calls per finished run; median model seconds per run (different hardware per arm, so rough).}
+\caption{Track 3 metrics on test set 3: task success; tool-call accuracy (accepted over all calls); calls per finished run; median model seconds per run (different hardware per arm, so rough; the 4-bit arm's 8 runs share one GPU).}
 \label{tab:track3}
 \end{table}
 

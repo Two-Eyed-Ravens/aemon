@@ -21,8 +21,9 @@ pipeline_tag: text-generation
 *weigh what is known. test what is not.*
 
 Team Two-eyed Ravens (Hatem Saadallah, Nour Jennane), Lexsi AI Hackathon, Track 3 (Agentic Fine-Tuning), Stage 2.
-Video: [the presentation](https://youtu.be/ChovfdwBemo). Live demo: [spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b). Article: [Weights and Harness Are Complements](https://huggingface.co/blog/HatemSaadallah/aemon-v2). Data and every judged run: [datasets/twoeyedravens/aemon-8b](https://huggingface.co/datasets/twoeyedravens/aemon-8b).
-Stage 1 (Tiny Aya Global 3.35B): [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon). Code and paper: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon).
+Video: [the presentation](https://youtu.be/ChovfdwBemo). Live demo: [spaces/twoeyedravens/aemon-8b](https://huggingface.co/spaces/twoeyedravens/aemon-8b). Article: [Weights and Harness Are Complements](https://huggingface.co/blog/HatemSaadallah/aemon-v2). Data and every judged run: [datasets/two-eyed-ravens/aemon-8b](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b).
+One-file 4-bit version (5.1 GB, twice as fast, $0.019 per investigation): [two-eyed-ravens/aemon-8b-GGUF](https://huggingface.co/two-eyed-ravens/aemon-8b-GGUF).
+Stage 1 (Tiny Aya Global 3.35B): [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon). Code and paper: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon).
 
 A LoRA adapter for [Aya Expanse 8B](https://huggingface.co/CohereLabs/aya-expanse-8b) that runs a structured
 strategy investigation through twelve guarded tools: frame the decision, state rival causal theories, weigh quoted

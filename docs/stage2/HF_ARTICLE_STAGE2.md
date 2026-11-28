@@ -1,6 +1,6 @@
 # Weights and Harness Are Complements: aemon-8b, a strategy investigator distilled into Aya Expanse 8B
 
-*Watch it: [the presentation video](https://youtu.be/ChovfdwBemo) · Try it: [the live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) (any username, no password; it sleeps when idle, so the first visit takes a few minutes) · Paper: [Weights and Harness Are Complements](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/PAPER_STAGE2.pdf) · [Slides](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/SLIDES_STAGE2.pdf) · Code, every run and every decision: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon) · Model: [twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b) · Data: [datasets/twoeyedravens/aemon-8b](https://huggingface.co/datasets/twoeyedravens/aemon-8b) · [Collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf)*
+*Watch it: [the presentation video](https://youtu.be/ChovfdwBemo) · Try it: [the live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) (any username, no password; it sleeps when idle, so the first visit takes a few minutes) · Paper: [Weights and Harness Are Complements](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/PAPER_STAGE2.pdf) · [Slides](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/stage2/SLIDES_STAGE2.pdf) · Code, every run and every decision: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon) · Model: [two-eyed-ravens/aemon-8b](https://huggingface.co/two-eyed-ravens/aemon-8b) · Data: [datasets/two-eyed-ravens/aemon-8b](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b) · [Collection](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e)*
 
 *weigh what is known. test what is not.*
 
@@ -79,11 +79,11 @@ Excerpts are quotations of public sources for research; the cases support evalua
 
 ## 5. Model artifacts
 
-[twoeyedravens/aemon-8b](https://huggingface.co/twoeyedravens/aemon-8b): `aemon-8b-adapter.gguf`, the adapter exactly as served in every evaluation, and `peft/`, the PEFT adapter it was converted from. The [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) serves it on one GPU with the full interface. Part of the [aemon collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf).
+[two-eyed-ravens/aemon-8b](https://huggingface.co/two-eyed-ravens/aemon-8b): `aemon-8b-adapter.gguf`, the adapter exactly as served in every evaluation, and `peft/`, the PEFT adapter it was converted from. The [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) serves it on one GPU with the full interface. Part of the [aemon collection](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e).
 
 ## 6. Data artifacts
 
-[datasets/twoeyedravens/aemon-8b](https://huggingface.co/datasets/twoeyedravens/aemon-8b): every development screen, blind packet, judgment and answer key; test set 3's frozen cases and dossiers, the runs of all four arms, both judges' predictions and the analysis; the rows added by every data condition. The dataset viewer has five tables (the test set 3 key and packets, each judge's judgments, the development key). Every file is listed in `MANIFEST.json` with the sha256 of its source.
+[datasets/two-eyed-ravens/aemon-8b](https://huggingface.co/datasets/two-eyed-ravens/aemon-8b): every development screen, blind packet, judgment and answer key; test set 3's frozen cases and dossiers, the runs of all four arms, both judges' predictions and the analysis; the rows added by every data condition. The dataset viewer has five tables (the test set 3 key and packets, each judge's judgments, the development key). Every file is listed in `MANIFEST.json` with the sha256 of its source.
 
 ## 7. Experiments and findings
 

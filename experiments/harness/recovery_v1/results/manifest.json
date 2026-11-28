@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "protocol": {
+    "version": 1,
+    "baseline": "baseline.json",
+    "candidates": [
+      "rereads.json",
+      "progress.json",
+      "combined.json"
+    ],
+    "training_cases": [
+      "trumpf-new-evidence-irrelevant",
+      "nilfisk-new-evidence-irrelevant",
+      "kone-new-evidence-irrelevant",
+      "ottobock-new-evidence-irrelevant",
+      "statitrol-new-evidence-irrelevant",
+      "arri-new-evidence-irrelevant"
+    ],
+    "validation_cases": [
+      "hellberg-base",
+      "hellberg-new-evidence-looks",
+      "hellberg-new-evidence-comfort",
+      "hellberg-new-evidence-favours-looks",
+      "hellberg-new-evidence-irrelevant",
+      "neumann-base",
+      "neumann-new-evidence-irrelevant",
+      "jotun-base",
+      "jotun-new-evidence-irrelevant",
+      "tanita-base",
+      "tanita-new-evidence-irrelevant",
+      "deere-base",
+      "deere-new-evidence-irrelevant",
+      "acr-base",
+      "acr-new-evidence-irrelevant"
+    ],
+    "first_attempt": 7,
+    "training_attempts": 1,
+    "validation_attempts": 3
+  },
+  "protocol_sha256": "30c3be2313eb73e64444a895cdb1874f519017aaf0cf9319d162ec0c8271251b",
+  "baseline": {
+    "version": 1,
+    "name": "baseline",
+    "features": [
+      "budget",
+      "evidence_first",
+      "grounded_beliefs",
+      "no_repeats",
+      "quote_menu",
+      "resample_repeats"
+    ]
+  },
+  "candidates": [
+    {
+      "version": 1,
+      "name": "rereads",
+      "features": [
+        "budget",
+        "evidence_first",
+        "grounded_beliefs",
+        "mask_rereads",
+        "no_repeats",
+        "quote_menu",
+        "resample_repeats"
+      ]
+    },
+    {
+      "version": 1,
+      "name": "progress",
+      "features": [
+        "budget",
+        "evidence_first",
+        "grounded_beliefs",
+        "no_repeats",
+        "progress",
+        "quote_menu",
+        "resample_repeats"
+      ]
+    },
+    {
+      "version": 1,
+      "name": "combined",
+      "features": [
+        "budget",
+        "evidence_first",
+        "grounded_beliefs",
+        "mask_rereads",
+        "no_repeats",
+        "progress",
+        "quote_menu",
+        "resample_repeats"
+      ]
+    }
+  ],
+  "snapshot": {
+    "source_sha256": "95516159240076f0c10c7df9376ac77ebf6eaa6a089101dc86fd3fd9919c946f",
+    "tests_sha256": "f8772a41c7d6dec0b42dbb6ae5545ce4ab267013a8fe9022f412805c11c3af44",
+    "data_sha256": "e91f46461e2601ca93dcf422ff9f536b1eb21e45d066bf1e320268317cc8caa0"
+  },
+  "runtime": "Aya Expanse 8B merged Q4_K_M 5ad8d535d8c94756d8138a9a877cf05987a28cbe82e72322475bfbb12c9b345f context8192 slots1",
+  "expectation": {
+    "model_path": "/dev/shm/harness-recovery-796519/model-q4.gguf",
+    "model_id": "/dev/shm/harness-recovery-796519/model-q4.gguf",
+    "context": 8192,
+    "build_info": "b1-dde879b",
+    "template_sha256": "90c33aee14aa2a226127516d48ee9184c9b90745d4a04c484621ec2e82fb712c",
+    "model_ftype": "Q4_K - Medium",
+    "total_slots": 1,
+    "weights_sha256": "5ad8d535d8c94756d8138a9a877cf05987a28cbe82e72322475bfbb12c9b345f"
+  },
+  "receipt": {
+    "model_path": "/dev/shm/harness-recovery-796519/model-q4.gguf",
+    "sha256": "5ad8d535d8c94756d8138a9a877cf05987a28cbe82e72322475bfbb12c9b345f",
+    "checked_by": "sha256sum -c in the job before the server started"
+  },
+  "model_kind": "merged",
+  "training_episodes": 36,
+  "validation_episodes": 90,
+  "provisional": true,
+  "quality_review": "pending"
+}

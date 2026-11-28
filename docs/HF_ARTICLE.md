@@ -1,4 +1,4 @@
-*Code, every run and every decision: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon) · Try it: [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (any username, no password) · Watch it: [demo video](https://youtu.be/Uow3miSSIIY) · Model and data: [the Two-Eyed Ravens collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) · [Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)*
+*Code, every run and every decision: [github.com/Two-Eyed-Ravens/aemon](https://github.com/Two-Eyed-Ravens/aemon) · Try it: [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon) (any username, no password) · Watch it: [demo video](https://youtu.be/Uow3miSSIIY) · Model and data: [the Two-Eyed Ravens collection](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e) · [Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)*
 
 *weigh what is known. test what is not.*
 
@@ -37,7 +37,7 @@ Our goal is to help teams move from "we think this will work" to "here is the ev
 > - **Result:** blind quality 0.65 → 1.48 (+0.83 [0.69, 0.97]) on a frozen test run once; +0.52 [0.33, 0.70] on a second; the final system reaches 1.62 and finishes 46 of 48 investigations in 39 tool calls each (base model: 4 of 48, 242 calls).
 > - **The caveat we state ourselves:** Claude Haiku 5.5 scores 2.28 through the same tools for a quarter of the cost. The small model's case is offline, open-weights, auditable use.
 > - **See it in 60 seconds:** [one finished run as a page](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/replays/system_rational-new-evidence-irrelevant_2.md), every tool call and refusal included; or [the live demo](https://huggingface.co/spaces/HatemSaadallah/aemon), any username, where finished investigations open at once.
-> - **Everything public:** [model](https://huggingface.co/twoeyedravens/aemon), [dataset with every judged run](https://huggingface.co/datasets/twoeyedravens/aemon), [code and dated decisions](https://github.com/Two-Eyed-Ravens/aemon), [paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf), [demo video](https://youtu.be/Uow3miSSIIY).
+> - **Everything public:** [model](https://huggingface.co/two-eyed-ravens/aemon), [dataset with every judged run](https://huggingface.co/datasets/two-eyed-ravens/aemon), [code and dated decisions](https://github.com/Two-Eyed-Ravens/aemon), [paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf), [demo video](https://youtu.be/Uow3miSSIIY).
 
 ## 1. Problem and approach
 
@@ -99,7 +99,7 @@ No benchmark existed for this task, so the data is ours, and all of it is publis
 
 ## 5. Model artifacts
 
-Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf). Model: [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon) (derivatives of Tiny Aya, so CC-BY-NC-4.0), with a table at the top saying which file is which:
+Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e). Model: [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon) (derivatives of Tiny Aya, so CC-BY-NC-4.0), with a table at the top saying which file is which:
 
 - **Version 1, the evaluated adapter**: the LoRA (`adapter_model.safetensors`, `adapter_config.json`; sha256 740c4a9b…) and its GGUF conversion for llama.cpp (`tiny-aya-global-strategy-lora-bf16.gguf`, sha256 41794b57…), the exact file evaluated on the frozen tests.
 - **Version 3, the final system's reasoner** (`v3_adapter.gguf`, sha256 ea919380…): continued from version 1 on the second teacher's rows. The app loads both; `app/server.py` sets the decoding-time guards.
@@ -107,7 +107,7 @@ Collection: [aemon: a strategy-investigation agent](https://huggingface.co/colle
 
 ## 6. Data artifacts
 
-Dataset: [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon), in the same collection:
+Dataset: [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon), in the same collection:
 
 - the training rows, loadable as splits: version 1's 3,891 train and 411 validation rows, the 51 correction rows, and the second teacher's 3,611 train and 262 validation rows, each bound to its teacher episode;
 - the dossier in full (1,958 records, byte-identical to the one in the repository) and every case, with both freeze files;

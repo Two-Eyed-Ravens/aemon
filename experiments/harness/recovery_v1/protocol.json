@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "baseline": "baseline.json",
+  "candidates": [
+    "rereads.json",
+    "progress.json",
+    "combined.json"
+  ],
+  "training_cases": [
+    "trumpf-new-evidence-irrelevant",
+    "nilfisk-new-evidence-irrelevant",
+    "kone-new-evidence-irrelevant",
+    "ottobock-new-evidence-irrelevant",
+    "statitrol-new-evidence-irrelevant",
+    "arri-new-evidence-irrelevant"
+  ],
+  "validation_cases": [
+    "hellberg-base",
+    "hellberg-new-evidence-looks",
+    "hellberg-new-evidence-comfort",
+    "hellberg-new-evidence-favours-looks",
+    "hellberg-new-evidence-irrelevant",
+    "neumann-base",
+    "neumann-new-evidence-irrelevant",
+    "jotun-base",
+    "jotun-new-evidence-irrelevant",
+    "tanita-base",
+    "tanita-new-evidence-irrelevant",
+    "deere-base",
+    "deere-new-evidence-irrelevant",
+    "acr-base",
+    "acr-new-evidence-irrelevant"
+  ],
+  "first_attempt": 7,
+  "training_attempts": 1,
+  "validation_attempts": 3
+}

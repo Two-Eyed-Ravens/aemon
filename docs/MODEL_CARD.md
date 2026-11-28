@@ -7,8 +7,8 @@ Team Two-eyed Ravens: Hatem Saadallah and Nour Jennane | Lexsi AI Hackathon Trac
 **[Live demo](https://huggingface.co/spaces/HatemSaadallah/aemon)** ·
 **[Full write-up and code](https://github.com/Two-Eyed-Ravens/aemon)** ·
 **[Article](https://huggingface.co/blog/HatemSaadallah/aemon)** ·
-[Dataset](https://huggingface.co/datasets/twoeyedravens/aemon) ·
-[Collection](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf) ·
+[Dataset](https://huggingface.co/datasets/two-eyed-ravens/aemon) ·
+[Collection](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e) ·
 [Paper](https://github.com/Two-Eyed-Ravens/aemon/blob/main/docs/PAPER.pdf)
 
 > On four companies it never saw, this adapter scored **1.48** against the best-prompted base model's **0.65** on a

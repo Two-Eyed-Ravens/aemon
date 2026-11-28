@@ -1,0 +1,5 @@
+{
+  "model_path": "/dev/shm/harness-recovery-796519/model-q4.gguf",
+  "sha256": "5ad8d535d8c94756d8138a9a877cf05987a28cbe82e72322475bfbb12c9b345f",
+  "checked_by": "sha256sum -c in the job before the server started"
+}

@@ -32,8 +32,8 @@ corrections marked; its numbered sections 1–9 describe Stage 1.
 
 | | What it is | Files | Numbers |
 |---|---|---|---|
-| **aemon-8b (Stage 2)** | one LoRA on Aya Expanse 8B (adapter A, training seed 7), distilled from Command A+, served with the same guards | `aemon-8b-adapter.gguf` on the [8B model page](https://huggingface.co/twoeyedravens/aemon-8b) (with the PEFT adapter); the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) runs it | +0.70 over the prompted 8B on test set 3, run once ([paper](stage2/PAPER_STAGE2.pdf)) |
-| **Version 1** | the evaluated adapter: one LoRA on Tiny Aya Global, distilled from Command A+ | `tiny-aya-global-strategy-lora-bf16.gguf` on the [model page](https://huggingface.co/twoeyedravens/aemon) (with the PEFT adapter) | +0.83 and +0.52 on the two frozen tests, run once (section 7) |
+| **aemon-8b (Stage 2)** | one LoRA on Aya Expanse 8B (adapter A, training seed 7), distilled from Command A+, served with the same guards | `aemon-8b-adapter.gguf` on the [8B model page](https://huggingface.co/two-eyed-ravens/aemon-8b) (with the PEFT adapter); the [live demo](https://huggingface.co/spaces/twoeyedravens/aemon-8b) runs it | +0.70 over the prompted 8B on test set 3, run once ([paper](stage2/PAPER_STAGE2.pdf)) |
+| **Version 1** | the evaluated adapter: one LoRA on Tiny Aya Global, distilled from Command A+ | `tiny-aya-global-strategy-lora-bf16.gguf` on the [model page](https://huggingface.co/two-eyed-ravens/aemon) (with the PEFT adapter) | +0.83 and +0.52 on the two frozen tests, run once (section 7) |
 | **Final system (Stage 1)** | what the Stage 1 app and its live demo run: version 1 gathers the evidence, version 3 (continued on a second teacher's runs) reasons, with decoding-time guards that remove failing actions | both adapters (`v3_adapter.gguf` added); `app/run_model.sh` serves them and `app/server.py` sets the guards ([Run it](../README.md#run-it)) | +1.02 and +1.11 over the base model on the same cases, measured after the tests (not held out) |
 | Experimental variants | adapter-switching rules, a company status check, a recovery controller, corrective distillation, a verification layer, grounded beliefs | runs and judgments under `experiments/` | [docs/FINAL_SYSTEM.md](FINAL_SYSTEM.md); none is in the app |
 
@@ -209,8 +209,8 @@ and the mechanical checks limit that, the human review we did not do would limit
 
 ## 5. Model artifacts
 
-Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/twoeyedravens/aemon-a-strategy-investigation-agent-6b02e96de429ffe04b279dcf).
-Model: [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon)
+Collection: [aemon: a strategy-investigation agent](https://huggingface.co/collections/two-eyed-ravens/aemon-models-6b0ad51a03322d756e80547e).
+Model: [two-eyed-ravens/aemon](https://huggingface.co/two-eyed-ravens/aemon)
 (a derivative of Tiny Aya, so CC-BY-NC-4.0):
 - the LoRA adapter (`adapter_model.safetensors`, `adapter_config.json`; sha256 740c4a9b…);
 - the converted GGUF adapter for llama.cpp (`tiny-aya-global-strategy-lora-bf16.gguf`, sha256 41794b57…), the exact
@@ -220,7 +220,7 @@ Model: [twoeyedravens/aemon](https://huggingface.co/twoeyedravens/aemon)
 
 ## 6. Data artifacts
 
-Dataset: [twoeyedravens/aemon](https://huggingface.co/datasets/twoeyedravens/aemon)
+Dataset: [two-eyed-ravens/aemon](https://huggingface.co/datasets/two-eyed-ravens/aemon)
 (in the same collection):
 - the training rows: 4,302 from the Command A+ teacher, 51 correction rows, and 3,611 (plus 262 for validation) from
   the DeepSeek V4-Pro teacher, each bound to its teacher episode;

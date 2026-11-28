@@ -3573,3 +3573,176 @@ billing block above, 61 valid and 1 re-judged once (valid). Every run scored by 
 A minus this arm: **+0.54 [+0.46, +0.62]**, 12 of 12 companies (Codex +0.64, Claude Code +0.44); on shared stages +0.51
 [+0.43, +0.60]. A without guards minus this arm: +0.06 [−0.12, +0.24], inconclusive. Reading: against the prompted
 8B's best prompt the fine-tuned agent still leads by about half a point at every held-out company.
+
+**Quality at 4 bits: the bench's promised judging (27 November; registered before any packet is built).** The 19
+November bench rule said the fastest qualifying setting "then gets the blind judge"; it never did, and an outside
+review noted that the paper's cost ($0.019 per investigation) is at 4 bits while every quality number is at bf16.
+Checked first: the bench (job 776913, code 1a8e7ab) merged `runs/base_aya-expanse-8b/adapter`, whose weights
+(adapter_model.safetensors 8c444fb0...) and served GGUF (490d47e3...) are identical on both accounts to test set 3's A.
+Rule:
+- Primary: Q4_K_M minus bf16, both merged and both served 8 at once (`experiments/bench/q4_k_m_s8.json`,
+  `bf16_s8.json`; the same 15 development cases x 3 attempts, guards, compact prompt). Only quantization differs.
+- Secondary: merged bf16 at 8 at once minus the LoRA arm A seed 7 (`experiments/screen/aya-expanse-8b-s7_guards.json`),
+  i.e. merging plus batching.
+- Blind packets from the three reports (`aemon.evaluation.judging.packets --split development`), judged by both judges
+  (codexsol170, claudecode; a failed answer re-judged once); `scripts/test3/analyze.py` unchanged (mean of judges,
+  company t-interval, here over 6 companies); finished runs and refused calls reported beside. "No loss" means the
+  lower bound of Q4_K_M minus bf16 is above −0.15. Outputs in `experiments/bench/judging/`; frozen files untouched.
+
+**Test set 3: A in its cost configuration as one more arm (27 November; registered before the run).** The
+configuration behind the paper's $0.019 per investigation, A merged and quantized to Q4_K_M and served 8 at once, run on
+test set 3 (`jobs/inference_bench.sbatch` at 0aea312 with `PRECISIONS=q4_k_m SLOTS=8 SPLIT=heldout3 ATTEMPTS=2` and the
+48 cases; the same adapter, 8c444fb0... / 490d47e3..., merged; agent and environment code unchanged since 49fe311).
+Packets with A and the prompted 8B, existing judgments reused by packet id, the new packets judged blind by both judges
+(a failed answer re-judged once); `scripts/test3/analyze.py` unchanged: this arm minus A (primary; serving at 4 bits,
+merged, 8 at once, against the evaluated bf16 LoRA at one at a time) and this arm minus the prompted 8B. "No loss":
+lower bound of this arm minus A above −0.15. Finished runs and refused calls reported beside. Outputs in
+`experiments/test3/q4/`.
+
+**QUALITY AT 4 BITS, DEVELOPMENT (27 November 18:40; read as registered; `experiments/bench/judging/report.json`).**
+134 packets from the three reports, all judged validly by both judges at the first attempt. Mean of judges: Q4_K_M
+merged at 8 at once 1.73 (39 of 45 finished, 98 refused calls, 92.8% accepted), bf16 merged at 8 at once 1.71 (37, 132,
+91.9%), the LoRA arm A 1.72 (39, 146, 91.2%). Primary, Q4_K_M minus bf16: +0.01 [−0.17, +0.20] over 6 companies
+(Codex −0.02, Claude Code +0.05): no detectable difference, but the lower bound is below −0.15, so "no loss" is not
+established by this reading; the interval is wide with six companies. Secondary, merged bf16 minus LoRA: −0.00
+[−0.09, +0.09]: merging and batching change nothing measurable. Also computed, not registered: Q4_K_M minus LoRA
++0.01 [−0.12, +0.14]. The held-out arm (job 796248) is the reading that can settle it.
+
+**Codex judge account change (27 November ~19:40).** Hatem logged the Codex CLI out of Nour's ChatGPT account and into
+his own (Edu plan) before the 4-bit arm's judging. The judge itself is unchanged: the pinned codex-cli 0.170.0 binary
+(sha256 880819aa...), the model gpt-6-sol and the settings in `backends_v1.json`. Every earlier Codex judgment used
+Nour's account. The local watcher was paused while logged out and restarted after; the cluster job was unaffected.
+
+**Offline harness optimization foundation (27 November 21:19 UTC).** Start with declarative recovery candidates
+and paired development evaluation. A candidate selects existing reviewed features through a frozen, validated JSON
+model in `src/aemon/evaluation/harness/candidate.py`. Unknown fields and unsupported features are rejected;
+`evidence_first` requires `quote_menu`. Candidate identity includes its canonical feature selection and name.
+
+The new package entry point, `python -m aemon.evaluation.harness`, validates candidates or runs them against a fixed
+baseline through the existing guarded investigation loop. Each arm starts fresh, using the compact prompt, 45 turns,
+four consecutive errors, 520 output tokens, quote normalization enabled, and attempt 0. This first runner explicitly
+disables adapters for both arms. Cases must belong to the requested training or validation company partition within
+development. The runner records source, test and dossier digests, revision, candidate identity, operator-supplied
+runtime description, full episode records, recomputed mechanical checks, and token totals. Exclusive output creation
+protects prior results; a completion row distinguishes a finished campaign from a partial file.
+
+This establishes the input contract and evaluation entry point for future bounded search. A promotion rule still
+requires independent blind quality review in addition to mechanical validity. Runtime descriptions require operator
+verification. Before executable candidate patches are accepted, introduce separate restricted optimizer, execution,
+and evaluator processes, protect evaluator inputs, and pin an independent progress definition. Model-backed paired
+measurements and automated search remain future work.
+
+Validation at this step used the harness tests plus recovery, grounding, verification, experiment-design and test-set
+freeze suites: **31 passed in 3.12 seconds**. Ruff check and format verification passed on the added Python files;
+Pyright reported **0 errors, 0 warnings** for the added package and tests. Pytest was installed into the local project
+environment through uv. Package usage is documented in `src/aemon/evaluation/harness/README.md`.
+
+Both existing HPC accounts were inspected after VPN connectivity was restored. Both can access the `stud` partition,
+which advertises 40 GB and 80 GB GPU resources, with a maximum job time of 1 day and 10 minutes. Neither account had
+queued or running jobs in the inspected output. The primary experiment workspace has Tiny Aya bf16 weights, prior
+evaluation adapters, a llama.cpp server binary, and a main environment containing pytest, Torch and AgentTune. The
+secondary workspace has a llama.cpp server binary, Qwen experiment artifacts and a smoke adapter; its main environment
+contains Pydantic but lacks pytest, Torch and AgentTune. Its separate training environment contains all four
+packages. These observations support using the primary workspace for an initial reproducible campaign. Shared filesystem free space does not establish either account's quota. This step
+performed remote inspection only.
+
+**Bounded recovery-policy experiment registered (27 November, before new inference).** Compare the strongest
+fine-tuned 8B's six recovery features with three additions, individually preregistered in
+`experiments/harness/recovery_v1/`: reread masking, structured progress feedback, and both. Selection cases are six
+training companies chosen by a deterministic hash of company names, with the case within each company selected by a
+hash of its ID, independently of model outcomes. Exact cases and attempts are in `protocol.json`. Each candidate is
+paired with the full baseline on the six cases at attempt 7. Eligibility requires no decrease in completion or
+mechanical guard clearance, no increase in simulated-citation refusals, and an efficiency improvement. Rank eligible
+candidates by total prompt plus completion tokens, then calls, then name. If none qualifies, record the rejection.
+
+Compare the selected candidate with the baseline on the established 15 validation cases at attempts 7, 8 and 9.
+These companies have already supported development choices, so this is a development experiment. Independent blind
+quality review is required before promotion. Inference uses the same merged Aya Expanse 8B Q4_K_M weights as the cost
+configuration, with a full weights hash check, context 8,192, one server slot, the compact prompt, 45 turns, four
+consecutive errors, and 520 output tokens. Both arms share all decoding settings. Count repeat-redraw inference in
+token totals. Single-slot latency supports within-experiment comparisons. The six-hour Slurm job bound covers model
+preparation and at most 126 investigations. The original evaluated configuration remains the baseline for this work.
+
+The accompanying interface will show recorded policy differences, paired metrics and traces, with provisional
+selection distinguished from independently reviewed quality. Claude judging is pending its subscription limit reset,
+as requested. Existing Q4 quality coverage is incomplete and cannot yet support the registered two-judge claim.
+
+**Q4 held-out judging coverage checked (27 November).** The completed inference run finished 79 of 96 investigations,
+with 293 refused calls, against A's 81 and 274. The first judge scored all 96 new packets; the second scored 18.
+All remaining 78 packets have two preserved HTTP 429 usage-limit failures with zero tokens and no answer. Their
+recovery remains pending user confirmation of availability, following the existing zero-output transport precedent.
+The current mean-of-judges Q4-minus-A comparison uses only 18 pairs from nine companies, -0.145 [-0.290, +0.000].
+It cannot establish the registered lower-bound-above--0.15 criterion. The unchanged analyzer reproduces the report
+exactly. Evidence is in `experiments/test3/q4/consolidation_evidence.json`. The development cost estimate and the
+held-out incomplete quality result retain their distinct populations and serving conditions.
+
+**Work stopped at user request (27 November 21:27 UTC).** Implementation is paused with an uncommitted checkpoint.
+The original foundation's 31 passing tests and targeted clean lint/type checks predate the new runner and interface
+drafts. The existing app API/auth/company suites also passed 32 tests during this session. Those results do not
+validate the unfinished integration described below.
+
+Changes since the foundation include draft runtime identity checks in `evaluation/harness/runtime.py`, runner/CLI
+extensions, and redraw usage aggregation in `agent/loop.py`. A draft `evaluation/harness/campaign.py` adds bounded
+selection orchestration. The preregistered candidate files and protocol are in `experiments/harness/recovery_v1/`,
+and `jobs/harness_recovery.sbatch` contains the proposed six-hour model-preparation and evaluation job.
+
+The new interface draft consists of `app/harness_experiments.py`,
+`app/web/src/pages/HarnessPage.tsx`, and navigation/routing changes in `app/web/src/App.tsx`. The backend router has
+not been registered in `app/server.py`. The interface, API data layout and campaign output still need integration
+and validation. A full frontend build and nested-display visual check remain pending.
+
+Known blocking mismatch at this checkpoint: the draft campaign's BASE_FEATURES uses `citations`, while the registered
+baseline correctly uses `resample_repeats`. Reconcile the implementation with the registered six features before
+running inference. The Slurm draft also lacks the new campaign CLI's required runtime-expectation and model-receipt
+arguments. Its expected-runtime JSON and externally checked model-hash receipt must be generated and supplied.
+Candidate schema support, CLI signatures, redraw accounting, campaign selection and partial-output handling all need
+review and tests together. Campaign tests have not yet been written. Runtime metadata is reported evidence with an
+operator receipt, not independent remote attestation.
+
+No new HPC job, model evaluation, optimizer search, quality-judging retry, deployment, or publication was started in
+this work. Both HPC accounts were inspected only. The pending Q4 analysis is documented in
+`experiments/test3/q4/README.md`, `consolidation_evidence.json`, and `validation_report.json`; its original report
+was reproduced exactly and remains incomplete. Claude judging stays pending the user's availability signal.
+Local environment additions through uv include pytest, httpx2 and a requested Playwright installation; final
+Playwright installation status was not rechecked at stop. A new root `uv.lock` appeared during tool invocations and
+is outside the intended deliverables; review its provenance before retaining it. Finish targeted formatting, lint,
+type checks, regression tests, frontend build and API integration before treating these drafts as usable.
+
+Worker stop receipts confirmed the runner now permits `resample_repeats` and its five touched Python files passed
+Ruff formatting and lint. Updated runner tests have not run, and its targeted type check did not execute. The app's
+pre-change TypeScript check passed; post-change frontend checks have not run. The draft backend reader is known to
+be incompatible with the campaign format and must be adapted before router registration. All delegated workers
+reported stopped, with no background compute or evaluation processes launched.
+
+**TEST SET 3, A IN ITS COST CONFIGURATION (27 November 23:20; read as registered; `experiments/test3/q4/report.json`).**
+Job 796248 (code 0aea312; Q4_K_M weights sha256 5ad8d535..., the same file as the development bench's). 96 runs: 79
+finished (A 81), 293 refused calls (A 274), 90.7% of calls accepted (A 92.4%). Judging: Codex scored all 96 new
+packets (now on Hatem's account, same pinned judge); Claude Code scored 18, and 78 returned HTTP 429 usage-limit
+responses with zero output twice. After the limit reset (23:00) those 78 were judged once more, all valid; the 429
+attempts are kept under `judge_results/test3_A_q4/transport_429/` (the transport precedent: no answer was produced, so
+nothing was discarded). Mean of judges: Q4 arm 1.59, A 1.71, prompted 1.01. Primary, Q4 arm minus A: **−0.12 [−0.19,
+−0.06]** over 12 companies (Codex −0.09, Claude Code −0.16), lower at 11 of 12: "no loss" is not met, and the loss is
+detectable. Q4 arm minus prompted: +0.58 [0.51, 0.64], higher at 12 of 12. The arm changes three things at once (4 bits,
+merged, 8 at once); on development, merging and batching changed nothing measurable (−0.00 [−0.09, +0.09]), so the
+loss is most likely the 4-bit quantization, but this reading alone does not separate them. Reading for the paper: the
+$0.019 per investigation configuration scores 0.12 below the evaluated model and still 0.58 above the prompted 8B.
+
+**Harness work finished from Codex's checkpoint (27 November 23:30; before any inference).** Codex stopped at Hatem's
+request with four items open. Fixed: the campaign's fixed baseline listed `citations` where the evaluated six guards
+(and `baseline.json`) have `resample_repeats`, so the campaign would have refused its own baseline; a test now loads
+the registered protocol as the campaign does. Two stale tests updated (`resample_repeats` is an allowed feature; the run
+command now requires `--expect-runtime`). The cluster job did not pass the runtime expectation the campaign requires:
+it now records the server's identity once at start (model path and id, build, context, chat template hash, quantization,
+slots) with a receipt for the weights hash it checks itself, and every paired run refuses a server that differs. The
+protocol, candidates, cases, attempts and selection rule are unchanged. Harness tests 13 passed; ruff and pyright clean.
+
+**HARNESS RECOVERY SELECTION, READ AS REGISTERED (28 November; job 796519, code d6d2928, 44 minutes).** Weights checked
+against the evaluated Q4_K_M hash; server identity recorded at start and checked on every paired run. On the 6 training
+cases at attempt 7, the six-guard baseline finished 5 of 6 with 456,755 tokens and 159 calls (identical in all three
+pairs: the runs are deterministic). Each candidate finished all 6 but spent more: reread masking 494,437 tokens (+8%),
+progress feedback 606,690 (+33%), both 550,653 (+21%). No simulated-citation refusals anywhere; no finished run cleared
+every mechanical gate in any arm (each fails one or two strict gates, such as `evidence_kinds`). The registered rule
+needs an efficiency gain, so no candidate is eligible: the baseline stays, and the validation stage was skipped as the
+protocol says. Reading: the loop ran end to end and refused changes that did not pay for themselves; the one signal
+worth a follow-up is that every candidate finished the run the baseline did not, at a token cost. Results in
+`experiments/harness/recovery_v1/results/`, shown on the app's harness page.

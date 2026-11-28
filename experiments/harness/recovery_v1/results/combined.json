@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "name": "combined",
+  "features": [
+    "budget",
+    "evidence_first",
+    "grounded_beliefs",
+    "mask_rereads",
+    "no_repeats",
+    "progress",
+    "quote_menu",
+    "resample_repeats"
+  ]
+}

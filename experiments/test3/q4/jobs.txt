@@ -1,0 +1,1 @@
+test3-q4 H 796248 (code 0aea312 slim copy, q4_k_m, 8 slots; first attempt 796242 failed on a partial copy, nothing ran)

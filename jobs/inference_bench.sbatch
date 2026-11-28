@@ -15,6 +15,7 @@
 # and the compact prompt: 1 attempt per case at 1 slot, 3 above, so the slots have work. Wall time gives investigations
 # per GPU hour; scripts/bench/inference_summary.py turns that into cost per investigation. Set NAME, HF_REPO, HF_REV,
 # ADAPTER_DIR (the PEFT adapter), REVISION, PY (transformers and peft: env_train on the second account).
+# Optional: PRECISIONS, SLOTS, CASES, SPLIT (default development) and ATTEMPTS (default 3, 1 at one slot).
 set -euo pipefail
 L=$HOME/lexsi
 PY=${PY:-$L/env/bin/python}
@@ -26,7 +27,7 @@ PORT=$((20000 + SLURM_JOB_ID % 20000))
 D=/dev/shm/bench-$SLURM_JOB_ID
 SERVER=
 trap '[ -n "$SERVER" ] && kill $SERVER 2>/dev/null || true; rm -rf "$D"' EXIT
-CASES=hellberg-base,hellberg-new-evidence-looks,hellberg-new-evidence-comfort,hellberg-new-evidence-favours-looks,hellberg-new-evidence-irrelevant,neumann-base,neumann-new-evidence-irrelevant,jotun-base,jotun-new-evidence-irrelevant,tanita-base,tanita-new-evidence-irrelevant,deere-base,deere-new-evidence-irrelevant,acr-base,acr-new-evidence-irrelevant
+CASES=${CASES:-hellberg-base,hellberg-new-evidence-looks,hellberg-new-evidence-comfort,hellberg-new-evidence-favours-looks,hellberg-new-evidence-irrelevant,neumann-base,neumann-new-evidence-irrelevant,jotun-base,jotun-new-evidence-irrelevant,tanita-base,tanita-new-evidence-irrelevant,deere-base,deere-new-evidence-irrelevant,acr-base,acr-new-evidence-irrelevant}
 GUARDS=no_repeats,quote_menu,resample_repeats,budget,grounded_beliefs,evidence_first
 echo "node $(hostname), start $(date +%T)"
 
@@ -50,8 +51,8 @@ ls -la $D/m-*.gguf
 TIMINGS=$OUT/timings.jsonl
 for precision in ${PRECISIONS:-bf16 q8_0 q4_k_m}; do
   for slots in ${SLOTS:-1 4 8 16}; do
-    attempts=3
-    [ $slots = 1 ] && attempts=1
+    attempts=${ATTEMPTS:-3}
+    [ -z "${ATTEMPTS:-}" ] && [ $slots = 1 ] && attempts=1
     tag=${precision}_s${slots}
     rm -f $OUT/$tag.json $OUT/$tag.episodes.jsonl
     $L/llama.cpp/build/bin/llama-server -m $D/m-$precision.gguf -ngl 99 -c $((8192 * slots)) --parallel $slots --jinja \
@@ -73,7 +74,7 @@ for precision in ${PRECISIONS:-bf16 q8_0 q4_k_m}; do
     started=$(date +%s)
     status=0
     (cd $L/code_$REVISION && PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 CODE_REVISION=$REVISION PYTHONPATH=$L/code_$REVISION/src \
-      $L/env/bin/python -W ignore -m aemon.agent.run_investigations --url http://127.0.0.1:$PORT --prompt compact --cases "$CASES" \
+      $L/env/bin/python -W ignore -m aemon.agent.run_investigations --url http://127.0.0.1:$PORT --prompt compact --split ${SPLIT:-development} --cases "$CASES" \
       --attempts $attempts --workers $slots --context 8192 --max-tokens 520 --max-turns 45 --recovery $GUARDS \
       --model-label "$NAME merged $precision, $slots at once (bench)" --weights-sha256 $(sha256sum $D/m-$precision.gguf | cut -d' ' -f1) \
       --manifest $OUT/provenance.jsonl --output $OUT/$tag.json > $OUT/$tag.log 2>&1) || status=$?

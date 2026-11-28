@@ -1,0 +1,75 @@
+{
+  "selected": "baseline",
+  "eligible": [],
+  "rejected": [
+    "rereads",
+    "progress",
+    "combined"
+  ],
+  "comparisons": [
+    {
+      "name": "rereads",
+      "baseline": {
+        "episodes": 6,
+        "finished": 5,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 456755,
+        "calls": 159
+      },
+      "candidate": {
+        "episodes": 6,
+        "finished": 6,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 494437,
+        "calls": 165
+      },
+      "eligible": false
+    },
+    {
+      "name": "progress",
+      "baseline": {
+        "episodes": 6,
+        "finished": 5,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 456755,
+        "calls": 159
+      },
+      "candidate": {
+        "episodes": 6,
+        "finished": 6,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 606690,
+        "calls": 205
+      },
+      "eligible": false
+    },
+    {
+      "name": "combined",
+      "baseline": {
+        "episodes": 6,
+        "finished": 5,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 456755,
+        "calls": 159
+      },
+      "candidate": {
+        "episodes": 6,
+        "finished": 6,
+        "validated": 0,
+        "synthetic_citation_refusals": 0,
+        "total_tokens": 550653,
+        "calls": 178
+      },
+      "eligible": false
+    }
+  ],
+  "reason": "no_improvement",
+  "validation": "skipped_no_eligible_candidate",
+  "provisional": true,
+  "quality_review": "pending"
+}

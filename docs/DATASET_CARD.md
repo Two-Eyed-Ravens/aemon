@@ -60,9 +60,9 @@ validation, never both, so the `validation` split is the 6 held-out companies (`
 
 ```python
 from datasets import load_dataset
-rows = load_dataset("twoeyedravens/aemon")                  # train 3,891 rows, validation 411
-v3 = load_dataset("twoeyedravens/aemon", "v3_deepseek_rows")   # the second teacher's rows, train 3,611, validation 262
-fixes = load_dataset("twoeyedravens/aemon", "correction_rows") # 51 correction rows
+rows = load_dataset("two-eyed-ravens/aemon")                  # train 3,891 rows, validation 411
+v3 = load_dataset("two-eyed-ravens/aemon", "v3_deepseek_rows")   # the second teacher's rows, train 3,611, validation 262
+fixes = load_dataset("two-eyed-ravens/aemon", "correction_rows") # 51 correction rows
 ```
 
 Each row is one teacher turn: `messages` (the conversation up to that turn), the target tool call, and its provenance

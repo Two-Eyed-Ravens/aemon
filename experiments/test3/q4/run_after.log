@@ -1,0 +1,6 @@
+19:52 A_q4 job done
+{"packets": 317, "runs": 384, "runs_by_arm": {"A": 96, "prompted": 96, "A_noguards": 96, "A_q4": 96}}
+{"new_packets": 96}
+claudecode: 18 valid first, 78 re-judged
+codexsol170: 96 valid first, 0 re-judged
+20:07 report: experiments/test3/q4/report.json

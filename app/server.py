@@ -35,6 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import attachments as attach  # noqa: E402
 import companies  # noqa: E402
 import followup  # noqa: E402
+import harness_experiments  # noqa: E402
 import insights  # noqa: E402
 import report as pdf_report  # noqa: E402
 import store  # noqa: E402
@@ -57,6 +58,7 @@ from aemon.rows.provenance import case_digest  # noqa: E402
 MODEL_URL = 'http://127.0.0.1:8091'
 
 app = FastAPI(title='aemon', docs_url=None, redoc_url=None, openapi_url=None)
+app.include_router(harness_experiments.router)
 # The React build (app/web, `npm run build`; app/run.sh builds it on first start)
 DIST = Path(__file__).parent / 'web' / 'dist'
 NO_CACHE = {'Cache-Control': 'no-cache'}  # the page names the current build's files, so a refresh always gets the new build
